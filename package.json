@@ -1,0 +1,22 @@
+{
+  "name": "mobile-hairdresser",
+  "version": "1.0.0",
+  "description": "A  web platform where mobile hairdressers can create their own portfolios and share with their potential customers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serhatci/mobile-hairdresser.git"
+  },
+  "author": "serhat ciftci",
+  "license": "SEE LICENCE IN LICENCE FILE",
+  "bugs": {
+    "url": "https://github.com/serhatci/mobile-hairdresser/issues"
+  },
+  "homepage": "https://github.com/serhatci/mobile-hairdresser#readme",
+  "devDependencies": {
+    "eslint": "^7.27.0"
+  }
+}
