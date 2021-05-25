@@ -83,3 +83,26 @@ class Hairdresser extends User {
     request.replies.push[reply]
   }
 }
+
+class Customer extends User {
+  constructor(name, surname, email, password) {
+    super(name, surname, email, password)
+    this.customerRequests = []
+  }
+
+  uploadPhoto (photo, adviceRequest) {
+    adviceRequest.photos.push(photo)
+  }
+
+  postRequest (request) {
+    this.customerRequests.push(request)
+  }
+
+  rateHairdresser (hairdresser, rating) {
+    hairdresser.ratings.push(rating)
+  }
+
+  reviewHairdresser (hairdresser, review) {
+    hairdresser.customerReviews.push(review)
+  }
+}
