@@ -151,3 +151,12 @@ class UserPost {
     this.date = new Date()
   }
 }
+
+class CustomerRequest extends UserPost {
+  constructor(user, type, postMessage) {
+    super(user, postMessage)
+    this.type = type
+    this.replies = []
+    this.photos = [] // optional
+  }
+}
