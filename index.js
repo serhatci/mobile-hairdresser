@@ -50,8 +50,36 @@ class User {
   }
 }
 
+class Hairdresser extends User {
+  constructor(name, surname, email, password) {
+    super(name, surname, email, password)
+    this.availability = ''; // [weekdays, weekends, after 7 pm, etc... ]
+    this.experience = ''; // [less than 1 year, 1 year, 2 year, etc... ]
+    this.serviceArea = 0; // perimeter in km around a location
+    this.ratings = [];
+    this.videos = [];
+    this.certificates = [];
     this.employerReferences = [];
     this.customerReviews = [];
-    this.ratings = 0;
+  }
+
+  uploadVideo (video) {
+    this.video.push(video)
+  }
+
+  tagVideo (video, user) {
+    video.taggedUsers.push(user)
+  }
+
+  uploadCertificate (certificate) {
+    this.certificates.push(certificate)
+  }
+
+  replyToCustomerRequest (request, reply) {
+    request.replies.push(reply)
+  }
+
+  adviseToCustomerRequest (request, reply) {
+    request.replies.push[reply]
   }
 }
