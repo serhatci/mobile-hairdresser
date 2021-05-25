@@ -142,3 +142,12 @@ class Rating {
     this.date = new Date()
   }
 }
+
+class UserPost {
+  constructor(user, postMessage) {
+    this.user = user
+    this.postMessage = postMessage
+    this.id = idGenerator.generate()
+    this.date = new Date()
+  }
+}
