@@ -106,3 +106,12 @@ class Customer extends User {
     hairdresser.customerReviews.push(review)
   }
 }
+
+class Photo {
+  constructor(fileName) {
+    this.id = idGenerator.generate()
+    this.fileName = fileName
+    this.taggedUsers = []
+    this.likedBy = []
+  }
+}
