@@ -160,3 +160,10 @@ class CustomerRequest extends UserPost {
     this.photos = [] // optional
   }
 }
+
+class ReplyToRequest extends UserPost {
+  constructor(user, postMessage) {
+    super(user, postMessage)
+    this.photos = [] // optional
+  }
+}
