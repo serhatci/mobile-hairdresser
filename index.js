@@ -126,3 +126,11 @@ class Video {
     this.likedBy = []
   }
 }
+
+class Certificate {
+  constructor(fileName, title) {
+    this.id = idGenerator.generate()
+    this.fileName = fileName
+    this.title = title
+  }
+}
