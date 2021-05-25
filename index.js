@@ -167,3 +167,14 @@ class ReplyToRequest extends UserPost {
     this.photos = [] // optional
   }
 }
+
+class PrivateMessage {
+  constructor(sender, receiver, message) {
+    this.sender = sender
+    this.receiver = receiver
+    this.message = message
+    this.id = idGenerator.generate()
+    this.date = new Date()
+  }
+}
+
