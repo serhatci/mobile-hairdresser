@@ -11,6 +11,7 @@ class Hairdresser extends User {
     this.certificates = [];
     this.employerReferences = [];
     this.customerReviews = [];
+    this.repliedRequests = []
   }
 
   get portfolio () {
@@ -38,11 +39,12 @@ class Hairdresser extends User {
 
   replyToCustomerRequest (request, reply) {
     request.replies.push(reply)
-
+    this.repliedRequests.push(request)
   }
 
   adviseToCustomerRequest (request, reply) {
     request.replies.push[reply]
+    this.repliedRequests.push(request)
   }
 }
 
