@@ -1,11 +1,13 @@
 
 const IdGenerator = require('./src/id-generator')
-const { Customer, Hairdresser } = require('./src/user')
+const Customer = require('./src/customer')
+const Hairdresser = require('./src/hairdresser')
 const Photo = require('./src/photo')
 const Video = require('./src/video')
 const Certificate = require('./src/certificate')
 const Rating = require('./src/rating')
-const { CustomerRequest, ReplyToRequest } = require('./src/user-post')
+const CustomerRequest = require('./src/customer-request')
+const ReplyToRequest = require('./src/reply-to-request')
 const PrivateMessage = require('./src/private-message')
 
 const id = new IdGenerator()
