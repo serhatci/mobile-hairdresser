@@ -9,7 +9,6 @@ class User {
     this.createdAt = new Date();
     this.address = '';
     this.tel = '';
-    this.photos = [];
     this.privateMessages = [];
   }
 
