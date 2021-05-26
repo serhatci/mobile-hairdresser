@@ -8,6 +8,7 @@ class Hairdresser extends User {
     this.serviceArea = 0; // perimeter in km around a location
     this.ratings = [];
     this.videos = [];
+    this.photos = [];
     this.certificates = [];
     this.employerReferences = [];
     this.customerReviews = [];
