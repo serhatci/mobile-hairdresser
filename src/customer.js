@@ -4,9 +4,14 @@ class Customer extends User {
   constructor(name, surname, email, password, id) {
     super(name, surname, email, password, id)
     this.customerRequests = []
+    this.profilePhoto = undefined
   }
 
-  uploadPhoto (photo, adviceRequest) {
+  addProfilePhoto (photo) {
+    this.profilePhoto = photo
+  }
+
+  addPhotoToAdviceRequest (photo, adviceRequest) {
     adviceRequest.photos.push(photo)
   }
 
