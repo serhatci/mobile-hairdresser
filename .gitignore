@@ -1,4 +1,7 @@
 .prettierrc
 .eslintrc
+.eslintcache
+.husky
+
 
 /node_modules
