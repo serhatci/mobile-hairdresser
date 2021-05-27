@@ -5,32 +5,32 @@ class User {
     this.surname = surname;
     this.email = email;
     this.password = password;
-    this.id = id
+    this.id = id;
     this.createdAt = new Date();
     this.address = '';
     this.tel = '';
     this.privateMessages = [];
   }
 
-  uploadPhoto (photo) {
-    this.photos.push(photo)
+  uploadPhoto(photo) {
+    this.photos.push(photo);
   }
 
-  likePhoto (photo) {
-    photo.likedBy.push(this)
+  likePhoto(photo) {
+    photo.likedBy.push(this);
   }
 
-  tagPhoto (photo, user) {
-    photo.taggedUsers.push(user)
+  tagPhoto(photo, user) {
+    photo.taggedUsers.push(user);
   }
 
-  likeVideo (video) {
-    video.likedBy.push(this)
+  likeVideo(video) {
+    video.likedBy.push(this);
   }
 
-  sendPM (user, message) {
-    user.privateMessages.push(message)
+  sendPM(user, message) {
+    user.privateMessages.push(message);
   }
 }
 
-module.exports = User
+module.exports = User;
