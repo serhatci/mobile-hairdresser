@@ -1,12 +1,12 @@
 class Video {
-  constructor(fileName, title, description) {
-    this.id = id.generate();
-    this.fileName = fileName;
-    this.title = title;
-    this.description = description;
-    this.taggedUsers = [];
-    this.likedBy = [];
+  constructor(fileName, title, description, id) {
+    this.id = i
+    this.fileName = fileName
+    this.title = title
+    this.description = description
+    this.taggedUsers = []
+    this.likedBy = []
   }
 }
 
-module.exports = Video;
+module.exports = Video
