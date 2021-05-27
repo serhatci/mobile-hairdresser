@@ -1,6 +1,6 @@
 class Video {
   constructor(fileName, title, description, id) {
-    this.id = i
+    this.id = id
     this.fileName = fileName
     this.title = title
     this.description = description
