@@ -1,12 +1,15 @@
-
-const IdGenerator = require('./classes/id-generator')
-const { Customer, Hairdresser } = require('./classes/user')
-const Photo = require('./classes/photo')
-const Video = require('./classes/video')
-const Certificate = require('./classes/certificate')
-const Rating = require('./classes/rating')
-const { CustomerRequest, ReplyToRequest } = require('./classes/user-post')
-const PrivateMessage = require('./classes/private-message')
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
+const IdGenerator = require('./id-generator')
+const Customer = require('./customer')
+const Hairdresser = require('./hairdresser')
+const Photo = require('./photo')
+const Video = require('./video')
+const Certificate = require('./certificate')
+const Rating = require('./rating')
+const CustomerRequest = require('./post-request')
+const ReplyToRequest = require('./post-reply')
+const PrivateMessage = require('./private-message')
 
 const id = new IdGenerator()
 const hairdresser = new Hairdresser('Hair', 'Dresser', 'hair@dresser.com', 'password', id.generate())
@@ -34,7 +37,8 @@ const hairdresserRequest = new CustomerRequest(
   customer,
   'Hairdresser Request',
   'I am looking for a mobile hairdresser on this weekends. Can anyone help me?',
-  id.generate())
+  id.generate()
+)
 customer.postRequest(hairdresserRequest)
 console.log('Customers`s requests: ', customer.customerRequests)
 
