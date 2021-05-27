@@ -1,7 +1,7 @@
 {
   "name": "mobile-hairdresser",
-  "version": "1.0.0",
-  "description": "a web platform for mobile haidresser search",
+  "version": "0.0.1",
+  "description": "a web platform for mobile hairdresser search",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
