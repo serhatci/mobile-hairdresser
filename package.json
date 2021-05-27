@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/serhatci/mobile-hairdresser/issues"
   },
-  "homepage": "https://github.com/serhatci/mobile-hairdresser#readme"
+  "homepage": "https://github.com/serhatci/mobile-hairdresser#readme",
+  "devDependencies": {
+    "eslint": "^7.27.0"
+  }
 }
