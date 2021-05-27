@@ -1,2 +1,4 @@
 .prettierrc
+.eslintrc
+
 /node_modules
