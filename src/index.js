@@ -40,8 +40,8 @@ customer.postRequest(customerRequest)
 console.log('Customers`s requests: ', customer.customerRequests)
 
 console.log('\n----Hairdresser replies Customer`s Request----')
-const replyToRequest = new ReplyToRequest(hairdresser, 'I can help! Please PM me!...', id.generate())
-hairdresser.replyToCustomerRequest(hairdresserRequest, replyToRequest)
+const reply = hairdresser.writeReply('I can help! Please PM me!...', id.generate())
+hairdresser.replyToCustomerRequest(customerRequest, reply)
 console.log('Customers`s requests: ', customer.customerRequests)
 
 console.log('\n----Show Hairdresser Portfolio----')
