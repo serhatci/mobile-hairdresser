@@ -17,7 +17,7 @@ class Hairdresser extends User {
 
   get portfolio() {
     return `
-        Name: ${this.name} ${this.surname}
+        Name: ${this.fullName}
         Address: ${this.address}
         Telephone: ${this.tel}
 
