@@ -31,13 +31,12 @@ customer.likePhoto(photo)
 console.log('Hairdresser`s photos: ', hairdresser.photos)
 
 console.log('\n----Customer posts Hairdresser Request----')
-const hairdresserRequest = new CustomerRequest(
-  customer,
+const customerRequest = customer.writeCustomerRequest(
   'Hairdresser Request',
   'I am looking for a mobile hairdresser on this weekends. Can anyone help me?',
   id.generate()
 )
-customer.postRequest(hairdresserRequest)
+customer.postRequest(customerRequest)
 console.log('Customers`s requests: ', customer.customerRequests)
 
 console.log('\n----Hairdresser replies Customer`s Request----')
