@@ -7,8 +7,6 @@ const Photo = require('./photo')
 const Video = require('./video')
 const Certificate = require('./certificate')
 const Rating = require('./rating')
-const CustomerRequest = require('./post-request')
-const ReplyToRequest = require('./post-reply')
 const PrivateMessage = require('./private-message')
 
 const id = new IdGenerator()
