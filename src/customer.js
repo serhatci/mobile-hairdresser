@@ -1,4 +1,5 @@
 const User = require('./user')
+const CustomerRequest = require('./request')
 
 class Customer extends User {
   constructor(name, surname, email, password, id) {
@@ -13,6 +14,10 @@ class Customer extends User {
 
   addPhotoToAdviceRequest(photo, adviceRequest) {
     adviceRequest.photos.push(photo)
+  }
+
+  writeCustomerRequest(type, message, id) {
+    return new CustomerRequest(this, type, message, id)
   }
 
   postRequest(request) {
