@@ -12,6 +12,10 @@ class User {
     this.privateMessages = []
   }
 
+  get fullName() {
+    return `${this.name} ${this.surname}`
+  }
+
   uploadPhoto(photo) {
     this.photos.push(photo)
   }
