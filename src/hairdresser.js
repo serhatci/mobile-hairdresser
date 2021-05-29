@@ -33,6 +33,9 @@ class Hairdresser extends User {
 
   uploadVideo(video) {
     this.video.push(video)
+
+  uploadVideoToPortfolio(video) {
+    this.videos.push(video)
   }
 
   tagVideo(video, user) {
