@@ -12,10 +12,6 @@ const PrivateMessage = require('./private-message')
 const hairdresser = new Hairdresser('Hair', 'Dresser', 'hair@dresser.com', 'password')
 const customer = new Customer('Customer', 'Surname', 'customer@customer.com', 'customerPassword')
 
-console.log('\n----ID check----')
-console.log('Hairdresser ID:', hairdresser.id)
-console.log('Customer ID:', customer.id)
-
 console.log('\n----Hairdresser uploads photo to his portfolio----')
 const photo = new Photo('image.jpg')
 hairdresser.uploadPhoto(photo)
