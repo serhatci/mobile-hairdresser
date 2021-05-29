@@ -7,45 +7,37 @@ const Photo = require('./photo')
 const Video = require('./video')
 const Certificate = require('./certificate')
 const Rating = require('./rating')
-const CustomerRequest = require('./post-request')
-const ReplyToRequest = require('./post-reply')
 const PrivateMessage = require('./private-message')
 
-const id = new IdGenerator()
-const hairdresser = new Hairdresser('Hair', 'Dresser', 'hair@dresser.com', 'password', id.generate())
-const customer = new Customer('Customer', 'Surname', 'customer@customer.com', 'customerPassword', id.generate())
+const hairdresser = new Hairdresser('Hair', 'Dresser', 'hair@dresser.com', 'password')
+const customer = new Customer('Customer', 'Surname', 'customer@customer.com', 'customerPassword')
 
-console.log('\n----ID check----')
-console.log('Hairdresser ID:', hairdresser.id)
-console.log('Customer ID:', customer.id)
-
-console.log('\n----Hairdresser uploads photo to his portfolio----')
-const photo = new Photo('image.jpg', id.generate())
+// Hairdresser uploads photo to his portfolio
+const photo = new Photo('image.jpg')
 hairdresser.uploadPhoto(photo)
-console.log('Hairdresser`s photos: ', hairdresser.photos)
+console.log('\nHairdresser added new photo:\n ', hairdresser.photos)
 
-console.log('\n----Hairdresser tags user to uploaded photo----')
+// Hairdresser tags a user to the uploaded photo
 hairdresser.tagPhoto(photo, customer)
-console.log('Hairdresser`s photos: ', hairdresser.photos)
+console.log('\nHairdresser tagged customer to the photo:\n ', hairdresser.photos)
 
-console.log('\n----Customer likes Hairdresser`s photo----')
+// Customer likes Hairdresser`s photo
 customer.likePhoto(photo)
-console.log('Hairdresser`s photos: ', hairdresser.photos)
+console.log('\nCustomer liked a photo of Hairdresser\n ', hairdresser.photos)
 
-console.log('\n----Customer posts Hairdresser Request----')
-const hairdresserRequest = new CustomerRequest(
-  customer,
+// Customer posts a Hairdresser Request
+const customerRequest = customer.writeCustomerRequest(
   'Hairdresser Request',
-  'I am looking for a mobile hairdresser on this weekends. Can anyone help me?',
-  id.generate()
+  'Urgent Help Please!...',
+  'I am looking for a mobile hairdresser on this weekends. Can anyone help me?'
 )
-customer.postRequest(hairdresserRequest)
-console.log('Customers`s requests: ', customer.customerRequests)
+customer.postRequest(customerRequest)
+console.log('\nCustomers created a Hairdresser requests:\n ', customer.customerRequests)
 
-console.log('\n----Hairdresser replies Customer`s Request----')
-const replyToRequest = new ReplyToRequest(hairdresser, 'I can help! Please PM me!...', id.generate())
-hairdresser.replyToCustomerRequest(hairdresserRequest, replyToRequest)
-console.log('Customers`s requests: ', customer.customerRequests)
+// Hairdresser replies Customer`s Request
+const reply = hairdresser.writeReply('I can help! Please PM me!...')
+hairdresser.replyToCustomerRequest(customerRequest, reply)
+console.log('\nHairdresser replied to customer request:\n ', customer.customerRequests)
 
-console.log('\n----Show Hairdresser Portfolio----')
+// Show Hairdresser Portfolio
 console.log(hairdresser.portfolio)

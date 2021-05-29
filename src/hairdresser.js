@@ -1,8 +1,9 @@
 const User = require('./user')
+const Reply = require('./reply')
 
 class Hairdresser extends User {
-  constructor(name, surname, email, password, id) {
-    super(name, surname, email, password, id)
+  constructor(name, surname, email, password) {
+    super(name, surname, email, password)
     this.availability = 'available' // [weekdays, weekends, after 7 pm, etc... ]
     this.experience = 'less than 1 year' // [less than 1 year, 1 year, 2 year, etc... ]
     this.serviceArea = undefined // perimeter in km around a location
@@ -12,12 +13,11 @@ class Hairdresser extends User {
     this.certificates = []
     this.employerReferences = []
     this.customerReviews = []
-    this.repliedRequests = []
   }
 
   get portfolio() {
     return `
-        Name: ${this.name} ${this.surname}
+        Name: ${this.fullName}
         Address: ${this.address}
         Telephone: ${this.tel}
 
@@ -38,14 +38,12 @@ class Hairdresser extends User {
     this.certificates.push(certificate)
   }
 
-  replyToCustomerRequest(request, reply) {
-    request.replies.push(reply)
-    this.repliedRequests.push(request)
+  writeReply(message, photos = []) {
+    return new Reply(this, message, photos)
   }
 
-  adviseToCustomerRequest(request, reply) {
+  replyToCustomerRequest(request, reply) {
     request.replies.push(reply)
-    this.repliedRequests.push(request)
   }
 }
 

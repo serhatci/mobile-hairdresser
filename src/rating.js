@@ -1,9 +1,11 @@
 class Rating {
-  constructor(user, rate) {
-    this.user = user;
-    this.rate = rate;
-    this.date = new Date();
+  constructor(user, hairdresser, rate) {
+    this.id = undefined
+    this.user = user
+    this.user = hairdresser
+    this.rate = rate
+    this.date = new Date()
   }
 }
 
-module.exports = Rating;
+module.exports = Rating

@@ -1,6 +1,6 @@
 class Certificate {
-  constructor(fileName, title, id) {
-    this.id = id
+  constructor(fileName, title) {
+    this.id = undefined
     this.fileName = fileName
     this.title = title
   }
