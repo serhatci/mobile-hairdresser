@@ -1,13 +1,7 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-const IdGenerator = require('./id-generator')
 const Customer = require('./customer')
 const Hairdresser = require('./hairdresser')
 const Photo = require('./photo')
-const Video = require('./video')
-const Certificate = require('./certificate')
-const Rating = require('./rating')
-const PrivateMessage = require('./private-message')
 
 const hairdresser = new Hairdresser('Hair', 'Dresser', 'hair@dresser.com', 'password')
 const customer = new Customer('Customer', 'Surname', 'customer@customer.com', 'customerPassword')
