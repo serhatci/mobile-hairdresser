@@ -12,32 +12,32 @@ const PrivateMessage = require('./private-message')
 const hairdresser = new Hairdresser('Hair', 'Dresser', 'hair@dresser.com', 'password')
 const customer = new Customer('Customer', 'Surname', 'customer@customer.com', 'customerPassword')
 
-console.log('\n----Hairdresser uploads photo to his portfolio----')
+// Hairdresser uploads photo to his portfolio
 const photo = new Photo('image.jpg')
 hairdresser.uploadPhoto(photo)
-console.log('Hairdresser`s photos: ', hairdresser.photos)
+console.log('\nHairdresser added new photo:\n ', hairdresser.photos)
 
-console.log('\n----Hairdresser tags user to uploaded photo----')
+// Hairdresser tags a user to the uploaded photo
 hairdresser.tagPhoto(photo, customer)
-console.log('Hairdresser`s photos: ', hairdresser.photos)
+console.log('\nHairdresser tagged customer to the photo:\n ', hairdresser.photos)
 
-console.log('\n----Customer likes Hairdresser`s photo----')
+// Customer likes Hairdresser`s photo
 customer.likePhoto(photo)
-console.log('Hairdresser`s photos: ', hairdresser.photos)
+console.log('\nCustomer liked a photo of Hairdresser\n ', hairdresser.photos)
 
-console.log('\n----Customer posts Hairdresser Request----')
+// Customer posts a Hairdresser Request
 const customerRequest = customer.writeCustomerRequest(
   'Hairdresser Request',
   'Urgent Help Please!...',
   'I am looking for a mobile hairdresser on this weekends. Can anyone help me?'
 )
 customer.postRequest(customerRequest)
-console.log('Customers`s requests: ', customer.customerRequests)
+console.log('\nCustomers created a Hairdresser requests:\n ', customer.customerRequests)
 
-console.log('\n----Hairdresser replies Customer`s Request----')
+// Hairdresser replies Customer`s Request
 const reply = hairdresser.writeReply('I can help! Please PM me!...')
 hairdresser.replyToCustomerRequest(customerRequest, reply)
-console.log('Customers`s requests: ', customer.customerRequests)
+console.log('\nHairdresser replied to customer request:\n ', customer.customerRequests)
 
-console.log('\n----Show Hairdresser Portfolio----')
+// Show Hairdresser Portfolio
 console.log(hairdresser.portfolio)
