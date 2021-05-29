@@ -8,6 +8,15 @@ class Customer extends User {
     this.profilePhoto = undefined
   }
 
+  get info() {
+    return {
+      fullname: this.fullName,
+      email: this.email,
+      requests: this.customerRequests,
+      profilePhoto: this.profilePhoto,
+    }
+  }
+
   addProfilePhoto(photo) {
     this.profilePhoto = photo
   }
