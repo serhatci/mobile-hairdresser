@@ -41,3 +41,6 @@ console.log('\nHairdresser replied to customer request:\n ', customer.customerRe
 
 // Show Hairdresser Portfolio
 console.log('\nHairdresser portfolio:\n', hairdresser.portfolio)
+
+// Show Customer Info
+console.log('\nCustomer info:\n', customer.info)
