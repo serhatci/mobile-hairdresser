@@ -28,6 +28,7 @@ console.log('Hairdresser`s photos: ', hairdresser.photos)
 console.log('\n----Customer posts Hairdresser Request----')
 const customerRequest = customer.writeCustomerRequest(
   'Hairdresser Request',
+  'Urgent Help Please!...',
   'I am looking for a mobile hairdresser on this weekends. Can anyone help me?'
 )
 customer.postRequest(customerRequest)
