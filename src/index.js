@@ -2,16 +2,18 @@
 const Customer = require('./customer')
 const Hairdresser = require('./hairdresser')
 const Photo = require('./photo')
+const Video = require('./video')
 
 const hairdresser = new Hairdresser('Hair', 'Dresser', 'hair@dresser.com', 'password')
 const customer = new Customer('Customer', 'Surname', 'customer@customer.com', 'customerPassword')
 
-// Hairdresser uploads photo to his portfolio
-const photo = new Photo('image.jpg')
-hairdresser.uploadPhoto(photo)
-console.log('\nHairdresser added new photo:\n ', hairdresser.photos)
+// Hairdresser uploads photo and video to his portfolio
+const photo = new Photo('image.jpg', 'With my best customer')
+const video = new Video('video.mpeg', 'Customer Visit Heidelberg', 'This was my first customer ever')
+hairdresser.uploadPhotoToPortfolio(photo)
+hairdresser.uploadVideoToPortfolio(video)
+console.log('\nHairdresser added new photo and video:\n ', hairdresser.photos, hairdresser.videos)
 
-// Hairdresser tags a user to the uploaded photo
 hairdresser.tagPhoto(photo, customer)
 console.log('\nHairdresser tagged customer to the photo:\n ', hairdresser.photos)
 
