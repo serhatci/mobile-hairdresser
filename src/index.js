@@ -38,3 +38,18 @@ console.log('\nHairdresser portfolio:\n', hairdresser.portfolio)
 
 // Show Customer Info
 console.log('\nCustomer info:\n', customer.info)
+
+// Customer sends a PM to Hairdresser
+const customerPM = customer.writePrivateMessage(hairdresser, 'Hello... Can you send me your price list?')
+customer.sendPrivateMessage(hairdresser, customerPM)
+customer.storePrivateMessage(customerPM)
+console.log('\nHairdresser PM:\n', hairdresser.privateMessages)
+
+// Hairdresser replies to Customer's PM
+const hairdresserPM = hairdresser.writePrivateMessage(
+  customer,
+  'Hello... You can see my price list at my portfolio page'
+)
+hairdresser.sendPrivateMessage(customer, hairdresserPM)
+hairdresser.storePrivateMessage(hairdresserPM)
+console.log('\nCustomer PM:\n', customer.privateMessages)
