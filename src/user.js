@@ -18,8 +18,8 @@ class User {
     return `${this.name} ${this.surname}`
   }
 
-  uploadPhoto(photo) {
-    this.photos.push(photo)
+  uploadPhotoToPost(photo, post) {
+    post.photos.push(photo)
   }
 
   likePhoto(photo) {
