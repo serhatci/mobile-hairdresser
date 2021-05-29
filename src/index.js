@@ -40,4 +40,4 @@ hairdresser.replyToCustomerRequest(customerRequest, reply)
 console.log('\nHairdresser replied to customer request:\n ', customer.customerRequests)
 
 // Show Hairdresser Portfolio
-console.log(hairdresser.portfolio)
+console.log('\nHairdresser portfolio:\n', hairdresser.portfolio)
