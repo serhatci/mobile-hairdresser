@@ -14,10 +14,12 @@ hairdresser.uploadPhotoToPortfolio(photo)
 hairdresser.uploadVideoToPortfolio(video)
 console.log('\nHairdresser added new photo and video:\n ', hairdresser.photos, hairdresser.videos)
 
+// Hairdresser tags a user to the uploaded photo adn video
 hairdresser.tagPhoto(photo, customer)
-console.log('\nHairdresser tagged customer to the photo:\n ', hairdresser.photos)
+hairdresser.tagVideo(video, customer)
+console.log('\nHairdresser tagged customer to the photo and video:\n ', hairdresser.photos, hairdresser.videos)
 
-// Customer likes Hairdresser`s photo
+// Customer likes Hairdresser's photo
 customer.likePhoto(photo)
 console.log('\nCustomer liked a photo of Hairdresser\n ', hairdresser.photos)
 
