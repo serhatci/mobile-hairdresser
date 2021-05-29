@@ -1,9 +1,9 @@
 class PrivateMessage {
-  constructor(sender, receiver, message, id) {
+  constructor(sender, receiver, message) {
     this.sender = sender
     this.receiver = receiver
     this.message = message
-    this.id = id
+    this.id = undefined
     this.date = new Date()
   }
 }

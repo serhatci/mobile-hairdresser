@@ -1,11 +1,11 @@
 class User {
   // Base class for Hairdresser and Customer
-  constructor(name, surname, email, password, id) {
+  constructor(name, surname, email, password) {
     this.name = name
     this.surname = surname
     this.email = email
     this.password = password
-    this.id = id
+    this.id = undefined
     this.createdAt = new Date()
     this.address = ''
     this.tel = ''

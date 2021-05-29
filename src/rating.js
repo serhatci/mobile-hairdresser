@@ -1,6 +1,6 @@
 class Rating {
-  constructor(user, hairdresser, rate, id) {
-    this.id = id
+  constructor(user, hairdresser, rate) {
+    this.id = undefined
     this.user = user
     this.user = hairdresser
     this.rate = rate

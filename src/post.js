@@ -1,9 +1,9 @@
 class Post {
   // Base class for posts
-  constructor(user, message, id) {
+  constructor(user, message) {
     this.user = user
     this.message = message
-    this.id = id
+    this.id = undefined
     this.date = new Date()
   }
 }

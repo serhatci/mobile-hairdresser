@@ -2,8 +2,8 @@ const User = require('./user')
 const CustomerRequest = require('./request')
 
 class Customer extends User {
-  constructor(name, surname, email, password, id) {
-    super(name, surname, email, password, id)
+  constructor(name, surname, email, password) {
+    super(name, surname, email, password)
     this.customerRequests = []
     this.profilePhoto = undefined
   }
@@ -16,8 +16,8 @@ class Customer extends User {
     adviceRequest.photos.push(photo)
   }
 
-  writeCustomerRequest(type, message, id) {
-    return new CustomerRequest(this, type, message, id)
+  writeCustomerRequest(type, message) {
+    return new CustomerRequest(this, type, message)
   }
 
   postRequest(request) {
