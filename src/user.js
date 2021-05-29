@@ -1,3 +1,5 @@
+const PrivateMessage = require('./private-message')
+
 class User {
   // Base class for Hairdresser and Customer
   constructor(name, surname, email, password) {
@@ -34,6 +36,18 @@ class User {
 
   sendPM(user, message) {
     user.privateMessages.push(message)
+  }
+
+  writePrivateMessage(toWhom, message) {
+    return new PrivateMessage(this, toWhom, message)
+  }
+
+  sendPrivateMessage(toWhom, message) {
+    toWhom.privateMessages.push(message)
+  }
+
+  storePrivateMessage(message) {
+    this.privateMessages.push(message)
   }
 }
 
