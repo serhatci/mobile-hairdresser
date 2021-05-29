@@ -1,6 +1,6 @@
 class Photo {
-  constructor(fileName, id) {
-    this.id = id
+  constructor(fileName) {
+    this.id = undefined
     this.fileName = fileName
     this.taggedUsers = []
     this.likedBy = []
