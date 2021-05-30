@@ -1,4 +1,5 @@
 class Video {
+  constructor(fileName, title = '', description = '') {
   constructor(fileName, title, description) {
     this.id = undefined
     this.fileName = fileName
