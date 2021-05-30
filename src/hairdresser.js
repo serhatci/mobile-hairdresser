@@ -8,8 +8,8 @@ class Hairdresser extends User {
     this.experience = 'less than 1 year' // [less than 1 year, 1 year, 2 year, etc... ]
     this.serviceArea = undefined // perimeter in km around a location
     this.ratings = []
-    this.videos = []
-    this.photos = []
+    this.portfolioVideos = []
+    this.portfolioPhotos = []
     this.certificates = []
     this.employerReferences = []
     this.customerReviews = []
