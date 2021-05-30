@@ -26,7 +26,8 @@ class Customer extends User {
     adviceRequest.photos.push(photo)
   }
 
-  postRequest(request) {
+  postRequest(type, title, message, ...photos) {
+    const request = new Request(this, type, title, message, ...photos)
     this.customerRequests.push(request)
   }
 
