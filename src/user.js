@@ -35,12 +35,9 @@ class User {
     video.likedBy.push(this)
   }
 
-  writePrivateMessage(toWhom, title, message) {
-    return new PrivateMessage(this, toWhom, title, message)
-  }
-
-  sendPrivateMessage(privateMessage) {
-    privateMessage.receiver.messageBox.receiveMessage(privateMessage)
+  sendPrivateMessage(receiver, title, message) {
+    const privateMessage = new PrivateMessage(this, receiver, title, message)
+    receiver.messageBox.receiveMessage(privateMessage)
     this.messageBox.storeSentMessage(privateMessage)
   }
 
