@@ -1,5 +1,6 @@
 const User = require('./user')
 const Request = require('./request')
+const Reply = require('./reply')
 
 class Customer extends User {
   constructor(name, surname, email, password) {
@@ -31,6 +32,14 @@ class Customer extends User {
 
   postRequest(request) {
     this.customerRequests.push(request)
+  }
+
+  writeReply(message, ...photos) {
+    return new Reply(this, message, ...photos)
+  }
+
+  replyToCustomerRequest(request, reply) {
+    request.replies.push(reply)
   }
 
   rateHairdresser(hairdresser, rating) {
