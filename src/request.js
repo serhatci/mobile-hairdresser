@@ -1,7 +1,7 @@
 const Post = require('./post')
 
 class Request extends Post {
-  constructor(user, type, title, message, photos) {
+  constructor(user, type, title, message, ...photos) {
     super(user, message)
     this.type = type
     this.title = title

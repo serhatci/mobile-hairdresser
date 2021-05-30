@@ -47,8 +47,8 @@ class Hairdresser extends User {
     this.certificates.push(certificate)
   }
 
-  writeReply(message, photos = []) {
-    return new Reply(this, message, photos)
+  writeReply(message, ...photos) {
+    return new Reply(this, message, ...photos)
   }
 
   replyToCustomerRequest(request, reply) {

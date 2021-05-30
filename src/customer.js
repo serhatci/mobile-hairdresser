@@ -25,8 +25,8 @@ class Customer extends User {
     adviceRequest.photos.push(photo)
   }
 
-  writeCustomerRequest(type, title, message, photos = []) {
-    return new Request(this, type, title, message, photos)
+  writeCustomerRequest(type, title, message, ...photos) {
+    return new Request(this, type, title, message, ...photos)
   }
 
   postRequest(request) {
