@@ -1,5 +1,5 @@
 class Photo {
-  constructor(fileName, description) {
+  constructor(fileName, description = '') {
     this.id = undefined
     this.fileName = fileName
     this.description = description
