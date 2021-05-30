@@ -16,18 +16,27 @@ class Hairdresser extends User {
   }
 
   get portfolio() {
-    return `
-        Name: ${this.fullName}
-        Address: ${this.address}
-        Telephone: ${this.tel}
-
-        ${this.name} ${this.surname} currently has/have ${this.photos.length} photo(s)
-        ${this.name} ${this.surname} currently has/have ${this.videos.length} video(s)
-        ${this.name} ${this.surname} currently has/have ${this.customerReviews.length} Customer Review(s)`
+    return {
+      fullname: this.fullName,
+      email: this.email,
+      serviceArea: this.serviceArea,
+      availability: this.availability,
+      experience: this.experience,
+      videos: this.videos,
+      photos: this.photos,
+      customerReviews: this.customerReviews,
+      ratings: this.ratings,
+      certificates: this.certificates,
+      employerReferences: this.employerReferences,
+    }
   }
 
-  uploadVideo(video) {
-    this.video.push(video)
+  uploadPhotoToPortfolio(photo) {
+    this.photos.push(photo)
+  }
+
+  uploadVideoToPortfolio(video) {
+    this.videos.push(video)
   }
 
   tagVideo(video, user) {
@@ -38,8 +47,8 @@ class Hairdresser extends User {
     this.certificates.push(certificate)
   }
 
-  writeReply(message, photos = []) {
-    return new Reply(this, message, photos)
+  writeReply(message, ...photos) {
+    return new Reply(this, message, ...photos)
   }
 
   replyToCustomerRequest(request, reply) {
