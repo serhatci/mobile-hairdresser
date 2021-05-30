@@ -1,6 +1,6 @@
 {
   "name": "mobile-hairdresser",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "a market place for mobile hairdressers & potential customers",
   "main": "src/index.js",
   "scripts": {
