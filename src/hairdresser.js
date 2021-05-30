@@ -48,12 +48,10 @@ class Hairdresser extends User {
     this.certificates.push(certificate)
   }
 
-  writeReply(message, ...photos) {
-    return new Reply(this, message, ...photos)
-  }
-
-  replyToCustomerRequest(request, reply) {
+  replyToCustomerRequest(request, message, ...photos) {
+    const reply = new Reply(this, message, ...photos)
     request.replies.push(reply)
+    this.repliedCustomerRequests.push(request)
   }
 }
 
