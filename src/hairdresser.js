@@ -23,8 +23,8 @@ class Hairdresser extends User {
       serviceArea: this.serviceArea,
       availability: this.availability,
       experience: this.experience,
-      videos: this.videos,
-      photos: this.photos,
+      portfolioVideos: this.portfolioVideos,
+      portfolioPhotos: this.portfolioPhotos,
       customerReviews: this.customerReviews,
       ratings: this.ratings,
       certificates: this.certificates,
@@ -33,11 +33,11 @@ class Hairdresser extends User {
   }
 
   uploadPhotoToPortfolio(photo) {
-    this.photos.push(photo)
+    this.portfolioPhotos.push(photo)
   }
 
   uploadVideoToPortfolio(video) {
-    this.videos.push(video)
+    this.portfolioVideos.push(video)
   }
 
   tagVideo(video, user) {
