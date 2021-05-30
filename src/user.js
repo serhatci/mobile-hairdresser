@@ -1,4 +1,5 @@
 const PrivateMessage = require('./private-message')
+const MessageBox = require('./message-box')
 
 class User {
   // Base class for Hairdresser and Customer
@@ -11,7 +12,7 @@ class User {
     this.createdAt = new Date()
     this.address = ''
     this.tel = ''
-    this.privateMessages = []
+    this.messageBox = new MessageBox()
   }
 
   get fullName() {
@@ -34,20 +35,30 @@ class User {
     video.likedBy.push(this)
   }
 
-  sendPM(user, message) {
-    user.privateMessages.push(message)
+  writePrivateMessage(toWhom, title, message) {
+    return new PrivateMessage(this, toWhom, title, message)
   }
 
-  writePrivateMessage(toWhom, message) {
-    return new PrivateMessage(this, toWhom, message)
+  sendPrivateMessage(privateMessage) {
+    privateMessage.receiver.messageBox.receiveMessage(privateMessage)
+    this.messageBox.storeSentMessage(privateMessage)
   }
 
-  sendPrivateMessage(toWhom, message) {
-    toWhom.privateMessages.push(message)
+  deletePrivateMessage(privateMessage) {
+    this.messageBox.deleteSeenMessage(privateMessage)
   }
 
-  storePrivateMessage(message) {
-    this.privateMessages.push(message)
+  readPrivateMessage(privateMessage) {
+    this.messageBox.tagMessageAsSeen(privateMessage)
+  }
+
+  unreadPrivateMessage(privateMessage) {
+    this.messageBox.tagMessageAsUnSeen(privateMessage)
+  }
+
+  recallPrivateMessage(privateMessage) {
+    privateMessage.receiver.messageBox.deleteUnseenMessage(privateMessage)
+    this.messageBox.deleteSeenMessage(privateMessage)
   }
 }
 
