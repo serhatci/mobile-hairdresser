@@ -19,9 +19,10 @@ hairdresser.tagPhoto(photo, customer)
 hairdresser.tagVideo(video, customer)
 console.log('\nHairdresser tagged customer to the photo and video:\n ', hairdresser.photos, hairdresser.videos)
 
-// Customer likes Hairdresser's photo
+// Customer likes Hairdresser's photo & video
 customer.likePhoto(photo)
-console.log('\nCustomer liked a photo of Hairdresser\n ', hairdresser.photos)
+customer.likeVideo(video)
+console.log('\nCustomer liked a photo & video of Hairdresser\n ', hairdresser.photos, hairdresser.videos)
 
 // Customer posts a Hairdresser Request
 const customerRequest = customer.writeCustomerRequest(
