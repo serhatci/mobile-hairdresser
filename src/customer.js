@@ -31,11 +31,8 @@ class Customer extends User {
     this.customerRequests.push(request)
   }
 
-  writeReply(message, ...photos) {
-    return new Reply(this, message, ...photos)
-  }
-
-  replyToCustomerRequest(request, reply) {
+  replyToRequest(request, message, ...photos) {
+    const reply = new Reply(this, message, ...photos)
     request.replies.push(reply)
   }
 
