@@ -13,6 +13,7 @@ class Hairdresser extends User {
     this.certificates = []
     this.employerReferences = []
     this.customerReviews = []
+    this.repliedCustomerRequests = []
   }
 
   get portfolio() {
