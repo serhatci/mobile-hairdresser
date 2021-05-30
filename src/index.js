@@ -12,17 +12,25 @@ const photo = new Photo('image.jpg', 'With my best customer')
 const video = new Video('video.mpeg', 'Customer Visit Heidelberg', 'This was my first customer ever')
 hairdresser.uploadPhotoToPortfolio(photo)
 hairdresser.uploadVideoToPortfolio(video)
-// console.log('\nHairdresser added new photo and video:\n ', hairdresser.photos, hairdresser.videos)
+// console.log('\nHairdresser added new photo and video:\n ', hairdresser.portfolioPhotos, hairdresser.portfolioVideos)
 
 // Hairdresser tags a user to the uploaded photo adn video
 hairdresser.tagPhoto(photo, customer)
 hairdresser.tagVideo(video, customer)
-// console.log('\nHairdresser tagged customer to the photo and video:\n ', hairdresser.photos, hairdresser.videos)
+// console.log(
+//   '\nHairdresser tagged customer to the photo and video:\n ',
+//   hairdresser.portfolioPhotos,
+//   hairdresser.portfolioVideos
+// )
 
 // Customer likes Hairdresser's photo & video
 customer.likePhoto(photo)
 customer.likeVideo(video)
-// console.log('\nCustomer liked a photo & video of Hairdresser\n ', hairdresser.photos, hairdresser.videos)
+// console.log(
+//   '\nCustomer liked a photo & video of Hairdresser\n ',
+//   hairdresser.portfolioPhotos,
+//   hairdresser.portfolioVideos
+// )
 
 // Customer posts a Hairdresser Request
 const customerRequest = customer.writeCustomerRequest(
