@@ -34,11 +34,10 @@ customer.postRequest(customerRequest)
 console.log('\nCustomers created a Hairdresser requests:\n ', customer.customerRequests)
 
 // Hairdresser replies Customer`s Request
-const reply = hairdresser.writeReply('I can help! Please PM me!...')
+const replyPhoto = new Photo('map.jpeg')
+const replyPhoto2 = new Photo('map2.jpeg')
+const reply = hairdresser.writeReply('I can help! Please PM me!...', replyPhoto, replyPhoto2)
 hairdresser.replyToCustomerRequest(customerRequest, reply)
-console.log('\nHairdresser replied to customer request:\n ', customer.customerRequests)
-
-// Show Hairdresser Portfolio
 console.log('\nHairdresser portfolio:\n', hairdresser.portfolio)
 
 // Show Customer Info
