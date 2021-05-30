@@ -33,24 +33,22 @@ customer.likeVideo(video)
 // )
 
 // Customer posts a Hairdresser Request
-const customerRequest = customer.writeCustomerRequest(
+customer.postRequest(
   'Hairdresser Request',
   'Urgent Help Please!...',
   'I am looking for a mobile hairdresser on this weekends. Can anyone help me?'
 )
-customer.postRequest(customerRequest)
 // console.log('\nCustomers created a Hairdresser requests:\n ', customer.customerRequests)
 
 // Hairdresser replies Customer`s Request
 const replyPhoto = new Photo('map.jpeg')
 const replyPhoto2 = new Photo('map2.jpeg')
-const reply = hairdresser.writeReply('I can help! Please PM me!...', replyPhoto, replyPhoto2)
-hairdresser.replyToCustomerRequest(customerRequest, reply)
-// console.log( '\nHairdresser replied to customer request:\n ', customer.customerRequests, reply)
+const customerRequest = customer.customerRequests[0]
+hairdresser.replyToCustomerRequest(customerRequest, 'I can help! Please PM me!...', replyPhoto, replyPhoto2)
+// console.log('\nHairdresser replied to customer request:\n ', customerRequest)
 
 // Customer answers back to hairdresser
-const replyToRequest = customer.writeReply('I sent you a PM!...')
-customer.replyToCustomerRequest(customerRequest, replyToRequest)
+customer.replyToRequest(customerRequest, 'I sent you a PM!...')
 // console.log(customerRequest)
 
 // Show Hairdresser Portfolio
@@ -60,37 +58,37 @@ customer.replyToCustomerRequest(customerRequest, replyToRequest)
 // console.log('\nCustomer info:\n', customer.info)
 
 // Customer sends a PM to Hairdresser
-const customerPM = customer.writePrivateMessage(hairdresser, 'hii...', 'Hello... Can you send me your price list?')
-customer.sendPrivateMessage(customerPM)
+customer.sendPrivateMessage(hairdresser, 'hii...', 'Hello... Can you send me your price list?')
 // console.log('\nHairdresser PM:\n', hairdresser.messageBox.unseenMessages, hairdresser.messageBox.seenMessages)
 // console.log('\nCustomer PM:\n', customer.messageBox.seenMessages, customer.messageBox.unseenMessages)
 
 // Hairdresser Reads Customer PM
-hairdresser.readPrivateMessage(customerPM)
+const newPM = hairdresser.messageBox.unseenMessages[0]
+hairdresser.readPrivateMessage(newPM)
 // console.log('\nHairdresser PM:\n', hairdresser.messageBox.unseenMessages, hairdresser.messageBox.seenMessages)
 
 // Hairdresser replies to Customer's PM
-const hairdresserPM = hairdresser.writePrivateMessage(
-  customer,
-  'Hello... You can see my price list at my portfolio page'
-)
-hairdresser.sendPrivateMessage(hairdresserPM)
+hairdresser.sendPrivateMessage(customer, 'Hello... You can see my price list at my portfolio page')
 // console.log('\nHairdresser PM:\n', hairdresser.messageBox.unseenMessages, hairdresser.messageBox.seenMessages)
 // console.log('\nCustomer PM:\n', customer.messageBox.seenMessages, customer.messageBox.unseenMessages)
 
+// Customer Reads Hairdresser's PM
+const newPM2 = customer.messageBox.unseenMessages[0]
+customer.readPrivateMessage(newPM2)
+// console.log('\nHairdresser PM:\n', hairdresser.messageBox.unseenMessages, hairdresser.messageBox.seenMessages)
+
 // Hairdresser & Customer deletes seen messages
-hairdresser.deletePrivateMessage(customerPM)
-hairdresser.deletePrivateMessage(hairdresserPM)
-customer.deletePrivateMessage(customerPM)
-customer.readPrivateMessage(hairdresserPM)
-customer.deletePrivateMessage(hairdresserPM)
+hairdresser.deletePrivateMessage(newPM)
+hairdresser.deletePrivateMessage(newPM2)
+customer.deletePrivateMessage(newPM)
+customer.deletePrivateMessage(newPM2)
 // console.log('\nHairdresser PM:\n', hairdresser.messageBox.unseenMessages, hairdresser.messageBox.seenMessages)
 
 // Hairdresser send a PM and recall it later
-const recallMessage = hairdresser.writePrivateMessage(customer, 'Hiii', 'this msg will be recalled')
-hairdresser.sendPrivateMessage(recallMessage)
-console.log('\nCustomer PM:\n', customer.messageBox.unseenMessages)
-console.log('\nHairdresser PM:\n', hairdresser.messageBox.seenMessages)
+hairdresser.sendPrivateMessage(customer, 'Hiii', 'this msg will be recalled')
+// console.log('\nCustomer PM:\n', customer.messageBox.unseenMessages)
+// console.log('\nHairdresser PM:\n', hairdresser.messageBox.seenMessages)
+const recallMessage = hairdresser.messageBox.seenMessages[0]
 hairdresser.recallPrivateMessage(recallMessage)
-console.log('\nCustomer PM:\n', customer.messageBox.unseenMessages)
-console.log('\nHairdresser PM:\n', hairdresser.messageBox.seenMessages)
+// console.log('\nCustomer PM:\n', customer.messageBox.unseenMessages)
+// console.log('\nHairdresser PM:\n', hairdresser.messageBox.seenMessages)
