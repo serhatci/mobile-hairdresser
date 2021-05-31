@@ -43,6 +43,10 @@ class Hairdresser extends User {
     this.portfolioPhotos = this.portfolioPhotos.filter(p => p !== photo)
   }
 
+  deleteVideoFromPortfolio(video) {
+    this.portfolioVideos = this.portfolioVideos.filter(p => p !== video)
+  }
+
   tagVideo(video, user) {
     video.taggedUsers.push(user)
   }
