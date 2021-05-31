@@ -46,6 +46,14 @@ customer.likeVideo(video)
 //   hairdresser.portfolioVideos
 // )
 
+// customer.unlikePhoto(photo)
+// customer.unlikeVideo(video)
+// console.log(
+//   '\nCustomer unlikes a photo & video of Hairdresser\n ',
+//   hairdresser.portfolioPhotos,
+//   hairdresser.portfolioVideos
+// )
+
 // Customer posts a Hairdresser Request
 customer.postRequest(
   'Hairdresser Request',
