@@ -92,3 +92,7 @@ const recallMessage = hairdresser.messageBox.seenMessages[0]
 hairdresser.recallPrivateMessage(recallMessage)
 // console.log('\nCustomer PM:\n', customer.messageBox.unseenMessages)
 // console.log('\nHairdresser PM:\n', hairdresser.messageBox.seenMessages)
+
+// Customer reviews Hairdresser
+customer.reviewHairdresser(hairdresser, 'He was so good!...', 5)
+console.log(hairdresser.customerReviews)
