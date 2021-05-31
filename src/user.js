@@ -36,6 +36,11 @@ class User {
     photo.taggedUsers.push(user)
   }
 
+  unTagPhoto(photo, user) {
+    const userIndex = photo.taggedUsers.indexOf(user)
+    photo.taggedUsers.splice(userIndex, 1)
+  }
+
   likeVideo(video) {
     video.likedBy.push(this)
   }
