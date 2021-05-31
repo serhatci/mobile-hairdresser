@@ -95,4 +95,4 @@ hairdresser.recallPrivateMessage(recallMessage)
 
 // Customer reviews Hairdresser
 customer.reviewHairdresser(hairdresser, 'He was so good!...', 5)
-console.log(hairdresser.customerReviews)
+console.log('\nHairdresser customer reviews:\n ', hairdresser.customerReviews)
