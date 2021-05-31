@@ -49,6 +49,10 @@ class Customer extends User {
     this.hairdresserReviews.push(review)
   }
 
+  deleteHairdresserReview(hairdresser, review) {
+    const reviewIndex = hairdresser.customerReviews.indexOf(review)
+    hairdresser.customerReviews.splice(reviewIndex, 1)
+    this.hairdresserReviews.splice(reviewIndex, 1)
   }
 }
 
