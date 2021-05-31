@@ -61,11 +61,11 @@ class User {
   }
 
   readPrivateMessage(privateMessage) {
-    this.messageBox.tagMessageAsSeen(privateMessage)
+    this.messageBox.setMessageAsSeen(privateMessage)
   }
 
   unreadPrivateMessage(privateMessage) {
-    this.messageBox.tagMessageAsUnSeen(privateMessage)
+    this.messageBox.setMessageAsUnSeen(privateMessage)
   }
 
   recallPrivateMessage(privateMessage) {
