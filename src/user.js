@@ -27,6 +27,11 @@ class User {
     photo.likedBy.push(this)
   }
 
+  unlikePhoto(photo) {
+    const photoIndex = photo.likedBy.indexOf(photo)
+    photo.likedBy.splice(photoIndex, 1)
+  }
+
   tagPhoto(photo, user) {
     photo.taggedUsers.push(user)
   }
