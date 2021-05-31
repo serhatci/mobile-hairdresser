@@ -32,6 +32,11 @@ class Customer extends User {
     this.customerRequests.push(request)
   }
 
+  deleteRequest(request) {
+    const requestIndex = this.customerRequests.indexOf(request)
+    this.customerRequests.splice(requestIndex, 1)
+  }
+
   replyToRequest(request, message, ...photos) {
     const reply = new Reply(this, message, ...photos)
     request.replies.push(reply)
