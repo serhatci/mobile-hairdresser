@@ -14,7 +14,7 @@ hairdresser.uploadPhotoToPortfolio(photo)
 hairdresser.uploadVideoToPortfolio(video)
 // console.log('\nHairdresser added new photo and video:\n ', hairdresser.portfolioPhotos, hairdresser.portfolioVideos)
 
-// Hairdresser tags a user to the uploaded photo adn video
+// Hairdresser tags a user to the uploaded photo & video
 hairdresser.tagPhoto(photo, customer)
 hairdresser.tagVideo(video, customer)
 // console.log(
