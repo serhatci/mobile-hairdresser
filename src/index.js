@@ -28,6 +28,15 @@ hairdresser.tagVideo(video, customer)
 //   hairdresser.portfolioVideos
 // )
 
+// Hairdresser untags a user to the uploaded photo & video
+// hairdresser.unTagPhoto(photo, customer)
+// hairdresser.unTagVideo(video, customer)
+// console.log(
+//   '\nHairdresser untagged customer to the photo and video:\n ',
+//   hairdresser.portfolioPhotos,
+//   hairdresser.portfolioVideos
+// )
+
 // Customer likes Hairdresser's photo & video
 customer.likePhoto(photo)
 customer.likeVideo(video)
