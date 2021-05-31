@@ -60,7 +60,10 @@ customer.postRequest(
   'Urgent Help Please!...',
   'I am looking for a mobile hairdresser on this weekends. Can anyone help me?'
 )
-// console.log('\nCustomers created a Hairdresser requests:\n ', customer.customerRequests)
+// // console.log('\nCustomers created a Hairdresser requests:\n ', customer.customerRequests)
+// const request = customer.customerRequests[0]
+// customer.deleteRequest(request)
+// // console.log('\nCustomers created a Hairdresser requests:\n ', customer.customerRequests)
 
 // Hairdresser replies Customer`s Request
 const replyPhoto = new Photo('map.jpeg')
