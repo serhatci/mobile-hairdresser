@@ -120,4 +120,9 @@ hairdresser.recallPrivateMessage(recallMessage)
 
 // Customer reviews Hairdresser
 customer.reviewHairdresser(hairdresser, 'He was so good!...', 5)
-console.log('\nHairdresser customer reviews:\n ', hairdresser.customerReviews)
+// console.log('\nHairdresser customer reviews:\n ', hairdresser.customerReviews)
+
+// // Customer reviews Hairdresser
+// const review = hairdresser.customerReviews[0]
+// customer.deleteHairdresserReview(hairdresser, review)
+// console.log('\nHairdresser customer reviews:\n ', hairdresser.customerReviews)
