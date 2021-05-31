@@ -7,6 +7,7 @@ class Customer extends User {
   constructor(name, surname, email, password) {
     super(name, surname, email, password)
     this.customerRequests = []
+    this.hairdresserReviews = []
     this.profilePhoto = undefined
   }
 
@@ -45,6 +46,9 @@ class Customer extends User {
   reviewHairdresser(hairdresser, message, rating) {
     const review = new Review(this, message, rating)
     hairdresser.customerReviews.push(review)
+    this.hairdresserReviews.push(review)
+  }
+
   }
 }
 
