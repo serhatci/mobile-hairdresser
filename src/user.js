@@ -45,6 +45,11 @@ class User {
     video.likedBy.push(this)
   }
 
+  unlikeVideo(video) {
+    const videoIndex = video.likedBy.indexOf(video)
+    video.likedBy.splice(videoIndex, 1)
+  }
+
   sendPrivateMessage(receiver, title, message) {
     const privateMessage = new PrivateMessage(this, receiver, title, message)
     receiver.messageBox.receiveMessage(privateMessage)
