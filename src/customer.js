@@ -1,6 +1,7 @@
 const User = require('./user')
 const Request = require('./request')
 const Reply = require('./reply')
+const Review = require('./review')
 
 class Customer extends User {
   constructor(name, surname, email, password) {
@@ -36,11 +37,8 @@ class Customer extends User {
     request.replies.push(reply)
   }
 
-  rateHairdresser(hairdresser, rating) {
-    hairdresser.ratings.push(rating)
-  }
-
-  reviewHairdresser(hairdresser, review) {
+  reviewHairdresser(hairdresser, message, rating) {
+    const review = new Review(this, message, rating)
     hairdresser.customerReviews.push(review)
   }
 }
