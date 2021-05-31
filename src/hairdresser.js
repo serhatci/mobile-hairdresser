@@ -51,6 +51,11 @@ class Hairdresser extends User {
     video.taggedUsers.push(user)
   }
 
+  unTagVideo(video, user) {
+    const userIndex = video.taggedUsers.indexOf(user)
+    video.taggedUsers.splice(userIndex, 1)
+  }
+
   uploadCertificate(certificate) {
     this.certificates.push(certificate)
   }
