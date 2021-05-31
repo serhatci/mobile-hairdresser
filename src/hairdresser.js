@@ -7,12 +7,12 @@ class Hairdresser extends User {
     this.availability = 'available' // [weekdays, weekends, after 7 pm, etc... ]
     this.experience = 'less than 1 year' // [less than 1 year, 1 year, 2 year, etc... ]
     this.serviceArea = undefined // perimeter in km around a location
-    this.ratings = []
-    this.videos = []
-    this.photos = []
+    this.portfolioVideos = []
+    this.portfolioPhotos = []
     this.certificates = []
     this.employerReferences = []
     this.customerReviews = []
+    this.repliedCustomerRequests = []
   }
 
   get portfolio() {
@@ -22,8 +22,8 @@ class Hairdresser extends User {
       serviceArea: this.serviceArea,
       availability: this.availability,
       experience: this.experience,
-      videos: this.videos,
-      photos: this.photos,
+      portfolioVideos: this.portfolioVideos,
+      portfolioPhotos: this.portfolioPhotos,
       customerReviews: this.customerReviews,
       ratings: this.ratings,
       certificates: this.certificates,
@@ -32,27 +32,38 @@ class Hairdresser extends User {
   }
 
   uploadPhotoToPortfolio(photo) {
-    this.photos.push(photo)
+    this.portfolioPhotos.push(photo)
   }
 
   uploadVideoToPortfolio(video) {
-    this.videos.push(video)
+    this.portfolioVideos.push(video)
+  }
+
+  deletePhotoFromPortfolio(photo) {
+    this.portfolioPhotos = this.portfolioPhotos.filter(p => p !== photo)
+  }
+
+  deleteVideoFromPortfolio(video) {
+    this.portfolioVideos = this.portfolioVideos.filter(p => p !== video)
   }
 
   tagVideo(video, user) {
     video.taggedUsers.push(user)
   }
 
+  unTagVideo(video, user) {
+    const userIndex = video.taggedUsers.indexOf(user)
+    video.taggedUsers.splice(userIndex, 1)
+  }
+
   uploadCertificate(certificate) {
     this.certificates.push(certificate)
   }
 
-  writeReply(message, ...photos) {
-    return new Reply(this, message, ...photos)
-  }
-
-  replyToCustomerRequest(request, reply) {
+  replyToCustomerRequest(request, message, ...photos) {
+    const reply = new Reply(this, message, ...photos)
     request.replies.push(reply)
+    this.repliedCustomerRequests.push(request)
   }
 }
 

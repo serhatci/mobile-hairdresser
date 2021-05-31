@@ -1,11 +1,13 @@
 const User = require('./user')
 const Request = require('./request')
 const Reply = require('./reply')
+const Review = require('./review')
 
 class Customer extends User {
   constructor(name, surname, email, password) {
     super(name, surname, email, password)
     this.customerRequests = []
+    this.hairdresserReviews = []
     this.profilePhoto = undefined
   }
 
@@ -26,28 +28,31 @@ class Customer extends User {
     adviceRequest.photos.push(photo)
   }
 
-  writeCustomerRequest(type, title, message, ...photos) {
-    return new Request(this, type, title, message, ...photos)
-  }
-
-  postRequest(request) {
+  postRequest(type, title, message, ...photos) {
+    const request = new Request(this, type, title, message, ...photos)
     this.customerRequests.push(request)
   }
 
-  writeReply(message, ...photos) {
-    return new Reply(this, message, ...photos)
+  deleteRequest(request) {
+    const requestIndex = this.customerRequests.indexOf(request)
+    this.customerRequests.splice(requestIndex, 1)
   }
 
-  replyToCustomerRequest(request, reply) {
+  replyToRequest(request, message, ...photos) {
+    const reply = new Reply(this, message, ...photos)
     request.replies.push(reply)
   }
 
-  rateHairdresser(hairdresser, rating) {
-    hairdresser.ratings.push(rating)
+  reviewHairdresser(hairdresser, message, rating) {
+    const review = new Review(this, message, rating)
+    hairdresser.customerReviews.push(review)
+    this.hairdresserReviews.push(review)
   }
 
-  reviewHairdresser(hairdresser, review) {
-    hairdresser.customerReviews.push(review)
+  deleteHairdresserReview(hairdresser, review) {
+    const reviewIndex = hairdresser.customerReviews.indexOf(review)
+    hairdresser.customerReviews.splice(reviewIndex, 1)
+    this.hairdresserReviews.splice(reviewIndex, 1)
   }
 }
 

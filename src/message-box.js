@@ -19,12 +19,12 @@ class MessageBox {
     this.unseenMessages = this.unseenMessages.filter(m => m !== message)
   }
 
-  tagMessageAsSeen(message) {
+  setMessageAsSeen(message) {
     this.seenMessages.push(message)
     this.unseenMessages = this.unseenMessages.filter(m => m !== message)
   }
 
-  tagMessageAsUnseen(message) {
+  setMessageAsUnseen(message) {
     this.unseenMessages.push(message)
     this.seenMessages = this.seenMessages.filter(m => m !== message)
   }
