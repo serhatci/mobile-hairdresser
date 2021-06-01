@@ -12,7 +12,6 @@ class Hairdresser extends User {
     this.certificates = []
     this.employerReferences = []
     this.customerReviews = []
-    this.repliedCustomerRequests = []
   }
 
   get portfolio() {
@@ -61,6 +60,7 @@ class Hairdresser extends User {
     const referenceIndex = this.employerReferences.indexOf(reference)
     this.employerReferences.splice(referenceIndex, 1)
   }
+
   tagVideo(video, user) {
     video.taggedUsers.push(user)
   }
@@ -77,10 +77,6 @@ class Hairdresser extends User {
   deleteCertificate(certificate) {
     const certificateIndex = this.certificates.indexOf(certificate)
     this.certificates.splice(certificateIndex, 1)
-  replyToCustomerRequest(request, message, ...photos) {
-    const reply = new Reply(this, message, ...photos)
-    request.replies.push(reply)
-    this.repliedCustomerRequests.push(request)
   }
 }
 
