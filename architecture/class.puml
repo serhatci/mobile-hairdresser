@@ -1,0 +1,206 @@
+@startuml UML DIAGRAM
+
+
+Title: Mobile Hairdresser Search
+
+class User {
+  name : String
+  surname : String
+  email : String
+  password : String
+  id : ObjectID
+  createdAt : Date
+  address : String
+  tel : String
+  fullName : String
+  repliedRequests : [Request]
+  messageBox : MessageBox
+  constructor(name: String, surname: String, email: String,
+
+  password: String)
+
+  uploadPhotoToPost(photo: Photo, post:Post)
+
+  likePhoto(photo: Photo)
+
+  unlikePhoto(photo: Photo)
+
+  tagPhoto(photo: Photo, user: User)
+
+  unTagPhoto(photo: Photo, user: User)
+
+  likeVideo(video: Video)
+
+  unlikeVideo(video: Video)
+
+  replyRequest(request: Request, message: String, ...photos : Photo)
+
+  deleteReply(request: Request, reply: Reply)
+
+  sendPrivateMessage(receiver: user: User, title: String, message: String)
+
+  deletePrivateMessage(privateMessage: PrivateMessage )
+
+  readPrivateMessage(privateMessage: PrivateMessage)
+
+  unreadPrivateMessage(privateMessage: PrivateMessage)
+
+  recallPrivateMessage(privateMessage: PrivateMessage)
+}
+
+class Hairdresser{
+  availability : String
+  experience : String
+  serviceArea : Number
+  portfolioVideos : [Video]
+  portfolioPhotos : [Photo]
+  certificates : [Certificate]
+  employerReferences : [Reference]
+  customerReviews : [Review]
+  repliedCustomerRequests : [Request]
+  portfolio : Object
+
+  constructor(name: String, surname: String, email: String,
+  password: String)
+
+  uploadPhotoToPortfolio(photo: Photo)
+
+  uploadVideoToPortfolio(video: Video)
+
+  deletePhotoFromPortfolio(photo: Photo)
+
+  deleteVideoFromPortfolio(video: Video)
+
+  tagVideo(video: Video, user: User)
+
+  unTagVideo(Video, user: User)
+
+  uploadCertificate(certificate: Certificate)
+
+  deleteCertificate(certificate: Certificate)
+}
+
+class Customer {
+  profilePhoto : Photo
+  info: Object
+  customerRequests : [Request]
+  hairdresserReviews : [Review]
+
+  constructor(name: String, surname: String, email: String,
+  password: String)
+
+  addProfilePhoto(photo: Photo)
+
+  addPhotoToAdviceRequest(photo: Photo, request: Request)
+
+  postRequest(type: String, title: String, message:String, ...photos : photo: Photo)
+
+  deleteRequest(request: Request)
+
+  reviewHairdresser(hairdresser: User, message : String, rating)
+
+  deleteHairdresserReview(hairdresser: User, review : Review)
+}
+
+class Certificate {
+  id : ObjectID
+  fileName : String
+  title : String
+
+  constructor(fileName: String, title: String)
+}
+
+class MessageBox {
+  seenMessages : [PrivateMessage]
+  unseenMessages : [PrivateMessage]
+
+  receiveMessage(message: PrivateMessage)
+
+  storeSentMessage(message: PrivateMessage)
+
+  deleteSeenMessage(message: PrivateMessage)
+
+  deleteUnseenMessage(message: PrivateMessage)
+
+  setMessageAsSeen(message: PrivateMessage)
+
+  setMessageAsUnseen(message: PrivateMessage)
+}
+
+class Photo {
+  id : ObjectID
+  createdAt : Date
+  fileName : String
+  description : String
+  taggedUsers : [User]
+  likedBy : [User]
+
+  constructor(fileName: String, description: String)
+  }
+
+class Post {
+  id :String
+  date : Date
+  user: User
+  message: String
+
+  constructor(user: User, message: String)
+}
+
+class PrivateMessage {
+  id: String
+  createdAt: Date
+  sender: User
+  receiver: User
+  title: String
+  message: String
+
+  constructor(sender, receiver, title = '', message)
+}
+
+class Reply extends Post {
+  photos = [Photo]
+
+  constructor(user: User, message: String, ...photos : Photo)
+}
+
+class Request extends Post {
+  type : String
+  title : String
+  replies : [Reply]
+  photos : [Photo]
+
+  constructor(user: User, type: String, title: String, message: String, ...photos: Photo)
+}
+
+class Review extends Post{
+  rating : Number
+
+  constructor(user: User, message: String, rating: Number)
+}
+
+class Video {
+  id : ObjectID
+  createdAt : Date
+  fileName : String
+  title : String
+  description : String
+  taggedUsers : [User]
+  likedBy : [User]
+
+  constructor(fileName: String, title: String, description: String)
+}
+
+Customer -|> User
+User <|- Hairdresser
+Certificate --* Hairdresser
+Hairdresser *- Video
+User *-- MessageBox
+User o-- Photo
+User o-- PrivateMessage
+Reply --o User
+Request --o Customer
+Review --o Customer
+
+
+@enduml
