@@ -74,6 +74,9 @@ class Hairdresser extends User {
     this.certificates.push(certificate)
   }
 
+  deleteCertificate(certificate) {
+    const certificateIndex = this.certificates.indexOf(certificate)
+    this.certificates.splice(certificateIndex, 1)
   replyToCustomerRequest(request, message, ...photos) {
     const reply = new Reply(this, message, ...photos)
     request.replies.push(reply)
