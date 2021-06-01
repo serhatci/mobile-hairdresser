@@ -47,6 +47,20 @@ class Hairdresser extends User {
     this.portfolioVideos = this.portfolioVideos.filter(p => p !== video)
   }
 
+  addEmployerReference(employerName, shopName, employerAddress, employerEmail, employerTelephone) {
+    this.employerReferences.push({
+      name: employerName,
+      shop: shopName,
+      address: employerAddress,
+      email: employerEmail,
+      telephone: employerTelephone,
+    })
+  }
+
+  deleteEmployerReference(reference) {
+    const referenceIndex = this.employerReferences.indexOf(reference)
+    this.employerReferences.splice(referenceIndex, 1)
+  }
   tagVideo(video, user) {
     video.taggedUsers.push(user)
   }
