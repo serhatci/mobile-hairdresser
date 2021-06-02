@@ -56,7 +56,7 @@ class User {
     const reply = new Reply(this, message, ...photos)
     request.replies.push(reply)
 
-    if (this.repliedRequests.find(request)) return
+    if (this.repliedRequests.find(r => r === request)) return
     this.repliedRequests.push(request)
   }
 
@@ -64,7 +64,7 @@ class User {
     const replyIndex = request.replies.indexOf(reply)
     request.replies.splice(replyIndex, 1)
 
-    if (this.repliedRequests.find(request)) return
+    if (this.repliedRequests.find(r => r === request)) return
     this.repliedRequests.push(request)
   }
 
