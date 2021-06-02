@@ -1,0 +1,43 @@
+@startuml
+
+skinparam actorStyle awesome
+
+actor "Hairdresser"
+actor "Customer"
+actor "User"
+
+package Request {
+  usecase "Post customer request" as UC1
+  usecase "Reply to customer request" as UC2
+}
+
+package Video {
+  usecase "Like a video" as UC3
+  usecase "Tag a video" as UC4
+}
+
+package Photo {
+  usecase "Like a photo" as UC5
+  usecase "Tag a photo" as UC6
+}
+
+package PrivateMessage {
+  usecase "Send a PM" as UC7
+  usecase "Receive a PM" as UC8
+}
+
+Hairdresser ---|> User
+Customer ---|> User
+
+User --> UC3
+User --> UC4
+User --> UC5
+User --> UC6
+User --> UC7
+User --> UC8
+
+Hairdresser -> UC2
+Customer -> UC1
+Customer -> UC2
+
+@enduml
