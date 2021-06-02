@@ -15,36 +15,22 @@ class User {
   fullName : String
   repliedRequests : [Request]
   messageBox : MessageBox
+
   constructor(name: String, surname: String, email: String,
-
   password: String)
-
   uploadPhotoToPost(photo: Photo, post:Post)
-
   likePhoto(photo: Photo)
-
   unlikePhoto(photo: Photo)
-
   tagPhoto(photo: Photo, user: User)
-
   unTagPhoto(photo: Photo, user: User)
-
   likeVideo(video: Video)
-
   unlikeVideo(video: Video)
-
   replyRequest(request: Request, message: String, ...photos : Photo)
-
   deleteReply(request: Request, reply: Reply)
-
   sendPrivateMessage(receiver: user: User, title: String, message: String)
-
   deletePrivateMessage(privateMessage: PrivateMessage )
-
   readPrivateMessage(privateMessage: PrivateMessage)
-
   unreadPrivateMessage(privateMessage: PrivateMessage)
-
   recallPrivateMessage(privateMessage: PrivateMessage)
 }
 
@@ -62,21 +48,13 @@ class Hairdresser{
 
   constructor(name: String, surname: String, email: String,
   password: String)
-
   uploadPhotoToPortfolio(photo: Photo)
-
   uploadVideoToPortfolio(video: Video)
-
   deletePhotoFromPortfolio(photo: Photo)
-
   deleteVideoFromPortfolio(video: Video)
-
   tagVideo(video: Video, user: User)
-
   unTagVideo(Video, user: User)
-
   uploadCertificate(certificate: Certificate)
-
   deleteCertificate(certificate: Certificate)
 }
 
@@ -85,20 +63,13 @@ class Customer {
   info: Object
   customerRequests : [Request]
   hairdresserReviews : [Review]
-
   constructor(name: String, surname: String, email: String,
   password: String)
-
   addProfilePhoto(photo: Photo)
-
   addPhotoToAdviceRequest(photo: Photo, request: Request)
-
   postRequest(type: String, title: String, message:String, ...photos : photo: Photo)
-
   deleteRequest(request: Request)
-
   reviewHairdresser(hairdresser: User, message : String, rating)
-
   deleteHairdresserReview(hairdresser: User, review : Review)
 }
 
@@ -113,17 +84,11 @@ class Certificate {
 class MessageBox {
   seenMessages : [PrivateMessage]
   unseenMessages : [PrivateMessage]
-
   receiveMessage(message: PrivateMessage)
-
   storeSentMessage(message: PrivateMessage)
-
   deleteSeenMessage(message: PrivateMessage)
-
   deleteUnseenMessage(message: PrivateMessage)
-
   setMessageAsSeen(message: PrivateMessage)
-
   setMessageAsUnseen(message: PrivateMessage)
 }
 
