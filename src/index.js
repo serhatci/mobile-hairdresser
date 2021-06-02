@@ -69,11 +69,11 @@ customer.postRequest(
 const replyPhoto = new Photo('map.jpeg')
 const replyPhoto2 = new Photo('map2.jpeg')
 const customerRequest = customer.customerRequests[0]
-hairdresser.replyToCustomerRequest(customerRequest, 'I can help! Please PM me!...', replyPhoto, replyPhoto2)
+hairdresser.replyRequest(customerRequest, 'I can help! Please PM me!...', replyPhoto, replyPhoto2)
 // console.log('\nHairdresser replied to customer request:\n ', customerRequest)
 
 // Customer answers back to hairdresser
-customer.replyToRequest(customerRequest, 'I sent you a PM!...')
+customer.replyRequest(customerRequest, 'I sent you a PM!...')
 // console.log(customerRequest)
 
 // Show Hairdresser Portfolio
