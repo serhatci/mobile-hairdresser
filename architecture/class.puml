@@ -1,5 +1,6 @@
 @startuml UML DIAGRAM
 
+skinparam TitleFontSize 60
 
 Title: Mobile Hairdresser Search
 
