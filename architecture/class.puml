@@ -156,16 +156,16 @@ class Video {
   constructor(fileName: String, title: String, description: String)
 }
 
-Customer -|> User
-User <|- Hairdresser
-Certificate --* Hairdresser
-Hairdresser *- Video
-User *-- MessageBox
-User o-- Photo
-User o-- PrivateMessage
-Reply --o User
-Request --o Customer
-Review --o Customer
+Customer -|> User : inherits
+User <|- Hairdresser : inherits
+Certificate "0..10" --o "1" Hairdresser : has
+Hairdresser "1" o- "0..3" Video : has
+User *-- "1" MessageBox : owns
+User "1" o-- "0..*" Photo : has
+User "1" o-- "0..* "PrivateMessage : sends/receives
+Reply "0..*" --o "1" User : gives answer to a request
+Request "0..*" --o "1" Customer : writes
+Review "0..*"--o "1" Customer : writes
 
 
 @enduml
