@@ -1,6 +1,5 @@
 const User = require('./user')
 const Request = require('./request')
-const Reply = require('./reply')
 const Review = require('./review')
 
 class Customer extends User {
@@ -36,11 +35,6 @@ class Customer extends User {
   deleteRequest(request) {
     const requestIndex = this.customerRequests.indexOf(request)
     this.customerRequests.splice(requestIndex, 1)
-  }
-
-  replyToRequest(request, message, ...photos) {
-    const reply = new Reply(this, message, ...photos)
-    request.replies.push(reply)
   }
 
   reviewHairdresser(hairdresser, message, rating) {

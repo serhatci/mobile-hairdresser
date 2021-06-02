@@ -1,5 +1,6 @@
 const PrivateMessage = require('./private-message')
 const MessageBox = require('./message-box')
+const Reply = require('./reply')
 
 class User {
   // Base class for Hairdresser and Customer
@@ -12,6 +13,7 @@ class User {
     this.createdAt = new Date()
     this.address = ''
     this.tel = ''
+    this.repliedRequests = []
     this.messageBox = new MessageBox()
   }
 
@@ -48,6 +50,22 @@ class User {
   unlikeVideo(video) {
     const videoIndex = video.likedBy.indexOf(video)
     video.likedBy.splice(videoIndex, 1)
+  }
+
+  replyRequest(request, message, ...photos) {
+    const reply = new Reply(this, message, ...photos)
+    request.replies.push(reply)
+
+    if (this.repliedRequests.find(request)) return
+    this.repliedRequests.push(request)
+  }
+
+  deleteReply(request, reply) {
+    const replyIndex = request.replies.indexOf(reply)
+    request.replies.splice(replyIndex, 1)
+
+    if (this.repliedRequests.find(request)) return
+    this.repliedRequests.push(request)
   }
 
   sendPrivateMessage(receiver, title, message) {
