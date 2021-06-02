@@ -2,6 +2,10 @@
 
 skinparam actorStyle awesome
 
+skinparam TitleFontSize 30
+
+Title: Mobile Hairdresser Search
+
 actor "Hairdresser"
 actor "Customer"
 actor "User"
