@@ -1,18 +1,25 @@
 {
   "name": "mobile-hairdresser",
   "version": "0.1.4",
+  "private": true,
   "description": "a market place for mobile hairdressers & potential customers",
-  "main": "src/index.js",
+  "main": "./bin/www",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js",
+    "start": "node ./bin/www",
     "lint": "lint-staged",
     "lint-only": "eslint .",
+    "lint-all": "pretty-quick && eslint",
     "prepare": "husky install"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "repository": {
     "type": "git",
@@ -24,6 +31,14 @@
     "url": "https://github.com/serhatci/mobile-hairdresser/issues"
   },
   "homepage": "https://github.com/serhatci/mobile-hairdresser#readme",
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "pug": "^3.0.2"
+  },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "eslint": "^7.27.0",
