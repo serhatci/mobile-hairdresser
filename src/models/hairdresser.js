@@ -1,5 +1,4 @@
 const User = require('./user')
-const Reply = require('./reply')
 
 class Hairdresser extends User {
   constructor(name, surname, email, password) {
