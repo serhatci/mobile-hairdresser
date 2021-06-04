@@ -3,10 +3,9 @@
   "version": "0.2.0",
   "private": true,
   "description": "a market place for mobile hairdressers & potential customers",
-  "main": "./bin/www",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www",
+    "start": "nodemon bin/www",
     "lint": "lint-staged",
     "lint-only": "eslint .",
     "lint-all": "pretty-quick && eslint",
