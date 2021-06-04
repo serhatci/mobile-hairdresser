@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
+    "connect-livereload": "^0.6.1",
     "eslint": "^7.27.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -50,6 +51,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
+    "livereload": "^0.9.3",
     "prettier": "^2.3.0"
   }
 }
