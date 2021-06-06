@@ -31,7 +31,6 @@ header {
 
 header a {
   color: var(--my-font-white);
-  font-size: 0.8rem;
 }
 
 .logo {
@@ -42,7 +41,6 @@ header a {
 #header-nav-col {
   height: 45px;
   line-height: 45px;
-  padding-right: 1rem;
 }
 
 video {
