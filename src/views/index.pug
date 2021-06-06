@@ -1,12 +1,12 @@
 extends layout
 
 block main
-  #main-row.row.g-0
-    .col-12.g-0
-      //- img.search-bg-img.img-fluid(src='/images/three-hairdressers.jpg', alt='three-hairdressers')
-      video(playsinline='playsinline', autoplay='autoplay', muted='muted', loop='loop')
-        source(src='images/barbershop.mp4', type='video/mp4')
-      .searchCardContainer
+  #search-row.row.g-0
+    #search-row-col.col.g-0
+      .video-container.position-relative
+        video(playsinline='playsinline', autoplay='autoplay', muted='muted', loop='loop')
+          source(src='images/barbershop.mp4', type='video/mp4')
+      #searchCardContainer
         #search-card.card.m-3
           h5.card-header.text-center I am looking for
           .card-body
