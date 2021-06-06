@@ -1,6 +1,12 @@
 body {
   padding: 50px;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+:root {
+  --my-screen-width: 450px;
+  --my-blue: #156eac;
+  --my-font-white: white;
+}
+
 }
 
 a {
