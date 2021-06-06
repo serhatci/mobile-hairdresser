@@ -44,6 +44,11 @@ header a {
   padding-right: 1rem;
 }
 
+video {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  opacity: 0.9;
 }
 
 a {
