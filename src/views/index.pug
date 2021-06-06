@@ -12,8 +12,8 @@ block main
           .card-body
             #search-form.form.text-center(action='submit')
               .form-check.form-check-inline
-                #select-hairdresser.input.form-check-input(type='checkbox', value='', checked)
-                label.form-check-label(for='select-hairdresser') Hairdresser
+                input#selectHairdresser.form-check-input(type='radio', name='searchType', checked)
+                label.form-check-label(for='selectHairdresser') Hairdresser
               .form-check.form-check-inline
-                #select-customer.input.form-check-input(type='checkbox', value='')
-                label.form-check-label(for='select-customer') Customer
+                input#selectCustomer.form-check-input(type='radio', name='searchType')
+                label.form-check-label(for='selectCustomer') Customer
