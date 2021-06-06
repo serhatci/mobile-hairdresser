@@ -1,8 +1,98 @@
-body {
-  padding: 50px;
-  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+/* * {
+  border: 1px solid rgb(250, 141, 141);
+} */
+
+:root {
+  --my-screen-width: 450px;
+  --my-blue: #156eac;
+  --my-font-white: white;
+  --my-aliceblue: aliceblue;
+  --my-lightblue: #a2d4ff;
 }
 
-a {
-  color: #00b7ff;
+.container-fluid {
+  min-width: var(--my-screen-width);
+  padding: 0;
+}
+
+header {
+  padding: 0.4rem 1rem;
+  background-color: var(--my-blue);
+  border-bottom: 1px solid rgb(165, 157, 157);
+  box-shadow: 0 4px 8px 0 rgba(148, 147, 147, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+header a {
+  color: var(--my-font-white);
+}
+
+.logo {
+  height: 45px;
+  min-width: 200px;
+}
+
+#header-nav-col {
+  height: 45px;
+  line-height: 45px;
+}
+
+video {
+  visibility: visible;
+  width: 100%;
+  opacity: 0.9;
+}
+
+#searchCardContainer {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 650px;
+}
+
+#search-inputs-row > div > input {
+  min-width: 250px;
+  width: 100%;
+  margin-right: 1rem;
+}
+
+#search-inputs-row > div > button {
+  min-width: 100px;
+  width: 100%;
+}
+
+#search-row-col {
+  background-color: var(--my-aliceblue);
+}
+
+.radiobox-container {
+  max-width: 270px;
+  margin: auto;
+}
+
+.hairdresser-container {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--my-lightblue);
+}
+
+@media only screen and (max-width: 450px) {
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  video {
+    visibility: hidden;
+    position: absolute;
+  }
+  #searchCardContainer {
+    position: relative;
+    top: 0%;
+    left: 0%;
+    transform: translate(0%, 0%);
+    margin-bottom: 10vh;
+    margin-top: 10vh;
+  }
 }
