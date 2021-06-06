@@ -16,6 +16,11 @@ body {
   }
 }
 
+.container-fluid {
+  min-width: var(--my-screen-width);
+  padding: 0;
+}
+
 }
 
 a {
