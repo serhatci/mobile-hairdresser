@@ -21,6 +21,29 @@ body {
   padding: 0;
 }
 
+header {
+  padding: 0.4rem 1rem;
+  background-color: var(--my-blue);
+  border-bottom: 1px solid rgb(165, 157, 157);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+header a {
+  color: var(--my-font-white);
+  font-size: 0.8rem;
+}
+
+.logo {
+  height: 45px;
+  min-width: 200px;
+}
+
+#header-nav-col {
+  height: 45px;
+  line-height: 45px;
+  padding-right: 1rem;
+}
+
 }
 
 a {
