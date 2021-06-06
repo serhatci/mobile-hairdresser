@@ -1,6 +1,19 @@
 extends layout
 
-block content
-  h1= title
-  p Welcome to #{title}
-  a(href="/users") Click to see active users
+block main
+  #main-row.row.g-0
+    .col-12.g-0
+      //- img.search-bg-img.img-fluid(src='/images/three-hairdressers.jpg', alt='three-hairdressers')
+      video(playsinline='playsinline', autoplay='autoplay', muted='muted', loop='loop')
+        source(src='images/barbershop.mp4', type='video/mp4')
+      .search-card-container
+        #search-card.card.m-3
+          h5.card-header.text-center I am looking for
+          .card-body
+            #search-form.form.text-center(action='submit')
+              .form-check.form-check-inline
+                #select-hairdresser.input.form-check-input(type='checkbox', value='', checked)
+                label.form-check-label(for='select-hairdresser') Hairdresser
+              .form-check.form-check-inline
+                #select-customer.input.form-check-input(type='checkbox', value='')
+                label.form-check-label(for='select-customer') Customer
