@@ -11,14 +11,17 @@ block main
           h5.card-header.text-center I am looking for
           .card-body
             #search-form.form.text-center(action='submit')
-              .form-check.form-check-inline
-                input#selectHairdresser.form-check-input(type='radio', name='searchType', checked)
-                label.form-check-label(for='selectHairdresser') Hairdresser
-              .form-check.form-check-inline
-                input#selectCustomer.form-check-input(type='radio', name='searchType')
-                label.form-check-label(for='selectCustomer') Customer
-              .row.align-items-center.mx-2
-                .col-12.col-md-8
+              .radiobox-container
+                .row.align-items-center.mx-2
+                  .col-12.col-sm-6.text-center.mb-2
+                    .form-check.form-check-inline
+                      input#selectHairdresser.form-check-input(type='radio', name='searchType', checked)
+                      label.form-check-label(for='selectHairdresser') Hairdresser
+                  .col-12.col-sm-6.text-center.mb-2
+                    .form-check.form-check-inline
+                      input#selectCustomer.form-check-input(type='radio', name='searchType')
+                      label.form-check-label(for='selectCustomer') Customer
+              #search-inputs-row.row.align-items-center.mx-2
                   input.p-1.mt-3(type='text', placeholder='State, Region, Name etc.')
                 .col-12.col-md-4
                   button.btn.btn-primary.mt-3(type='submit') Search
