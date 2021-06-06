@@ -49,6 +49,22 @@ video {
   transform: translate(-50%, -50%);
   max-width: 650px;
 }
+
+#search-inputs-row > div > input {
+  min-width: 250px;
+  width: 100%;
+  margin-right: 1rem;
+}
+
+#search-inputs-row > div > button {
+  min-width: 100px;
+  width: 100%;
+}
+
+#search-row-col {
+  background-color: var(--my-aliceblue);
+}
+
 @media only screen and (max-width: 450px) {
   .navbar-brand {
     font-size: 1.1rem;
