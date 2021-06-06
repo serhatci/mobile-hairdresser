@@ -8,15 +8,6 @@
   --my-font-white: white;
 }
 
-@media only screen and (max-width: 450px) {
-  .navbar-brand {
-    font-size: 0.8rem;
-  }
-  video {
-    visibility: hidden;
-  }
-}
-
 .container-fluid {
   min-width: var(--my-screen-width);
   padding: 0;
@@ -53,4 +44,21 @@ video {
 .searchCardContainer {
   margin: 13vw auto;
   max-width: 650px;
+}
+@media only screen and (max-width: 450px) {
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+
+  video {
+    visibility: hidden;
+    position: absolute;
+  }
+
+  #searchCardContainer {
+    position: relative;
+    top: 0%;
+    left: 0%;
+    transform: translate(0%, 0%);
+  }
 }
