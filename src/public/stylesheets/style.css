@@ -100,7 +100,8 @@ section.second {
     margin-bottom: 10vh;
     margin-top: 10vh;
   }
-  .search-input {
+  .search-input,
+  .search-button {
     font-size: x-large;
   }
 }
