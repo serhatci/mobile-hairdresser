@@ -1,29 +1,31 @@
-/* * {
-  border: 1px solid rgb(250, 141, 141);
-} */
-
 :root {
   --my-screen-width: 450px;
   --my-blue: #156eac;
   --my-font-white: white;
   --my-aliceblue: aliceblue;
   --my-lightblue: #a2d4ff;
+  --my-darkblue: #5386b2;
 }
 
 .container-fluid {
   min-width: var(--my-screen-width);
-  padding: 0;
 }
 
 header {
-  padding: 0.4rem 1rem;
+  padding: 0.4rem 3rem;
   background-color: var(--my-blue);
-  border-bottom: 1px solid rgb(165, 157, 157);
-  box-shadow: 0 4px 8px 0 rgba(148, 147, 147, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 header a {
   color: var(--my-font-white);
+}
+
+footer {
+  background-color: var(--my-darkblue);
+}
+
+footer p {
+  min-height: 20vh;
 }
 
 .logo {
@@ -31,18 +33,17 @@ header a {
   min-width: 200px;
 }
 
-#header-nav-col {
-  height: 45px;
-  line-height: 45px;
+.bg-video-container {
+  background-color: var(--my-aliceblue);
 }
 
-video {
+.bg-video {
   visibility: visible;
   width: 100%;
   opacity: 0.9;
 }
 
-#searchCardContainer {
+.search-card-container {
   position: absolute;
   top: 200px;
   left: 50%;
@@ -50,49 +51,71 @@ video {
   max-width: 650px;
 }
 
-#search-inputs-row > div > input {
-  min-width: 250px;
-  width: 100%;
-  margin-right: 1rem;
-}
-
-#search-inputs-row > div > button {
-  min-width: 100px;
-  width: 100%;
-}
-
-#search-row-col {
-  background-color: var(--my-aliceblue);
-}
-
 .radiobox-container {
   max-width: 270px;
   margin: auto;
 }
 
-.hairdresser-container {
-  height: 100vh;
+.search-input {
+  min-width: 250px;
   width: 100%;
+  margin-right: 1rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.search-button {
+  min-width: 100px;
+  width: 100%;
+}
+
+section.first,
+section.third {
+  background-color: var(--my-aliceblue);
+}
+
+section.second {
   background-color: var(--my-lightblue);
 }
 
-@media only screen and (max-width: 450px) {
-  .navbar-brand {
-    font-size: 1.1rem;
+section.second,
+section.third {
+  width: 100%;
+  padding: 10vw 5vw;
+}
+
+@media only screen and (max-width: 992px) {
+  .search-input {
+    font-size: larger;
+  }
+  header {
+    padding: 0.4rem 1rem;
   }
 }
 
 @media only screen and (max-width: 600px) {
-  video {
+  .bg-video {
     visibility: hidden;
     position: absolute;
   }
-  #searchCardContainer {
+  .search-card-container {
     position: relative;
     top: 0%;
     left: 0%;
     transform: translate(0%, 0%);
     margin-bottom: 10vh;
     margin-top: 10vh;
+  }
+  .search-input,
+  .search-button {
+    font-size: x-large;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+  header {
+    padding: 0.4rem 0.5rem;
   }
 }

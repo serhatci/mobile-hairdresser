@@ -1,45 +1,61 @@
 extends layout
 
 block main
-  #search-row.row.g-0
-    #search-row-col.col.g-0
-      .video-container.position-relative
-        video(playsinline='playsinline', autoplay='autoplay', muted='muted', loop='loop')
-          source(src='images/barbershop.mp4', type='video/mp4')
-      #searchCardContainer
-        #search-card.card.m-3.border-primary
-          h5.card-header.text-center I am looking for
-          .card-body
-            #search-form.form.text-center(action='submit')
-              .radiobox-container
+  section.first
+    .row.g-0
+      .col.g-0
+        .position-relative
+          video.bg-video(playsinline='playsinline', autoplay='autoplay', muted='muted', loop='loop')
+            source(src='images/barbershop.mp4', type='video/mp4')
+        .search-card-container
+          .card.m-3.border-primary
+            h5.card-header.text-center I am looking for
+            .card-body
+              .form.text-center(action='submit')
+                .radiobox-container
+                  .row.align-items-center.mx-2
+                    .col-12.col-sm-6.text-center.mb-2
+                      .form-check.form-check-inline
+                        input.form-check-input(type='radio', name='searchType', checked)
+                        label.form-check-label(for='selectHairdresser') Hairdresser
+                    .col-12.col-sm-6.text-center.mb-2
+                      .form-check.form-check-inline
+                        input.form-check-input(type='radio', name='searchType')
+                        label.form-check-label(for='selectCustomer') Customer
                 .row.align-items-center.mx-2
-                  .col-12.col-sm-6.text-center.mb-2
-                    .form-check.form-check-inline
-                      input#selectHairdresser.form-check-input(type='radio', name='searchType', checked)
-                      label.form-check-label(for='selectHairdresser') Hairdresser
-                  .col-12.col-sm-6.text-center.mb-2
-                    .form-check.form-check-inline
-                      input#selectCustomer.form-check-input(type='radio', name='searchType')
-                      label.form-check-label(for='selectCustomer') Customer
-              #search-inputs-row.row.align-items-center.mx-2
-                .col-12.col-lg-8.mb-1
-                  input.p-1.mt-3(type='text', placeholder='State, Region, Name etc.')
-                .col-12.col-lg-4.mb-1
-                  button.btn.btn-primary.mt-3(type='submit') Search
-  #find-hairdresser.row.g-0
-    .col.g-0
-      .hairdresser-container.pt-5
-        h1.text-center.text-secondary.mx-3.mb-5 Find a mobile hairdresser close to your location
-        .row.g-0.align-items-center.px-3
+                  .col-12.col-lg-8.mb-1
+                    input.search-input.mt-3(type='text', placeholder='State, Region, Name etc.')
+                  .col-12.col-lg-4.mb-1
+                    button.search-button.btn.btn-primary.mt-3(type='submit') Search
+  section.second
+    .row.g-0
+      .col.g-0
+        h1.text-center.text-secondary.mb-5 Find a mobile hairdresser close to your location
+        .row.g-0.align-items-center
           .col-12.col-md-4.text-center
-            img.img-fluid(src='/images/hair-dryer.svg', alt='hairDryer')
+            img(src='/images/hair-dryer-icon.svg', alt='hairDryer')
           .col-12.col-md-8.text-center
-            #hairdresser-card.card
+            .card
               .row.g-0
-                .col-4.d-flex.flex-wrap.align-items-center
-                  img.card-img-center.img-thumbnail(src='/images/hairdresser.jpg', alt='hairdresser')
+                .col-4.d-flex.flex-wrap.align-items-center.p-2
+                  img.card-img-center.img-thumbnail.rounded-circle(src='/images/hairdresser.jpg', alt='hairdresser')
                 .col-8
                   .card-body
                     h5.card-title Card title
                     p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
                     a.btn.btn-primary(href='#') goo
+  section.third
+    .row.g-0
+      .col.g-0
+        h1.text-center.text-secondary.mb-5 Look at customer requests for mobile hairdressers
+        .row.g-0.align-items-center
+          .col-12.col-md-3.text-center
+            img(src='/images/female-icon.svg', alt='hairDryer')
+          .col-12.col-md-6.text-center
+            .card
+              .card-body
+                h5.card-title Card title
+                p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
+                a.btn.btn-primary(href='#') goo
+          .col-12.col-md-3.text-center
+            img(src='/images/male-icon.svg', alt='hairDryer')
