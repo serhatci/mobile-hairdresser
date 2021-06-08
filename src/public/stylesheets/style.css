@@ -4,6 +4,7 @@
   --my-font-white: white;
   --my-aliceblue: aliceblue;
   --my-lightblue: #a2d4ff;
+  --my-darkblue: #5386b2;
 }
 
 .container-fluid {
@@ -13,12 +14,18 @@
 header {
   padding: 0.4rem 3rem;
   background-color: var(--my-blue);
-  border-bottom: 1px solid rgb(165, 157, 157);
-  box-shadow: 0 4px 8px 0 rgba(148, 147, 147, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 header a {
   color: var(--my-font-white);
+}
+
+footer {
+  background-color: var(--my-darkblue);
+}
+
+footer p {
+  min-height: 20vh;
 }
 
 .logo {
