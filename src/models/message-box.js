@@ -1,8 +1,14 @@
+const mongoose = require('mongoose')
+
+const MessageBoxSchema = new mongoose.Schema(
+  {
+    seenMessages: [],
+    unseenMessages: [],
+  },
+  { _id: false }
+)
+
 class MessageBox {
-  seenMessages = []
-
-  unseenMessages = []
-
   receiveMessage(message) {
     this.unseenMessages.push(message)
   }
@@ -30,4 +36,5 @@ class MessageBox {
   }
 }
 
-module.exports = MessageBox
+MessageBoxSchema.loadClass(MessageBox)
+module.exports = MessageBoxSchema

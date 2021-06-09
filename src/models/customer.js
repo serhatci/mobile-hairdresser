@@ -1,15 +1,32 @@
+const mongoose = require('mongoose')
+
 const User = require('./user')
 const Request = require('./request')
 const Review = require('./review')
 
-class Customer extends User {
-  constructor(name, surname, email, password) {
-    super(name, surname, email, password)
-    this.customerRequests = []
-    this.hairdresserReviews = []
-    this.profilePhoto = undefined
-  }
+const CustomerSchema = new mongoose.Schema({
+  customerRequests: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Request',
+      autopopulate: true,
+    },
+  ],
+  hairdresserReviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Review',
+      autopopulate: true,
+    },
+  ],
+  profilePhoto: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Photo',
+    autopopulate: true,
+  },
+})
 
+class Customer {
   get info() {
     return {
       fullname: this.fullName,
@@ -50,4 +67,5 @@ class Customer extends User {
   }
 }
 
-module.exports = Customer
+CustomerSchema.loadClass(Customer)
+module.exports = User.discriminator('Customer', CustomerSchema)

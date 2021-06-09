@@ -1,22 +1,36 @@
+const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
+
 const PrivateMessage = require('./private-message')
 const MessageBox = require('./message-box')
 const Reply = require('./reply')
 
-class User {
-  // Base class for Hairdresser and Customer
-  constructor(name, surname, email, password) {
-    this.name = name
-    this.surname = surname
-    this.email = email
-    this.password = password
-    this.id = undefined
-    this.createdAt = new Date()
-    this.address = ''
-    this.tel = ''
-    this.repliedRequests = []
-    this.messageBox = new MessageBox()
-  }
+const UserSchema = new mongoose.Schema(
+  {
+    // Base class for Hairdresser and Customer
+    userType: String,
+    name: String,
+    surname: String,
+    email: String,
+    password: String,
+    address: String,
+    tel: String,
+    repliedRequests: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Request',
+        autopopulate: true,
+      },
+    ],
+    messageBox: {
+      type: MessageBox,
+      default: {},
+    },
+  },
+  { timestamps: true, discriminatorKey: 'type' }
+)
 
+class User {
   get fullName() {
     return `${this.name} ${this.surname}`
   }
@@ -92,4 +106,6 @@ class User {
   }
 }
 
-module.exports = User
+UserSchema.loadClass(User)
+UserSchema.plugin(autopopulate)
+module.exports = mongoose.model('User', UserSchema)

@@ -1,18 +1,47 @@
+const mongoose = require('mongoose')
+
 const User = require('./user')
+const EmployerReference = require('./employer-reference')
 
-class Hairdresser extends User {
-  constructor(name, surname, email, password) {
-    super(name, surname, email, password)
-    this.availability = 'available' // [weekdays, weekends, after 7 pm, etc... ]
-    this.experience = 'less than 1 year' // [less than 1 year, 1 year, 2 year, etc... ]
-    this.serviceArea = undefined // perimeter in km around a location
-    this.portfolioVideos = []
-    this.portfolioPhotos = []
-    this.certificates = []
-    this.employerReferences = []
-    this.customerReviews = []
-  }
+const HairdresserSchema = new mongoose.Schema({
+  availability: String, // [weekdays, weekends, after 7 pm, etc... ]
+  experience: String, // [less than 1 year, 1 year, 2 year, etc... ]
+  serviceArea: String, // perimeter in km around a location
+  employerReferences: {
+    type: EmployerReference,
+    default: {},
+  },
+  portfolioVideos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Video',
+      autopopulate: true,
+    },
+  ],
+  portfolioPhotos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Photo',
+      autopopulate: true,
+    },
+  ],
+  certificates: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Certificate',
+      autopopulate: true,
+    },
+  ],
+  customerReviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Review',
+      autopopulate: true,
+    },
+  ],
+})
 
+class Hairdresser {
   get portfolio() {
     return {
       fullname: this.fullName,
@@ -79,4 +108,5 @@ class Hairdresser extends User {
   }
 }
 
-module.exports = Hairdresser
+HairdresserSchema.loadClass(Hairdresser)
+module.exports = User.discriminator('Hairdresser', HairdresserSchema)

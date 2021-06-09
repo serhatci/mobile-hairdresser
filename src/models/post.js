@@ -1,13 +1,18 @@
-class Post {
-  // Base class for posts
-  id = undefined
+const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
 
-  date = new Date()
+const PostSchema = new mongoose.Schema(
+  {
+    // Base schema for Request, Reply, Review
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      autopopulate: true,
+    },
+    message: String,
+  },
+  { timestamps: true, discriminatorKey: 'type' }
+)
 
-  constructor(user, message) {
-    this.user = user
-    this.message = message
-  }
-}
-
-module.exports = Post
+PostSchema.plugin(autopopulate)
+module.exports = mongoose.model('Post', PostSchema)
