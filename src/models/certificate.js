@@ -1,7 +1,10 @@
 const mongoose = require('mongoose')
 
 const CertificateSchema = new mongoose.Schema({
-  fileName: String,
+  fileName: {
+    type: String,
+    required: true,
+  },
   title: String,
 })
 

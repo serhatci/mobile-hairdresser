@@ -3,8 +3,14 @@ const mongoose = require('mongoose')
 const Post = require('./post')
 
 const RequestSchema = new mongoose.Schema({
-  requestType: String,
-  title: String,
+  requestType: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
   replies: [
     {
       type: mongoose.Schema.Types.ObjectId,

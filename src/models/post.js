@@ -8,8 +8,12 @@ const PostSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       autopopulate: true,
+      required: true,
     },
-    message: String,
+    message: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true, discriminatorKey: 'type' }
 )

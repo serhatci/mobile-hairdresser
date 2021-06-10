@@ -2,7 +2,10 @@ const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
 
 const VideoSchema = new mongoose.Schema({
-  fileName: String,
+  fileName: {
+    type: String,
+    required: true,
+  },
   title: String,
   description: String,
   taggedUsers: [

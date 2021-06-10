@@ -1,11 +1,14 @@
 const mongoose = require('mongoose')
 
 const EmployerReferenceSchema = new mongoose.Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true,
+  },
   shop: String,
   address: String,
   email: String,
   telephone: String,
 })
 
-module.exports = mongoose.model('EmployerReference', EmployerReferenceSchema)
+module.exports = EmployerReferenceSchema

@@ -8,11 +8,22 @@ const Reply = require('./reply')
 const UserSchema = new mongoose.Schema(
   {
     // Base class for Hairdresser and Customer
-    userType: String,
-    name: String,
-    surname: String,
-    email: String,
-    password: String,
+    name: {
+      type: String,
+      required: true,
+    },
+    surname: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
     address: String,
     tel: String,
     repliedRequests: [

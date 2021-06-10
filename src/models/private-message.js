@@ -7,14 +7,19 @@ const PrivateMessageSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       autopopulate: true,
+      required: true,
     },
     receiver: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       autopopulate: true,
+      required: true,
     },
     title: String,
-    message: String,
+    message: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 )
