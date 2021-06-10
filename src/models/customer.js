@@ -9,14 +9,12 @@ const CustomerSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Request',
-      autopopulate: true,
     },
   ],
   hairdresserReviews: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Review',
-      autopopulate: true,
     },
   ],
   profilePhoto: {

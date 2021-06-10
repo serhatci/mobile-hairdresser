@@ -12,28 +12,24 @@ const HairdresserSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Video',
-      autopopulate: true,
     },
   ],
   portfolioPhotos: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Photo',
-      autopopulate: true,
     },
   ],
   certificates: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Certificate',
-      autopopulate: true,
     },
   ],
   customerReviews: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Review',
-      autopopulate: true,
     },
   ],
 })
