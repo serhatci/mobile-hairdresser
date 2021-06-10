@@ -31,7 +31,6 @@ const UserSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Request',
-        autopopulate: true,
       },
     ],
     messageBox: {
