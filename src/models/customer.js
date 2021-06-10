@@ -68,4 +68,4 @@ class Customer {
 }
 
 CustomerSchema.loadClass(Customer)
-module.exports = User.discriminator('Customer', CustomerSchema)
+module.exports = User.discriminator('Customer', CustomerSchema, 'Customer')
