@@ -72,13 +72,14 @@ class Hairdresser {
   }
 
   addEmployerReference(employerName, shopName, employerAddress, employerEmail, employerTelephone) {
-    this.employerReferences.push({
+    const reference = new EmployerReference({
       name: employerName,
       shop: shopName,
       address: employerAddress,
       email: employerEmail,
       telephone: employerTelephone,
     })
+    this.employerReferences.push(reference)
   }
 
   deleteEmployerReference(reference) {
