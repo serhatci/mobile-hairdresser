@@ -7,10 +7,7 @@ const HairdresserSchema = new mongoose.Schema({
   availability: String, // [weekdays, weekends, after 7 pm, etc... ]
   experience: String, // [less than 1 year, 1 year, 2 year, etc... ]
   serviceArea: String, // perimeter in km around a location
-  employerReferences: {
-    type: EmployerReference,
-    default: {},
-  },
+  employerReferences: [],
   portfolioVideos: [
     {
       type: mongoose.Schema.Types.ObjectId,
