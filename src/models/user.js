@@ -46,72 +46,85 @@ class User {
     return `${this.name} ${this.surname}`
   }
 
-  uploadPhotoToPost(photo, post) {
+  async uploadPhotoToPost(photo, post) {
     post.photos.push(photo)
+    await post.save()
   }
 
-  likePhoto(photo) {
+  async likePhoto(photo) {
     photo.likedBy.push(this)
+    await photo.save()
   }
 
-  unlikePhoto(photo) {
+  async unlikePhoto(photo) {
     const photoIndex = photo.likedBy.indexOf(photo)
     photo.likedBy.splice(photoIndex, 1)
+    await photo.save()
   }
 
-  tagPhoto(photo, user) {
+  async tagPhoto(photo, user) {
     photo.taggedUsers.push(user)
+    await photo.save()
   }
 
-  unTagPhoto(photo, user) {
+  async unTagPhoto(photo, user) {
     const userIndex = photo.taggedUsers.indexOf(user)
     photo.taggedUsers.splice(userIndex, 1)
+    await photo.save()
   }
 
-  likeVideo(video) {
+  async likeVideo(video) {
     video.likedBy.push(this)
+    await video.save()
   }
 
-  unlikeVideo(video) {
+  async unlikeVideo(video) {
     const videoIndex = video.likedBy.indexOf(video)
     video.likedBy.splice(videoIndex, 1)
+    await video.save()
   }
 
-  replyRequest(request, message, ...photos) {
+  async replyRequest(request, message, ...photos) {
     const reply = new Reply(this, message, ...photos)
     request.replies.push(reply)
+    await request.save()
 
-    if (this.repliedRequests.find(r => r === request)) return
-    this.repliedRequests.push(request)
+    if (this.repliedRequests.find(r => r === request)) {
+      this.repliedRequests.push(request)
+      await this.save()
+    }
   }
 
-  deleteReply(request, reply) {
+  async deleteReply(request, reply) {
     const replyIndex = request.replies.indexOf(reply)
     request.replies.splice(replyIndex, 1)
+    await request.save()
 
-    if (this.repliedRequests.find(r => r === request)) return
-    this.repliedRequests.push(request)
+    if (this.repliedRequests.find(r => r === request)) {
+      this.repliedRequests.push(request)
+      await request.save()
+    }
   }
 
-  sendPrivateMessage(receiver, title, message) {
-    const privateMessage = new PrivateMessage(this, receiver, title, message)
+  async sendPrivateMessage(receiver, title, message) {
+    const privateMessage = await PrivateMessage.create(this, receiver, title, message)
     receiver.messageBox.receiveMessage(privateMessage)
     this.messageBox.storeSentMessage(privateMessage)
   }
 
-  deletePrivateMessage(privateMessage) {
+  async deletePrivateMessage(privateMessage) {
     this.messageBox.deleteSeenMessage(privateMessage)
   }
 
-  readPrivateMessage(privateMessage) {
+  async readPrivateMessage(privateMessage) {
     this.messageBox.setMessageAsSeen(privateMessage)
   }
 
-  unreadPrivateMessage(privateMessage) {
+  async unreadPrivateMessage(privateMessage) {
     this.messageBox.setMessageAsUnSeen(privateMessage)
   }
 
-  recallPrivateMessage(privateMessage) {
+  async recallPrivateMessage(privateMessage) {
     privateMessage.receiver.messageBox.deleteUnseenMessage(privateMessage)
     this.messageBox.deleteSeenMessage(privateMessage)
   }
