@@ -20,12 +20,7 @@ const HairdresserSchema = new mongoose.Schema({
       ref: 'Photo',
     },
   ],
-  certificates: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Certificate',
-    },
-  ],
+  certificates: [],
   customerReviews: [
     {
       type: mongoose.Schema.Types.ObjectId,
