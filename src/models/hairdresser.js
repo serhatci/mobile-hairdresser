@@ -109,4 +109,4 @@ class Hairdresser {
 }
 
 HairdresserSchema.loadClass(Hairdresser)
-module.exports = User.discriminator('Hairdresser', HairdresserSchema)
+module.exports = User.discriminator('Hairdresser', HairdresserSchema, 'Hairdresser')
