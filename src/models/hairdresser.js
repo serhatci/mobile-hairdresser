@@ -46,23 +46,27 @@ class Hairdresser {
     }
   }
 
-  uploadPhotoToPortfolio(photo) {
+  async uploadPhotoToPortfolio(photo) {
     this.portfolioPhotos.push(photo)
+    await this.save()
   }
 
-  uploadVideoToPortfolio(video) {
+  async uploadVideoToPortfolio(video) {
     this.portfolioVideos.push(video)
+    await this.save()
   }
 
-  deletePhotoFromPortfolio(photo) {
+  async deletePhotoFromPortfolio(photo) {
     this.portfolioPhotos = this.portfolioPhotos.filter(p => p !== photo)
+    await this.save()
   }
 
-  deleteVideoFromPortfolio(video) {
+  async deleteVideoFromPortfolio(video) {
     this.portfolioVideos = this.portfolioVideos.filter(p => p !== video)
+    await this.save()
   }
 
-  addEmployerReference(employerName, shopName, employerAddress, employerEmail, employerTelephone) {
+  async addEmployerReference(employerName, shopName, employerAddress, employerEmail, employerTelephone) {
     const reference = new EmployerReference({
       name: employerName,
       shop: shopName,
@@ -71,29 +75,35 @@ class Hairdresser {
       telephone: employerTelephone,
     })
     this.employerReferences.push(reference)
+    await this.save()
   }
 
-  deleteEmployerReference(reference) {
+  async deleteEmployerReference(reference) {
     const referenceIndex = this.employerReferences.indexOf(reference)
     this.employerReferences.splice(referenceIndex, 1)
+    await this.save()
   }
 
-  tagVideo(video, user) {
+  async tagVideo(video, user) {
     video.taggedUsers.push(user)
+    await video.save()
   }
 
-  unTagVideo(video, user) {
+  async unTagVideo(video, user) {
     const userIndex = video.taggedUsers.indexOf(user)
     video.taggedUsers.splice(userIndex, 1)
+    await video.save()
   }
 
-  uploadCertificate(certificate) {
+  async uploadCertificate(certificate) {
     this.certificates.push(certificate)
+    await this.save()
   }
 
-  deleteCertificate(certificate) {
+  async deleteCertificate(certificate) {
     const certificateIndex = this.certificates.indexOf(certificate)
     this.certificates.splice(certificateIndex, 1)
+    await this.save()
   }
 }
 
