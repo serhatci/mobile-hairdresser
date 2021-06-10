@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
 
 const PrivateMessage = require('./private-message')
-const MessageBox = require('./message-box')
+const MessageBoxSchema = require('./message-box')
 const Reply = require('./reply')
 
 const UserSchema = new mongoose.Schema(
@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema(
       },
     ],
     messageBox: {
-      type: MessageBox,
+      type: MessageBoxSchema,
       default: {},
     },
   },
