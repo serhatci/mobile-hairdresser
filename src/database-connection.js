@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+mongoose.set('useCreateIndex', true)
+
 const username = process.env.MONGODB_USERNAME
 const password = process.env.MONGODB_PASSWORD
 const dbName = process.env.MONGODB_DATABASE
