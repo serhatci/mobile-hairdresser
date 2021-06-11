@@ -1,12 +1,26 @@
-class PrivateMessage {
-  constructor(sender, receiver, title = '', message) {
-    this.id = undefined
-    this.createdAt = new Date()
-    this.sender = sender
-    this.receiver = receiver
-    this.title = title
-    this.message = message
-  }
-}
+const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
 
-module.exports = PrivateMessage
+const PrivateMessageSchema = new mongoose.Schema(
+  {
+    sender: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    receiver: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    title: String,
+    message: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+)
+
+PrivateMessageSchema.plugin(autopopulate)
+module.exports = mongoose.model('PrivateMessage', PrivateMessageSchema)

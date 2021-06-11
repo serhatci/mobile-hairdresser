@@ -1,9 +1,11 @@
-class Certificate {
-  constructor(fileName, title) {
-    this.id = undefined
-    this.fileName = fileName
-    this.title = title
-  }
-}
+const mongoose = require('mongoose')
 
-module.exports = Certificate
+const CertificateSchema = new mongoose.Schema({
+  fileName: {
+    type: String,
+    required: true,
+  },
+  title: String,
+})
+
+module.exports = mongoose.model('Certificate', CertificateSchema)

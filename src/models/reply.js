@@ -1,10 +1,15 @@
+const mongoose = require('mongoose')
+
 const Post = require('./post')
 
-class Reply extends Post {
-  constructor(user, message, ...photos) {
-    super(user, message)
-    this.photos = [...photos] /// optional
-  }
-}
+const ReplySchema = new mongoose.Schema({
+  photos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Photo',
+      autopopulate: true,
+    },
+  ],
+})
 
-module.exports = Reply
+module.exports = Post.discriminator('Reply', ReplySchema)

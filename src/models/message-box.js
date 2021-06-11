@@ -1,33 +1,46 @@
+const mongoose = require('mongoose')
+
+const MessageBoxSchema = new mongoose.Schema(
+  {
+    seenMessages: [],
+    unseenMessages: [],
+  },
+  { _id: false }
+)
+
 class MessageBox {
-  seenMessages = []
-
-  unseenMessages = []
-
-  receiveMessage(message) {
+  async receiveMessage(message) {
     this.unseenMessages.push(message)
+    await this.save()
   }
 
-  storeSentMessage(message) {
+  async storeSentMessage(message) {
     this.seenMessages.push(message)
+    await this.save()
   }
 
-  deleteSeenMessage(message) {
+  async deleteSeenMessage(message) {
     this.seenMessages = this.seenMessages.filter(m => m !== message)
+    await this.save()
   }
 
-  deleteUnseenMessage(message) {
+  async deleteUnseenMessage(message) {
     this.unseenMessages = this.unseenMessages.filter(m => m !== message)
+    await this.save()
   }
 
-  setMessageAsSeen(message) {
+  async setMessageAsSeen(message) {
     this.seenMessages.push(message)
     this.unseenMessages = this.unseenMessages.filter(m => m !== message)
+    await this.save()
   }
 
-  setMessageAsUnseen(message) {
+  async setMessageAsUnseen(message) {
     this.unseenMessages.push(message)
     this.seenMessages = this.seenMessages.filter(m => m !== message)
+    await this.save()
   }
 }
 
-module.exports = MessageBox
+MessageBoxSchema.loadClass(MessageBox)
+module.exports = MessageBoxSchema

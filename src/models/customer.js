@@ -1,15 +1,30 @@
+const mongoose = require('mongoose')
+
 const User = require('./user')
 const Request = require('./request')
 const Review = require('./review')
 
-class Customer extends User {
-  constructor(name, surname, email, password) {
-    super(name, surname, email, password)
-    this.customerRequests = []
-    this.hairdresserReviews = []
-    this.profilePhoto = undefined
-  }
+const CustomerSchema = new mongoose.Schema({
+  customerRequests: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Request',
+    },
+  ],
+  hairdresserReviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Review',
+    },
+  ],
+  profilePhoto: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Photo',
+    autopopulate: true,
+  },
+})
 
+class Customer {
   get info() {
     return {
       fullname: this.fullName,
@@ -19,35 +34,44 @@ class Customer extends User {
     }
   }
 
-  addProfilePhoto(photo) {
+  async addProfilePhoto(photo) {
     this.profilePhoto = photo
+    await this.save()
   }
 
-  addPhotoToAdviceRequest(photo, adviceRequest) {
+  async addPhotoToAdviceRequest(photo, adviceRequest) {
     adviceRequest.photos.push(photo)
+    await adviceRequest.save()
   }
 
-  postRequest(type, title, message, ...photos) {
-    const request = new Request(this, type, title, message, ...photos)
+  async postRequest(type, title, message, ...photos) {
+    const request = await Request.create(this, type, title, message, ...photos)
     this.customerRequests.push(request)
+    await this.save()
   }
 
-  deleteRequest(request) {
+  async deleteRequest(request) {
     const requestIndex = this.customerRequests.indexOf(request)
     this.customerRequests.splice(requestIndex, 1)
+    await this.save()
   }
 
-  reviewHairdresser(hairdresser, message, rating) {
-    const review = new Review(this, message, rating)
+  async reviewHairdresser(hairdresser, message, rating) {
+    const review = await Review.create(this, message, rating)
     hairdresser.customerReviews.push(review)
+    await hairdresser.save()
     this.hairdresserReviews.push(review)
+    await this.save()
   }
 
-  deleteHairdresserReview(hairdresser, review) {
+  async deleteHairdresserReview(hairdresser, review) {
     const reviewIndex = hairdresser.customerReviews.indexOf(review)
     hairdresser.customerReviews.splice(reviewIndex, 1)
+    await hairdresser.save()
     this.hairdresserReviews.splice(reviewIndex, 1)
+    await this.save()
   }
 }
 
-module.exports = Customer
+CustomerSchema.loadClass(Customer)
+module.exports = User.discriminator('Customer', CustomerSchema, 'Customer')

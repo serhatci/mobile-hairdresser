@@ -1,12 +1,28 @@
-class Photo {
-  constructor(fileName, description = '') {
-    this.id = undefined
-    this.createdAt = new Date()
-    this.fileName = fileName
-    this.description = description
-    this.taggedUsers = []
-    this.likedBy = []
-  }
-}
+const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
 
-module.exports = Photo
+const PhotoSchema = new mongoose.Schema(
+  {
+    fileName: {
+      type: String,
+      required: true,
+    },
+    description: String,
+    taggedUsers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+    likedBy: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+  },
+  { timestamps: true }
+)
+
+PhotoSchema.plugin(autopopulate)
+module.exports = mongoose.model('Photo', PhotoSchema)

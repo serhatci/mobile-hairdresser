@@ -1,13 +1,26 @@
-class Video {
-  constructor(fileName, title = '', description = '') {
-    this.id = undefined
-    this.createdAt = new Date()
-    this.fileName = fileName
-    this.title = title
-    this.description = description
-    this.taggedUsers = []
-    this.likedBy = []
-  }
-}
+const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
 
-module.exports = Video
+const VideoSchema = new mongoose.Schema({
+  fileName: {
+    type: String,
+    required: true,
+  },
+  title: String,
+  description: String,
+  taggedUsers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+  likedBy: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+})
+
+VideoSchema.plugin(autopopulate)
+module.exports = mongoose.model('Video', VideoSchema)

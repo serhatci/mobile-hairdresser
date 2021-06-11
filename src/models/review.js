@@ -1,10 +1,12 @@
+const mongoose = require('mongoose')
+
 const Post = require('./post')
 
-class Review extends Post {
-  constructor(user, message, rating) {
-    super(user, message)
-    this.rating = rating
-  }
-}
+const ReviewSchema = new mongoose.Schema({
+  rating: {
+    type: Number,
+    required: true,
+  },
+})
 
-module.exports = Review
+module.exports = Post.discriminator('Review', ReviewSchema)
