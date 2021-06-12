@@ -4,6 +4,11 @@ const User = require('./user')
 const EmployerReference = require('./employer-reference')
 
 const HairdresserSchema = new mongoose.Schema({
+  about: String, // short info about hairdresser
+  languages: { type: [], default: ['DE'] },
+  website: String,
+  facebook: String,
+  instagram: String,
   availability: String, // [weekdays, weekends, after 7 pm, etc... ]
   experience: String, // [less than 1 year, 1 year, 2 year, etc... ]
   serviceArea: String, // perimeter in km around a location
