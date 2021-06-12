@@ -35,20 +35,6 @@ const HairdresserSchema = new mongoose.Schema({
 })
 
 class Hairdresser {
-  get portfolio() {
-    return {
-      fullname: this.fullName,
-      email: this.email,
-      serviceArea: this.serviceArea,
-      availability: this.availability,
-      experience: this.experience,
-      portfolioVideos: this.portfolioVideos,
-      portfolioPhotos: this.portfolioPhotos,
-      customerReviews: this.customerReviews,
-      ratings: this.ratings,
-      certificates: this.certificates,
-      employerReferences: this.employerReferences,
-    }
   }
 
   async uploadPhotoToPortfolio(photo) {
