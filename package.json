@@ -5,7 +5,7 @@
   "description": "a market place for mobile hairdressers & potential customers",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon bin/www",
+    "start": "node bin/www",
     "lint": "lint-staged",
     "lint-only": "eslint .",
     "lint-all": "pretty-quick && eslint",
