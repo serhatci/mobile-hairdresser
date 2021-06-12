@@ -83,6 +83,10 @@ section.third {
   padding: 10vw 5vw;
 }
 
+.card-about {
+  max-width: 330px;
+}
+
 @media only screen and (max-width: 992px) {
   .search-input {
     font-size: larger;
