@@ -35,6 +35,24 @@ const HairdresserSchema = new mongoose.Schema({
 })
 
 class Hairdresser {
+  get fullname() {
+    return `${this.name} ${this.surname}`
+  }
+
+  get ratingArr() {
+    // const totalRating = this.customerReviews.reduce((a, b) => a.rating + b.rating)
+    // const averageRating = totalRating / this.customerReviews.length
+    // const ratingArray = []
+    // for (let i = 1; i <= 5; i += 1) {
+    //   if (averageRating - i > 1) {
+    //     ratingArray.push('fullStar')
+    //   } else if (averageRating - i > 0.5) {
+    //     ratingArray.push('halfStar')
+    //   } else {
+    //     ratingArray.push('emptyStar')
+    //   }
+    // }
+    return ['fullStar', 'fullStar', 'fullStar', 'halfStar', 'emptyStar']
   }
 
   async uploadPhotoToPortfolio(photo) {
