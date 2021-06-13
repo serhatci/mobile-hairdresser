@@ -4,6 +4,11 @@ const User = require('./user')
 const EmployerReference = require('./employer-reference')
 
 const HairdresserSchema = new mongoose.Schema({
+  about: String, // short info about hairdresser
+  languages: { type: [], default: ['DE'] },
+  website: String,
+  facebook: String,
+  instagram: String,
   availability: String, // [weekdays, weekends, after 7 pm, etc... ]
   experience: String, // [less than 1 year, 1 year, 2 year, etc... ]
   serviceArea: String, // perimeter in km around a location
@@ -30,20 +35,24 @@ const HairdresserSchema = new mongoose.Schema({
 })
 
 class Hairdresser {
-  get portfolio() {
-    return {
-      fullname: this.fullName,
-      email: this.email,
-      serviceArea: this.serviceArea,
-      availability: this.availability,
-      experience: this.experience,
-      portfolioVideos: this.portfolioVideos,
-      portfolioPhotos: this.portfolioPhotos,
-      customerReviews: this.customerReviews,
-      ratings: this.ratings,
-      certificates: this.certificates,
-      employerReferences: this.employerReferences,
-    }
+  get fullname() {
+    return `${this.name} ${this.surname}`
+  }
+
+  get ratingArr() {
+    // const totalRating = this.customerReviews.reduce((a, b) => a.rating + b.rating)
+    // const averageRating = totalRating / this.customerReviews.length
+    // const ratingArray = []
+    // for (let i = 1; i <= 5; i += 1) {
+    //   if (averageRating - i > 1) {
+    //     ratingArray.push('fullStar')
+    //   } else if (averageRating - i > 0.5) {
+    //     ratingArray.push('halfStar')
+    //   } else {
+    //     ratingArray.push('emptyStar')
+    //   }
+    // }
+    return ['fullStar', 'fullStar', 'fullStar', 'halfStar', 'emptyStar']
   }
 
   async uploadPhotoToPortfolio(photo) {

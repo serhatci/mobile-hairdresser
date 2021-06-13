@@ -1,0 +1,8 @@
+.ratings.text-start
+  each val in hairdresser.ratingArr
+    if val==='emptyStar' || !hairdresser.ratingArr
+      img(src='images/icons/star.svg', alt='starEmpty')
+    if val==='fullStar'
+      img(src='images/icons/star-fill.svg', alt='starFill')
+    if val==='halfStar'
+      img(src='images/icons/star-half.svg', alt='starHalf')
