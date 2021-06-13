@@ -2,9 +2,6 @@ const express = require('express')
 
 const router = express.Router()
 
-require('../models/photo')
-require('../models/video')
-require('../models/certificate')
 const Customer = require('../models/customer')
 const Hairdresser = require('../models/hairdresser')
 
