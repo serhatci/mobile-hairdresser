@@ -7,7 +7,10 @@ const PhotoSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    description: String,
+    description: {
+      type: String,
+      default: '',
+    },
     taggedUsers: [
       {
         type: mongoose.Schema.Types.ObjectId,
