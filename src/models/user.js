@@ -26,9 +26,9 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
     address: {
-      city: { type: String, required: true },
-      state: { type: String, required: true },
-      postalCode: { type: String, required: true },
+      city: { type: String },
+      state: { type: String },
+      postcode: { type: Number },
     },
     tel: String,
     repliedRequests: [
