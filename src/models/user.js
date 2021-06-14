@@ -37,6 +37,11 @@ const UserSchema = new mongoose.Schema(
         ref: 'Request',
       },
     ],
+    profilePhoto: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Photo',
+      autopopulate: true,
+    },
     messageBox: {
       type: MessageBoxSchema,
       default: {},
@@ -48,6 +53,11 @@ const UserSchema = new mongoose.Schema(
 class User {
   get fullName() {
     return `${this.name} ${this.surname}`
+  }
+
+  async addProfilePhoto(photo) {
+    this.profilePhoto = photo
+    await this.save()
   }
 
   async uploadPhotoToPost(photo, post) {
