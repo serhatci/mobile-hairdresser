@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 
+// Disables depreciate warnings
 mongoose.set('useCreateIndex', true)
+mongoose.set('useFindAndModify', false)
 
 const username = process.env.MONGODB_USERNAME
 const password = process.env.MONGODB_PASSWORD
