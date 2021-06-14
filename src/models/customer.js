@@ -17,11 +17,6 @@ const CustomerSchema = new mongoose.Schema({
       ref: 'Review',
     },
   ],
-  profilePhoto: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Photo',
-    autopopulate: true,
-  },
 })
 
 class Customer {
@@ -32,11 +27,6 @@ class Customer {
       requests: this.customerRequests,
       profilePhoto: this.profilePhoto,
     }
-  }
-
-  async addProfilePhoto(photo) {
-    this.profilePhoto = photo
-    await this.save()
   }
 
   async addPhotoToAdviceRequest(photo, adviceRequest) {
