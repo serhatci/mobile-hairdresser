@@ -15,12 +15,14 @@ const PhotoSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        autopopulate: true,
       },
     ],
     likedBy: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        autopopulate: true,
       },
     ],
   },
