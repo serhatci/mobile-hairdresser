@@ -1,23 +1,35 @@
+/* eslint-disable no-param-reassign */
 const mongoose = require('mongoose')
 
 const User = require('./user')
 const Request = require('./request')
 const Review = require('./review')
 
-const CustomerSchema = new mongoose.Schema({
-  customerRequests: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Request',
+const CustomerSchema = new mongoose.Schema(
+  {
+    customerRequests: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Request',
+      },
+    ],
+    hairdresserReviews: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Review',
+      },
+    ],
+  },
+  {
+    toJSON: {
+      transform(doc, ret) {
+        delete ret.password
+        // eslint-disable-next-line no-underscore-dangle
+        delete ret.__v
+      },
     },
-  ],
-  hairdresserReviews: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Review',
-    },
-  ],
-})
+  }
+)
 
 class Customer {
   get info() {

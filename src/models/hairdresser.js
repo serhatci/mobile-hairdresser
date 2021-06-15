@@ -1,38 +1,50 @@
+/* eslint-disable no-param-reassign */
 const mongoose = require('mongoose')
 
 const User = require('./user')
 const EmployerReference = require('./employer-reference')
 
-const HairdresserSchema = new mongoose.Schema({
-  about: String, // short info about hairdresser
-  languages: { type: [], default: ['DE'] },
-  website: String,
-  facebook: String,
-  instagram: String,
-  availability: String, // [weekdays, weekends, after 7 pm, etc... ]
-  experience: String, // [less than 1 year, 1 year, 2 year, etc... ]
-  serviceArea: String, // perimeter in km around a location
-  employerReferences: [],
-  portfolioVideos: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Video',
+const HairdresserSchema = new mongoose.Schema(
+  {
+    about: String, // short info about hairdresser
+    languages: { type: [], default: ['DE'] },
+    website: String,
+    facebook: String,
+    instagram: String,
+    availability: String, // [weekdays, weekends, after 7 pm, etc... ]
+    experience: String, // [less than 1 year, 1 year, 2 year, etc... ]
+    serviceArea: String, // perimeter in km around a location
+    employerReferences: [],
+    portfolioVideos: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Video',
+      },
+    ],
+    portfolioPhotos: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Photo',
+      },
+    ],
+    certificates: [],
+    customerReviews: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Review',
+      },
+    ],
+  },
+  {
+    toJSON: {
+      transform(doc, ret) {
+        delete ret.password
+        // eslint-disable-next-line no-underscore-dangle
+        delete ret.__v
+      },
     },
-  ],
-  portfolioPhotos: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Photo',
-    },
-  ],
-  certificates: [],
-  customerReviews: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Review',
-    },
-  ],
-})
+  }
+)
 
 class Hairdresser {
   get fullname() {
