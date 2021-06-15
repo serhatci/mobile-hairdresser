@@ -10,6 +10,7 @@ require('./database-connection')
 const indexRouter = require('./routes/index')
 const customersRouter = require('./routes/customers')
 const hairdressersRouter = require('./routes/hairdressers')
+const photosRouter = require('./routes/photos')
 
 const app = express()
 
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRouter)
 app.use('/customers', customersRouter)
 app.use('/hairdressers', hairdressersRouter)
+app.use('/photos', photosRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
