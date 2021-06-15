@@ -3,21 +3,27 @@ const autopopulate = require('mongoose-autopopulate')
 
 const PhotoSchema = new mongoose.Schema(
   {
-    fileName: {
+    filename: {
       type: String,
       required: true,
+      unique: true,
     },
-    description: String,
+    description: {
+      type: String,
+      default: '',
+    },
     taggedUsers: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        autopopulate: true,
       },
     ],
     likedBy: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        autopopulate: true,
       },
     ],
   },

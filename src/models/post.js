@@ -11,7 +11,6 @@ const PostSchema = new mongoose.Schema(
     },
     message: {
       type: String,
-      required: true,
     },
   },
   { timestamps: true, discriminatorKey: 'type' }
