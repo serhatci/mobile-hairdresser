@@ -3,9 +3,10 @@ const autopopulate = require('mongoose-autopopulate')
 
 const PhotoSchema = new mongoose.Schema(
   {
-    fileName: {
+    filename: {
       type: String,
       required: true,
+      unique: true,
     },
     description: {
       type: String,
