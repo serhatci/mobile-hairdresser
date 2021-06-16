@@ -23,7 +23,7 @@
       "eslint --fix"
     ],
     "*.+(json|css|md)": [
-      "prettier --write"
+      "pretty-quick --staged"
     ]
   },
   "repository": {
