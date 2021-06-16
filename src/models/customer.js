@@ -2,8 +2,6 @@
 const mongoose = require('mongoose')
 
 const User = require('./user')
-const Request = require('./request')
-const Review = require('./review')
 
 const CustomerSchema = new mongoose.Schema(
   {
@@ -46,8 +44,7 @@ class Customer {
     await adviceRequest.save()
   }
 
-  async postRequest(type, title, message, ...photos) {
-    const request = await Request.create(this, type, title, message, ...photos)
+  async postRequest(request) {
     this.customerRequests.push(request)
     await this.save()
   }
@@ -58,8 +55,7 @@ class Customer {
     await this.save()
   }
 
-  async reviewHairdresser(hairdresser, message, rating) {
-    const review = await Review.create(this, message, rating)
+  async reviewHairdresser(hairdresser, review) {
     hairdresser.customerReviews.push(review)
     await hairdresser.save()
     this.hairdresserReviews.push(review)

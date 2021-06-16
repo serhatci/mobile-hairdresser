@@ -1,5 +1,5 @@
 .eslintcache
 .husky
-
-
-/node_modules
+.eslintignore
+node_modules
+coverage
