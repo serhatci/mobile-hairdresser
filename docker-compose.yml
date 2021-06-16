@@ -1,9 +1,9 @@
 version: '3'
 services:
-  app:
-    image: mobiler
+  backend:
+    image: backend
     build:
-      context: .
+      context: backend
       dockerfile: Dockerfile
     environment:
       # - MONGODB_USERNAME
@@ -14,8 +14,8 @@ services:
       - 3000:3000
       - 35729:35729
     volumes:
-      - ./src:/app/src
-      - ./test:/app/test
+      - ./backend/src:/app/src
+      - ./backend/test:/app/test
   mongo:
     image: mongo
     ports:
