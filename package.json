@@ -4,15 +4,24 @@
   "private": true,
   "description": "a market place for mobile hairdressers & potential customers",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "unit-test": "jest --watchAll",
+    "test": "jest --testEnvironment=node --verbose  --forceExit --watchAll --maxWorkers=1",
+    "test-coverage": " jest --collect-coverage --testEnvironment=node --forceExit --maxWorkers=1",
     "start": "node bin/www",
     "lint": "lint-staged",
     "lint-only": "eslint .",
-    "lint-all": "pretty-quick && eslint",
-    "prepare": "husky install"
+    "lint-all": "pretty-quick && eslint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
+    "*.js": [
+      "pretty-quick --staged",
+      "eslint --fix"
+    ],
     "*.+(json|css|md)": [
       "prettier --write"
     ]
@@ -39,6 +48,7 @@
   },
   "devDependencies": {
     "@prettier/plugin-pug": "^1.15.2",
+    "@types/jest": "^26.0.23",
     "babel-eslint": "^10.1.0",
     "connect-livereload": "^0.6.1",
     "eslint": "^7.28.0",
@@ -52,6 +62,8 @@
     "jest": "^27.0.4",
     "lint-staged": "^11.0.0",
     "livereload": "^0.9.3",
-    "prettier": "^2.3.1"
+    "prettier": "^2.3.1",
+    "pretty-quick": "^3.1.0",
+    "supertest": "^6.1.3"
   }
 }
