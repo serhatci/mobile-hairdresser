@@ -1,8 +1,8 @@
 .ratings.text-start
-  each val in hairdresser.ratingArr
-    if val==='emptyStar' || !hairdresser.ratingArr
-      img(src='images/icons/star.svg', alt='starEmpty')
-    if val==='fullStar'
+  - var n = [1, 2, 3, 4, 5]
+  each val in n
+    - var star = val < hairdresser.averageRating
+    if star
       img(src='images/icons/star-fill.svg', alt='starFill')
-    if val==='halfStar'
-      img(src='images/icons/star-half.svg', alt='starHalf')
+    else
+      img(src='images/icons/star.svg', alt='starEmpty')
