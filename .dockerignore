@@ -6,3 +6,4 @@
 /architecture
 Dockerfile
 .vscode
+/coverage
