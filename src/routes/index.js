@@ -7,8 +7,8 @@ const Hairdresser = require('../models/hairdresser')
 
 /* GET home page. */
 router.get('/', async (req, res) => {
-  const customer = await Customer.findById('60c15f21b98f7435f0949f1c')
-  const hairdresser = await Hairdresser.findById('60c15f21b98f7435f0949f1b')
+  const customer = await Customer.findOne({})
+  const hairdresser = await Hairdresser.findOne({})
   res.render('index', { customer, hairdresser })
 })
 
