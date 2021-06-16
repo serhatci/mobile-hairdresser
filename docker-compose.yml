@@ -1,5 +1,14 @@
 version: '3'
 services:
+  frontend:
+    image: frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./frontend/src:/app/src
   backend:
     image: backend
     build:
