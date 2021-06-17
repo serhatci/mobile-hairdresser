@@ -1,5 +1,3 @@
-.eslintcache
 .husky
-.eslintignore
-node_modules
-coverage
+.backend
+.frontend
