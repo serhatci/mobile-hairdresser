@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb", "prettier", "plugin:jest/all"],
   "rules": {
     "eqeqeq": "off",
     "class-methods-use-this": "off"
