@@ -1,16 +1,18 @@
-const app = require('../src/app')
+/* eslint-disable jest/no-commented-out-tests */
 const request = require('supertest')
+const app = require('../src/app')
 
 describe('Customers endpoints', () => {
   it('get request to /customers should give list of customers', async () => {
-    const customerList = (await request(app).get('/customers')).body
+    await request(app).put('/api/create-test-users')
+    const customerList = (await request(app).get('/api/customers')).body
     const customersExist = customerList.length > 0
 
     expect(customersExist).toBe(true)
   })
 
   it('get request to /customers should give max 10 customers', async () => {
-    const customerList = (await request(app).get('/customers')).body
+    const customerList = (await request(app).get('/api/customers')).body
     const customersExist = customerList.length <= 10
 
     expect(customersExist).toBe(true)
