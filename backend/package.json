@@ -7,7 +7,7 @@
     "unit-test": "jest --watchAll",
     "test": "jest --testEnvironment=node --verbose  --forceExit --watchAll --maxWorkers=1",
     "test-coverage": " jest --collect-coverage --testEnvironment=node --forceExit --maxWorkers=1",
-    "start": "nodemon bin/www",
+    "start": "node bin/www",
     "lint": "lint-staged",
     "lint-only": "eslint .",
     "lint-all": "pretty-quick && eslint",
