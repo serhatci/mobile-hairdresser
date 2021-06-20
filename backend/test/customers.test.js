@@ -70,7 +70,7 @@ describe('Customers endpoints', () => {
 
     it('api/customers/:customerId should return err if customerId is wrong', async () => {
       const error = (await request(app).get(`/api/customers/--wrongId--`)).body
-      expect(error.msg).toEqual('Provided CustomerId is wrong')
+      expect(error.msg).toEqual('Provided CustomerId does not exists in database!')
     })
   })
 
@@ -125,40 +125,42 @@ describe('Customers endpoints', () => {
       await request(app).post('/api/customers').send(newCustomer)
     })
 
-    // afterAll(async () => {
-    //   await request(app).delete('/api?delete=testUsers')
-    // })
+    afterAll(async () => {
+      await request(app).delete('/api?delete=testUsers')
+    })
 
     it('should update a given customer', async () => {
       const customers = (await request(app).get('/api/customers')).body
       const customer = customers[0]
 
-      customer.address = { city: 'olaha', state: 'komo', postcode: '70000' }
+      customer.address = { city: 'Stuttgart', state: 'BW', postcode: '70000' }
+      customer.tel = '10123123123123'
 
       const updatedCustomer = (await request(app).put(`/api/customers/${customer._id}`).send(customer)).body
-      expect(updatedCustomer.address.city).toEqual('olaha')
-      expect(updatedCustomer.address.state).toEqual('komo')
+      expect(updatedCustomer.address.city).toEqual('Stuttgart')
+      expect(updatedCustomer.address.state).toEqual('BW')
       expect(updatedCustomer.address.postcode).toEqual('70000')
+      expect(updatedCustomer.tel).toEqual('10123123123123')
     })
 
-    // it('should only accept unique user emails', async () => {
-    //   const addedCustomer = (await request(app).post('/api/customers').send(newCustomer)).body
-    //   expect(addedCustomer.msg).toEqual('This user already exists!')
-    // })
+    it('should give validation error if provided data is wrong', async () => {
+      const customers = (await request(app).get('/api/customers')).body
+      const customer = customers[0]
 
-    // it('should not accept users with empty values', async () => {
-    //   const emptyCustomer = {
-    //     firstName: '',
-    //     lastName: '',
-    //     email: '',
-    //     password: '',
-    //   }
+      customer.address = { city: 'textWithSpecialChars:[]{}' }
+      customer.tel = '123/123123'
 
-    //   const error = (await request(app).post('/api/customers').send(emptyCustomer)).body
-    //   expect(error.msg.firstName.name).toEqual('ValidatorError')
-    //   expect(error.msg.lastName.name).toEqual('ValidatorError')
-    //   expect(error.msg.email.name).toEqual('ValidatorError')
-    //   expect(error.msg.password.name).toEqual('ValidatorError')
-    // })
+      const error = (await request(app).put(`/api/customers/${customer._id}`).send(customer)).body
+      expect(error.msg['address.city'].name).toEqual('ValidatorError')
+      expect(error.msg.tel.name).toEqual('ValidatorError')
+    })
+
+    it('should give error if provided customerId is wrong', async () => {
+      const customers = (await request(app).get('/api/customers')).body
+      const customer = customers[0]
+
+      const error = (await request(app).put('/api/customers/--wrongId--').send(customer)).body
+      expect(error.msg).toEqual('Provided CustomerId does not exists in database!')
+    })
   })
 })
