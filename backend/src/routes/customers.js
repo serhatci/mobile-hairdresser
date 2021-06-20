@@ -66,14 +66,19 @@ router.post('/', async (req, res) => {
 /* UPDATE a customer . */
 router.put('/:customerId', async (req, res) => {
   const { customerId } = req.params
-  if (!customerId) return res.status(400).send({ msg: 'customerId parameter is missing!' })
 
   try {
-    await Customer.findByIdAndUpdate(customerId, req.body)
+    await Customer.findByIdAndUpdate(customerId, req.body, { runValidators: true })
     const updatedCustomer = await Customer.findById(customerId)
     res.send(updatedCustomer)
-  } catch {
-    res.sendStatus(404)
+  } catch (err) {
+    if (err.name === 'CastError') {
+      res.status(400).send({ msg: 'Provided CustomerId does not exists in database!' })
+    } else if (err.name === 'ValidationError') {
+      res.status(400).send({ msg: err.errors })
+    } else {
+      res.status(500).send({ msg: 'Database query error!' })
+    }
   }
 })
 
