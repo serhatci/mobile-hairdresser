@@ -13,7 +13,11 @@ const HairdresserSchema = new mongoose.Schema(
     website: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
     facebook: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
     instagram: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
-    availability: { type: String, default: 'Anytime', enum: ['Anytime', 'Weekdays', 'Weekends'] },
+    availability: {
+      type: String,
+      default: 'Anytime',
+      enum: { values: ['Anytime', 'Weekdays', 'Weekends'], message: '{VALUE} is not supported' },
+    },
     experienceInYears: {
       type: Number,
       min: [0, 'Years of experience should not be negative'],
