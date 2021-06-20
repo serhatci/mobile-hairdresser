@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable jest/no-disabled-tests */
 /* eslint-disable jest/no-commented-out-tests */
 const request = require('supertest')
@@ -110,5 +111,54 @@ describe('Customers endpoints', () => {
       expect(error.msg.email.name).toEqual('ValidatorError')
       expect(error.msg.password.name).toEqual('ValidatorError')
     })
+  })
+
+  describe('PUT request to api/customers', () => {
+    beforeAll(async () => {
+      const newCustomer = {
+        firstName: 'NewTestUser',
+        lastName: 'OnlyCreatedForTestPurpose',
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+      }
+
+      await request(app).post('/api/customers').send(newCustomer)
+    })
+
+    // afterAll(async () => {
+    //   await request(app).delete('/api?delete=testUsers')
+    // })
+
+    it('should update a given customer', async () => {
+      const customers = (await request(app).get('/api/customers')).body
+      const customer = customers[0]
+
+      customer.address = { city: 'olaha', state: 'komo', postcode: '70000' }
+
+      const updatedCustomer = (await request(app).put(`/api/customers/${customer._id}`).send(customer)).body
+      expect(updatedCustomer.address.city).toEqual('olaha')
+      expect(updatedCustomer.address.state).toEqual('komo')
+      expect(updatedCustomer.address.postcode).toEqual('70000')
+    })
+
+    // it('should only accept unique user emails', async () => {
+    //   const addedCustomer = (await request(app).post('/api/customers').send(newCustomer)).body
+    //   expect(addedCustomer.msg).toEqual('This user already exists!')
+    // })
+
+    // it('should not accept users with empty values', async () => {
+    //   const emptyCustomer = {
+    //     firstName: '',
+    //     lastName: '',
+    //     email: '',
+    //     password: '',
+    //   }
+
+    //   const error = (await request(app).post('/api/customers').send(emptyCustomer)).body
+    //   expect(error.msg.firstName.name).toEqual('ValidatorError')
+    //   expect(error.msg.lastName.name).toEqual('ValidatorError')
+    //   expect(error.msg.email.name).toEqual('ValidatorError')
+    //   expect(error.msg.password.name).toEqual('ValidatorError')
+    // })
   })
 })
