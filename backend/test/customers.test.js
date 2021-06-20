@@ -69,7 +69,22 @@ describe('Customers endpoints', () => {
 
     it('should only accept unique user emails', async () => {
       const addedCustomer = (await request(app).post('/api/customers').send(newCustomer)).body
-      expect(addedCustomer).toEqual({})
+      expect(addedCustomer.msg).toEqual('This user already exists!')
+    })
+
+    it('should not accept users with empty values', async () => {
+      const emptyCustomer = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+      }
+
+      const error = (await request(app).post('/api/customers').send(emptyCustomer)).body
+      expect(error.msg.firstName.name).toEqual('ValidatorError')
+      expect(error.msg.lastName.name).toEqual('ValidatorError')
+      expect(error.msg.email.name).toEqual('ValidatorError')
+      expect(error.msg.password.name).toEqual('ValidatorError')
     })
   })
 })
