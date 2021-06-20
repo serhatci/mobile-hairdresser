@@ -8,18 +8,19 @@ const EmployerReference = require('./employer-reference')
 
 const HairdresserSchema = new mongoose.Schema(
   {
-    about: { type: String, maxLength: 300 }, // short info about hairdresser
+    about: { type: String, maxLength: 300, default: null }, // short info about hairdresser
     languages: { type: [], default: ['Deutsch'] },
-    website: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
-    facebook: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
-    instagram: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
-    availability: { type: String, enum: ['Anytime', 'Weekdays', 'Weekends'] },
+    website: { type: String, trim: true, default: null, validate: [isURL, 'Requires a valid URL'] },
+    facebook: { type: String, trim: true, default: null, validate: [isURL, 'Requires a valid URL'] },
+    instagram: { type: String, trim: true, default: null, validate: [isURL, 'Requires a valid URL'] },
+    availability: { type: String, default: ['Anytime'], enum: ['Anytime', 'Weekdays', 'Weekends'] },
     experienceInYears: {
       type: Number,
       min: [0, 'Years of experience should not be negative'],
       max: [70, 'Years of experience should have a logical value'],
+      default: 0,
     },
-    serviceArea: Number, // perimeter in km around a location
+    serviceArea: { type: Number, default: 0 }, // perimeter in km around a location
     employerReferences: [],
     portfolioVideos: [
       {
