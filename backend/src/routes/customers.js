@@ -1,10 +1,9 @@
 /* eslint-disable consistent-return */
 /* eslint-disable import/no-extraneous-dependencies */
 const express = require('express')
+const Customer = require('../models/customer')
 
 const router = express.Router()
-
-const Customer = require('../models/customer')
 
 /* GET customers by filters . */
 router.get('/', async (req, res) => {
@@ -26,64 +25,86 @@ router.get('/', async (req, res) => {
     const customer = await Customer.find(query).limit(10)
     res.send(customer)
   } catch {
-    res.sendStatus(404)
+    res.status(500).send({ msg: 'Database query error!' })
   }
 })
 
 /* GET customer by ID . */
 router.get('/:customerId', async (req, res) => {
   const { customerId } = req.params
-  if (!customerId) return res.sendStatus(400)
 
   try {
     const customer = await Customer.findById(customerId)
     res.send(customer)
-  } catch {
-    res.sendStatus(404)
+  } catch (err) {
+    if (err.name === 'CastError') {
+      res.status(400).send({ msg: 'Provided CustomerId has wrong format!' })
+    } else {
+      res.status(500).send({ msg: 'Database query error!' })
+    }
   }
 })
 
 /* POST a new customer . */
 router.post('/', async (req, res) => {
-  const customerToCreate = {
-    name: req.body.name,
-    surname: req.body.surname,
-    email: req.body.email,
-    password: req.body.password,
-  }
+  const customerToCreate = req.body
 
   try {
     const createdCustomer = await Customer.create(customerToCreate)
     res.send(createdCustomer)
-  } catch {
-    res.sendStatus(404)
+  } catch (err) {
+    if (err.name === 'MongoError' && err.code === 11000) {
+      res.status(409).send({ msg: 'This user already exists!' })
+    } else if (err.name === 'ValidationError') {
+      res.status(400).send({ msg: err.errors })
+    } else {
+      res.status(500).send({ msg: 'Database query error!' })
+    }
   }
 })
 
 /* UPDATE a customer . */
 router.put('/:customerId', async (req, res) => {
   const { customerId } = req.params
-  if (!customerId) return res.sendStatus(400)
 
   try {
-    await Customer.findByIdAndUpdate(customerId, req.body)
+    await Customer.findByIdAndUpdate(customerId, req.body, { runValidators: true })
     const updatedCustomer = await Customer.findById(customerId)
+
+    if (updatedCustomer === null) throw new Error('CustomerId does not exist in database!')
+
     res.send(updatedCustomer)
-  } catch {
-    res.sendStatus(404)
+  } catch (err) {
+    if (err.name === 'CastError') {
+      res.status(400).send({ msg: 'Provided CustomerId has wrong format!' })
+    } else if (err.name === 'ValidationError') {
+      res.status(400).send({ msg: err.errors })
+    } else if (err.name === 'Error') {
+      res.status(400).send({ msg: err.message })
+    } else {
+      res.status(500).send({ msg: 'Database query error!' })
+    }
   }
 })
 
 /* DELETE a customer . */
 router.delete('/:customerId', async (req, res) => {
   const { customerId } = req.params
-  if (!customerId) return res.sendStatus(400)
 
   try {
     const deletedCustomer = await Customer.findByIdAndDelete(customerId)
+
+    if (deletedCustomer === null) throw new Error('CustomerId does not exist in database!')
+
     res.send(deletedCustomer)
-  } catch {
-    res.sendStatus(404)
+  } catch (err) {
+    if (err.name === 'CastError') {
+      res.status(400).send({ msg: 'Provided CustomerId has wrong format!' })
+    } else if (err.name === 'Error') {
+      res.status(400).send({ msg: err.message })
+    } else {
+      res.status(500).send({ msg: 'Database query error!' })
+    }
   }
 })
 

@@ -1,10 +1,9 @@
 /* eslint-disable consistent-return */
 /* eslint-disable import/no-extraneous-dependencies */
 const express = require('express')
+const Hairdresser = require('../models/hairdresser')
 
 const router = express.Router()
-
-const Hairdresser = require('../models/hairdresser')
 
 /* GET hairdressers by filters . */
 router.get('/', async (req, res) => {
@@ -26,80 +25,86 @@ router.get('/', async (req, res) => {
     const hairdresser = await Hairdresser.find(query).limit(10)
     res.send(hairdresser)
   } catch {
-    res.sendStatus(404)
+    res.status(500).send({ msg: 'Database query error!' })
   }
 })
 
 /* GET hairdresser by ID . */
 router.get('/:hairdresserId', async (req, res) => {
   const { hairdresserId } = req.params
-  if (!hairdresserId) return res.sendStatus(400)
 
   try {
     const hairdresser = await Hairdresser.findById(hairdresserId)
     res.send(hairdresser)
-  } catch {
-    res.sendStatus(404)
+  } catch (err) {
+    if (err.name === 'CastError') {
+      res.status(400).send({ msg: 'Provided HairdresserId has wrong format!' })
+    } else {
+      res.status(500).send({ msg: 'Database query error!' })
+    }
   }
 })
 
 /* POST a new hairdresser . */
 router.post('/', async (req, res) => {
-  const hairdresserToCreate = {
-    name: req.body.name,
-    surname: req.body.surname,
-    email: req.body.email,
-    password: req.body.password,
-  }
+  const hairdresserToCreate = req.body
 
   try {
     const createdHairdresser = await Hairdresser.create(hairdresserToCreate)
     res.send(createdHairdresser)
-  } catch {
-    res.sendStatus(404)
+  } catch (err) {
+    if (err.name === 'MongoError' && err.code === 11000) {
+      res.status(409).send({ msg: 'This user already exists!' })
+    } else if (err.name === 'ValidationError') {
+      res.status(400).send({ msg: err.errors })
+    } else {
+      res.status(500).send({ msg: 'Database query error!' })
+    }
   }
 })
 
 /* UPDATE a hairdresser . */
 router.put('/:hairdresserId', async (req, res) => {
   const { hairdresserId } = req.params
-  if (!hairdresserId) return res.sendStatus(400)
 
   try {
-    await Hairdresser.findByIdAndUpdate(hairdresserId, req.body)
+    await Hairdresser.findByIdAndUpdate(hairdresserId, req.body, { runValidators: true })
     const updatedHairdresser = await Hairdresser.findById(hairdresserId)
+
+    if (updatedHairdresser === null) throw new Error('HairdresserId does not exist in database!')
+
     res.send(updatedHairdresser)
-  } catch {
-    res.sendStatus(404)
+  } catch (err) {
+    if (err.name === 'CastError') {
+      res.status(400).send({ msg: 'Provided HairdresserId has wrong format!' })
+    } else if (err.name === 'ValidationError') {
+      res.status(400).send({ msg: err.errors })
+    } else if (err.name === 'Error') {
+      res.status(400).send({ msg: err.message })
+    } else {
+      res.status(500).send({ msg: 'Database query error!' })
+    }
   }
 })
 
 /* DELETE a hairdresser . */
 router.delete('/:hairdresserId', async (req, res) => {
   const { hairdresserId } = req.params
-  if (!hairdresserId) return res.sendStatus(400)
 
   try {
     const deletedHairdresser = await Hairdresser.findByIdAndDelete(hairdresserId)
+
+    if (deletedHairdresser === null) throw new Error('HairdresserId does not exist in database!')
+
     res.send(deletedHairdresser)
-  } catch {
-    res.sendStatus(404)
-  }
-})
-
-/* POST hairdresser a photoId his portfolio. */
-router.post('/:hairdresserId/photos', async (req, res) => {
-  const { hairdresserId } = req.params
-  const photoId = req.body
-
-  if (!hairdresserId || !photoId) return res.sendStatus(400)
-
-  try {
-    const hairdresser = await Hairdresser.findById(hairdresserId)
-    hairdresser.uploadPhotoToPortfolio(photoId)
-    res.send(photoId)
   } catch (err) {
-    res.sendStatus(404)
+    if (err.name === 'CastError') {
+      res.status(400).send({ msg: 'Provided HairdresserId has wrong format!' })
+    } else if (err.name === 'Error') {
+      res.status(400).send({ msg: err.message })
+    } else {
+      res.status(500).send({ msg: 'Database query error!' })
+    }
   }
 })
 

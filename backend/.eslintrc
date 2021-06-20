@@ -1,12 +1,18 @@
 {
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb", "prettier", "plugin:jest/recommended"],
   "rules": {
     "eqeqeq": "off",
     "class-methods-use-this": "off"
   },
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false
+  },
   "settings": {
     "react": {
+      "version": "latest"
+    },
+    "jest": {
       "version": "latest"
     }
   }

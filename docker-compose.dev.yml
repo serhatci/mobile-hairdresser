@@ -1,0 +1,18 @@
+version: '3'
+services:
+  backend:
+    image: backend
+    build:
+      context: backend
+      dockerfile: Dockerfile.backend-test
+    environment:
+      - MONGODB_CONNECTION_STRING=mongodb://mongo/mobilehairdresser
+    ports:
+      - 3000:3000
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/test:/app/test
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017

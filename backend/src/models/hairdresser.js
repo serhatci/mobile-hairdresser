@@ -1,19 +1,30 @@
 /* eslint-disable no-param-reassign */
 const mongoose = require('mongoose')
 
+const { isURL } = require('validator')
+
 const User = require('./user')
 const EmployerReference = require('./employer-reference')
 
 const HairdresserSchema = new mongoose.Schema(
   {
-    about: String, // short info about hairdresser
-    languages: { type: [], default: ['DE'] },
-    website: String,
-    facebook: String,
-    instagram: String,
-    availability: String, // [weekdays, weekends, after 7 pm, etc... ]
-    experience: String, // [less than 1 year, 1 year, 2 year, etc... ]
-    serviceArea: String, // perimeter in km around a location
+    about: { type: String, maxLength: 300, default: 'Please check my portfolio for more info.', trim: true }, // short info about hairdresser
+    languages: { type: [], default: ['Deutsch'] },
+    website: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
+    facebook: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
+    instagram: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
+    availability: {
+      type: String,
+      default: 'Anytime',
+      enum: { values: ['Anytime', 'Weekdays', 'Weekends'], message: '{VALUE} is not supported' },
+    },
+    experienceInYears: {
+      type: Number,
+      min: [0, 'Years of experience should not be negative'],
+      max: [70, 'Years of experience should have a logical value'],
+      default: 0,
+    },
+    serviceArea: { type: Number, default: 0 }, // perimeter in km around a location
     employerReferences: [],
     portfolioVideos: [
       {
@@ -47,14 +58,12 @@ const HairdresserSchema = new mongoose.Schema(
 )
 
 class Hairdresser {
-  get fullname() {
-    return `${this.name} ${this.surname}`
-  }
-
   get averageRating() {
-    const totalRating = this.customerReviews.reduce((a, b) => a + b.rating, 0)
-    return totalRating / this.customerReviews.length
-    // return 3.6
+    if (this.customerReviews.length !== 0) {
+      const totalRating = this.customerReviews.reduce((a, b) => a + b.rating, 0)
+      return totalRating / this.customerReviews.length
+    }
+    return 0
   }
 
   async uploadPhotoToPortfolio(photo) {

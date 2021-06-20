@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
-const autopopulate = require('mongoose-autopopulate')
+
+const { isAlphanumeric, isEmail, isInt } = require('validator')
 
 const PrivateMessage = require('./private-message')
 const MessageBoxSchema = require('./message-box')
@@ -8,29 +9,53 @@ const Reply = require('./reply')
 const UserSchema = new mongoose.Schema(
   {
     // Base class for Hairdresser and Customer
-    name: {
+    firstName: {
       type: String,
-      required: true,
+      required: [true, 'Enter a first name'],
+      trim: true,
+      validate: [isAlphanumeric, 'First name should contain letters & numbers only'],
     },
-    surname: {
+    middleName: {
       type: String,
-      required: true,
+      trim: true,
+      validate: [isAlphanumeric, 'Middle name should contain letters & numbers only'],
+    },
+    lastName: {
+      type: String,
+      required: [true, 'Enter a last name'],
+      trim: true,
+      validate: [isAlphanumeric, 'Last name should contain letters & numbers only'],
     },
     email: {
       type: String,
-      required: true,
-      unique: true,
+      required: [true, 'Enter an email'],
+      unique: [true, 'That email address is taken'],
+      trim: true,
+      validate: [isEmail, 'Enter a valid email address'],
     },
     password: {
       type: String,
-      required: true,
+      required: [true, 'Enter a password'],
+      trim: true,
     },
     address: {
-      city: { type: String },
-      state: { type: String },
-      postcode: { type: Number },
+      city: {
+        type: String,
+        trim: true,
+        validate: [isAlphanumeric, 'City name should contain letters & numbers only'],
+      },
+      state: {
+        type: String,
+        trim: true,
+        validate: [isAlphanumeric, 'State name should contain letters & numbers only'],
+      },
+      postcode: String,
     },
-    tel: String,
+    tel: {
+      type: String,
+      trim: true,
+      validate: [isInt, 'Telephone should contain numbers only'],
+    },
     repliedRequests: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -40,7 +65,6 @@ const UserSchema = new mongoose.Schema(
     profilePhoto: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Photo',
-      autopopulate: true,
     },
     messageBox: {
       type: MessageBoxSchema,
@@ -52,7 +76,7 @@ const UserSchema = new mongoose.Schema(
 
 class User {
   get fullName() {
-    return `${this.name} ${this.surname}`
+    return `${this.firstName} ${this.middleName} ${this.lastName}`
   }
 
   async addProfilePhoto(photo) {
@@ -145,5 +169,4 @@ class User {
 }
 
 UserSchema.loadClass(User)
-UserSchema.plugin(autopopulate)
 module.exports = mongoose.model('User', UserSchema)

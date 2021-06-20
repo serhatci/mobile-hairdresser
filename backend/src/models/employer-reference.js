@@ -1,14 +1,22 @@
 const mongoose = require('mongoose')
 
+const { isAlphanumeric, isEmail, isInt } = require('validator')
+
 const EmployerReferenceSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    trim: true,
+    validate: [isAlphanumeric, 'Name should contain letters & numbers only'],
   },
-  shop: String,
-  address: String,
-  email: String,
-  telephone: String,
+  shop: { type: String, trim: true },
+  address: { type: String, trim: true },
+  email: { type: String, trim: true, validate: [isEmail, 'Enter a valid email address'] },
+  tel: {
+    type: String,
+    trim: true,
+    validate: [isInt, 'Telephone should contain numbers only'],
+  },
 })
 
-module.exports = EmployerReferenceSchema
+module.exports = mongoose.model('EmployerReference', EmployerReferenceSchema)
