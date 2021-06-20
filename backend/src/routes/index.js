@@ -51,8 +51,8 @@ router.post('/', async (req, res) => {
 router.delete('/', async (req, res) => {
   if (req.query.delete == 'testUsers') {
     try {
-      await User.deleteMany({ firstName: 'TestUser', lastName: 'OnlyCreatedForTestPurpose' })
-      res.status(200).send('**** Test users are deleted! **** \n')
+      await User.deleteMany({ lastName: 'OnlyCreatedForTestPurpose' })
+      res.status(200).send('**** Test users are successfully deleted! **** \n')
     } catch (err) {
       res.status(500).send('**** Test users deletion in DB is failed! **** \n')
     }
