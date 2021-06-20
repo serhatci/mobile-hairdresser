@@ -7,8 +7,14 @@ const app = require('../src/app')
 
 describe('Customers endpoints', () => {
   describe('get request to api/customers', () => {
+    beforeAll(async () => {
     it('should give list of customers', async () => {
       await request(app).post('/api?create=testUsers')
+    })
+
+    afterAll(async () => {
+      await request(app).delete('/api?delete=testUsers')
+    })
 
       const customerList = (await request(app).get('/api/customers')).body
       const customersExist = customerList.length > 0
