@@ -70,7 +70,7 @@ describe('Customers endpoints', () => {
 
     it('api/customers/:customerId should return err if customerId is wrong', async () => {
       const error = (await request(app).get(`/api/customers/--wrongId--`)).body
-      expect(error.msg).toEqual('Provided CustomerId does not exists in database!')
+      expect(error.msg).toEqual('Provided CustomerId has wrong format!')
     })
   })
 
@@ -160,7 +160,8 @@ describe('Customers endpoints', () => {
       const customer = customers[0]
 
       const error = (await request(app).put('/api/customers/--wrongId--').send(customer)).body
-      expect(error.msg).toEqual('Provided CustomerId does not exists in database!')
+      expect(error.msg).toEqual('Provided CustomerId has wrong format!')
+    })
     })
   })
 })
