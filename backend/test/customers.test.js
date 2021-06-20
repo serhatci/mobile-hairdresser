@@ -162,6 +162,45 @@ describe('Customers endpoints', () => {
       const error = (await request(app).put('/api/customers/--wrongId--').send(customer)).body
       expect(error.msg).toEqual('Provided CustomerId has wrong format!')
     })
+
+    it('should give error if provided customerId does not exist in database', async () => {
+      const error = (await request(app).put('/api/customers/60cf817acbb01500be427bf8')).body
+      expect(error.msg).toEqual('CustomerId does not exist in database!')
+    })
+  })
+
+  describe('DELETE request to api/customers', () => {
+    beforeAll(async () => {
+      const newCustomer = {
+        firstName: 'NewTestUser',
+        lastName: 'OnlyCreatedForTestPurpose',
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+      }
+
+      await request(app).post('/api/customers').send(newCustomer)
+    })
+
+    afterAll(async () => {
+      await request(app).delete('/api?delete=testUsers')
+    })
+
+    it('should delete a given customer', async () => {
+      const customers = (await request(app).get('/api/customers')).body
+      const customer = customers[0]
+
+      const deletedCustomer = (await request(app).delete(`/api/customers/${customer._id}`)).body
+      expect(deletedCustomer._id).toEqual(customer._id)
+    })
+
+    it('should give error if provided customerId is wrong', async () => {
+      const error = (await request(app).delete('/api/customers/--wrongId--')).body
+      expect(error.msg).toEqual('Provided CustomerId has wrong format!')
+    })
+
+    it('should give error if provided customerId does not exist in database', async () => {
+      const error = (await request(app).delete('/api/customers/60cf817acbb01500be427bf8')).body
+      expect(error.msg).toEqual('CustomerId does not exist in database!')
     })
   })
 })
