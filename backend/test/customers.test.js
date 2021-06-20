@@ -58,6 +58,19 @@ describe('Customers endpoints', () => {
       const userNotExist = (await request(app).get('/api/customers?postcode=00000000')).body
       expect(userNotExist).toEqual([])
     })
+
+    it('api/customers/:customerId should return specific customer', async () => {
+      const customers = (await request(app).get('/api/customers')).body
+      const customer = customers[0]
+
+      const specificCustomer = (await request(app).get(`/api/customers/${customer._id}`)).body
+      expect(specificCustomer._id).toEqual(customer._id)
+    })
+
+    it('api/customers/:customerId should return err if customerId is wrong', async () => {
+      const error = (await request(app).get(`/api/customers/--wrongId--`)).body
+      expect(error.msg).toEqual('Provided CustomerId is wrong')
+    })
   })
 
   describe('POST request to api/customers', () => {
