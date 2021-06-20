@@ -90,13 +90,21 @@ router.put('/:customerId', async (req, res) => {
 /* DELETE a customer . */
 router.delete('/:customerId', async (req, res) => {
   const { customerId } = req.params
-  if (!customerId) return res.sendStatus(400)
 
   try {
     const deletedCustomer = await Customer.findByIdAndDelete(customerId)
+
+    if (deletedCustomer === null) throw new Error('CustomerId does not exist in database!')
+
     res.send(deletedCustomer)
-  } catch {
-    res.sendStatus(404)
+  } catch (err) {
+    if (err.name === 'CastError') {
+      res.status(400).send({ msg: 'Provided CustomerId has wrong format!' })
+    } else if (err.name === 'Error') {
+      res.status(400).send({ msg: err.message })
+    } else {
+      res.status(500).send({ msg: 'Database query error!' })
+    }
   }
 })
 
