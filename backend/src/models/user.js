@@ -39,16 +39,12 @@ const UserSchema = new mongoose.Schema(
       trim: true,
     },
     address: {
-      city: { type: String, default: null },
-      state: { type: String, default: null },
-      postcode: {
-        type: Number,
-        default: null,
-      },
+      city: String,
+      state: String,
+      postcode: Number,
     },
     tel: {
       type: Number,
-      default: null,
     },
     repliedRequests: [
       {
@@ -59,7 +55,6 @@ const UserSchema = new mongoose.Schema(
     profilePhoto: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Photo',
-      default: null,
     },
     messageBox: {
       type: MessageBoxSchema,
