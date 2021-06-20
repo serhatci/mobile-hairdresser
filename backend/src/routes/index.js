@@ -18,35 +18,44 @@ router.get('/', async (req, res) => {
 })
 
 /* Creates fake users in db for testing */
-router.put('/:testUsers', async (req, res) => {
-  if (req.params.testUsers === 'create-test-users') {
+router.post('/', async (req, res) => {
+  if (req.query.create == 'testUsers') {
     try {
       for (let i = 0; i < 30; i += 1) {
-        const name = 'I am fake'
-        const surname = 'Only created for test purpose'
+        const firstName = 'TestUser'
+        const lastName = 'OnlyCreatedForTestPurpose'
         const email = faker.internet.email()
         const password = faker.internet.password()
 
         i % 2
-          ? await Customer.create({ name, surname, email, password })
-          : await Hairdresser.create({ name, surname, email, password })
+          ? await Customer.create({ firstName, lastName, email, password })
+          : await Hairdresser.create({ firstName, lastName, email, password })
       }
+
+      const city = 'Heilbronn'
+      const state = 'BD'
+      const postcode = 7
+
+      await User.updateMany(
+        { firstName: 'TestUser', lastName: 'OnlyCreatedForTestPurpose' },
+        { address: { city, state, postcode } }
+      )
       res.status(200).send('**** Test users are created! **** \n')
-    } catch {
-      res.status(500).send('**** Test users creation in DB is failed! **** \n')
+    } catch (err) {
+      res.status(400).send(`**** Test users creation in DB is failed! **** \n ${err}`)
     }
   }
 })
 
 /* Delete fake users in db for testing */
-router.delete('/:testUsers', async (req, res) => {
-  if (req.params.testUsers === 'delete-test-users') {
+router.delete('/', async (req, res) => {
+  if (req.query.delete == 'testUsers') {
     try {
-      await User.deleteMany({ name: 'I am fake', surname: 'Only created for test purpose' })
+      await User.deleteMany({ firstName: 'TestUser', lastName: 'OnlyCreatedForTestPurpose' })
+      res.status(200).send('**** Test users are deleted! **** \n')
     } catch (err) {
       res.status(500).send('**** Test users deletion in DB is failed! **** \n')
     }
-    res.status(200).send('**** Test users are deleted! **** \n')
   }
 })
 
