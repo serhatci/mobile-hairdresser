@@ -70,12 +70,17 @@ router.put('/:customerId', async (req, res) => {
   try {
     await Customer.findByIdAndUpdate(customerId, req.body, { runValidators: true })
     const updatedCustomer = await Customer.findById(customerId)
+
+    if (updatedCustomer === null) throw new Error('CustomerId does not exist in database!')
+
     res.send(updatedCustomer)
   } catch (err) {
     if (err.name === 'CastError') {
-      res.status(400).send({ msg: 'Provided CustomerId does not exists in database!' })
+      res.status(400).send({ msg: 'Provided CustomerId has wrong format!' })
     } else if (err.name === 'ValidationError') {
       res.status(400).send({ msg: err.errors })
+    } else if (err.name === 'Error') {
+      res.status(400).send({ msg: err.message })
     } else {
       res.status(500).send({ msg: 'Database query error!' })
     }
