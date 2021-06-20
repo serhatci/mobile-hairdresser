@@ -50,6 +50,9 @@ describe('Customers endpoints', () => {
   })
 
   describe('post request to api/customers', () => {
+    afterAll(async () => {
+      await request(app).delete('/api?delete=testUsers')
+    })
     it('should add a new customer', async () => {
       const newCustomer = {
         firstName: 'NewTestUser',
