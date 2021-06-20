@@ -38,7 +38,7 @@ router.get('/:customerId', async (req, res) => {
     res.send(customer)
   } catch (err) {
     if (err.name === 'CastError') {
-      res.status(400).send({ msg: 'Provided CustomerId does not exists in database!' })
+      res.status(400).send({ msg: 'Provided CustomerId has wrong format!' })
     } else {
       res.status(500).send({ msg: 'Database query error!' })
     }
