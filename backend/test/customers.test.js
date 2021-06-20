@@ -30,17 +30,17 @@ describe('Customers endpoints', () => {
 
     it('should filter customers by city', async () => {
       const customerList = (await request(app).get('/api/customers?city=Heilbronn')).body
-      customerList.forEach(user => expect(user.address.city).toBe('Heilbronn'))
+      customerList.forEach(user => expect(user.address.city).toEqual('Heilbronn'))
     })
 
     it('should filter customers by state', async () => {
       const customerList = (await request(app).get('/api/customers?state=BW')).body
-      customerList.forEach(user => expect(user.address.state).toBe('BW'))
+      customerList.forEach(user => expect(user.address.state).toEqual('BW'))
     })
 
     it('should filter customers by postcode', async () => {
       const customerList = (await request(app).get('/api/customers?postcode=74076')).body
-      customerList.forEach(user => expect(user.address.postcode).toBe(74076))
+      customerList.forEach(user => expect(user.address.postcode).toEqual(74076))
     })
 
     it('should return [] if no filtered users are found', async () => {
