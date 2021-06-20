@@ -53,26 +53,21 @@ describe('Customers endpoints', () => {
     afterAll(async () => {
       await request(app).delete('/api?delete=testUsers')
     })
-    it('should add a new customer', async () => {
-      const newCustomer = {
-        firstName: 'NewTestUser',
-        lastName: 'OnlyCreatedForTestPurpose',
-        email: 'unique@email.test',
-        password: faker.internet.password(),
-      }
 
+    const newCustomer = {
+      firstName: 'NewTestUser',
+      lastName: 'OnlyCreatedForTestPurpose',
+      email: 'unique@email.test',
+      password: faker.internet.password(),
+    }
+
+    it('should add a new customer', async () => {
       const addedCustomer = (await request(app).post('/api/customers').send(newCustomer)).body
-      expect(addedCustomer.firstName).toBe('NewTestUser')
+      expect(addedCustomer.firstName).toEqual('NewTestUser')
+      expect(addedCustomer.email).toEqual('unique@email.test')
     })
 
     it('should only accept unique user emails', async () => {
-      const newCustomer = {
-        firstName: 'NewTestUser',
-        lastName: 'OnlyCreatedForTestPurpose',
-        email: 'unique@email.test',
-        password: faker.internet.password(),
-      }
-
       const addedCustomer = (await request(app).post('/api/customers').send(newCustomer)).body
       expect(addedCustomer).toEqual({})
     })
