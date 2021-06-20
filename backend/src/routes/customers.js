@@ -58,7 +58,7 @@ router.post('/', async (req, res) => {
     } else if (err.name === 'ValidationError') {
       res.status(400).send({ msg: err.errors })
     } else {
-      res.status(500).send({ msg: err })
+      res.status(500).send({ msg: 'Database query error!' })
     }
   }
 })
@@ -66,7 +66,7 @@ router.post('/', async (req, res) => {
 /* UPDATE a customer . */
 router.put('/:customerId', async (req, res) => {
   const { customerId } = req.params
-  if (!customerId) return res.sendStatus(400)
+  if (!customerId) return res.status(400).send({ msg: 'customerId parameter is missing!' })
 
   try {
     await Customer.findByIdAndUpdate(customerId, req.body)
