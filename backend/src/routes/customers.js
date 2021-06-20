@@ -49,8 +49,14 @@ router.post('/', async (req, res) => {
   try {
     const createdCustomer = await Customer.create(customerToCreate)
     res.send(createdCustomer)
-  } catch {
-    res.status(500).send('Database query error!')
+  } catch (err) {
+    if (err.name === 'MongoError' && err.code === 11000) {
+      res.status(409).send({ msg: 'This user already exists!' })
+    } else if (err.name === 'ValidationError') {
+      res.status(400).send({ msg: err.errors })
+    } else {
+      res.status(500).send({ msg: err })
+    }
   }
 })
 
