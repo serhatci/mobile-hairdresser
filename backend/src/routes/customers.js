@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
     const customer = await Customer.find(query).limit(10)
     res.send(customer)
   } catch {
-    res.status(500).send('Database query error!')
+    res.status(500).send({ msg: 'Database query error!' })
   }
 })
 
@@ -38,7 +38,7 @@ router.get('/:customerId', async (req, res) => {
     const customer = await Customer.findById(customerId)
     res.send(customer)
   } catch {
-    res.status(500).send('Database query error!')
+    res.status(500).send({ msg: 'Database query error!' })
   }
 })
 
