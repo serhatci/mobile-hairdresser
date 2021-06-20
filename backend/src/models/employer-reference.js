@@ -10,10 +10,10 @@ const EmployerReferenceSchema = new mongoose.Schema({
     trim: true,
     validate: [isAlphanumeric, 'Name should contain letters & numbers only'],
   },
-  shop: { Type: String, default: null, trim: true },
-  address: { Type: String, default: null, trim: true },
-  email: { Type: String, default: null, trim: true, validate: [isEmail, 'Enter a valid email address'] },
-  telephone: { Type: Number, default: null, trim: true },
+  shop: { type: String, default: null, trim: true },
+  address: { type: String, default: null, trim: true },
+  email: { type: String, trim: true, validate: [isEmail, 'Enter a valid email address'] },
+  telephone: { type: Number, default: null, trim: true },
 })
 
-module.exports = EmployerReferenceSchema
+module.exports = mongoose.model('EmployerReference', EmployerReferenceSchema)
