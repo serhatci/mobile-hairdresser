@@ -51,7 +51,7 @@ describe('Customers endpoints', () => {
       const customersExist = customerList.length > 0
 
       expect(customersExist).toBe(true)
-      customerList.forEach(user => expect(user.address.postcode).toEqual(74076))
+      customerList.forEach(user => expect(user.address.postcode).toEqual('74076'))
     })
 
     it('should return [] if no filtered users are found', async () => {
