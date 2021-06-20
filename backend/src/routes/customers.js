@@ -1,10 +1,9 @@
 /* eslint-disable consistent-return */
 /* eslint-disable import/no-extraneous-dependencies */
 const express = require('express')
+const Customer = require('../models/customer')
 
 const router = express.Router()
-
-const Customer = require('../models/customer')
 
 /* GET customers by filters . */
 router.get('/', async (req, res) => {
@@ -26,7 +25,7 @@ router.get('/', async (req, res) => {
     const customer = await Customer.find(query).limit(10)
     res.send(customer)
   } catch {
-    res.sendStatus(404)
+    res.status(500).send('Database query error!')
   }
 })
 
@@ -39,24 +38,19 @@ router.get('/:customerId', async (req, res) => {
     const customer = await Customer.findById(customerId)
     res.send(customer)
   } catch {
-    res.sendStatus(404)
+    res.status(500).send('Database query error!')
   }
 })
 
 /* POST a new customer . */
 router.post('/', async (req, res) => {
-  const customerToCreate = {
-    name: req.body.name,
-    surname: req.body.surname,
-    email: req.body.email,
-    password: req.body.password,
-  }
+  const customerToCreate = req.body
 
   try {
     const createdCustomer = await Customer.create(customerToCreate)
     res.send(createdCustomer)
   } catch {
-    res.sendStatus(404)
+    res.status(500).send('Database query error!')
   }
 })
 
