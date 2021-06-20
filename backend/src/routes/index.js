@@ -33,8 +33,8 @@ router.post('/', async (req, res) => {
       }
 
       const city = 'Heilbronn'
-      const state = 'BD'
-      const postcode = 7
+      const state = 'BW'
+      const postcode = 74076
 
       await User.updateMany(
         { firstName: 'TestUser', lastName: 'OnlyCreatedForTestPurpose' },
