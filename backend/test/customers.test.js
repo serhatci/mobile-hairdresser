@@ -6,7 +6,7 @@ const faker = require('faker')
 const app = require('../src/app')
 
 describe('Customers endpoints', () => {
-  describe('get request to api/customers', () => {
+  describe('GET request to api/customers', () => {
     beforeAll(async () => {
       await request(app).post('/api?create=testUsers')
     })
@@ -49,7 +49,7 @@ describe('Customers endpoints', () => {
     })
   })
 
-  describe('post request to api/customers', () => {
+  describe('POST request to api/customers', () => {
     afterAll(async () => {
       await request(app).delete('/api?delete=testUsers')
     })
