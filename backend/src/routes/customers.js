@@ -32,13 +32,16 @@ router.get('/', async (req, res) => {
 /* GET customer by ID . */
 router.get('/:customerId', async (req, res) => {
   const { customerId } = req.params
-  if (!customerId) return res.sendStatus(400)
 
   try {
     const customer = await Customer.findById(customerId)
     res.send(customer)
-  } catch {
-    res.status(500).send({ msg: 'Database query error!' })
+  } catch (err) {
+    if (err.name === 'CastError') {
+      res.status(400).send({ msg: 'Provided CustomerId is wrong' })
+    } else {
+      res.status(500).send({ msg: 'Database query error!' })
+    }
   }
 })
 
