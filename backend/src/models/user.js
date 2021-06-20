@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const { isAlphanumeric, isEmail } = require('validator')
+const { isAlphanumeric, isEmail, isInt } = require('validator')
 
 const PrivateMessage = require('./private-message')
 const MessageBoxSchema = require('./message-box')
@@ -39,12 +39,22 @@ const UserSchema = new mongoose.Schema(
       trim: true,
     },
     address: {
-      city: String,
-      state: String,
+      city: {
+        type: String,
+        trim: true,
+        validate: [isAlphanumeric, 'City name should contain letters & numbers only'],
+      },
+      state: {
+        type: String,
+        trim: true,
+        validate: [isAlphanumeric, 'State name should contain letters & numbers only'],
+      },
       postcode: String,
     },
     tel: {
-      type: Number,
+      type: String,
+      trim: true,
+      validate: [isInt, 'Telephone should contain numbers only'],
     },
     repliedRequests: [
       {
