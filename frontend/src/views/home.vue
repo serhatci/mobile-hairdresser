@@ -39,7 +39,7 @@ body
           .col.g-0
             .position-relative
               video.bg-video(playsinline='playsinline', autoplay='autoplay', muted='muted', loop='loop')
-                source(src='@/assets/videos/barbershop.mp4', type='video/mp4')
+                source(src='/img/videos/barbershop.mp4', type='video/mp4')
             .search-card-container
               .card.m-3.border-primary
                 h5.card-header.text-center I am looking for
