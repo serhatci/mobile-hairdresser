@@ -14,7 +14,7 @@ const User = require('../models/user')
 router.get('/', async (req, res) => {
   const customer = await Customer.findOne({})
   const hairdresser = await Hairdresser.findOne({})
-  res.render('index', { customer, hairdresser })
+  res.send([customer, hairdresser])
 })
 
 /* Creates fake users in db for testing */
