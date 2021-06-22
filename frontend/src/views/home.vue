@@ -68,7 +68,7 @@ body
               .col-12.col-lg-3.text-center.py-2
                 img(src='@/assets/icons/hair-dryer-icon.svg', alt='hairDryerIcon')
               .col-12.col-lg-6
-                HairdresserCard
+                HairdresserCard(:hairdresser='hairdresser')
               .col-12.col-lg-3.text-center.py-2
                 img(src='@/assets/icons/scissors-icon.svg', alt='scissorsIcon')
       section.third
