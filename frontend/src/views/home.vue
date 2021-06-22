@@ -12,10 +12,17 @@ export default {
     Footer,
     HairdresserCard
   },
+  data () {
+    return {
+      customer: {},
+      hairdresser: {},
+    }
+  },
   async created () {
-    const usersRequest = await axios.get('/')
+    const users = await axios.get('/api')
 
-    this.users = usersRequest.data
+    this.customer = users.data[0]
+    this.hairdresser = users.data[1]
   }
 
 };
