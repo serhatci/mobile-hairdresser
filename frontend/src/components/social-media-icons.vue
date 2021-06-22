@@ -1,22 +1,16 @@
 <script>
 export default {
-  name: 'Rating',
-  data: function () {
-    return {
-      count: 0
-    }
-  }
+  name: 'SocialMediaIcons',
+  props: {
+    hairdresser: Object
+  },
 };
 </script>
 
 <template lang="pug">
 .social-media-icons
-  if hairdresser.facebook
-    img.me-3(src='/images/icons/facebook.svg', alt='facebookIcon')
-  else
-    img.me-3(src='/images/icons/facebook-faded.svg', alt='facebookIcon')
-  if hairdresser.instagram
-    img(src='/images/icons/instagram.svg', alt='instagramIcon')
-  else
-    img(src='/images/icons/instagram-faded.svg', alt='instagramIcon')
+  img.me-3(v-if='hairdresser.facebook', src='@/assets/icons/facebook.svg', alt='facebookIcon')
+  img.me-3(v-else, src='@/assets/icons/facebook-faded.svg', alt='facebookIcon')
+  img(v-if='hairdresser.instagram', src='@/assets/icons/instagram.svg', alt='instagramIcon')
+  img(v-else, src='@/assets/icons/instagram-faded.svg', alt='instagramIcon')
 </template>
