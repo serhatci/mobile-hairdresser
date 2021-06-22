@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose')
 
 const { isAlphanumeric, isEmail, isInt } = require('validator')
@@ -71,14 +73,27 @@ const UserSchema = new mongoose.Schema(
       default: {},
     },
   },
-  { timestamps: true, discriminatorKey: 'type' }
+  {
+    timestamps: true,
+    discriminatorKey: 'type',
+    toJSON: {
+      transform(doc, ret) {
+        delete ret.password
+        delete ret.__v
+      },
+      virtuals: true,
+    },
+  }
 )
 
-class User {
-  get fullName() {
-    return `${this.firstName} ${this.middleName} ${this.lastName}`
-  }
+// eslint-disable-next-line func-names
+UserSchema.virtual('fullName').get(function () {
+  return this.middleName
+    ? `${this.firstName} ${this.middleName} ${this.lastName}`
+    : `${this.firstName} ${this.lastName}`
+})
 
+class User {
   async addProfilePhoto(photo) {
     this.profilePhoto = photo
     await this.save()

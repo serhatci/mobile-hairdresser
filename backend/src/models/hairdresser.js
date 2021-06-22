@@ -53,19 +53,21 @@ const HairdresserSchema = new mongoose.Schema(
         // eslint-disable-next-line no-underscore-dangle
         delete ret.__v
       },
+      virtuals: true,
     },
   }
 )
 
-class Hairdresser {
-  get averageRating() {
-    if (this.customerReviews.length !== 0) {
-      const totalRating = this.customerReviews.reduce((a, b) => a + b.rating, 0)
-      return totalRating / this.customerReviews.length
-    }
-    return 0
+// eslint-disable-next-line func-names
+HairdresserSchema.virtual('averageRating').get(function () {
+  if (this.customerReviews.length !== 0) {
+    const totalRating = this.customerReviews.reduce((a, b) => a + b.rating, 0)
+    return totalRating / this.customerReviews.length
   }
+  return 0
+})
 
+class Hairdresser {
   async uploadPhotoToPortfolio(photo) {
     this.portfolioPhotos.push(photo)
     await this.save()
