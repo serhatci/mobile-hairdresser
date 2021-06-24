@@ -34,5 +34,11 @@ export default {
               p.text-start Available at
                 span.text-danger.ms-1 {{ hairdresser.availability }}
             col-12.col-lg-6
-              Rating(:parentData='hairdresser.averageRating')
+              Rating(:hairdresser='hairdresser.averageRating')
 </template>
+
+<style lang="scss">
+.hairdresser-card {
+  max-width: 600px;
+}
+</style>
