@@ -89,3 +89,55 @@ body
   footer
     Footer
 </template>
+
+<style lang="scss">
+.bg-video-container {
+  background-color: var(--my-aliceblue);
+}
+
+.bg-video {
+  visibility: visible;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.search-card-container {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 650px;
+}
+
+.radiobox-container {
+  max-width: 270px;
+  margin: auto;
+}
+
+.search-input {
+  min-width: 250px;
+  width: 100%;
+  margin-right: 1rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.search-button {
+  min-width: 100px;
+  width: 100%;
+}
+
+section.first,
+section.third {
+  background-color: var(--my-aliceblue);
+}
+
+section.second {
+  background-color: var(--my-lightblue);
+}
+
+section.second,
+section.third {
+  width: 100%;
+  padding: 10vw 5vw;
+}
+</style>
