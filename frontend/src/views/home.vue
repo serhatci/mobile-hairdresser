@@ -129,4 +129,41 @@ section.third {
   width: 100%;
   padding: 10vw 5vw;
 }
+
+@media only screen and (max-width: 992px) {
+  .search-input {
+    font-size: larger;
+  }
+  header {
+    padding: 0.4rem 1rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .bg-video {
+    visibility: hidden;
+    position: absolute;
+  }
+  .search-card-container {
+    position: relative;
+    top: 0%;
+    left: 0%;
+    transform: translate(0%, 0%);
+    margin-bottom: 10vh;
+    margin-top: 10vh;
+  }
+  .search-input,
+  .search-button {
+    font-size: x-large;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+  header {
+    padding: 0.4rem 0.5rem;
+  }
+}
 </style>
