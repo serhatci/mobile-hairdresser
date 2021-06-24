@@ -1,8 +1,26 @@
+<script>
+import Header from "@/components/header.vue";
+import Footer from "@/components/footer.vue";
+
+export default {
+  name: "App",
+  components: {
+    Header,
+    Footer,
+  }
+}
+</script>
 
 <template lang="pug">
 #app
-  router-link(to='/')
-  router-view
+  body
+    .container-fluid.g-0
+      header.sticky-top.shadow.border-bottom.border-secondary
+        Header
+      main
+        router-view
+      footer
+        Footer
 </template>
 
 
