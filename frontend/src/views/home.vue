@@ -1,6 +1,6 @@
 <script>
-import axios from 'axios'
 import HairdresserCard from "@/components/hairdresser-card.vue";
+import { mapActions } from 'vuex'
 
 export default {
   name: "Home",
@@ -14,11 +14,14 @@ export default {
     }
   },
   async created () {
-    const users = await axios.get('/api')
+    const indexUsers = await this.fetchIndexUsers()
 
-    this.customer = users.data[0]
-    this.hairdresser = users.data[1]
-  }
+    this.customer = indexUsers[0]
+    this.hairdresser = indexUsers[1]
+  },
+  methods: {
+    ...mapActions(['fetchIndexUsers'])
+  },
 
 };
 </script>
