@@ -1,8 +1,9 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose')
+const passportLocalMongoose = require('passport-local-mongoose')
 
-const { isAlphanumeric, isEmail, isInt } = require('validator')
+const { isAlphanumeric, isInt } = require('validator')
 
 const PrivateMessage = require('./private-message')
 const MessageBoxSchema = require('./message-box')
@@ -28,18 +29,7 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       validate: [isAlphanumeric, 'Last name should contain letters & numbers only'],
     },
-    email: {
-      type: String,
-      required: [true, 'Enter an email'],
-      unique: [true, 'That email address is taken'],
-      trim: true,
-      validate: [isEmail, 'Enter a valid email address'],
-    },
-    password: {
-      type: String,
-      required: [true, 'Enter a password'],
-      trim: true,
-    },
+
     address: {
       city: {
         type: String,
@@ -77,10 +67,6 @@ const UserSchema = new mongoose.Schema(
     timestamps: true,
     discriminatorKey: 'type',
     toJSON: {
-      transform(doc, ret) {
-        delete ret.password
-        delete ret.__v
-      },
       virtuals: true,
     },
   }
@@ -184,4 +170,7 @@ class User {
 }
 
 UserSchema.loadClass(User)
+UserSchema.plugin(passportLocalMongoose, {
+  usernameField: 'email',
+})
 module.exports = mongoose.model('User', UserSchema)
