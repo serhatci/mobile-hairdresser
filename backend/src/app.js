@@ -13,7 +13,7 @@ const indexRouter = require('./routes/index')
 const customersRouter = require('./routes/customers')
 const hairdressersRouter = require('./routes/hairdressers')
 const photosRouter = require('./routes/photos')
-const accountsRouter = require('./routes/accounts')
+const accountRouter = require('./routes/account')
 
 const app = express()
 
@@ -52,7 +52,7 @@ app.use('/api', indexRouter)
 app.use('/api/customers', customersRouter)
 app.use('/api/hairdressers', hairdressersRouter)
 app.use('/api/photos', photosRouter)
-app.use('/api/accounts', accountsRouter)
+app.use('/api/account', accountRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
