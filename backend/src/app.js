@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
+const passport = require('passport')
+const User = require('./models/user')
 
 require('./database-connection')
 
@@ -38,13 +40,21 @@ app.use(cookieParser())
 app.use(
   session({
     secret: ['ofCourseThisIsDifferentInProduction', 'PushedHereOnlyForLEarningPurposes'],
-    store: MongoStore.create({ mongoUrl: 'mongodb://mongo/mobilehairdresser', stringify: false }),
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_CONNECTION_STRING, stringify: false }),
     cookie: {
       maxAge: 30 * 24 * 60 * 60 * 1000,
       path: '/api',
     },
   })
 )
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+passport.use(User.createStrategy())
+
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
 app.use(express.static(path.join(__dirname, 'public')))
 
