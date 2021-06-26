@@ -30,10 +30,10 @@ export default {
               SocialMediaIcons(:hairdresser='hairdresser')
           p.text-start.mt-4 {{ hairdresser.about }}
           .row.g-0
-            col-12.col-lg-6
+            .availablity.col-12.col-lg-6
               p.text-start Available at
                 span.text-danger.ms-1 {{ hairdresser.availability }}
-            col-12.col-lg-6
+            .ratings.col-12.col-lg-6
               Rating(:hairdresser='hairdresser.averageRating')
 </template>
 
