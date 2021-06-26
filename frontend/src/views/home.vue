@@ -10,7 +10,9 @@ export default {
   data () {
     return {
       customer: {},
-      hairdresser: {},
+      hairdresser: {
+        address: {}
+      },
     }
   },
   async created () {
