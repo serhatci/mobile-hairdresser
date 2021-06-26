@@ -9,7 +9,7 @@ const MongoStore = require('connect-mongo')
 const passport = require('passport')
 const User = require('./models/user')
 
-require('./database-connection')
+const mongooseConnection = require('./database-connection')
 
 const indexRouter = require('./routes/index')
 const customersRouter = require('./routes/customers')
@@ -40,7 +40,8 @@ app.use(cookieParser())
 app.use(
   session({
     secret: ['ofCourseThisIsDifferentInProduction', 'PushedHereOnlyForLEarningPurposes'],
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_CONNECTION_STRING, stringify: false }),
+    // eslint-disable-next-line no-underscore-dangle
+    store: MongoStore.create({ mongoUrl: mongooseConnection._connectionString, stringify: false }),
     cookie: {
       maxAge: 30 * 24 * 60 * 60 * 1000,
       path: '/api',
