@@ -15,6 +15,9 @@ export default new Vuex.Store({
       const hairdresser = users.data[1]
       return [customer, hairdresser]
     },
+    async signUp(store, user) {
+      return axios.post('/api/account/user', user)
+    },
   },
   modules: {},
 })
