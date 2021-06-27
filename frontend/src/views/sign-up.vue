@@ -5,6 +5,55 @@ export default {
 </script>
 
 <template lang='pug'>
-.about
-  p.m-5.text-center Sign up
+.signup-page.p-3
+  .card.m-auto
+    h5.card-header.text-center Sign Up
+    .card-body
+      form
+        .mb-0
+          label.form-label(for='email')
+            span.screenreader Email
+          input#email.form-control(type='email', aria-describedby='emailHelp', placeholder='Email')
+        .mb-0
+          label.form-label(for='password')
+            span.screenreader Password
+          input#password.form-control(type='password', placeholder='Password')
+        .mb-3
+          label.form-label(for='password-confirmation')
+            span.screenreader Password Confirmation
+          input#password-confirmation.form-control(type='password', placeholder='Password Confirmation')
+        .mb-3.text-center
+          button.btn.btn-primary(type='submit') Sign Up
+      .card-footer
+        .row
+          .col-12.col-sm-8.text-center.text-sm-end
+            span.mb-1 Already have an account?
+          .col-12.col-sm-4.text-center.text-sm-start
+            router-link(to='/login') Log In
+          .col
+            router-link.d-block.text-center.mt-1(to='/forgat-password') Forgot your password?
 </template>
+
+<style lang="scss" scoped>
+.signup-page.p-3 {
+  height: 80vh;
+  background-color: var(--my-aliceblue);
+}
+
+.screenreader {
+  display: none;
+}
+
+.card {
+  max-width: 400px;
+}
+
+.card-footer {
+  font-size: 0.8rem;
+}
+
+button {
+  width: 100%;
+  max-width: 380px;
+}
+</style>
