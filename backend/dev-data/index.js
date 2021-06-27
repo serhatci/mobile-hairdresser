@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-const Customer = require('./customer')
-const Hairdresser = require('./hairdresser')
-const Photo = require('./photo')
-const Video = require('./video')
+const Customer = require('../src/models/customer')
+const Hairdresser = require('../src/models/hairdresser')
+const Photo = require('../src/models/photo')
+const Video = require('../src/models/video')
 
 const hairdresser = new Hairdresser('Hair', 'Dresser', 'hair@dresser.com', 'password')
 const customer = new Customer('Customer', 'Surname', 'customer@customer.com', 'customerPassword')
