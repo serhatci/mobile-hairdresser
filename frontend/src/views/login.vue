@@ -7,7 +7,7 @@ export default {
 <template lang='pug'>
 .signup-page.p-3
   .card.m-auto
-    h5.card-header.text-center Log In
+    h4.card-header.text-center.text-primary Log In
     .card-body
       form
         .mb-0
