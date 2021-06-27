@@ -52,9 +52,9 @@ export default {
                         input.form-check-input(type='radio', name='searchType')
                         label.form-check-label(for='selectCustomer') Customer
                 .row.align-items-center.mx-2
-                  .col-12.col-lg-8.mb-1
-                    input.search-input.mt-3(type='text', placeholder='City, Region or Postcode')
-                  .col-12.col-lg-4.mb-1
+                  .col-12.col-xl-8.mb-1
+                    input.search-input.mt-3.p-1(type='text', placeholder='City, Region or Postcode')
+                  .col-12.col-xl-4.mb-1
                     button.search-button.btn.btn-primary.mt-3(type='submit') Search
   section.second
     .row.g-0
