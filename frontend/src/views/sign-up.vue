@@ -9,7 +9,18 @@ export default {
   .card.m-auto
     h5.card-header.text-center Sign Up
     .card-body
-      form
+      form(@submit='submitSignUp')
+        .radiobox-container
+          .row.align-items-center.mx-2
+            .col-12.col-sm-6.text-center.mb-2
+              .form-check.form-check-inline
+                input#typeHairdresser.form-check-input(type='radio', v-model='type', value='Hairdresser', checked)
+                label.form-check-label(for='typeHairdresser') Hairdresser
+            .col-12.col-sm-6.text-center.mb-2
+              .form-check.form-check-inline
+                input#typeCustomer.form-check-input(type='radio', v-model='type', value='Customer')
+                label.form-check-label(for='typeCustomer') Customer
+        span.d-block.text-center.text-danger(v-if='backendError') {{ backendError }}
         .mb-0
           label.form-label(for='email')
             span.screenreader Email
