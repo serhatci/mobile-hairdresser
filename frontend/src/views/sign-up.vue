@@ -42,7 +42,7 @@ export default {
 <template lang='pug'>
 .signup-page.p-3
   .card.m-auto
-    h5.card-header.text-center Sign Up
+    h4.card-header.text-center.text-primary Sign Up
     .card-body
       form(@submit='submitSignUp')
         .radiobox-container
