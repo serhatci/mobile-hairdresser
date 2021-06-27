@@ -36,7 +36,7 @@ describe('Hairdressers endpoints', () => {
       const hairdressersExist = hairdresserList.length > 0
 
       expect(hairdressersExist).toBe(true)
-      hairdresserList.forEach(user => expect(user.address.city).toEqual('Heilbronn'))
+      hairdresserList.forEach(user => expect(user.city).toEqual('Heilbronn'))
     })
 
     it('should filter hairdressers by state', async () => {
@@ -44,7 +44,7 @@ describe('Hairdressers endpoints', () => {
       const hairdressersExist = hairdresserList.length > 0
 
       expect(hairdressersExist).toBe(true)
-      hairdresserList.forEach(user => expect(user.address.state).toEqual('BW'))
+      hairdresserList.forEach(user => expect(user.state).toEqual('BW'))
     })
 
     it('should filter hairdressers by postcode', async () => {
@@ -52,7 +52,7 @@ describe('Hairdressers endpoints', () => {
       const hairdressersExist = hairdresserList.length > 0
 
       expect(hairdressersExist).toBe(true)
-      hairdresserList.forEach(user => expect(user.address.postcode).toEqual('74076'))
+      hairdresserList.forEach(user => expect(user.postcode).toEqual('74076'))
     })
 
     it('should return [] if no filtered users are found', async () => {
@@ -133,13 +133,15 @@ describe('Hairdressers endpoints', () => {
       const hairdressers = (await request(app).get('/api/hairdressers')).body
       const hairdresser = hairdressers[0]
 
-      hairdresser.address = { city: 'Stuttgart', state: 'BW', postcode: '70000' }
+      hairdresser.city = 'Stuttgart'
+      hairdresser.state = 'BW'
+      hairdresser.postcode = '70000'
       hairdresser.tel = '10123123123123'
 
       const updatedHairdresser = (await request(app).put(`/api/hairdressers/${hairdresser._id}`).send(hairdresser)).body
-      expect(updatedHairdresser.address.city).toEqual('Stuttgart')
-      expect(updatedHairdresser.address.state).toEqual('BW')
-      expect(updatedHairdresser.address.postcode).toEqual('70000')
+      expect(updatedHairdresser.city).toEqual('Stuttgart')
+      expect(updatedHairdresser.state).toEqual('BW')
+      expect(updatedHairdresser.postcode).toEqual('70000')
       expect(updatedHairdresser.tel).toEqual('10123123123123')
     })
 
@@ -147,11 +149,11 @@ describe('Hairdressers endpoints', () => {
       const hairdressers = (await request(app).get('/api/hairdressers')).body
       const hairdresser = hairdressers[0]
 
-      hairdresser.address = { city: 'textWithSpecialChars:[]{}' }
+      hairdresser.city = 'textWithSpecialChars:[]{}'
       hairdresser.tel = '123/123123'
 
       const error = (await request(app).put(`/api/hairdressers/${hairdresser._id}`).send(hairdresser)).body
-      expect(error.msg['address.city'].name).toEqual('ValidatorError')
+      expect(error.msg.city.name).toEqual('ValidatorError')
       expect(error.msg.tel.name).toEqual('ValidatorError')
     })
 

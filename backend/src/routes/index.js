@@ -41,10 +41,7 @@ router.post('/', async (req, res) => {
       const state = 'BW'
       const postcode = 74076
 
-      await User.updateMany(
-        { firstName: 'TestUser', lastName: 'OnlyCreatedForTestPurpose' },
-        { address: { city, state, postcode } }
-      )
+      await User.updateMany({ firstName: 'TestUser', lastName: 'OnlyCreatedForTestPurpose' }, { city, state, postcode })
       res.status(200).send('**** Test users are created! **** \n')
     } catch (err) {
       res.status(400).send(`**** Test users creation in DB is failed! **** \n ${err}`)

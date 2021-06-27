@@ -9,15 +9,15 @@ router.get('/', async (req, res) => {
   let query = {}
 
   if (req.query.city) {
-    query = { 'address.city': req.query.city }
+    query = { city: req.query.city }
   }
 
   if (req.query.state) {
-    query = { 'address.state': req.query.state }
+    query = { state: req.query.state }
   }
 
   if (req.query.postcode) {
-    query = { 'address.postcode': req.query.postcode }
+    query = { postcode: req.query.postcode }
   }
 
   try {

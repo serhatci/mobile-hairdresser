@@ -1,16 +1,16 @@
 <script>
-import Rating from "./rating.vue";
-import SocialMediaIcons from "./social-media-icons.vue";
+import Rating from './rating.vue'
+import SocialMediaIcons from './social-media-icons.vue'
 
 export default {
   name: 'HairdresserCard',
   components: {
     Rating,
-    SocialMediaIcons
+    SocialMediaIcons,
   },
   props: {
-    hairdresser: Object
-  }
+    hairdresser: Object,
+  },
 }
 </script>
 
@@ -25,7 +25,7 @@ export default {
         .card-body
           .row.g-0
             .col-6
-              p.text-start.m-0.fs-4 {{ hairdresser.address.city }}, {{ hairdresser.address.state }}
+              p.text-start.m-0.fs-4 {{ hairdresser.city }}, {{ hairdresser.state }}
             .col-6.text-end
               SocialMediaIcons(:hairdresser='hairdresser')
           p.text-start.mt-4 {{ hairdresser.about }}

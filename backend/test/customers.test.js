@@ -36,7 +36,7 @@ describe('Customers endpoints', () => {
       const customersExist = customerList.length > 0
 
       expect(customersExist).toBe(true)
-      customerList.forEach(user => expect(user.address.city).toEqual('Heilbronn'))
+      customerList.forEach(user => expect(user.city).toEqual('Heilbronn'))
     })
 
     it('should filter customers by state', async () => {
@@ -44,7 +44,7 @@ describe('Customers endpoints', () => {
       const customersExist = customerList.length > 0
 
       expect(customersExist).toBe(true)
-      customerList.forEach(user => expect(user.address.state).toEqual('BW'))
+      customerList.forEach(user => expect(user.state).toEqual('BW'))
     })
 
     it('should filter customers by postcode', async () => {
@@ -52,7 +52,7 @@ describe('Customers endpoints', () => {
       const customersExist = customerList.length > 0
 
       expect(customersExist).toBe(true)
-      customerList.forEach(user => expect(user.address.postcode).toEqual('74076'))
+      customerList.forEach(user => expect(user.postcode).toEqual('74076'))
     })
 
     it('should return [] if no filtered users are found', async () => {
@@ -133,13 +133,15 @@ describe('Customers endpoints', () => {
       const customers = (await request(app).get('/api/customers')).body
       const customer = customers[0]
 
-      customer.address = { city: 'Stuttgart', state: 'BW', postcode: '70000' }
+      customer.city = 'Stuttgart'
+      customer.state = 'BW'
+      customer.postcode = '70000'
       customer.tel = '10123123123123'
 
       const updatedCustomer = (await request(app).put(`/api/customers/${customer._id}`).send(customer)).body
-      expect(updatedCustomer.address.city).toEqual('Stuttgart')
-      expect(updatedCustomer.address.state).toEqual('BW')
-      expect(updatedCustomer.address.postcode).toEqual('70000')
+      expect(updatedCustomer.city).toEqual('Stuttgart')
+      expect(updatedCustomer.state).toEqual('BW')
+      expect(updatedCustomer.postcode).toEqual('70000')
       expect(updatedCustomer.tel).toEqual('10123123123123')
     })
 
@@ -147,11 +149,11 @@ describe('Customers endpoints', () => {
       const customers = (await request(app).get('/api/customers')).body
       const customer = customers[0]
 
-      customer.address = { city: 'textWithSpecialChars:[]{}' }
+      customer.city = 'textWithSpecialChars:[]{}'
       customer.tel = '123/123123'
 
       const error = (await request(app).put(`/api/customers/${customer._id}`).send(customer)).body
-      expect(error.msg['address.city'].name).toEqual('ValidatorError')
+      expect(error.msg.city.name).toEqual('ValidatorError')
       expect(error.msg.tel.name).toEqual('ValidatorError')
     })
 

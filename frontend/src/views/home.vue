@@ -1,31 +1,28 @@
 <script>
-import HairdresserCard from "@/components/hairdresser-card.vue";
+import HairdresserCard from '@/components/hairdresser-card.vue'
 import { mapActions } from 'vuex'
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
-    HairdresserCard
+    HairdresserCard,
   },
-  data () {
+  data() {
     return {
       customer: {},
-      hairdresser: {
-        address: {}
-      },
+      hairdresser: {},
     }
   },
-  async created () {
+  async created() {
     const indexUsers = await this.fetchIndexUsers()
 
     this.customer = indexUsers[0]
     this.hairdresser = indexUsers[1]
   },
   methods: {
-    ...mapActions(['fetchIndexUsers'])
+    ...mapActions(['fetchIndexUsers']),
   },
-
-};
+}
 </script>
 
 <template lang="pug">
@@ -84,7 +81,7 @@ export default {
             img(src='@/assets/icons/male-icon.svg', alt='maleIcon')
 </template>
 
-<style lang='scss'>
+<style lang="scss">
 .bg-video-container {
   background-color: var(--my-aliceblue);
 }
