@@ -27,20 +27,17 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       validate: [isAlphanumeric, 'Last name should contain letters & numbers only'],
     },
-
-    address: {
-      city: {
-        type: String,
-        trim: true,
-        validate: [isAlphanumeric, 'City name should contain letters & numbers only'],
-      },
-      state: {
-        type: String,
-        trim: true,
-        validate: [isAlphanumeric, 'State name should contain letters & numbers only'],
-      },
-      postcode: String,
+    city: {
+      type: String,
+      trim: true,
+      default: '',
     },
+    state: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    postcode: { type: String, default: '' },
     tel: {
       type: String,
       trim: true,
