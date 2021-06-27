@@ -1,7 +1,42 @@
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'SignUp',
+  data () {
+    return {
+      type: 'Hairdresser',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+
+      backendError: null
+    }
+
+  },
+  methods: {
+    ...mapActions(['signUp']),
+    async submitSignUp (e) {
+      e.preventDefault()
+
+      try {
+        await this.signUp({
+          type: this.type,
+          email: this.email,
+          password: this.password,
+          passwordConfirmation: this.passwordConfirmation
+        })
+
+        this.type === 'Hairdresser ' ?
+          this.$router.push('/hairdresser')
+          : this.$router.push('/customer')
+      } catch (e) {
+        this.backendError = e.response.data.message
+      }
+    }
+  }
 }
+
 </script>
 
 <template lang='pug'>
