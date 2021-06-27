@@ -27,9 +27,15 @@ router.post('/', async (req, res) => {
         const email = faker.internet.email()
         const password = faker.internet.password()
 
-        i % 2
-          ? await Customer.create({ firstName, lastName, email, password })
-          : await Hairdresser.create({ firstName, lastName, email, password })
+        if (i % 2) {
+          const customer = new Customer({ firstName, lastName, email })
+          await customer.setPassword(password)
+          await customer.save()
+        } else {
+          const hairdresser = new Hairdresser({ firstName, lastName, email })
+          await hairdresser.setPassword(password)
+          await hairdresser.save()
+        }
       }
 
       const city = 'Heilbronn'

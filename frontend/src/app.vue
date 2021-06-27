@@ -15,7 +15,7 @@ export default {
 #app
   body
     .container-fluid.g-0
-      header.sticky-top.shadow.border-bottom.border-secondary
+      header.sticky-top.shadow
         Header
       main
         router-view
@@ -25,32 +25,22 @@ export default {
 
 
 <style lang="scss">
-@import './assets/theme.scss';
 @import 'bootstrap/scss/bootstrap.scss';
+@import './assets/theme.scss';
+
+#app,
+body,
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
 
 .container-fluid {
   min-width: var(--my-screen-width);
 }
 
-header {
-  padding: 0.4rem 3rem;
-  background-color: var(--my-blue);
-}
-
-header a {
-  color: var(--my-font-white);
-}
-
-footer {
-  background-color: var(--my-darkblue);
-}
-
-footer p {
-  min-height: 20vh;
-}
-
-.logo {
-  height: 45px;
-  min-width: 200px;
+html {
+  font-size: 16px;
 }
 </style>

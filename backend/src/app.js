@@ -6,8 +6,10 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
+const passport = require('passport')
+const User = require('./models/user')
 
-require('./database-connection')
+const mongooseConnection = require('./database-connection')
 
 const indexRouter = require('./routes/index')
 const customersRouter = require('./routes/customers')
@@ -38,13 +40,22 @@ app.use(cookieParser())
 app.use(
   session({
     secret: ['ofCourseThisIsDifferentInProduction', 'PushedHereOnlyForLEarningPurposes'],
-    store: MongoStore.create({ mongoUrl: 'mongodb://mongo/mobilehairdresser', stringify: false }),
+    // eslint-disable-next-line no-underscore-dangle
+    store: MongoStore.create({ mongoUrl: mongooseConnection._connectionString, stringify: false }),
     cookie: {
       maxAge: 30 * 24 * 60 * 60 * 1000,
       path: '/api',
     },
   })
 )
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+passport.use(User.createStrategy())
+
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
 app.use(express.static(path.join(__dirname, 'public')))
 
