@@ -5,7 +5,6 @@ const Customer = require('../models/customer')
 
 const router = express.Router()
 
-/* GET customers by filters . */
 router.get('/', async (req, res) => {
   let query = {}
 
@@ -29,7 +28,6 @@ router.get('/', async (req, res) => {
   }
 })
 
-/* GET customer by ID . */
 router.get('/:customerId', async (req, res) => {
   const { customerId } = req.params
 
@@ -45,7 +43,6 @@ router.get('/:customerId', async (req, res) => {
   }
 })
 
-/* POST a new customer . */
 router.post('/', async (req, res) => {
   const customerToCreate = req.body
 
@@ -63,7 +60,6 @@ router.post('/', async (req, res) => {
   }
 })
 
-/* UPDATE a customer . */
 router.put('/:customerId', async (req, res) => {
   const { customerId } = req.params
 
@@ -87,7 +83,6 @@ router.put('/:customerId', async (req, res) => {
   }
 })
 
-/* DELETE a customer . */
 router.delete('/:customerId', async (req, res) => {
   const { customerId } = req.params
 

@@ -8,7 +8,6 @@ router.get('/session', (req, res) => {
   res.send(req.sessions)
 })
 
-/* POST a new customer . */
 router.post('/customer', async (req, res) => {
   const { firstName, lastName, email, password } = req.body
 
