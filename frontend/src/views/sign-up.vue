@@ -59,15 +59,19 @@ export default {
         .mb-0
           label.form-label(for='email')
             span.screenreader Email
-          input#email.form-control(type='email', aria-describedby='emailHelp', placeholder='Email')
+          input#email.form-control(type='email', v-model='email', aria-describedby='emailHelp', placeholder='Email')
         .mb-0
           label.form-label(for='password')
             span.screenreader Password
-          input#password.form-control(type='password', placeholder='Password')
+          input#password.form-control(type='password', v-model='password', placeholder='Password')
         .mb-3
           label.form-label(for='password-confirmation')
             span.screenreader Password Confirmation
-          input#password-confirmation.form-control(type='password', placeholder='Password Confirmation')
+          input#password-confirmation.form-control(
+            type='password',
+            placeholder='Password Confirmation',
+            v-model='passwordConfirmation'
+          )
         .mb-3.text-center
           button.btn.btn-primary(type='submit') Sign Up
       .card-footer
@@ -82,7 +86,7 @@ export default {
 
 <style lang="scss" scoped>
 .signup-page.p-3 {
-  height: 80vh;
+  height: 90vh;
   background-color: var(--my-aliceblue);
 }
 
