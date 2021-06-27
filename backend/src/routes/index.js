@@ -10,7 +10,6 @@ const Customer = require('../models/customer')
 const Hairdresser = require('../models/hairdresser')
 const User = require('../models/user')
 
-/* GET home page. */
 router.get('/', async (req, res) => {
   const customer = await Customer.findOne({})
   const hairdresser = await Hairdresser.findOne({})

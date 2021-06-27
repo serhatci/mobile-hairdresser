@@ -5,7 +5,6 @@ const Hairdresser = require('../models/hairdresser')
 
 const router = express.Router()
 
-/* GET hairdressers by filters . */
 router.get('/', async (req, res) => {
   let query = {}
 
@@ -29,7 +28,6 @@ router.get('/', async (req, res) => {
   }
 })
 
-/* GET hairdresser by ID . */
 router.get('/:hairdresserId', async (req, res) => {
   const { hairdresserId } = req.params
 
@@ -45,7 +43,6 @@ router.get('/:hairdresserId', async (req, res) => {
   }
 })
 
-/* POST a new hairdresser . */
 router.post('/', async (req, res) => {
   const hairdresserToCreate = req.body
 
@@ -63,7 +60,6 @@ router.post('/', async (req, res) => {
   }
 })
 
-/* UPDATE a hairdresser . */
 router.put('/:hairdresserId', async (req, res) => {
   const { hairdresserId } = req.params
 
@@ -87,7 +83,6 @@ router.put('/:hairdresserId', async (req, res) => {
   }
 })
 
-/* DELETE a hairdresser . */
 router.delete('/:hairdresserId', async (req, res) => {
   const { hairdresserId } = req.params
 

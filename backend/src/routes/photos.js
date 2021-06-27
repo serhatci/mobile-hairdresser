@@ -4,7 +4,6 @@ const express = require('express')
 const router = express.Router()
 const Photo = require('../models/photo')
 
-/* POST create a photo */
 router.post('/', async (req, res) => {
   if (!req.body) return res.sendStatus(400)
 
