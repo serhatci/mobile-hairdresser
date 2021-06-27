@@ -14,7 +14,6 @@ const UserSchema = new mongoose.Schema(
     // Base class for Hairdresser and Customer
     firstName: {
       type: String,
-      required: [true, 'Enter a first name'],
       trim: true,
       validate: [isAlphanumeric, 'First name should contain letters & numbers only'],
     },
@@ -25,7 +24,6 @@ const UserSchema = new mongoose.Schema(
     },
     lastName: {
       type: String,
-      required: [true, 'Enter a last name'],
       trim: true,
       validate: [isAlphanumeric, 'Last name should contain letters & numbers only'],
     },
