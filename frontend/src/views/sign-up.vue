@@ -27,7 +27,7 @@ export default {
           passwordConfirmation: this.passwordConfirmation
         })
 
-        this.type === 'Hairdresser ' ?
+        this.type === 'Hairdresser' ?
           this.$router.push('/hairdresser')
           : this.$router.push('/customer')
       } catch (e) {
