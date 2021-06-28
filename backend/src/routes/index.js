@@ -18,22 +18,16 @@ router.get('/', async (req, res) => {
 
 /* Creates fake users in db for testing */
 router.post('/', async (req, res) => {
-  if (req.query.create == 'testUsers') {
+  if (req.query.testUsers == 'Yes') {
     try {
-      for (let i = 0; i < 30; i += 1) {
-        const firstName = 'TestUser'
-        const lastName = 'OnlyCreatedForTestPurpose'
-        const email = faker.internet.email()
+      for (let i = 0; i < 25; i += 1) {
+        const email = `_TestEmail_${faker.internet.email()}`
         const password = faker.internet.password()
 
         if (i % 2) {
-          const customer = new Customer({ firstName, lastName, email })
-          await customer.setPassword(password)
-          await customer.save()
+          await Customer.register({ email }, password)
         } else {
-          const hairdresser = new Hairdresser({ firstName, lastName, email })
-          await hairdresser.setPassword(password)
-          await hairdresser.save()
+          await Hairdresser.register({ email }, password)
         }
       }
 
