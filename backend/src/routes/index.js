@@ -43,14 +43,18 @@ router.post('/', async (req, res) => {
   }
 })
 
-/* Delete fake users in db for testing */
 router.delete('/', async (req, res) => {
-  if (req.query.delete == 'testUsers') {
+  if (req.query.testUsers === 'Yes') {
     try {
-      await User.deleteMany({ lastName: 'OnlyCreatedForTestPurpose' })
-      res.status(200).send('**** Test users are successfully deleted! **** \n')
+      await User.deleteMany({ email: { $regex: /_TestEmail_/, $options: 'g' } })
+
+      res.status(200).send('Test users are deleted!')
     } catch (err) {
-      res.status(500).send('**** Test users deletion in DB is failed! **** \n')
+      if (err.name === 'Error') {
+        res.status(400).send({ msg: err.message })
+      } else {
+        res.status(500).send({ msg: 'Database query error!' })
+      }
     }
   }
 })
