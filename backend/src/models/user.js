@@ -3,7 +3,7 @@
 const mongoose = require('mongoose')
 const passportLocalMongoose = require('passport-local-mongoose')
 
-const { isAlphanumeric, isInt } = require('validator')
+const { isEmail, isAlphanumeric, isInt } = require('validator')
 
 const PrivateMessage = require('./private-message')
 const MessageBoxSchema = require('./message-box')
@@ -12,6 +12,11 @@ const Reply = require('./reply')
 const UserSchema = new mongoose.Schema(
   {
     // Base class for Hairdresser and Customer
+    email: {
+      type: String,
+      trim: true,
+      validate: [isEmail, 'Email is not valid!'],
+    },
     firstName: {
       type: String,
       trim: true,
