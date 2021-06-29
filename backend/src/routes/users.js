@@ -79,7 +79,7 @@ router.put('/:userId', async (req, res) => {
       res.status(400).send({ message: 'Provided UserId has wrong format!' })
     } else if (err.name === 'ValidationError') {
       const invalidProperty = Object.keys(err.errors)[0]
-      res.status(400).send({ message: err.errors[invalidProperty].message })
+      res.status(422).send({ message: err.errors[invalidProperty].message })
     } else if (err.name === 'Error') {
       res.status(400).send({ message: err.message })
     } else {
