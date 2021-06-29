@@ -1,7 +1,34 @@
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'Login',
+  data () {
+    return {
+      email: '',
+      password: '',
+      backendError: null
+    }
+  },
+  methods: {
+    ...mapActions(['login']),
+    async submitLogin (e) {
+      e.preventDefault()
+
+      try {
+        await this.login({
+          email: this.email,
+          password: this.password
+        })
+
+        this.$router.push('/customer')
+      } catch (e) {
+        this.backendError = e.response.data.message
+      }
+    }
+  }
 }
+
 </script>
 
 <template lang='pug'>
@@ -9,15 +36,16 @@ export default {
   .card.m-auto
     h4.card-header.text-center.text-primary Log In
     .card-body
-      form
+      form(@submit='submitLogin')
+        span.d-block.text-center.text-danger(v-if='backendError') {{ backendError }}
         .mb-0
           label.form-label(for='email')
             span.screenreader Email
-          input#email.form-control(type='email', aria-describedby='emailHelp', placeholder='Email')
+          input#email.form-control(type='email', v-model='email', aria-describedby='emailHelp', placeholder='Email')
         .mb-3
           label.form-label(for='password')
             span.screenreader Password
-          input#password.form-control(type='password', placeholder='Password')
+          input#password.form-control(type='password', v-model='password', placeholder='Password')
         .mb-3.text-center
           button.btn.btn-primary(type='submit') Log In
       .card-footer
