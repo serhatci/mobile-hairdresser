@@ -8,7 +8,7 @@ const mutations = {
   SET_USER: 'set user',
 }
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     user: null,
   },
@@ -47,3 +47,8 @@ export default new Vuex.Store({
   },
   modules: {},
 })
+
+export default async function init() {
+  await store.dispatch('fetchSession')
+  return store
+}
