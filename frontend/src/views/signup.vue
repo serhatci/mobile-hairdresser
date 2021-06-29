@@ -2,7 +2,7 @@
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'SignUp',
+  name: 'Signup',
   data () {
     return {
       type: 'Hairdresser',
@@ -15,23 +15,25 @@ export default {
 
   },
   methods: {
-    ...mapActions(['signUp']),
+    ...mapActions(['signup', 'login']),
     async submitSignUp (e) {
       e.preventDefault()
 
       try {
-        await this.signUp({
+        await this.signup({
           type: this.type,
           email: this.email,
           password: this.password,
           passwordConfirmation: this.passwordConfirmation
         })
 
+        await this.login({
+          email: this.email,
+          password: this.password,
+        })
 
-        this.$router.push('/login')
-        // this.type === 'Hairdresser' ?
-        //   this.$router.push('/hairdresser')
-        //   : this.$router.push('/customer')
+        this.$router.push('/')
+
       } catch (e) {
         this.backendError = e.response.data.message
       }
