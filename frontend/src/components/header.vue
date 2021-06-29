@@ -30,12 +30,12 @@ export default {
         img(src='../assets/icons/list.svg', alt='navigation-list')
       #navbarSupportedContent.collapse.navbar-collapse.rounded-start
         ul.navbar-nav.px-4.py-2.py-sm-0
-          li.nav-item.py-2.home-item
-            router-link.navbar-brand.link-light(to='/') Home
-          li.nav-item.py-2
-            router-link.navbar-brand.link-light(to='/login') Log in
-          li.nav-item.py-2
-            router-link.navbar-brand.me-0.link-light(to='/signup') Sign up
+          li.nav-item.py-2(v-show='!user')
+            router-link.navbar-brand.link-light.p-0(to='/login') Log in
+          li.nav-item.py-2(v-show='user')
+            .navbar-brand.link-light.p-0(@click='doLogout') Log out
+          li.nav-item.py-2(v-show='!user')
+            router-link.navbar-brand.me-0.link-light.p-0(to='/signup') Sign up
 </template>
 
 <style lang="scss">
