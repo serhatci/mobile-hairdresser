@@ -1,13 +1,24 @@
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
   name: 'Header',
   methods: {
-    goToIndex () {
+    goToHome () {
+      if (this.$router.name === '/') return
       return this.$router.push('/');
+    },
+    ...mapActions(['logout']),
+    async doLogout () {
+      await this.logout()
+      this.$router.push('/')
     }
-  }
-};
+  },
+  computed: {
+    ...mapState(['user'])
+  },
+}
 </script>
 
 <style lang="scss">
