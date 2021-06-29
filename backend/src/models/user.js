@@ -3,7 +3,7 @@
 const mongoose = require('mongoose')
 const passportLocalMongoose = require('passport-local-mongoose')
 
-const { isAlphanumeric, isInt } = require('validator')
+const { isEmail, isAlphanumeric, isInt } = require('validator')
 
 const PrivateMessage = require('./private-message')
 const MessageBoxSchema = require('./message-box')
@@ -12,9 +12,13 @@ const Reply = require('./reply')
 const UserSchema = new mongoose.Schema(
   {
     // Base class for Hairdresser and Customer
+    email: {
+      type: String,
+      trim: true,
+      validate: [isEmail, 'Email is not valid!'],
+    },
     firstName: {
       type: String,
-      required: [true, 'Enter a first name'],
       trim: true,
       validate: [isAlphanumeric, 'First name should contain letters & numbers only'],
     },
@@ -25,24 +29,20 @@ const UserSchema = new mongoose.Schema(
     },
     lastName: {
       type: String,
-      required: [true, 'Enter a last name'],
       trim: true,
       validate: [isAlphanumeric, 'Last name should contain letters & numbers only'],
     },
-
-    address: {
-      city: {
-        type: String,
-        trim: true,
-        validate: [isAlphanumeric, 'City name should contain letters & numbers only'],
-      },
-      state: {
-        type: String,
-        trim: true,
-        validate: [isAlphanumeric, 'State name should contain letters & numbers only'],
-      },
-      postcode: String,
+    city: {
+      type: String,
+      trim: true,
+      default: '',
     },
+    state: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    postcode: { type: String, default: '' },
     tel: {
       type: String,
       trim: true,

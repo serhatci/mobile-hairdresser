@@ -18,22 +18,16 @@ router.get('/', async (req, res) => {
 
 /* Creates fake users in db for testing */
 router.post('/', async (req, res) => {
-  if (req.query.create == 'testUsers') {
+  if (req.query.testUsers == 'Yes') {
     try {
-      for (let i = 0; i < 30; i += 1) {
-        const firstName = 'TestUser'
-        const lastName = 'OnlyCreatedForTestPurpose'
-        const email = faker.internet.email()
+      for (let i = 0; i < 25; i += 1) {
+        const email = `_TestEmail_${faker.internet.email()}`
         const password = faker.internet.password()
 
         if (i % 2) {
-          const customer = new Customer({ firstName, lastName, email })
-          await customer.setPassword(password)
-          await customer.save()
+          await Customer.register({ email }, password)
         } else {
-          const hairdresser = new Hairdresser({ firstName, lastName, email })
-          await hairdresser.setPassword(password)
-          await hairdresser.save()
+          await Hairdresser.register({ email }, password)
         }
       }
 
@@ -41,10 +35,7 @@ router.post('/', async (req, res) => {
       const state = 'BW'
       const postcode = 74076
 
-      await User.updateMany(
-        { firstName: 'TestUser', lastName: 'OnlyCreatedForTestPurpose' },
-        { address: { city, state, postcode } }
-      )
+      await User.updateMany({ email: { $regex: /_TestEmail_/, $options: 'g' } }, { city, state, postcode })
       res.status(200).send('**** Test users are created! **** \n')
     } catch (err) {
       res.status(400).send(`**** Test users creation in DB is failed! **** \n ${err}`)
@@ -52,14 +43,18 @@ router.post('/', async (req, res) => {
   }
 })
 
-/* Delete fake users in db for testing */
 router.delete('/', async (req, res) => {
-  if (req.query.delete == 'testUsers') {
+  if (req.query.testUsers === 'Yes') {
     try {
-      await User.deleteMany({ lastName: 'OnlyCreatedForTestPurpose' })
-      res.status(200).send('**** Test users are successfully deleted! **** \n')
+      await User.deleteMany({ email: { $regex: /_TestEmail_/, $options: 'g' } })
+
+      res.status(200).send('Test users are deleted!')
     } catch (err) {
-      res.status(500).send('**** Test users deletion in DB is failed! **** \n')
+      if (err.name === 'Error') {
+        res.status(400).send({ msg: err.message })
+      } else {
+        res.status(500).send({ msg: 'Database query error!' })
+      }
     }
   }
 })

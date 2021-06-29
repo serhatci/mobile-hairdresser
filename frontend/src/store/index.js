@@ -4,9 +4,19 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {},
-  mutations: {},
+const mutations = {
+  SET_USER: 'set user',
+}
+
+const store = new Vuex.Store({
+  state: {
+    user: null,
+  },
+  mutations: {
+    [mutations.SET_USER](state, user) {
+      state.user = user
+    },
+  },
   actions: {
     async fetchIndexUsers(store) {
       const users = await axios.get('/api')
@@ -15,6 +25,30 @@ export default new Vuex.Store({
       const hairdresser = users.data[1]
       return [customer, hairdresser]
     },
+    async signup(store, user) {
+      return axios.post('/api/account', user)
+    },
+    async fetchSession({ commit }) {
+      const user = await axios.get('/api/account/session')
+      commit(mutations.SET_USER, user.data || null)
+    },
+    async login({ commit }, credentials) {
+      try {
+        const user = await axios.post('/api/account/session', credentials)
+        commit(mutations.SET_USER, user.data)
+      } catch (e) {
+        throw e
+      }
+    },
+    async logout({ commit }) {
+      await axios.delete('/api/account/session')
+      commit(mutations.SET_USER, null)
+    },
   },
   modules: {},
 })
+
+export default async function init() {
+  await store.dispatch('fetchSession')
+  return store
+}

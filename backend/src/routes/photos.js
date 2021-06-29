@@ -4,7 +4,7 @@ const express = require('express')
 const router = express.Router()
 const Photo = require('../models/photo')
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
   if (!req.body) return res.sendStatus(400)
 
   const photoToCreate = {
@@ -15,8 +15,8 @@ router.post('/', async (req, res) => {
   try {
     const createdPhoto = await Photo.create(photoToCreate)
     res.send(createdPhoto)
-  } catch {
-    res.sendStatus(404)
+  } catch (err) {
+    return next(err)
   }
 })
 
