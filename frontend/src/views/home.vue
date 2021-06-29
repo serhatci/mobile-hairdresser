@@ -7,13 +7,13 @@ export default {
   components: {
     HairdresserCard,
   },
-  data() {
+  data () {
     return {
       customer: {},
       hairdresser: {},
     }
   },
-  async created() {
+  async created () {
     const indexUsers = await this.fetchIndexUsers()
 
     this.customer = indexUsers[0]
