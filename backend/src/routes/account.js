@@ -23,15 +23,15 @@ router.post('/', async (req, res, next) => {
     res.send(createdUser)
   } catch (err) {
     if (err.name === 'UserExistsError') {
-      res.status(409).send({ message: 'This user already exists!' })
+      return res.status(409).send({ message: 'This user already exists!' })
     }
     if (err.name === 'MongoError' && err.code === 11000) {
-      res.status(409).send({ message: 'This email belongs to a user!' })
+      return res.status(409).send({ message: 'This email belongs to a user!' })
     }
     if (err.name === 'ValidationError') {
-      res.status(400).send({ message: err.errors.email.message })
+      return res.status(422).send({ message: err.errors.email.message })
     }
-    next(err)
+    return next(err)
   }
 })
 
