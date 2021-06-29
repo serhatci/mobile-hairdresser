@@ -24,10 +24,10 @@ export default {
 <style lang="scss">
 </style>
 
-<template lang="pug">
+<template lang="pug" >
 .header.row.g-0.pe-1.px-sm-1
   .col-8.d-flex.justify-content-start.align-items-center
-    img.logo(@click='goToIndex', src='../assets/logo/logo.svg', alt='logo')
+    img.logo(@click='goToHome', src='../assets/logo/logo.svg', alt='logo')
   .col-4.d-flex.justify-content-end.align-items-center
     .navbar.navbar-expand-sm.p-0.navbar-dark.justify-content-end
       button.navbar-toggler.p-0(
