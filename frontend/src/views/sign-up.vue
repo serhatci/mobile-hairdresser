@@ -27,9 +27,11 @@ export default {
           passwordConfirmation: this.passwordConfirmation
         })
 
-        this.type === 'Hairdresser' ?
-          this.$router.push('/hairdresser')
-          : this.$router.push('/customer')
+
+        this.$router.push('/login')
+        // this.type === 'Hairdresser' ?
+        //   this.$router.push('/hairdresser')
+        //   : this.$router.push('/customer')
       } catch (e) {
         this.backendError = e.response.data.message
       }
