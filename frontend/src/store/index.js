@@ -29,8 +29,12 @@ const store = new Vuex.Store({
       return axios.post('/api/account', user)
     },
     async fetchSession({ commit }) {
-      const user = await axios.get('/api/account/session')
-      commit(mutations.SET_USER, user.data || null)
+      try {
+        const user = await axios.get('/api/account/session')
+        commit(mutations.SET_USER, user.data || null)
+      } catch (err) {
+        commit(mutations.SET_USER, null)
+      }
     },
     async login({ commit }, credentials) {
       try {
