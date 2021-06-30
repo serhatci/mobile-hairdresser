@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 const express = require('express')
 const passport = require('passport')
+const validator = require('validator')
 
 const router = express.Router()
 
@@ -43,6 +44,7 @@ router.post('/session', (req, res, next) => {
   const { email, password } = req.body
   if (email === '') return res.status(400).send({ message: 'Email can not be empty!' })
   if (password === '') return res.status(400).send({ message: 'Password can not be empty!' })
+  if (!validator.isEmail(email)) return res.status(400).send({ message: 'Email is not valid!' })
 
   passport.authenticate('local', (err, user) => {
     if (err) {
