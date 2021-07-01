@@ -47,23 +47,6 @@ router.get('/:userId', async (req, res) => {
   }
 })
 
-// router.post('/', async (req, res) => {
-//   const userToCreate = req.body
-
-//   try {
-//     const createdUser = await User.create(userToCreate)
-//     res.send(createdUser)
-//   } catch (err) {
-//     if (err.name === 'MongoError' && err.code === 11000) {
-//       res.status(409).send({ message: 'This user already exists!' })
-//     } else if (err.name === 'ValidationError') {
-//       res.status(400).send({ message: err.errors })
-//     } else {
-//       res.status(500).send({ message: 'Database query error!' })
-//     }
-//   }
-// })
-
 router.put('/:userId', async (req, res) => {
   const { userId } = req.params
 
