@@ -37,7 +37,7 @@ export default {
               Rating(:hairdresser='hairdresser.averageRating')
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .hairdresser-card {
   max-width: 600px;
 }
