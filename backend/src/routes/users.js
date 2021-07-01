@@ -5,7 +5,7 @@ const User = require('../models/user')
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   let query = {}
 
   if (req.query.city) {
@@ -28,11 +28,11 @@ router.get('/', async (req, res) => {
     const user = await User.find(query).limit(8)
     res.send(user)
   } catch (err) {
-    res.status(500).send({ message: 'Database query error!' })
+    next(err)
   }
 })
 
-router.get('/:userId', async (req, res) => {
+router.get('/:userId', async (req, res, next) => {
   const { userId } = req.params
 
   try {
@@ -42,12 +42,12 @@ router.get('/:userId', async (req, res) => {
     if (err.name === 'CastError') {
       res.status(400).send({ message: 'Provided UserId has wrong format!' })
     } else {
-      res.status(500).send({ message: 'Database query error!' })
+      next(err)
     }
   }
 })
 
-router.put('/:userId', async (req, res) => {
+router.put('/:userId', async (req, res, next) => {
   const { userId } = req.params
 
   try {
@@ -66,12 +66,12 @@ router.put('/:userId', async (req, res) => {
     } else if (err.name === 'Error') {
       res.status(400).send({ message: err.message })
     } else {
-      res.status(500).send({ message: 'Database query error!' })
+      next(err)
     }
   }
 })
 
-router.delete('/:userId', async (req, res) => {
+router.delete('/:userId', async (req, res, next) => {
   const { userId } = req.params
 
   try {
@@ -86,7 +86,7 @@ router.delete('/:userId', async (req, res) => {
     } else if (err.name === 'Error') {
       res.status(400).send({ message: err.message })
     } else {
-      res.status(500).send({ message: 'Database query error!' })
+      next(err)
     }
   }
 })
