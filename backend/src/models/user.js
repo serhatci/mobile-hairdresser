@@ -74,9 +74,12 @@ const UserSchema = new mongoose.Schema(
 
 // eslint-disable-next-line func-names
 UserSchema.virtual('fullName').get(function () {
-  return this.middleName
-    ? `${this.firstName} ${this.middleName} ${this.lastName}`
-    : `${this.firstName} ${this.lastName}`
+  if (this.firstName) {
+    return this.middleName
+      ? `${this.firstName} ${this.middleName} ${this.lastName}`
+      : `${this.firstName} ${this.lastName}`
+  }
+  return null
 })
 
 class User {
