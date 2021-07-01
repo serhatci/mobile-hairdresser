@@ -2,13 +2,14 @@ const mongoose = require('mongoose')
 
 const RequestSchema = new mongoose.Schema(
   {
-    petitioner: {
+    sender: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
     message: {
       type: String,
+      required: true,
     },
     requestType: {
       type: String,
@@ -22,14 +23,12 @@ const RequestSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Reply',
-        autopopulate: true,
       },
     ],
     photos: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Photo',
-        autopopulate: true,
       },
     ],
   },

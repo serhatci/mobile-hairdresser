@@ -31,7 +31,8 @@ const store = new Vuex.Store({
     async fetchSession({ commit }) {
       try {
         const user = await axios.get('/api/account/session')
-        commit(mutations.SET_USER, user.data || null)
+        const populatedUser = await axios.get(`/api/users/${user.data._id}`)
+        commit(mutations.SET_USER, populatedUser.data || null)
       } catch (err) {
         commit(mutations.SET_USER, null)
       }
@@ -39,7 +40,8 @@ const store = new Vuex.Store({
     async login({ commit }, credentials) {
       try {
         const user = await axios.post('/api/account/session', credentials)
-        commit(mutations.SET_USER, user.data)
+        const populatedUser = await axios.get(`/api/users/${user.data._id}`)
+        commit(mutations.SET_USER, populatedUser.data || null)
       } catch (e) {
         throw e
       }
@@ -47,6 +49,15 @@ const store = new Vuex.Store({
     async logout({ commit }) {
       await axios.delete('/api/account/session')
       commit(mutations.SET_USER, null)
+    },
+    async postRequest({ commit }, request) {
+      try {
+        const createdRequest = await axios.post('/api/requests', request)
+        const user = await axios.post(`/api/customers/${request.sender}/request`, createdRequest.data)
+        commit(mutations.SET_USER, user.data)
+      } catch (e) {
+        throw e
+      }
     },
   },
   modules: {},

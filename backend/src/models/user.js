@@ -2,6 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose')
 const passportLocalMongoose = require('passport-local-mongoose')
+const autopopulate = require('mongoose-autopopulate')
 
 const { isEmail, isAlphanumeric, isInt } = require('validator')
 
@@ -74,9 +75,12 @@ const UserSchema = new mongoose.Schema(
 
 // eslint-disable-next-line func-names
 UserSchema.virtual('fullName').get(function () {
-  return this.middleName
-    ? `${this.firstName} ${this.middleName} ${this.lastName}`
-    : `${this.firstName} ${this.lastName}`
+  if (this.firstName) {
+    return this.middleName
+      ? `${this.firstName} ${this.middleName} ${this.lastName}`
+      : `${this.firstName} ${this.lastName}`
+  }
+  return null
 })
 
 class User {
@@ -173,4 +177,5 @@ UserSchema.loadClass(User)
 UserSchema.plugin(passportLocalMongoose, {
   usernameField: 'email',
 })
+UserSchema.plugin(autopopulate)
 module.exports = mongoose.model('User', UserSchema)
