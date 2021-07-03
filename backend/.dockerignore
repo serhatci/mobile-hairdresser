@@ -7,3 +7,7 @@
 Dockerfile
 .vscode
 /coverage
+/test
+/dev-data
+jest.config.js
+jest.config.setup
