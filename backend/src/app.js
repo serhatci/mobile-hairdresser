@@ -7,6 +7,7 @@ const logger = require('morgan')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const passport = require('passport')
+const cors = require('cors')
 const User = require('./models/user')
 
 const mongooseConnection = require('./database-connection')
@@ -19,6 +20,13 @@ const requestsRouter = require('./routes/requests')
 const customersRouter = require('./routes/customers')
 
 const app = express()
+
+app.use(
+  cors({
+    origin: true, // will change in the production to real
+    credentials: true,
+  })
+)
 
 if (app.get('env') == 'development') {
   /* eslint-disable-next-line */
