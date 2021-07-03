@@ -4,7 +4,7 @@ services:
     image: frontend
     build:
       context: frontend
-      dockerfile: Dockerfile
+      dockerfile: dev.Dockerfile
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.routers.frontend.rule=Host(`myapp.localhost`)'
@@ -17,7 +17,7 @@ services:
     image: backend
     build:
       context: backend
-      dockerfile: Dockerfile
+      dockerfile: dev.Dockerfile
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.routers.backend.rule=(Host(`myapp.localhost`) && PathPrefix(`/api`))'
