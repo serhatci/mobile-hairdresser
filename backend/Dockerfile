@@ -1,6 +1,6 @@
-FROM node:alpine
+FROM node:16.3.0-alpine3.11
 
-RUN npm install -g nodemon
+ENV NODE_ENV=production
 
 WORKDIR /app
 
@@ -8,6 +8,7 @@ ADD package.json package-lock.json ./
 
 RUN npm install
 
-ADD /bin ./bin
+ADD bin ./bin
+ADD src ./src
 
-CMD [ "nodemon" ]
+CMD [ "npm", "start" ]
