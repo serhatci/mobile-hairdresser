@@ -37,6 +37,8 @@ if (app.get('env') == 'development') {
     .watch([`${__dirname}/public`, `${__dirname}/views`])
 }
 
+app.set('trust proxy', 1)
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
