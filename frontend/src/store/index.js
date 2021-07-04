@@ -58,8 +58,14 @@ const store = new Vuex.Store({
     async postRequest({ commit }, request) {
       try {
         const createdRequest = await axios.post('/api/requests', request)
-        const user = await axios.post(`/api/customers/${request.sender}/request`, createdRequest.data)
-        commit(mutations.SET_USER, user.data)
+        if (createdRequest) {
+          const user = await axios.post(`/api/customers/${request.sender}/request`, createdRequest.data)
+          commit(mutations.SET_USER, user.data)
+        }
+      } catch (e) {
+        throw e
+      }
+    },
       } catch (e) {
         throw e
       }
