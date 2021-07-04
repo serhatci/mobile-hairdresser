@@ -13,9 +13,27 @@ router.post('/:customerId/request', async (req, res, next) => {
   try {
     const customer = await Customer.findById(customerId)
 
-    await customer.postRequest(req.body)
+    const updatedCustomer = await customer.postRequest(req.body)
+    res.status(200).send(updatedCustomer)
+  } catch (err) {
+    if (err.name === 'MongoError' && err.code === 11000) {
+      res.status(409).send({ message: 'This request already exists!' })
+    } else if (err.name === 'ValidationError') {
+      res.status(400).send({ message: err.errors })
+    } else {
+      next(err)
+    }
+  }
+})
 
-    const updatedCustomer = await customer.populate('customerRequests').execPopulate()
+router.delete('/:customerId/request/:requestId', async (req, res, next) => {
+  const { customerId, requestId } = req.params
+  if (!customerId) return res.status(400).send({ message: 'User ID can not be empty!' })
+  if (!requestId) return res.status(400).send({ message: 'Request ID can not be empty!' })
+
+  try {
+    const customer = await Customer.findById(customerId)
+    const updatedCustomer = await customer.deleteRequest(requestId)
     res.status(200).send(updatedCustomer)
   } catch (err) {
     if (err.name === 'MongoError' && err.code === 11000) {

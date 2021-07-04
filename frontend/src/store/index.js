@@ -34,8 +34,7 @@ const store = new Vuex.Store({
     async fetchSession({ commit }) {
       try {
         const user = await axios.get('/api/account/session')
-        const populatedUser = await axios.get(`/api/users/${user.data._id}`)
-        commit(mutations.SET_USER, populatedUser.data || null)
+        commit(mutations.SET_USER, user.data || null)
       } catch (err) {
         commit(mutations.SET_USER, null)
       }
@@ -43,21 +42,37 @@ const store = new Vuex.Store({
     async login({ commit }, credentials) {
       try {
         const user = await axios.post('/api/account/session', credentials)
-        const populatedUser = await axios.get(`/api/users/${user.data._id}`)
-        commit(mutations.SET_USER, populatedUser.data || null)
+        commit(mutations.SET_USER, user.data || null)
       } catch (e) {
         throw e
       }
     },
     async logout({ commit }) {
-      await axios.delete('/api/account/session')
-      commit(mutations.SET_USER, null)
+      try {
+        await axios.delete('/api/account/session')
+        commit(mutations.SET_USER, null)
+      } catch (e) {
+        throw e
+      }
     },
     async postRequest({ commit }, request) {
       try {
         const createdRequest = await axios.post('/api/requests', request)
-        const user = await axios.post(`/api/customers/${request.sender}/request`, createdRequest.data)
-        commit(mutations.SET_USER, user.data)
+        if (createdRequest) {
+          const user = await axios.post(`/api/customers/${request.sender}/request`, createdRequest.data)
+          commit(mutations.SET_USER, user.data)
+        }
+      } catch (e) {
+        throw e
+      }
+    },
+    async deleteRequest({ commit }, request) {
+      try {
+        const user = await axios.delete(`/api/customers/${request.sender}/request/${request._id}`)
+        if (user) {
+          commit(mutations.SET_USER, user.data)
+          await axios.delete(`/api/requests/${request._id}`)
+        }
       } catch (e) {
         throw e
       }

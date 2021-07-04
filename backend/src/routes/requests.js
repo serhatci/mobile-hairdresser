@@ -28,4 +28,21 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.delete('/:requestId', async (req, res, next) => {
+  const { requestId } = req.params
+
+  if (!requestId) return res.status(400).send({ message: 'Request ID can not be empty!' })
+
+  try {
+    const deletedRequest = await Request.findByIdAndDelete(requestId)
+    return res.send(deletedRequest)
+  } catch (err) {
+    if (err.name === 'CastError') {
+      res.status(400).send({ message: 'Provided requestId has wrong format!' })
+    } else {
+      next(err)
+    }
+  }
+})
+
 module.exports = router

@@ -49,12 +49,15 @@ class Customer {
   async postRequest(request) {
     this.customerRequests.push(request)
     await this.save()
+    return this
   }
 
-  async deleteRequest(request) {
-    const requestIndex = this.customerRequests.indexOf(request)
-    this.customerRequests.splice(requestIndex, 1)
+  async deleteRequest(requestId) {
+    // eslint-disable-next-line no-underscore-dangle
+    const index = this.customerRequests.findIndex(item => item._id == requestId)
+    this.customerRequests.splice(index, 1)
     await this.save()
+    return this
   }
 
   async reviewHairdresser(hairdresser, review) {
