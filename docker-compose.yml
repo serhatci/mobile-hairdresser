@@ -20,7 +20,7 @@ services:
       dockerfile: dev.Dockerfile
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.backend.rule=(Host(`myapp.localhost`) && PathPrefix(`/api`))'
+      - 'traefik.http.routers.backend.rule=(Host(`myapp.localhost`) && (PathPrefix(`/api`) || PathPrefix(`/socket`)))'
       - 'traefik.http.routers.backend.entrypoints=web'
     environment:
       # - MONGODB_USERNAME

@@ -8,9 +8,9 @@ export default {
     RequestCard,
   },
   computed: {
-    ...mapState(['user'])
+    ...mapState(['user']),
   },
-  data () {
+  data() {
     return {
       requestType: 'Hairdresser Request',
       title: '',
@@ -20,8 +20,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['postRequest']),
-    async submitRequest (e) {
+    ...mapActions(['postRequest', 'notifyRequest']),
+    async submitRequest(e) {
       e.preventDefault()
 
       try {
@@ -32,15 +32,16 @@ export default {
           message: this.message,
         })
 
+        this.notifyRequest(this.user.city)
       } catch (e) {
         this.backendError = e.response.data.message
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
-<template lang='pug'>
+<template lang="pug">
 .customer-container.pb-5
   h5.m-auto.pt-5.text-center Welcome Customer
   p.text-center.mt-2(v-if='user') USER EMAIL: {{ user.email }}
@@ -75,12 +76,12 @@ export default {
           button.btn.btn-primary.w-100(type='submit') Post
   hr
   h3.text-center.my-2 Your Current Posts
-  .requests(v-show='this.user.customerRequests.length>0')
+  .requests(v-show='user.customerRequests.length>0')
     div(v-for='request in user.customerRequests', :key='request._id')
       RequestCard(:customer='user', :request='request')
 </template>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .customer-container {
   background-color: var(--my-aliceblue);
 }

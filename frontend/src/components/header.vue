@@ -1,30 +1,28 @@
-
 <script>
 import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Header',
   methods: {
-    goToHome () {
+    goToHome() {
       if (this.$router.name === '/') return
-      return this.$router.push('/');
+      return this.$router.push('/')
     },
     ...mapActions(['logout']),
-    async doLogout () {
+    async doLogout() {
       await this.logout()
       this.$router.push('/')
-    }
+    },
   },
   computed: {
-    ...mapState(['user'])
+    ...mapState(['user', 'notifications']),
   },
 }
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>
 
-<template lang="pug" >
+<template lang="pug">
 .header.row.g-0.pe-1.px-sm-1
   .col-8.d-flex.justify-content-start.align-items-center
     img.logo(@click='goToHome', src='../assets/logo/logo.svg', alt='logo')
@@ -41,6 +39,15 @@ export default {
         img(src='../assets/icons/list.svg', alt='navigation-list')
       #navbarSupportedContent.collapse.navbar-collapse.rounded-start
         ul.navbar-nav.px-4.py-2.py-sm-0
+          li.nav-item.py-2(v-show='user')
+            i.bi.bi-bell.text-light.mx-3(v-if='!notifications')
+            i.bi.bi-bell-fill.text-danger.mx-3(
+              v-else,
+              data-bs-toggle='popover',
+              title='Popover title',
+              data-bs-content='And Right?'
+            )
+
           li.nav-item.py-2(v-show='!user')
             router-link.navbar-brand.link-light.p-0(to='/login') Log in
           li.nav-item.py-2(v-show='user')
@@ -54,6 +61,10 @@ export default {
   position: relative;
   background-color: var(--my-blue);
   min-height: 40px;
+}
+
+.bi {
+  font-size: 1.3rem;
 }
 
 #navbarSupportedContent {
