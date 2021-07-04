@@ -1,23 +1,33 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import io from 'socket.io-client'
 
 axios.defaults.baseURL = process.env.VUE_APP_BASE_URL
 axios.defaults.withCredentials = true //enables setting cookies for different domains
 
 Vue.use(Vuex)
 
+const socket = io()
+
+socket.emit('Connection Check')
+
 const mutations = {
   SET_USER: 'set user',
+  SET_NOTIFICATIONS: 'set notifications',
 }
 
 const store = new Vuex.Store({
   state: {
     user: null,
+    notifications: 0,
   },
   mutations: {
     [mutations.SET_USER](state, user) {
       state.user = user
+    },
+    [mutations.SET_NOTIFICATIONS](state) {
+      state.notifications++
     },
   },
   actions: {
@@ -77,8 +87,20 @@ const store = new Vuex.Store({
         throw e
       }
     },
+    notifyRequest(store, requestCity) {
+      socket.emit('New Request', requestCity)
+    },
+    receiveNotifications({ commit }) {
+      commit(mutations.SET_NOTIFICATIONS)
+    },
   },
   modules: {},
+})
+
+socket.on('Hairdresser Request', city => {
+  if (store.state.user.city != city) return
+
+  store.dispatch('receiveNotifications')
 })
 
 export default async function init() {
