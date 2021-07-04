@@ -34,8 +34,7 @@ const store = new Vuex.Store({
     async fetchSession({ commit }) {
       try {
         const user = await axios.get('/api/account/session')
-        const populatedUser = await axios.get(`/api/users/${user.data._id}`)
-        commit(mutations.SET_USER, populatedUser.data || null)
+        commit(mutations.SET_USER, user.data || null)
       } catch (err) {
         commit(mutations.SET_USER, null)
       }
@@ -43,8 +42,7 @@ const store = new Vuex.Store({
     async login({ commit }, credentials) {
       try {
         const user = await axios.post('/api/account/session', credentials)
-        const populatedUser = await axios.get(`/api/users/${user.data._id}`)
-        commit(mutations.SET_USER, populatedUser.data || null)
+        commit(mutations.SET_USER, user.data || null)
       } catch (e) {
         throw e
       }
