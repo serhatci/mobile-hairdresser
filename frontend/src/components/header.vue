@@ -5,15 +5,15 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: 'Header',
   methods: {
-    goToHome () {
+    goToHome() {
       if (this.$router.name === '/') return
-      return this.$router.push('/');
+      return this.$router.push('/')
     },
     ...mapActions(['logout']),
-    async doLogout () {
+    async doLogout() {
       await this.logout()
       this.$router.push('/')
-    }
+    },
   },
   computed: {
     ...mapState(['user'])
