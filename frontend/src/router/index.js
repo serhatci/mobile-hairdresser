@@ -23,49 +23,38 @@ export default function init(store) {
           if (store.state.user) {
             if (store.state.user.type === 'Customer') return next('/customer')
             if (store.state.user.type === 'Hairdresser') return next('/hairdresser')
+          } else {
+            return next()
           }
-          return next()
         },
       },
       {
         path: '/login',
         name: 'login',
         component: () => import(/* webpackChunkName: "customer" */ '../views/login.vue'),
-        // beforeEnter(to, from, next) {
-        //   if (store.state.user) {
-        //     if (store.state.user.type === 'Customer') return next('/customer')
-        //     if (store.state.user.type === 'Hairdresser') return next('/hairdresser')
-        //   }
-        //   return next()
-        // },
       },
       {
         path: '/signup',
         name: 'signup',
         component: () => import(/* webpackChunkName: "customer" */ '../views/signup.vue'),
-        // beforeEnter(to, from, next) {
-        //   if (store.state.user) {
-        //     if (store.state.user.type === 'Customer') return next('/customer')
-        //     if (store.state.user.type === 'Hairdresser') return next('/hairdresser')
-        //   }
-        //   return next()
-        // },
       },
       {
         path: '/customer',
         name: 'customer',
         component: () => import(/* webpackChunkName: "customer" */ '../views/customer.vue'),
-        // beforeEnter(to, from, next) {
-        //   if (store.state.user.type !== 'Customer') return next('/login')
-        // },
+        beforeEnter(to, from, next) {
+          if (!store.state.user) return next('/')
+          else return next()
+        },
       },
       {
         path: '/hairdresser',
         name: 'hairdresser',
         component: () => import(/* webpackChunkName: "hairdresser" */ '../views/hairdresser.vue'),
-        // beforeEnter(to, from, next) {
-        //   if (store.state.user.type === 'Hairdresser') return next('/login')
-        // },
+        beforeEnter(to, from, next) {
+          if (!store.state.user) return next('/')
+          else return next()
+        },
       },
     ],
   })
