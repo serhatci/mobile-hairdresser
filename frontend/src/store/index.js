@@ -66,6 +66,13 @@ const store = new Vuex.Store({
         throw e
       }
     },
+    async deleteRequest({ commit }, request) {
+      try {
+        const user = await axios.delete(`/api/customers/${request.sender}/request/${request._id}`)
+        if (user) {
+          commit(mutations.SET_USER, user.data)
+          await axios.delete(`/api/requests/${request._id}`)
+        }
       } catch (e) {
         throw e
       }
