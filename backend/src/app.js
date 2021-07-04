@@ -11,6 +11,7 @@ const cors = require('cors')
 const User = require('./models/user')
 
 const mongooseConnection = require('./database-connection')
+const socketService = require('./socket-service')
 
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
@@ -38,6 +39,8 @@ if (app.get('env') == 'development') {
 }
 
 app.set('trust proxy', 1)
+
+app.set('io', socketService)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
