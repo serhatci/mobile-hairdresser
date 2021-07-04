@@ -48,8 +48,12 @@ const store = new Vuex.Store({
       }
     },
     async logout({ commit }) {
-      await axios.delete('/api/account/session')
-      commit(mutations.SET_USER, null)
+      try {
+        await axios.delete('/api/account/session')
+        commit(mutations.SET_USER, null)
+      } catch (e) {
+        throw e
+      }
     },
     async postRequest({ commit }, request) {
       try {
