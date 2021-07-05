@@ -4,12 +4,12 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: 'Header',
   methods: {
-    goToHome() {
+    goToHome () {
       if (this.$router.name === '/') return
       return this.$router.push('/')
     },
     ...mapActions(['logout']),
-    async doLogout() {
+    async doLogout () {
       await this.logout()
       this.$router.push('/')
     },
@@ -51,7 +51,7 @@ export default {
           li.nav-item.py-2(v-show='!user')
             router-link.navbar-brand.link-light.p-0(to='/login') Log in
           li.nav-item.py-2(v-show='user')
-            .navbar-brand.link-light.p-0(@click='doLogout') Log out
+            .logout.navbar-brand.link-light.p-0(@click='doLogout') Log out
           li.nav-item.py-2(v-show='!user')
             router-link.navbar-brand.me-0.link-light.p-0(to='/signup') Sign up
 </template>
@@ -61,6 +61,10 @@ export default {
   position: relative;
   background-color: var(--my-blue);
   min-height: 40px;
+}
+
+.logout {
+  cursor: pointer;
 }
 
 .bi {
