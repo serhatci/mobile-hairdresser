@@ -59,8 +59,8 @@ app.use(
     cookie: {
       maxAge: 30 * 24 * 60 * 60 * 1000,
       path: '/api',
-      // sameSite: 'none',
-      // secure: true,
+      sameSite: 'none',
+      secure: true,
     },
   })
 )
