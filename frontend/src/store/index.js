@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+
 import io from 'socket.io-client'
 
 axios.defaults.baseURL = process.env.VUE_APP_BASE_URL
@@ -8,7 +9,7 @@ axios.defaults.withCredentials = true //enables setting cookies for different do
 
 Vue.use(Vuex)
 
-const socket = io()
+const socket = io(process.env.VUE_APP_BASE_URL)
 
 socket.emit('Connection Check')
 
@@ -98,6 +99,7 @@ const store = new Vuex.Store({
 })
 
 socket.on('Hairdresser Request', city => {
+  console.log(`city ${city}`)
   if (store.state.user.city != city) return
 
   store.dispatch('receiveNotifications')
