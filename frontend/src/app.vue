@@ -1,14 +1,12 @@
 <script>
 import Header from "@/components/header.vue";
 import Footer from "@/components/footer.vue";
-import VueSkeletonLoader from 'skeleton-loader-vue';
 
 export default {
   name: "App",
   components: {
     Header,
     Footer,
-    VueSkeletonLoader
   }
 }
 </script>
@@ -16,10 +14,10 @@ export default {
 <template lang="pug">
 #app
   body
-    .skeleton-loader-vue(type='circle', :width='200', :height='200', animation='fade')
     .container-fluid.g-0
-      header.sticky-top.shadow
-        Header
+      Header
+      header
+
       main
         router-view
       footer
