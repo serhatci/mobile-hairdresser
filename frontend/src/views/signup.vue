@@ -44,8 +44,8 @@ export default {
 </script>
 
 <template lang='pug'>
-.signup-page.p-3
-  .card.m-auto
+.signup-page.d-flex.align-items-center.justify-content-center.py-3.py-sm-5
+  .card.w-100.mx-2
     h4.card-header.text-center.text-primary Sign Up
     .card-body
       form(@submit='submitSignUp')
@@ -87,8 +87,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.signup-page.p-3 {
-  height: 90vh;
   background-color: var(--my-aliceblue);
 }
 
