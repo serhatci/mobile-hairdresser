@@ -4,10 +4,6 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: 'TopNav',
   methods: {
-    goToHome () {
-      if (this.$router.name === '/') return
-      return this.$router.push('/')
-    },
     ...mapActions(['logout']),
     async doLogout () {
       await this.logout()
