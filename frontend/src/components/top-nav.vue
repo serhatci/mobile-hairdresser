@@ -34,8 +34,6 @@ nav.navbar.navbar-expand-md.navbar-light.px-3(aria-label='Top sticky navigation 
     #TopNavbars.navbar-collapse.collapse(style='')
       ul.navbar-nav.me-auto.mb-2.mb-md-0
         li.nav-item
-          a.nav-link.active(aria-current='page', href='/') Home
-        li.nav-item
           a.nav-link(href='/about') About
         li.nav-item
           a.nav-link(href='/contact') Contact
