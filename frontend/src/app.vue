@@ -1,11 +1,12 @@
 <script>
-import Header from "@/components/header.vue";
+import TopNav from "@/components/top-nav.vue";
 import Footer from "@/components/footer.vue";
+
 
 export default {
   name: "App",
   components: {
-    Header,
+    TopNav,
     Footer,
   }
 }
@@ -15,11 +16,8 @@ export default {
 #app
   body
     .container-fluid.g-0
-      Header
-      header
-
-      main
-        router-view
+      TopNav
+      router-view
       footer
         Footer
 </template>
@@ -38,9 +36,9 @@ html {
   margin: 0;
 }
 
-.container-fluid {
-  min-width: var(--my-screen-width);
-}
+// .container-fluid {
+//   min-width: var(--my-screen-width);
+// }
 
 html {
   font-size: 16px;
