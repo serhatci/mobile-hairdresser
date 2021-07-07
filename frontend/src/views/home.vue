@@ -31,97 +31,51 @@ export default {
 main
   SearchBar
   section.first
-    .row.g-0
-      .col.g-0
-        .position-relative
-          video.bg-video.d-block(playsinline='playsinline', autoplay='autoplay', muted='muted', loop='loop')
-            source(src='/img/videos/barbershop.mp4', type='video/mp4')
-        .search-card-container
-          .card.m-3.border-primary
-            h5.card-header.text-center I am looking for
-            .card-body
-              .form.text-center(action='submit')
-                .radiobox-container
-                  .row.align-items-center.mx-2
-                    .col-12.col-sm-6.text-center.mb-2
-                      .form-check.form-check-inline
-                        input.form-check-input(type='radio', name='searchType', checked)
-                        label.form-check-label(for='selectHairdresser') Hairdresser
-                    .col-12.col-sm-6.text-center.mb-2
-                      .form-check.form-check-inline
-                        input.form-check-input(type='radio', name='searchType')
-                        label.form-check-label(for='selectCustomer') Customer
-                .row.align-items-center.mx-2
-                  .col-12.col-xl-8.mb-1
-                    input.search-input.mt-3.p-1(type='text', placeholder='City, Region or Postcode')
-                  .col-12.col-xl-4.mb-1
-                    button.search-button.btn.btn-primary.mt-3(type='submit') Search
-  section.second
-    .row.g-0
-      .col.g-0
-        h1.text-center.text-secondary.mb-5 Find a mobile hairdresser close to your location
-        .row.g-0.align-items-center
-          .col-12.col-lg-3.text-center.py-2
-            img(src='@/assets/icons/hair-dryer-icon.svg', alt='hairDryerIcon')
-          .col-12.col-lg-6
-            HairdresserCard(:hairdresser='hairdresser')
-          .col-12.col-lg-3.text-center.py-2
-            img(src='@/assets/icons/scissors-icon.svg', alt='scissorsIcon')
-  section.third
-    .row.g-0
-      .col.g-0
-        h1.text-center.text-secondary.mb-5 Look at customer requests for mobile hairdressers
-        .row.g-0.align-items-center
-          .col-12.col-lg-3.text-center.py-2
-            img(src='@/assets/icons/female-icon.svg', alt='femaleIcon')
-          .col-12.col-lg-6.text-center
-            .card
-              .card-body
-                h5.card-title Card title
-                p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
-                a.btn.btn-primary(href='#') goo
-          .col-12.col-lg-3.text-center.py-2
-            img(src='@/assets/icons/male-icon.svg', alt='maleIcon')
+    .d-flex.justify-content-center.align-items-center.h-100
+      a.btn.btn.btn-success.btn-lg.mx-l2(href='#services', role='button') Tell me more
+
+  section#services.second.p-5
+    .container.py-5
+      .text-center.pb-5
+        h2.text-uppercase Looking for mobile hairdresser?
+      .row.text-center
+        .col-md-4
+          i.service-icons.bi.bi-scissors
+          h4.my-3 Search
+          p.text
+            | Easily search mobile hairdressers close to your location. Check their portfolio and learn more about their previous works & customer reviews.
+        .col-md-4
+          i.service-icons.bi.bi-chat-left-text
+          h4.my-3 Post
+          p.text
+            | Post a hairdresser request. Define your expectations and wait for the replies.
+        .col-md-4
+          i.service-icons.bi.bi-chat
+          h4.my-3 Ask for Advice
+          p.text
+            | Do you want to have a new hair style? Why not asking for opinion of real hairdressers?
+
+  section.third.p-5
+    .container.py-5
+      .text-center.pb-5
+        h2.text-uppercase Looking for customer?
+      .row.text-center
+        .col-md-4
+          i.service-icons.bi.bi-scissors
+          h4.my-3 Alert
+          p.text
+            | Get real time notifications when a customer post a hairdresser request. Be the first one to be notified if customer's location close to your service area.
+        .col-md-4
+          i.service-icons.bi.bi-chat-dots
+          h4.my-3 Reply
+          p.text
+            | Reply hairdresser requests and reach out you potential customers.
+        .col-md-4
+          i.service-icons.bi.bi-info-circle
+          h4.my-3 Help
+          p.text
+            | Help your potential customers looking for hairstyle advices. Reply them instantly and increase your network
 </template>
-
-<style lang="scss">
-.bg-video-container {
-  background-color: var(--my-aliceblue);
-}
-
-.bg-video {
-  position: relative;
-  visibility: hidden;
-  width: 100%;
-  opacity: 0.9;
-}
-
-.search-card-container {
-  position: absolute;
-  width: 100%;
-  max-width: 450px;
-  top: 150px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin-bottom: 10vh;
-  margin-top: 10vh;
-}
-
-.radiobox-container {
-  max-width: 270px;
-  margin: auto;
-}
-
-.search-input {
-  width: 100%;
-  margin-right: 1rem;
-  line-height: 0px;
-  font-size: larger;
-}
-
-.search-button {
-  width: 100%;
-}
 
 section.first {
   min-height: 327px;
