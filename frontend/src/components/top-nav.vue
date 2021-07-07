@@ -38,10 +38,12 @@ nav.navbar.navbar-expand-md.navbar-light.px-3(aria-label='Top sticky navigation 
         li.nav-item
           a.nav-link(href='/contact') Contact
       ul.navbar-nav.mb-2.mb-md-0
-        li.nav-item
-          a.btn.btn-outline-primary.m-1(href='/login', role='button') Log In
-        li.nav-item
-          a.btn.btn-outline-primary.m-1(href='/signup', role='button') Sign Up
+        li.nav-item(v-show='!user')
+          a.btn.btn-outline-primary.m-1(href='/login', role='button') Log in
+        li.nav-item(v-show='!user')
+          a.btn.btn-outline-primary.m-1(href='/signup', role='button') Sign up
+        li.nav-item(v-show='user')
+          button.btn.btn-outline-primary.m-1(@click='doLogout') Log out
 </template>
 
 <style lang="scss">
