@@ -18,8 +18,7 @@ export default {
     .container-fluid.g-0
       TopNav
       router-view
-      footer
-        Footer
+      Footer
 </template>
 
 
@@ -35,10 +34,6 @@ html {
   width: 100%;
   margin: 0;
 }
-
-// .container-fluid {
-//   min-width: var(--my-screen-width);
-// }
 
 html {
   font-size: 16px;
