@@ -61,12 +61,12 @@ export default {
   background-color: var(--my-aliceblue);
 }
 
-.screenreader {
-  display: none;
+.card {
+  max-width: 25rem;
 }
 
-.card {
-  max-width: 400px;
+.screenreader {
+  display: none;
 }
 
 .card-footer {
