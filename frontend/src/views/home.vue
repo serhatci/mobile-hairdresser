@@ -77,42 +77,25 @@ main
             | Help your potential customers looking for hairstyle advices. Reply them instantly and increase your network
 </template>
 
+<style lang="scss">
 section.first {
-  min-height: 327px;
-}
-
-section.first,
-section.third {
-  background-color: var(--my-aliceblue);
+  height: 100vh;
+  background-image: url('../assets/illustrations/scissors3.svg');
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  background-size: cover;
 }
 
 section.second {
-  background-color: var(--my-lightblue);
+  background-color: var(--my-aliceblue);
 }
 
-section.second,
 section.third {
-  width: 100%;
-  padding: 10vw 5vw;
+  background-color: var(--my-pink);
 }
 
-@media (min-width: 576px) {
-  .bg-video {
-    visibility: visible;
-  }
-  .search-card-container {
-    top: 180px;
-    max-width: 500px;
-  }
-  .search-input {
-    min-width: 280px;
-  }
-}
-
-@media (min-width: 992px) {
-  .search-input {
-    min-width: 0px;
-    font-size: large;
-  }
+.service-icons {
+  font-size: 5rem;
 }
 </style>
