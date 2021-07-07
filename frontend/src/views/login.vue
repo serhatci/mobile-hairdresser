@@ -54,8 +54,6 @@ export default {
             span.mb-1 Don't have an account?
           .col-12.col-sm-4.text-center.text-sm-start
             router-link(to='/signup') Sign Up
-          .col
-            router-link.d-block.text-center.mt-1(to='/forgat-password') Forgot your password?
 </template>
 
 <style lang="scss" scoped>
