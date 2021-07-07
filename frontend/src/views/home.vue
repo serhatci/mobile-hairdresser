@@ -1,11 +1,13 @@
 <script>
 import HairdresserCard from '@/components/hairdresser-card.vue'
 import { mapActions } from 'vuex'
+import SearchBar from "@/components/search-bar.vue";
 
 export default {
   name: 'Home',
   components: {
     HairdresserCard,
+    SearchBar
   },
   data () {
     return {
@@ -26,7 +28,8 @@ export default {
 </script>
 
 <template lang="pug">
-.main
+main
+  SearchBar
   section.first
     .row.g-0
       .col.g-0
