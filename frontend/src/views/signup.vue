@@ -87,6 +87,9 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@import '../assets/theme.scss';
+
+.signup-page {
   background-color: var(--my-aliceblue);
 }
 
@@ -95,7 +98,7 @@ export default {
 }
 
 .card {
-  max-width: 400px;
+  max-width: 25rem;
 }
 
 .card-footer {
