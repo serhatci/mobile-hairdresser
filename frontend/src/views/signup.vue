@@ -90,7 +90,7 @@ export default {
 @import '../assets/theme.scss';
 
 .signup-page {
-  background-color: var(--my-aliceblue);
+  background-color: var(--my-green);
 }
 
 .screenreader {

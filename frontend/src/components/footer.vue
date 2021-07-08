@@ -6,7 +6,7 @@ export default {
 </script>
 
 <template lang="pug">
-footer.py-4
+.footer.py-4
   .row.g-0.align-items-center.justify-content-center.text-center
     .col-lg-4
       span.text-lg-start Copyright &copy; MOBILER HAIRDRESSER 2021
@@ -26,7 +26,7 @@ footer.py-4
 </template>
 
 <style lang="scss" scoped>
-footer {
+.footer {
   min-height: 26vh;
 }
 </style>

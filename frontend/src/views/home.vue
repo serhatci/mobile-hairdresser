@@ -28,11 +28,12 @@ export default {
 </script>
 
 <template lang="pug">
-main
-  SearchBar
+.home-page
+  .search-bar.col.col-sm-10.col-lg-8.m-auto
+    SearchBar
   section.first
     .d-flex.justify-content-center.align-items-center.h-100
-      a.btn.btn.btn-success.btn-lg.mx-l2(href='#services', role='button') Tell me more
+      a.btn.btn.btn-primary.btn-lg.mx-l2.px-5(href='#services', role='button') Tell me more...
 
   section#services.second.p-5
     .container.py-5
@@ -85,6 +86,10 @@ section.first {
   background-attachment: scroll;
   background-position: center center;
   background-size: cover;
+}
+
+.home-page {
+  background-color: var(--my-green);
 }
 
 section.second {
