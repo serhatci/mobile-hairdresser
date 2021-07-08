@@ -8,10 +8,13 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const passport = require('passport')
 const cors = require('cors')
-const User = require('./models/user')
+const helmet = require('helmet')
+const mongoSanitize = require('express-mongo-sanitize')
 
 const mongooseConnection = require('./database-connection')
 const socketService = require('./socket-service')
+
+const User = require('./models/user')
 
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
@@ -74,6 +77,14 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 app.use(express.static(path.join(__dirname, 'public')))
+
+app.use(helmet())
+
+app.use(
+  mongoSanitize({
+    replaceWith: '_',
+  })
+)
 
 app.use('/api', indexRouter)
 app.use('/api/users', usersRouter)
