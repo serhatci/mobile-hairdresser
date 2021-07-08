@@ -58,7 +58,7 @@ export default {
 
 <style lang="scss" scoped>
 .login-page {
-  background-color: var(--my-aliceblue);
+  background-color: var(--my-green);
 }
 
 .card {
