@@ -19,9 +19,3 @@ export default {
         .col-auto.mx-2
           button.btn.btn-md.btn-success(type='submit') Search
 </template>
-
-<style>
-.search-bar {
-  background-color: var(--my-aliceblue);
-}
-</style>
