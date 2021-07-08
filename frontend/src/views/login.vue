@@ -32,8 +32,8 @@ export default {
 </script>
 
 <template lang='pug'>
-.signup-page.p-3
-  .card.m-auto
+.login-page.d-flex.align-items-center.justify-content-center.py-3.py-sm-5
+  .card.w-100.mx-2
     h4.card-header.text-center.text-primary Log In
     .card-body
       form(@submit='submitLogin')
@@ -54,22 +54,19 @@ export default {
             span.mb-1 Don't have an account?
           .col-12.col-sm-4.text-center.text-sm-start
             router-link(to='/signup') Sign Up
-          .col
-            router-link.d-block.text-center.mt-1(to='/forgat-password') Forgot your password?
 </template>
 
 <style lang="scss" scoped>
-.signup-page.p-3 {
-  height: 80vh;
+.login-page {
   background-color: var(--my-aliceblue);
+}
+
+.card {
+  max-width: 25rem;
 }
 
 .screenreader {
   display: none;
-}
-
-.card {
-  max-width: 400px;
 }
 
 .card-footer {

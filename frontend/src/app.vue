@@ -1,14 +1,13 @@
 <script>
-import Header from "@/components/header.vue";
+import TopNav from "@/components/top-nav.vue";
 import Footer from "@/components/footer.vue";
-import VueSkeletonLoader from 'skeleton-loader-vue';
+
 
 export default {
   name: "App",
   components: {
-    Header,
+    TopNav,
     Footer,
-    VueSkeletonLoader
   }
 }
 </script>
@@ -16,14 +15,10 @@ export default {
 <template lang="pug">
 #app
   body
-    .skeleton-loader-vue(type='circle', :width='200', :height='200', animation='fade')
     .container-fluid.g-0
-      header.sticky-top.shadow
-        Header
-      main
-        router-view
-      footer
-        Footer
+      TopNav
+      router-view
+      Footer
 </template>
 
 
@@ -38,10 +33,6 @@ html {
   height: 100%;
   width: 100%;
   margin: 0;
-}
-
-.container-fluid {
-  min-width: var(--my-screen-width);
 }
 
 html {
