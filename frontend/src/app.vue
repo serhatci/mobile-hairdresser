@@ -16,9 +16,12 @@ export default {
 #app
   body
     .container-fluid.g-0
-      TopNav
-      router-view
-      Footer
+      header
+        TopNav
+      main
+        router-view
+      footer
+        Footer
 </template>
 
 
