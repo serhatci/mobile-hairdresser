@@ -1,11 +1,17 @@
 <script>
 import { mapState, mapActions } from 'vuex'
+import UserProfileCard from '@/components/user-profile-card.vue'
+import SearchBar from '@/components/search-bar.vue'
 import RequestCard from '@/components/request-card.vue'
+import PostsCard from '@/components/posts-card.vue'
 
 export default {
   name: 'Customer',
   components: {
     RequestCard,
+    UserProfileCard,
+    SearchBar,
+    PostsCard
   },
   computed: {
     ...mapState(['user']),
