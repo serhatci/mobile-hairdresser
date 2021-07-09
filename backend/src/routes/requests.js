@@ -11,7 +11,6 @@ router.post('/', async (req, res, next) => {
     return res.status(400).send({ message: 'Request type is wrong' })
 
   if (sender === '') return res.status(400).send({ message: 'Sender ID can not be empty!' })
-  if (title === '') return res.status(400).send({ message: 'Title can not be empty!' })
   if (message === '') return res.status(400).send({ message: 'Message can not be empty!' })
 
   const requestToCreate = { sender, requestType, title, message }
