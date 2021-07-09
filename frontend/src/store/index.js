@@ -16,12 +16,14 @@ socket.emit('Connection Check')
 const mutations = {
   SET_USER: 'set user',
   SET_NOTIFICATIONS: 'set notifications',
+  SET_LOCATIONS: 'set locations',
 }
 
 const store = new Vuex.Store({
   state: {
     user: null,
     notifications: 0,
+    locations: [],
   },
   mutations: {
     [mutations.SET_USER](state, user) {
@@ -30,18 +32,11 @@ const store = new Vuex.Store({
     [mutations.SET_NOTIFICATIONS](state) {
       state.notifications++
     },
+    [mutations.SET_LOCATIONS](state, locations) {
+      state.locations = locations
+    },
   },
   actions: {
-    async fetchIndexUsers(store) {
-      const users = await axios.get('/api')
-
-      const customer = users.data[0]
-      const hairdresser = users.data[1]
-      return [customer, hairdresser]
-    },
-    async signup(store, user) {
-      return axios.post('/api/account', user)
-    },
     async fetchSession({ commit }) {
       try {
         const user = await axios.get('/api/account/session')
@@ -49,6 +44,17 @@ const store = new Vuex.Store({
       } catch (err) {
         commit(mutations.SET_USER, null)
       }
+    },
+    async fetchLocations({ commit }) {
+      try {
+        const locations = await axios.get('/api/locations')
+        commit(mutations.SET_LOCATIONS, locations.data || null)
+      } catch (err) {
+        commit(mutations.SET_LOCATIONS, [])
+      }
+    },
+    async signup(store, user) {
+      return axios.post('/api/account', user)
     },
     async login({ commit }, credentials) {
       try {
@@ -107,5 +113,6 @@ socket.on('Hairdresser Request', city => {
 
 export default async function init() {
   await store.dispatch('fetchSession')
+  await store.dispatch('fetchLocations')
   return store
 }
