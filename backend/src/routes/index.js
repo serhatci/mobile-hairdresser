@@ -10,12 +10,6 @@ const Customer = require('../models/customer')
 const Hairdresser = require('../models/hairdresser')
 const User = require('../models/user')
 
-router.get('/', async (req, res) => {
-  const customer = await Customer.findOne({})
-  const hairdresser = await Hairdresser.findOne({})
-  res.send([customer, hairdresser])
-})
-
 /* Creates fake users in db for testing */
 router.post('/', async (req, res) => {
   if (req.query.testUsers == 'Yes') {
