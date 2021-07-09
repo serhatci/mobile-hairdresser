@@ -2,16 +2,16 @@
 import { mapState, mapActions } from 'vuex'
 import UserProfileCard from '@/components/user-profile-card.vue'
 import SearchBar from '@/components/search-bar.vue'
-import RequestCard from '@/components/request-card.vue'
-import PostsCard from '@/components/posts-card.vue'
+import PostRequest from '@/components/post-request.vue'
+import Requests from '@/components/requests.vue'
 
 export default {
   name: 'Customer',
   components: {
-    RequestCard,
     UserProfileCard,
     SearchBar,
-    PostsCard
+    PostRequest,
+    Requests
   },
   computed: {
     ...mapState(['user']),
@@ -51,8 +51,8 @@ export default {
 .customer-page
   .user-card.m-auto
     UserProfileCard
-    RequestCard
-    PostsCard
+    PostRequest
+    Requests
 
   //- hr
   //- h3.text-center.my-2 Your Current Posts
