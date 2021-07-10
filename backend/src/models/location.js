@@ -23,28 +23,17 @@ const LocationSchema = new mongoose.Schema({
   },
   province: {
     type: String,
-    required: true,
   },
   province_code: {
     type: String,
-    required: true,
   },
   community: {
     type: String,
-    required: true,
   },
   community_code: {
     type: Number,
-    required: true,
   },
-  latitude: {
-    type: Number,
-    required: true,
-  },
-  longitude: {
-    type: Number,
-    required: true,
-  },
+  location: [],
 })
 
 module.exports = mongoose.model('Location', LocationSchema)
