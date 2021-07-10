@@ -14,15 +14,22 @@ export default ({
     }
   },
   methods: {
+
+    emitValue: function (value) {
+      this.$emit('input', value);
+    },
+
     doAutocomplete: function () {
       if (this.address.length < 3) return
 
-      return this.locations.filter((item) => item.place.toLowerCase().startsWith(this.address.toLowerCase()) || item.zipcode.toString().startsWith(this.address))
+      return this.locations.filter((item) => item.city.toLowerCase().startsWith(this.address.toLowerCase()) || item.postcode.toString().startsWith(this.address))
     },
-    updateBinding: function (text) {
+    updateBinding: function (item) {
       let el = document.getElementById("addressInput");
-      el.value = text;
+      el.value = `${item.city}, ${item.postcode}`;
       el.dispatchEvent(new Event('addressInput'));
+
+      this.$emit('clicked', item)
 
       this.setSuggestions()
     },
@@ -41,7 +48,7 @@ export default ({
 <template lang="pug">
 .row
   .col-12.col-md-4.text-md-end
-    label.d-none.d-sm-inline.form-control-label.form-control-sm(for='addressInput') Location:
+    label.d-none.d-sm-inline.form-control-label.form-control-sm(for='addressInput') Address:
   .col-12.col-md-8
     input#addressInput.form-control.form-control-sm.form-control-borderless(
       type='text',
@@ -54,10 +61,10 @@ export default ({
       ul.list-group.rounded
         li.list-group-item.py-2.px-3(
           v-for='item in doAutocomplete()',
-          :key='`${item.zipcode}-${item.place}`',
-          @click='updateBinding(`${item.place}, ${item.zipcode}`)'
+          :key='`${item.postcode}-${item.city}`',
+          @click='updateBinding(item)'
         )
-          | {{ item.place }}, {{ item.zipcode }}
+          | {{ item.city }}, {{ item.postcode }}
 </template>
 
 <style scoped>
