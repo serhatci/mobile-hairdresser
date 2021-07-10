@@ -10,7 +10,8 @@
     "start": "node bin/www",
     "lint": "lint-staged",
     "lint-only": "eslint .",
-    "lint-all": "pretty-quick && eslint"
+    "lint-all": "pretty-quick && eslint",
+    "prepare": "npx husky install"
   },
   "husky": {
     "hooks": {
