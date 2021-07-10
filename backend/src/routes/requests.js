@@ -36,15 +36,15 @@ router.get('/', async (req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
-  const { sender, requestType, title, message } = req.body
+  const { senderId, senderFullName, requestType, address, message } = req.body
 
   if (requestType !== 'Hairdresser Request' && requestType !== 'Style Advice')
     return res.status(400).send({ message: 'Request type is wrong' })
 
-  if (sender === '') return res.status(400).send({ message: 'Sender ID can not be empty!' })
+  if (address === '') return res.status(400).send({ message: 'Address can not be empty!' })
   if (message === '') return res.status(400).send({ message: 'Message can not be empty!' })
 
-  const requestToCreate = { sender, requestType, title, message }
+  const requestToCreate = { senderId, senderFullName, requestType, address, message }
 
   try {
     const createdRequest = await Request.create(requestToCreate)
