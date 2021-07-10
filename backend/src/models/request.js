@@ -30,6 +30,18 @@ const RequestSchema = new mongoose.Schema(
         ref: 'Photo',
       },
     ],
+    address: {
+      city: {
+        type: String,
+        default: '',
+      },
+      state: {
+        type: String,
+        default: '',
+      },
+      postcode: { type: Number, default: '' },
+      location: [],
+    },
   },
   { timestamps: true }
 )
