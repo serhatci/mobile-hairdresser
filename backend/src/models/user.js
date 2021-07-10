@@ -35,15 +35,14 @@ const UserSchema = new mongoose.Schema(
     },
     city: {
       type: String,
-      trim: true,
       default: '',
     },
     state: {
       type: String,
-      trim: true,
       default: '',
     },
-    postcode: { type: String, default: '' },
+    postcode: { type: Number, default: '' },
+    location: [],
     tel: {
       type: String,
       trim: true,
