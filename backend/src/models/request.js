@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
 
 const RequestSchema = new mongoose.Schema(
   {
@@ -22,12 +23,14 @@ const RequestSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Reply',
+        autopopulate: true,
       },
     ],
     photos: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Photo',
+        autopopulate: true,
       },
     ],
     address: {
@@ -46,4 +49,5 @@ const RequestSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
+RequestSchema.plugin(autopopulate)
 module.exports = mongoose.model('Request', RequestSchema)
