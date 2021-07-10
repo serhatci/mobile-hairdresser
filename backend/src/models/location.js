@@ -5,11 +5,11 @@ const LocationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  zipcode: {
+  postcode: {
     type: Number,
     required: true,
   },
-  place: {
+  city: {
     type: String,
     required: true,
   },
