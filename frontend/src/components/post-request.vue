@@ -12,7 +12,7 @@ export default ({
   },
   data () {
     return {
-      isClicked: false,
+      isPostExpanded: false,
 
       requestType: 'Hairdresser Request',
       title: '',
@@ -48,10 +48,10 @@ export default ({
 .posts
   .card.border-secondary.my-3.mx-2.p-3.rounded.shadow-sm
     h6.border-bottom.pb-2.mb-0 Post a request
-      i.bi.bi-chevron-compact-up.ms-2(@click='isClicked = !isClicked', v-if='isClicked')
-      i.bi.bi-chevron-compact-down.ms-2(@click='isClicked = !isClicked', v-else)
+      i.bi.bi-chevron-compact-up.ms-2(@click='isPostExpanded = !isPostExpanded', v-if='isPostExpanded')
+      i.bi.bi-chevron-compact-down.ms-2(@click='isPostExpanded = !isPostExpanded', v-else)
     transition(name='fade')
-      form.py-2(@submit='submitRequest', v-show='isClicked', autocomplete='off')
+      form.py-2(@submit='submitRequest', v-show='isPostExpanded', autocomplete='off')
         span.d-block.text-center.text-danger.mb-2(v-if='backendError') {{ backendError }}
         .row.g-0
           .col-12.col-sm-6.mb-1
