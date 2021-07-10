@@ -4,6 +4,37 @@ const express = require('express')
 const router = express.Router()
 const Request = require('../models/request')
 
+router.get('/', async (req, res, next) => {
+  let query = {}
+
+  if (req.query.senderId) {
+    query = { sender: req.query.senderId }
+  }
+
+  if (req.query.city) {
+    query = { address: { city: req.query.city } }
+  }
+
+  if (req.query.state) {
+    query = { address: { state: req.query.state } }
+  }
+
+  if (req.query.postcode) {
+    query = { address: { postcode: req.query.postcode } }
+  }
+
+  if (req.query.userType) {
+    query.type = req.query.userType
+  }
+
+  try {
+    const user = await Request.find(query).limit(8)
+    res.send(user)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   const { sender, requestType, title, message } = req.body
 
