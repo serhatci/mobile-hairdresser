@@ -8,33 +8,56 @@ export default ({
     AddressInputBar
   },
   computed: {
-    ...mapState(['user']),
+    ...mapState(['user', 'locations']),
   },
   data () {
     return {
       isPostExpanded: false,
 
       requestType: 'Hairdresser Request',
-      title: '',
+      address: '',
       message: '',
 
       backendError: null,
     }
   },
+  mounted () {
+    if (this.locations.lenght > 0) return
+
+    this.fetchLocations()
+  },
   methods: {
-    ...mapActions(['postRequest', 'notifyRequest']),
+    getLocation (item) {
+      this.address = item
+    },
+
+    resetFormValues () {
+      this.requestType = 'Hairdresser Request'
+      this.address = ''
+      this.message = ''
+      this.backendError = null
+
+      let el = document.getElementById("addressInput");
+      el.value = '';
+      el.dispatchEvent(new Event('addressInput'));
+    },
+
+    ...mapActions(['postRequest', 'notifyRequest', 'fetchLocations']),
 
     async submitRequest (e) {
       e.preventDefault()
       try {
         await this.postRequest({
-          sender: this.user._id,
+          senderId: this.user._id,
+          senderFullName: this.user.fullName,
           requestType: this.requestType,
-          title: this.title,
+          address: this.address,
           message: this.message,
         })
 
-        this.notifyRequest(this.user.city)
+        this.notifyRequest(this.address)
+
+        this.resetFormValues()
       } catch (e) {
         this.backendError = e.response.data.message
       }
@@ -67,7 +90,7 @@ export default ({
               input#customerRequest.form-check-input(type='radio', v-model='requestType', value='Style Advice')
               label.form-check-label(for='customerRequest') Style Advice
           .col-12.col-sm-6
-            AddressInputBar
+            AddressInputBar(@clicked='getLocation')
         .mb-3
           label.form-label(for='message')
             span.d-none Request Message
