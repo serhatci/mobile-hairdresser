@@ -102,8 +102,8 @@ const store = new Vuex.Store({
         throw e
       }
     },
-    notifyRequest(store, requestCity) {
-      socket.emit('New Request', requestCity)
+    notifyRequest(store, address) {
+      socket.emit('New Request', address)
     },
     receiveNotifications({ commit }) {
       commit(mutations.SET_NOTIFICATIONS)
@@ -112,15 +112,14 @@ const store = new Vuex.Store({
   modules: {},
 })
 
-socket.on('Hairdresser Request', city => {
-  console.log(`city ${city}`)
-  if (store.state.user.city != city) return
+socket.on('Hairdresser Request', address => {
+  console.log(`city ${address.city}`)
+  if (store.state.user.city != address.city) return
 
   store.dispatch('receiveNotifications')
 })
 
 export default async function init() {
   await store.dispatch('fetchSession')
-  await store.dispatch('fetchLocations')
   return store
 }
