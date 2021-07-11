@@ -38,7 +38,7 @@ export default ({
           requestId: this.requestId
         })
 
-        this.notifyReply(this.requestId)
+        // this.notifyReply(this.requestId)
 
         this.resetFormValues()
       } catch (e) {
@@ -51,23 +51,29 @@ export default ({
 
 
 <template lang="pug">
-.card.border-secondary.my-3.mx-2.p-3.rounded.shadow-sm
-  transition(name='fade')
-    form.py-2(@submit='submitReply', v-show='isReplyClicked')
-      span.d-block.text-center.text-danger.mb-2(v-if='backendError') {{ backendError }}
-      .mb-3
-        label.form-label(for='replyMessage')
-          span.d-none Request Message
-        textarea#replyMessage.form-control.form-control-sm(
-          v-model='message',
-          placeholder='Reply Message',
-          aria-describedby='message'
-        )
-      .text-center
-        button.btn.btn-primary.w-100(type='submit') Reply
+transition(name='fade')
+  form.bg-light.px-3.pb-3(@submit='submitReply', v-show='isReplyClicked')
+    span.d-block.text-center.text-danger.py-1(v-if='backendError') {{ backendError }}
+    .mb-3
+      label.form-label(for='replyMessage')
+        span.d-none Request Message
+      textarea#replyMessage.form-control.form-control-sm(
+        v-model='message',
+        placeholder='Reply Message',
+        aria-describedby='message'
+      )
+    .d-flex.justify-content-end
+      button.btn.btn-primary.w-100(type='submit') Reply
 </template>
 
 <style scoped>
+button {
+  max-width: 10rem;
+}
+
+textarea {
+  height: 8rem;
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.6s ease;
