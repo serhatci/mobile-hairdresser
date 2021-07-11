@@ -8,7 +8,6 @@ const { isEmail, isAlphanumeric, isInt } = require('validator')
 
 const PrivateMessage = require('./private-message')
 const MessageBoxSchema = require('./message-box')
-const Reply = require('./reply')
 
 const UserSchema = new mongoose.Schema(
   {
@@ -33,16 +32,18 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       validate: [isAlphanumeric, 'Last name should contain letters & numbers only'],
     },
-    city: {
-      type: String,
-      default: '',
+    address: {
+      city: {
+        type: String,
+        default: '',
+      },
+      state: {
+        type: String,
+        default: '',
+      },
+      postcode: { type: Number, default: '' },
+      location: [],
     },
-    state: {
-      type: String,
-      default: '',
-    },
-    postcode: { type: Number, default: '' },
-    location: [],
     tel: {
       type: String,
       trim: true,
@@ -79,7 +80,7 @@ UserSchema.virtual('fullName').get(function () {
       ? `${this.firstName} ${this.middleName} ${this.lastName}`
       : `${this.firstName} ${this.lastName}`
   }
-  return null
+  return 'Anonymous'
 })
 
 class User {
@@ -126,15 +127,12 @@ class User {
     await video.save()
   }
 
-  async replyRequest(request, message, ...photos) {
-    const reply = new Reply(this, message, ...photos)
-    request.replies.push(reply)
-    await request.save()
+  async storeRepliedRequest(reply) {
+    if (this.repliedRequests.includes(reply._id)) return this
 
-    if (this.repliedRequests.find(r => r === request)) {
-      this.repliedRequests.push(request)
-      await this.save()
-    }
+    this.repliedRequests.push(reply)
+    await this.save()
+    return this
   }
 
   async deleteReply(request, reply) {
