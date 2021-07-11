@@ -2,7 +2,7 @@
 import { mapState, mapActions } from 'vuex'
 
 export default {
-  name: 'TopNav',
+  name: 'HeaderNavigation',
   methods: {
     ...mapActions(['logout']),
     async doLogout () {
@@ -11,7 +11,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['user', 'notifications']),
+    ...mapState(['user']),
   },
 }
 </script>
@@ -42,9 +42,8 @@ nav.navbar.navbar-expand-md.navbar-light.px-3(aria-label='Top sticky navigation 
           a.btn.btn-outline-primary.m-1(href='/login', role='button') Log in
         li.nav-item(v-show='!user')
           a.btn.btn-outline-primary.m-1(href='/signup', role='button') Sign up
-        li.nav-item.fs-3.py-1.px-2(v-show='user')
-          i.bi.bi-bell.text-dark(v-if='!notifications')
-          i.bi.bi-bell-fill.text-danger(v-else)
+        li.nav-item(v-show='user')
+          a.btn.btn-outline-primary.m-1(href='/user', role='button') User Page
         li.nav-item(v-show='user')
           button.btn.btn-outline-primary.m-1(@click='doLogout') Log out
 </template>

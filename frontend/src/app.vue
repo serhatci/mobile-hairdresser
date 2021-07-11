@@ -1,12 +1,12 @@
 <script>
-import TopNav from "@/components/top-nav.vue";
+import HeaderNavigation from "@/components/header-navigation.vue";
 import Footer from "@/components/footer.vue";
 
 
 export default {
   name: "App",
   components: {
-    TopNav,
+    HeaderNavigation,
     Footer,
   }
 }
@@ -17,7 +17,7 @@ export default {
   body
     .container-fluid.g-0
       header
-        TopNav
+        HeaderNavigation
       main
         router-view
       footer
