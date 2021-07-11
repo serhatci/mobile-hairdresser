@@ -1,8 +1,12 @@
 <script>
 import { mapState, mapActions } from 'vuex'
+import PostReply from './post-reply.vue'
 
 export default {
   name: 'DisplayRequests',
+  components: {
+    PostReply
+  },
   props: {
     title: String,
     requests: []
@@ -17,6 +21,10 @@ export default {
   },
   methods: {
     ...mapActions(['deleteRequest']),
+
+    clickReply () {
+      this.isReplyClicked = !this.isReplyClicked
+    }
   },
 }
 </script>
@@ -48,9 +56,10 @@ export default {
         .small.d-flex.justify-content-between.pb-3.border-bottom
           nav
             .btn.btn-sm.me-3.text-primary.text-decoration-underline(href='#!') Comments
-            .btn.btn-sm.me-3.text-primary.text-decoration-underline(href='#!') Reply
+            .btn.btn-sm.me-3.text-primary.text-decoration-underline(@click='clickReply') Reply
           nav(v-show='request.senderId == user._id')
             .btn.btn-sm.me-3.text-danger.text-decoration-underline(@click='deleteRequest(request)') DELETE
+        PostReply(:requestId='request._id')
 </template>
 
 <style scoped>
