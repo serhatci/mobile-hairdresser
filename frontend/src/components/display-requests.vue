@@ -1,29 +1,19 @@
 <script>
-import { mapState, mapActions } from 'vuex'
-import PostReply from './post-reply.vue'
+import RequestCard from './request-card.vue'
 
 export default {
   name: 'DisplayRequests',
   components: {
-    PostReply
+    RequestCard
   },
   props: {
     title: String,
     requests: []
   },
   computed: {
-    ...mapState(['user']),
-
     sortedRequests () {
       if (this.requests.length > 0) return this.requests.reverse()
       return this.requests
-    }
-  },
-  methods: {
-    ...mapActions(['deleteRequest']),
-
-    clickReply () {
-      this.isReplyClicked = !this.isReplyClicked
     }
   },
 }
