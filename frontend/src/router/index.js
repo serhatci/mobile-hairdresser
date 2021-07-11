@@ -19,38 +19,29 @@ export default function init(store) {
         path: '/',
         name: 'home',
         component: Home,
-        beforeEnter(to, from, next) {
-          if (store.state.user) {
-            if (store.state.user.type === 'Customer') return next('/customer')
-            if (store.state.user.type === 'Hairdresser') return next('/hairdresser')
-          } else {
-            return next()
-          }
-        },
       },
       {
         path: '/login',
         name: 'login',
-        component: () => import(/* webpackChunkName: "customer" */ '../views/login.vue'),
-      },
-      {
-        path: '/signup',
-        name: 'signup',
-        component: () => import(/* webpackChunkName: "customer" */ '../views/signup.vue'),
-      },
-      {
-        path: '/customer',
-        name: 'customer',
-        component: () => import(/* webpackChunkName: "customer" */ '../views/customer.vue'),
+        component: () => import(/* webpackChunkName: "user" */ '../views/login.vue'),
         beforeEnter(to, from, next) {
-          if (!store.state.user) return next('/')
+          if (store.state.user) return next('/user')
           else return next()
         },
       },
       {
-        path: '/hairdresser',
-        name: 'hairdresser',
-        component: () => import(/* webpackChunkName: "hairdresser" */ '../views/hairdresser.vue'),
+        path: '/signup',
+        name: 'signup',
+        component: () => import(/* webpackChunkName: "user" */ '../views/signup.vue'),
+        beforeEnter(to, from, next) {
+          if (store.state.user) return next('/user')
+          else return next()
+        },
+      },
+      {
+        path: '/user',
+        name: 'user',
+        component: () => import(/* webpackChunkName: "user" */ '../views/user.vue'),
         beforeEnter(to, from, next) {
           if (!store.state.user) return next('/')
           else return next()
