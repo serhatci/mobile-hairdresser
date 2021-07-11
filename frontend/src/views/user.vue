@@ -1,7 +1,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 
-import UserProfileCard from '@/components/user-profile-card.vue'
+import UserNavigation from '@/components/user-navigation.vue'
 import SearchBar from '@/components/search-bar.vue'
 import PostRequest from '@/components/post-request.vue'
 import DisplayRequests from '@/components/display-requests.vue'
@@ -9,7 +9,7 @@ import DisplayRequests from '@/components/display-requests.vue'
 export default {
   name: 'Customer',
   components: {
-    UserProfileCard,
+    UserNavigation,
     SearchBar,
     PostRequest,
     DisplayRequests
@@ -23,11 +23,11 @@ export default {
 <template lang="pug">
 .customer-page.pb-5
   section
-    UserProfileCard
-  section
+    UserNavigation
+  section(v-show='user.type==="Customer"')
     PostRequest
   section
-    DisplayRequests(title='Your Recent Requests', :requests='user.customerRequests')
+    DisplayRequests(title='Recent Requests', :requests='user.customerRequests')
 </template>
 
 <style lang="scss" scoped>
