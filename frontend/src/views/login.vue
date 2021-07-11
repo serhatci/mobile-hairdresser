@@ -21,7 +21,7 @@ export default {
           password: this.password
         })
 
-        this.$router.push('/')
+        this.$router.push('/user')
       } catch (e) {
         this.backendError = e.response.data.message
       }
