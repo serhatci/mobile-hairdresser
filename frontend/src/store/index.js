@@ -72,6 +72,14 @@ const store = new Vuex.Store({
         throw e
       }
     },
+    async getRequests(store, sender) {
+      try {
+        const requests = await axios.get(`/api/requests?senderId=${sender._id}`)
+        return requests.data
+      } catch (e) {
+        throw e
+      }
+    },
     async postRequest({ commit }, request) {
       try {
         const createdRequest = await axios.post('/api/requests', request)
