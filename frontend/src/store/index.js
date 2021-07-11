@@ -45,6 +45,7 @@ const store = new Vuex.Store({
         commit(mutations.SET_USER, null)
       }
     },
+
     async fetchLocations({ commit }) {
       try {
         const locations = await axios.get('/api/locations')
@@ -53,9 +54,11 @@ const store = new Vuex.Store({
         commit(mutations.SET_LOCATIONS, [])
       }
     },
+
     async signup(store, user) {
       return axios.post('/api/account', user)
     },
+
     async login({ commit }, credentials) {
       try {
         const user = await axios.post('/api/account/session', credentials)
@@ -64,6 +67,7 @@ const store = new Vuex.Store({
         throw e
       }
     },
+
     async logout({ commit }) {
       try {
         await axios.delete('/api/account/session')
@@ -72,6 +76,7 @@ const store = new Vuex.Store({
         throw e
       }
     },
+
     async getRequests(store, sender) {
       try {
         const requests = await axios.get(`/api/requests?senderId=${sender._id}`)
@@ -80,6 +85,7 @@ const store = new Vuex.Store({
         throw e
       }
     },
+
     async postRequest({ commit }, request) {
       try {
         const createdRequest = await axios.post('/api/requests', request)
@@ -91,6 +97,7 @@ const store = new Vuex.Store({
         throw e
       }
     },
+
     async deleteRequest({ commit }, request) {
       try {
         const user = await axios.delete(`/api/customers/${request.senderId}/request/${request._id}`)
@@ -102,9 +109,23 @@ const store = new Vuex.Store({
         throw e
       }
     },
+
+    async postReply({ commit }, data) {
+      try {
+        const repliedRequest = await axios.post(`/api/requests/${data.requestId}/reply`, data.reply)
+        if (repliedRequest) {
+          const user = await axios.post(`/api/users/${data.reply.senderId}/replied-requests`, repliedRequest.data)
+          commit(mutations.SET_USER, user.data)
+        }
+      } catch (e) {
+        throw e
+      }
+    },
+
     notifyRequest(store, address) {
       socket.emit('New Request', address)
     },
+
     receiveNotifications({ commit }) {
       commit(mutations.SET_NOTIFICATIONS)
     },
