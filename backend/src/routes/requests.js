@@ -75,4 +75,26 @@ router.delete('/:requestId', async (req, res, next) => {
   }
 })
 
+router.post('/:requestId/reply', async (req, res, next) => {
+  const { requestId } = req.params
+  const { senderId, senderFullName, senderAddress, message, photos } = req.body
+
+  if (message === '') return res.status(400).send({ message: 'Message can not be empty!' })
+
+  const replyToCreate = { senderId, senderFullName, senderAddress, message, photos }
+
+  try {
+    const request = await Request.findById(requestId)
+
+    const updatedRequest = await request.addReply(replyToCreate)
+    return res.send(updatedRequest)
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      const invalidProperty = Object.keys(err.errors)[0]
+      return res.status(422).send({ message: err.errors[invalidProperty].message })
+    }
+    return next(err)
+  }
+})
+
 module.exports = router
