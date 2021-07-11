@@ -18,24 +18,23 @@ export default ({
     }
   },
   methods: {
-
+    ...mapActions(['postReply', 'notifyReply']),
 
     resetFormValues () {
       this.message = ''
       this.backendError = null
     },
 
-    ...mapActions(['postReply', 'notifyReply']),
-
     async submitReply (e) {
       e.preventDefault()
       try {
         await this.postReply({
-          senderId: this.user._id,
-          senderFullName: this.user.fullName,
-          requestType: this.requestType,
-          senderAddress: this.address,
-          message: this.message,
+          reply: {
+            senderId: this.user._id,
+            senderFullName: this.user.fullName,
+            senderAddress: this.user.address,
+            message: this.message
+          },
           requestId: this.requestId
         })
 
