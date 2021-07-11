@@ -84,7 +84,7 @@ const store = new Vuex.Store({
       try {
         const createdRequest = await axios.post('/api/requests', request)
         if (createdRequest) {
-          const user = await axios.post(`/api/customers/${request.sender}/request`, createdRequest.data)
+          const user = await axios.post(`/api/customers/${request.senderId}/request`, createdRequest.data)
           commit(mutations.SET_USER, user.data)
         }
       } catch (e) {
@@ -93,7 +93,7 @@ const store = new Vuex.Store({
     },
     async deleteRequest({ commit }, request) {
       try {
-        const user = await axios.delete(`/api/customers/${request.sender}/request/${request._id}`)
+        const user = await axios.delete(`/api/customers/${request.senderId}/request/${request._id}`)
         if (user) {
           commit(mutations.SET_USER, user.data)
           await axios.delete(`/api/requests/${request._id}`)
