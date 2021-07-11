@@ -12,15 +12,15 @@ router.get('/', async (req, res, next) => {
   }
 
   if (req.query.city) {
-    query = { address: { city: req.query.city } }
+    query = { senderAddress: { city: req.query.city } }
   }
 
   if (req.query.state) {
-    query = { address: { state: req.query.state } }
+    query = { senderAddress: { state: req.query.state } }
   }
 
   if (req.query.postcode) {
-    query = { address: { postcode: req.query.postcode } }
+    query = { senderAddress: { postcode: req.query.postcode } }
   }
 
   if (req.query.userType) {
@@ -36,15 +36,15 @@ router.get('/', async (req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
-  const { senderId, senderFullName, requestType, address, message } = req.body
+  const { senderId, senderFullName, requestType, senderAddress, message } = req.body
 
   if (requestType !== 'Hairdresser Request' && requestType !== 'Style Advice')
     return res.status(400).send({ message: 'Request type is wrong' })
 
-  if (address === '') return res.status(400).send({ message: 'Address can not be empty!' })
+  if (senderAddress === '') return res.status(400).send({ message: 'Address can not be empty!' })
   if (message === '') return res.status(400).send({ message: 'Message can not be empty!' })
 
-  const requestToCreate = { senderId, senderFullName, requestType, address, message }
+  const requestToCreate = { senderId, senderFullName, requestType, senderAddress, message }
 
   try {
     const createdRequest = await Request.create(requestToCreate)

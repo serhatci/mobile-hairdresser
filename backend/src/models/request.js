@@ -33,7 +33,7 @@ const RequestSchema = new mongoose.Schema(
         autopopulate: true,
       },
     ],
-    address: {
+    senderAddress: {
       city: {
         type: String,
         default: '',
