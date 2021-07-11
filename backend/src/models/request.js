@@ -6,18 +6,19 @@ const RequestSchema = new mongoose.Schema(
     senderId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
+      required: [true, 'Sender ID should be provided!'],
     },
     senderFullName: {
       type: String,
-      required: true,
+      required: [true, 'Fullname of sender should be provided!'],
     },
     message: {
       type: String,
-      required: true,
+      required: [true, 'Message should be provided!'],
     },
     requestType: {
       type: String,
-      required: true,
+      required: [true, 'Request Type should be provided!'],
     },
     replies: [
       {
