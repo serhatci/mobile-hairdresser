@@ -32,15 +32,6 @@ const CustomerSchema = new mongoose.Schema(
 )
 
 class Customer {
-  get info() {
-    return {
-      fullname: this.fullName,
-      email: this.email,
-      requests: this.customerRequests,
-      profilePhoto: this.profilePhoto,
-    }
-  }
-
   async addPhotoToAdviceRequest(photo, adviceRequest) {
     adviceRequest.photos.push(photo)
     await adviceRequest.save()
