@@ -51,7 +51,7 @@ export default ({
           senderId: this.user._id,
           senderFullName: this.user.fullName,
           requestType: this.requestType,
-          address: this.address,
+          senderAddress: this.address,
           message: this.message,
         })
 
