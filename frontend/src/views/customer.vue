@@ -1,9 +1,10 @@
 <script>
 import { mapState, mapActions } from 'vuex'
+
 import UserProfileCard from '@/components/user-profile-card.vue'
 import SearchBar from '@/components/search-bar.vue'
 import PostRequest from '@/components/post-request.vue'
-import Requests from '@/components/requests.vue'
+import DisplayRequests from '@/components/display-requests.vue'
 
 export default {
   name: 'Customer',
@@ -11,54 +12,22 @@ export default {
     UserProfileCard,
     SearchBar,
     PostRequest,
-    Requests
+    DisplayRequests
   },
   computed: {
     ...mapState(['user']),
-  },
-  data () {
-    return {
-      requestType: 'Hairdresser Request',
-      title: '',
-      message: '',
-
-      backendError: null,
-    }
-  },
-  methods: {
-    ...mapActions(['postRequest', 'notifyRequest']),
-    async submitRequest (e) {
-      e.preventDefault()
-
-      try {
-        await this.postRequest({
-          sender: this.user._id,
-          requestType: this.requestType,
-          title: this.title,
-          message: this.message,
-        })
-
-        this.notifyRequest(this.user.city)
-      } catch (e) {
-        this.backendError = e.response.data.message
-      }
-    },
   },
 }
 </script>
 
 <template lang="pug">
-.customer-page
-  .user-card.m-auto
+.customer-page.pb-5
+  section
     UserProfileCard
+  section
     PostRequest
-    Requests
-
-  //- hr
-  //- h3.text-center.my-2 Your Current Posts
-  //- .requests(v-show='user.customerRequests.length>0')
-  //-   div(v-for='request in user.customerRequests', :key='request._id')
-  //-     RequestCard(:customer='user', :request='request')
+  section
+    DisplayRequests(title='Your Recent Requests', :requests='user.customerRequests')
 </template>
 
 <style lang="scss" scoped>
@@ -66,7 +35,8 @@ export default {
   background-color: var(--my-green);
 }
 
-.user-card {
+section {
   max-width: 1000px;
+  margin: auto;
 }
 </style>
