@@ -28,12 +28,12 @@ router.post('/', async (req, res) => {
       const firstName = faker.name.firstName()
       const lastName = faker.name.lastName()
       const city = 'Heilbronn'
-      const state = 'BW'
+      const stateCode = 'BW'
       const postcode = 74076
 
       await User.updateMany(
         { email: { $regex: /_TestEmail_/, $options: 'g' } },
-        { firstName, lastName, city, state, postcode }
+        { firstName, lastName, city, stateCode, postcode }
       )
       res.status(200).send('**** Test users are created! **** \n')
     } catch (err) {
