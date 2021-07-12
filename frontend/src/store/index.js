@@ -77,9 +77,9 @@ const store = new Vuex.Store({
       }
     },
 
-    async getRequests(store, sender) {
+    async getRequests(store, query) {
       try {
-        const requests = await axios.get(`/api/requests?senderId=${sender._id}`)
+        const requests = await axios.get(`/api/requests?${query}`)
         return requests.data
       } catch (e) {
         throw e
