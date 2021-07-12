@@ -38,7 +38,7 @@ export default ({
           requestId: this.requestId
         })
 
-        // this.notifyReply(this.requestId)
+        this.$emit('replySent')
 
         this.resetFormValues()
       } catch (e) {
