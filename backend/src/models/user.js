@@ -8,7 +8,6 @@ const { isEmail, isAlphanumeric, isInt } = require('validator')
 
 const PrivateMessage = require('./private-message')
 const MessageBoxSchema = require('./message-box')
-const Reply = require('./reply')
 
 const UserSchema = new mongoose.Schema(
   {
@@ -33,28 +32,23 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       validate: [isAlphanumeric, 'Last name should contain letters & numbers only'],
     },
-    city: {
-      type: String,
-      trim: true,
-      default: '',
+    address: {
+      city: {
+        type: String,
+        default: '',
+      },
+      stateCode: {
+        type: String,
+        default: '',
+      },
+      postcode: { type: Number, default: '' },
+      location: [],
     },
-    state: {
-      type: String,
-      trim: true,
-      default: '',
-    },
-    postcode: { type: String, default: '' },
     tel: {
       type: String,
       trim: true,
       validate: [isInt, 'Telephone should contain numbers only'],
     },
-    repliedRequests: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Request',
-      },
-    ],
     profilePhoto: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Photo',
@@ -80,7 +74,7 @@ UserSchema.virtual('fullName').get(function () {
       ? `${this.firstName} ${this.middleName} ${this.lastName}`
       : `${this.firstName} ${this.lastName}`
   }
-  return null
+  return 'Anonymous'
 })
 
 class User {
@@ -127,26 +121,15 @@ class User {
     await video.save()
   }
 
-  async replyRequest(request, message, ...photos) {
-    const reply = new Reply(this, message, ...photos)
+  async replyRequest(request, reply) {
     request.replies.push(reply)
     await request.save()
-
-    if (this.repliedRequests.find(r => r === request)) {
-      this.repliedRequests.push(request)
-      await this.save()
-    }
   }
 
   async deleteReply(request, reply) {
-    const replyIndex = request.replies.indexOf(reply)
+    const replyIndex = request.replies.findIndex(i => i._id == reply._id)
     request.replies.splice(replyIndex, 1)
     await request.save()
-
-    if (this.repliedRequests.find(r => r === request)) {
-      this.repliedRequests.push(request)
-      await request.save()
-    }
   }
 
   async sendPrivateMessage(receiver, title, message) {

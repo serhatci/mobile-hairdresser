@@ -42,12 +42,12 @@ describe('Users endpoints', () => {
       userList.forEach(user => expect(user.city).toEqual('Heilbronn'))
     })
 
-    it('should filter users by state', async () => {
-      const userList = (await request(app).get('/api/users?state=BW')).body
+    it('should filter users by state_code', async () => {
+      const userList = (await request(app).get('/api/users?state_code=BW')).body
       const usersExist = userList.length > 0
 
       expect(usersExist).toBe(true)
-      userList.forEach(user => expect(user.state).toEqual('BW'))
+      userList.forEach(user => expect(user.state_code).toEqual('BW'))
     })
 
     it('should filter users by postcode', async () => {
@@ -98,13 +98,13 @@ describe('Users endpoints', () => {
       const user = users[0]
 
       user.city = 'Stuttgart'
-      user.state = 'BW'
+      user.state_code = 'BW'
       user.postcode = '70000'
       user.tel = '10123123123123'
 
       const updatedUser = (await request(app).put(`/api/users/${user.id}`).send(user)).body
       expect(updatedUser.city).toEqual('Stuttgart')
-      expect(updatedUser.state).toEqual('BW')
+      expect(updatedUser.state_code).toEqual('BW')
       expect(updatedUser.postcode).toEqual('70000')
       expect(updatedUser.tel).toEqual('10123123123123')
     })
@@ -202,12 +202,12 @@ describe('Users endpoints', () => {
   //     userList.forEach(user => expect(user.city).toEqual('Heilbronn'))
   //   })
 
-  //   it('should filter users by state', async () => {
-  //     const userList = (await request(app).get('/api/users/customers?state=BW')).body
+  //   it('should filter users by state_code', async () => {
+  //     const userList = (await request(app).get('/api/users/customers?state_code=BW')).body
   //     const usersExist = userList.length > 0
 
   //     expect(usersExist).toBe(true)
-  //     userList.forEach(user => expect(user.state).toEqual('BW'))
+  //     userList.forEach(user => expect(user.state_code).toEqual('BW'))
   //   })
 
   //   it('should filter users by postcode', async () => {

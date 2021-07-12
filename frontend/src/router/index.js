@@ -19,24 +19,24 @@ export default function init(store) {
         path: '/',
         name: 'home',
         component: Home,
-        beforeEnter(to, from, next) {
-          if (store.state.user) {
-            if (store.state.user.type === 'Customer') return next('/customer')
-            if (store.state.user.type === 'Hairdresser') return next('/hairdresser')
-          } else {
-            return next()
-          }
-        },
       },
       {
         path: '/login',
         name: 'login',
-        component: () => import(/* webpackChunkName: "customer" */ '../views/login.vue'),
+        component: () => import(/* webpackChunkName: "user" */ '../views/login.vue'),
+        beforeEnter(to, from, next) {
+          if (store.state.user) return next('/user')
+          else return next()
+        },
       },
       {
         path: '/signup',
         name: 'signup',
-        component: () => import(/* webpackChunkName: "customer" */ '../views/signup.vue'),
+        component: () => import(/* webpackChunkName: "user" */ '../views/signup.vue'),
+        beforeEnter(to, from, next) {
+          if (store.state.user) return next('/user')
+          else return next()
+        },
       },
       {
         path: '/customer',

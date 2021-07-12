@@ -22,6 +22,7 @@ const photosRouter = require('./routes/photos')
 const accountRouter = require('./routes/account')
 const requestsRouter = require('./routes/requests')
 const customersRouter = require('./routes/customers')
+const locationsRouter = require('./routes/locations')
 
 const app = express()
 
@@ -92,6 +93,7 @@ app.use('/api/photos', photosRouter)
 app.use('/api/account', accountRouter)
 app.use('/api/requests', requestsRouter)
 app.use('/api/customers', customersRouter)
+app.use('/api/locations', locationsRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

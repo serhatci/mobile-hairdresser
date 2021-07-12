@@ -16,12 +16,14 @@ socket.emit('Connection Check')
 const mutations = {
   SET_USER: 'set user',
   SET_NOTIFICATIONS: 'set notifications',
+  SET_LOCATIONS: 'set locations',
 }
 
 const store = new Vuex.Store({
   state: {
     user: null,
     notifications: 0,
+    locations: [],
   },
   mutations: {
     [mutations.SET_USER](state, user) {
@@ -30,18 +32,11 @@ const store = new Vuex.Store({
     [mutations.SET_NOTIFICATIONS](state) {
       state.notifications++
     },
+    [mutations.SET_LOCATIONS](state, locations) {
+      state.locations = locations
+    },
   },
   actions: {
-    async fetchIndexUsers(store) {
-      const users = await axios.get('/api')
-
-      const customer = users.data[0]
-      const hairdresser = users.data[1]
-      return [customer, hairdresser]
-    },
-    async signup(store, user) {
-      return axios.post('/api/account', user)
-    },
     async fetchSession({ commit }) {
       try {
         const user = await axios.get('/api/account/session')
@@ -50,6 +45,20 @@ const store = new Vuex.Store({
         commit(mutations.SET_USER, null)
       }
     },
+
+    async fetchLocations({ commit }) {
+      try {
+        const locations = await axios.get('/api/locations')
+        commit(mutations.SET_LOCATIONS, locations.data || null)
+      } catch (err) {
+        commit(mutations.SET_LOCATIONS, [])
+      }
+    },
+
+    async signup(store, user) {
+      return axios.post('/api/account', user)
+    },
+
     async login({ commit }, credentials) {
       try {
         const user = await axios.post('/api/account/session', credentials)
@@ -58,6 +67,7 @@ const store = new Vuex.Store({
         throw e
       }
     },
+
     async logout({ commit }) {
       try {
         await axios.delete('/api/account/session')
@@ -66,31 +76,65 @@ const store = new Vuex.Store({
         throw e
       }
     },
+
+    async getRequests(store, query) {
+      try {
+        const requests = await axios.get(`/api/requests?${query}`)
+        return requests.data
+      } catch (e) {
+        throw e
+      }
+    },
+
     async postRequest({ commit }, request) {
       try {
         const createdRequest = await axios.post('/api/requests', request)
         if (createdRequest) {
-          const user = await axios.post(`/api/customers/${request.sender}/request`, createdRequest.data)
+          const user = await axios.post(`/api/customers/${request.senderId}/request`, createdRequest.data)
           commit(mutations.SET_USER, user.data)
         }
       } catch (e) {
         throw e
       }
     },
+
     async deleteRequest({ commit }, request) {
       try {
-        const user = await axios.delete(`/api/customers/${request.sender}/request/${request._id}`)
+        const user = await axios.delete(`/api/customers/${request.senderId}/request/${request._id}`)
         if (user) {
           commit(mutations.SET_USER, user.data)
-          await axios.delete(`/api/requests/${request._id}`)
         }
       } catch (e) {
         throw e
       }
     },
-    notifyRequest(store, requestCity) {
-      socket.emit('New Request', requestCity)
+
+    async postReply({ commit }, { requestId, reply }) {
+      try {
+        const user = await axios.post(`/api/users/${reply.senderId}/${requestId}`, reply)
+        if (user) {
+          commit(mutations.SET_USER, user.data)
+        }
+      } catch (e) {
+        throw e
+      }
     },
+
+    async deleteReply({ commit }, { requestId, reply }) {
+      try {
+        const user = await axios.patch(`/api/users/${reply.senderId}/${requestId}`, reply)
+        if (user) {
+          commit(mutations.SET_USER, user.data)
+        }
+      } catch (e) {
+        throw e
+      }
+    },
+
+    notifyRequest(store, address) {
+      socket.emit('New Request', address)
+    },
+
     receiveNotifications({ commit }) {
       commit(mutations.SET_NOTIFICATIONS)
     },
@@ -98,9 +142,9 @@ const store = new Vuex.Store({
   modules: {},
 })
 
-socket.on('Hairdresser Request', city => {
-  console.log(`city ${city}`)
-  if (store.state.user.city != city) return
+socket.on('Hairdresser Request', address => {
+  console.log(`city ${address.city}`)
+  if (store.state.user.address.city != address.city) return
 
   store.dispatch('receiveNotifications')
 })

@@ -1,67 +1,90 @@
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import PostReply from './post-reply.vue'
+import ReplyCard from './reply-card.vue'
 
-export default {
+export default ({
   name: 'RequestCard',
-  props: {
-    customer: Object,
-    request: Object,
+  components: {
+    PostReply,
+    ReplyCard
   },
-  data() {
+  props: {
+    request: {}
+  },
+  data () {
     return {
-      isDeleteClicked: false,
+      isReplyClicked: false,
+      isAllRepliesClicked: false
     }
   },
+  computed: {
+    ...mapState(['user']),
+  },
   methods: {
-    toggleDelete: function () {
-      this.isDeleteClicked = !this.isDeleteClicked
-    },
     ...mapActions(['deleteRequest']),
   },
-}
+})
 </script>
 
+
 <template lang="pug">
-.request-card.m-auto.w-75
-  .card.mb-2
-    .row.g-0
-      .col-3.flex-column.flex-wrap.align-items-start.justify-start-center
-        .px-5.py-2
-          img#customer-img.card-img-center.img-thumbnail.rounded-circle(
-            src='/img/photos/hairdresser.jpg',
-            alt='request'
-          )
-        h5.card-title.mt-1.text-center(v-if='customer.fullName') {{ customer.fullName }}
-        h5.text-center(v-else) No Name
-      .col-9
-        .card-body
-          .row.g-0
-            .col-8
-              p.text-start.m-0.fs-4(v-if='customer.city') {{ customer.city }}, {{ customer.state }}
-              p(v-else) Address not provided
-            .col-4
-              .delete.text-end(@click='toggleDelete', v-if='!isDeleteClicked')
-                i.bi.bi-trash #{ ' ' }delete
-              .text-end(v-else)
-                .row.g-0
-                  .col-12.col-md-6
-                    .delete.d-inline.me-lg-2.text-success(@click='deleteRequest(request)')
-                      i.bi.bi-check-square #{ ' ' }delete
-                  .col-12.col-md-6
-                    .cancel.d-inline(@click='toggleDelete')
-                      i.bi.bi-x-square.text-danger #{ ' ' }cancel
-          h5.text-start.mt-1 {{ request.title }}
-          p.text-start.mt-1 {{ request.message }}
-          p.text-start.mt-1 {{ request.updatedAt.slice(0, 10) }}
+.request-card
+  section
+    .d-flex.flex-start.align-items-center.mt-2
+      img.rounded-circle.shadow-1-strong.me-3(
+        src='https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg',
+        alt='avatar',
+        width='60',
+        height='60'
+      )
+      div
+        h6.fw-bold.text-info.mb-1 {{ request.senderFullName }}
+        p.text-muted.small.mb-0
+          | Shared - {{ request.createdAt }}
+  p.mt-3.mb-1.pb-2
+    | Looking for&nbsp
+    strong(v-if='request.requestType === "Hairdresser Request"') Mobile Hairdresser&nbsp
+    strong(v-else) Style Advice&nbsp
+    | at location&nbsp
+    strong {{ request.senderAddress.city }}, {{ request.senderAddress.postcode }}
+  p#message.mt-3.mb-4 {{ request.message }}
+  .small.d-flex.justify-content-between.pb-3.border-bottom
+    nav
+      #comment-button.d-inline(@click='isAllRepliesClicked = !isAllRepliesClicked')
+        span.badge.bg-warning.ms-1 {{ request.replies.length }}
+        .btn.btn-sm.me-3.text-primary.text-decoration-underline All Replies
+          i.bi.ms-2(:class='isAllRepliesClicked ? "bi-chevron-compact-up" : "bi-chevron-compact-down"')
+      #reply-button.d-inline(@click='isReplyClicked = !isReplyClicked')
+        .btn.btn-sm.me-3.text-primary.text-decoration-underline Reply
+          i.bi.ms-2(:class='isReplyClicked ? "bi-chevron-compact-up" : "bi-chevron-compact-down"')
+    nav(v-show='request.senderId == user._id')
+      .btn.btn-sm.me-3.text-danger.text-decoration-underline(@click='deleteRequest(request)') Delete
+  PostReply(
+    :requestId='request._id',
+    :isReplyClicked='isReplyClicked',
+    v-on:replySent='isReplyClicked = !isReplyClicked'
+  )
+  transition-group(name='replyList', tag='ul')
+    li(v-for='reply in request.replies', :key='reply._id', v-show='isAllRepliesClicked')
+      ReplyCard(:reply='reply', :requestId='request._id')
 </template>
 
-<style lang="scss" scoped>
-.request-card {
-  max-width: 700px;
+<style scoped>
+#message {
+  white-space: pre-line;
 }
 
-.delete,
-.cancel {
-  cursor: pointer;
+ul {
+  list-style-type: none;
+}
+
+.replyList-enter-active,
+.replyList-leave-active {
+  transition: all 1s;
+}
+.replyList-enter, .replyList-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>

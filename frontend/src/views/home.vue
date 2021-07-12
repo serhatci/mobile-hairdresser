@@ -1,28 +1,11 @@
 <script>
-import HairdresserCard from '@/components/hairdresser-card.vue'
 import { mapActions } from 'vuex'
 import SearchBar from "@/components/search-bar.vue";
 
 export default {
   name: 'Home',
   components: {
-    HairdresserCard,
     SearchBar
-  },
-  data () {
-    return {
-      customer: {},
-      hairdresser: {},
-    }
-  },
-  async created () {
-    const indexUsers = await this.fetchIndexUsers()
-
-    this.customer = indexUsers[0]
-    this.hairdresser = indexUsers[1]
-  },
-  methods: {
-    ...mapActions(['fetchIndexUsers']),
   },
 }
 </script>
