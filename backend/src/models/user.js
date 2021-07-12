@@ -37,7 +37,7 @@ const UserSchema = new mongoose.Schema(
         type: String,
         default: '',
       },
-      state: {
+      stateCode: {
         type: String,
         default: '',
       },
@@ -121,17 +121,15 @@ class User {
     await video.save()
   }
 
+  async replyRequest(request, reply) {
+    request.replies.push(reply)
+    await request.save()
   }
 
   async deleteReply(request, reply) {
-    const replyIndex = request.replies.indexOf(reply)
+    const replyIndex = request.replies.findIndex(i => i._id == reply._id)
     request.replies.splice(replyIndex, 1)
     await request.save()
-
-    if (this.repliedRequests.find(r => r === request)) {
-      this.repliedRequests.push(request)
-      await request.save()
-    }
   }
 
   async sendPrivateMessage(receiver, title, message) {
