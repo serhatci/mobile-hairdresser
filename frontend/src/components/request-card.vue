@@ -64,9 +64,9 @@ export default ({
     :isReplyClicked='isReplyClicked',
     v-on:replySent='isReplyClicked = !isReplyClicked'
   )
-  transition-group(name='list', tag='reply')
-    .replies(v-for='reply in request.replies', :key='reply._id', v-show='isAllRepliesClicked')
-      ReplyCard(:reply='reply')
+  transition-group(name='replyList', tag='ul')
+    li(v-for='reply in request.replies', :key='reply._id', v-show='isAllRepliesClicked')
+      ReplyCard(:reply='reply', :requestId='request._id')
 </template>
 
 <style scoped>
@@ -74,11 +74,15 @@ export default ({
   white-space: pre-line;
 }
 
-.list-enter-active,
-.list-leave-active {
+ul {
+  list-style-type: none;
+}
+
+.replyList-enter-active,
+.replyList-leave-active {
   transition: all 1s;
 }
-.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+.replyList-enter, .replyList-leave-to /* .list-leave-active below version 2.1.8 */ {
   opacity: 0;
   transform: translateY(30px);
 }
