@@ -1,7 +1,9 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 /* eslint-disable import/no-extraneous-dependencies */
 const express = require('express')
 const User = require('../models/user')
+const Request = require('../models/request')
 
 const router = express.Router()
 
@@ -91,14 +93,36 @@ router.delete('/:userId', async (req, res, next) => {
   }
 })
 
-router.post('/:userId/replied-requests', async (req, res, next) => {
-  const { userId } = req.params
-  const repliedRequest = req.body
+router.post('/:userId/:requestId', async (req, res, next) => {
+  const { userId, requestId } = req.params
+  const reply = req.body
 
   try {
     const user = await User.findById(userId)
+    const request = await Request.findById(requestId)
+    await user.replyRequest(request, reply)
 
-    const updatedUser = await user.storeRepliedRequest(repliedRequest)
+    const updatedUser = await User.findById(userId)
+    res.send(updatedUser)
+  } catch (err) {
+    if (err.name === 'CastError') {
+      res.status(400).send({ message: 'Provided UserId has wrong format!' })
+    } else {
+      next(err)
+    }
+  }
+})
+
+router.patch('/:userId/:requestId', async (req, res, next) => {
+  const { userId, requestId } = req.params
+  const reply = req.body
+
+  try {
+    const user = await User.findById(userId)
+    const request = await Request.findById(requestId)
+    await user.deleteReply(request, reply)
+
+    const updatedUser = await User.findById(userId)
     res.send(updatedUser)
   } catch (err) {
     if (err.name === 'CastError') {
