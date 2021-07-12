@@ -1,18 +1,21 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import PostReply from './post-reply.vue'
+import ReplyCard from './reply-card.vue'
 
 export default ({
   name: 'RequestCard',
   components: {
-    PostReply
+    PostReply,
+    ReplyCard
   },
   props: {
     request: {}
   },
   data () {
     return {
-      isReplyClicked: false
+      isReplyClicked: false,
+      isAllRepliesClicked: false
     }
   },
   computed: {
@@ -52,11 +55,27 @@ export default ({
       .btn.btn-sm.me-3.text-primary.text-decoration-underline(@click='isReplyClicked = !isReplyClicked') Reply
     nav(v-show='request.senderId == user._id')
       .btn.btn-sm.me-3.text-danger.text-decoration-underline(@click='deleteRequest(request)') DELETE
-  PostReply(:requestId='request._id', :isReplyClicked='isReplyClicked')
+  PostReply(
+    :requestId='request._id',
+    :isReplyClicked='isReplyClicked',
+    v-on:replySent='isReplyClicked = !isReplyClicked'
+  )
+  transition-group(name='list', tag='reply')
+    .replies(v-for='reply in request.replies', :key='reply._id', v-show='isAllRepliesClicked')
+      ReplyCard(:reply='reply')
 </template>
 
 <style scoped>
 #message {
   white-space: pre-line;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
