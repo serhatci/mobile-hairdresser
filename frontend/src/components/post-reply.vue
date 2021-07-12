@@ -33,7 +33,7 @@ export default ({
             senderId: this.user._id,
             senderFullName: this.user.fullName,
             senderAddress: this.user.address,
-            message: this.message
+            message: this.message,
           },
           requestId: this.requestId
         })
