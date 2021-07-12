@@ -49,12 +49,6 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       validate: [isInt, 'Telephone should contain numbers only'],
     },
-    repliedRequests: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Request',
-      },
-    ],
     profilePhoto: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Photo',
@@ -127,12 +121,6 @@ class User {
     await video.save()
   }
 
-  async storeRepliedRequest(reply) {
-    if (this.repliedRequests.includes(reply._id)) return this
-
-    this.repliedRequests.push(reply)
-    await this.save()
-    return this
   }
 
   async deleteReply(request, reply) {
