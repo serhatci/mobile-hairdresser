@@ -7,7 +7,7 @@ import PostRequest from '@/components/post-request.vue'
 import DisplayRequests from '@/components/display-requests.vue'
 
 export default {
-  name: 'Customer',
+  name: 'Hairdresser',
   components: {
     UserNavigation,
     SearchBar,
@@ -17,18 +17,31 @@ export default {
   computed: {
     ...mapState(['user']),
   },
+  methods: {
+    ...mapActions(['getRequests']),
+  },
+  data () {
+    return {
+      requestsAtSameCity: [],
+      requestsAtSameState: []
+    }
+  },
+  async created () {
+    this.requestsAtSameCity = await this.getRequests(`city=${this.user.address.city}`)
+    const requestsAtState = await this.getRequests(`stateCode=${this.user.address.stateCode}`)
+    this.requestsAtSameState = requestsAtState.filter(i => i.senderAddress.city != user.address.city)
+  }
 }
+
 </script>
 
 <template lang="pug">
-.customer-page.pb-5
+#hairdresserPage.pb-5
   section
     UserNavigation
-  section(v-show='user.type==="Customer"')
-    PostRequest
   section
-    #display-request(v-if='user.type == "Customer"')
-      DisplayRequests(title='Recent Requests', :requests='user.customerRequests')
+    DisplayRequests(title='Requests in your city', :requests='requestsAtSameCity')
+    DisplayRequests(title='Requests in your state', :requests='requestsAtSameState')
 </template>
 
 <style lang="scss" scoped>
