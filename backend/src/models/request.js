@@ -80,14 +80,5 @@ const RequestSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-class Request {
-  async addReply(reply) {
-    this.replies.push(reply)
-    await this.save()
-    return this
-  }
-}
-
-RequestSchema.loadClass(Request)
 RequestSchema.plugin(autopopulate)
 module.exports = mongoose.model('Request', RequestSchema)
