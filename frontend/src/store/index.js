@@ -110,11 +110,17 @@ const store = new Vuex.Store({
       }
     },
 
-    async postReply({ commit }, data) {
+    async postReply({ commit }, { requestId, reply }) {
       try {
-        const repliedRequest = await axios.post(`/api/requests/${data.requestId}/reply`, data.reply)
-        if (repliedRequest) {
-          const user = await axios.post(`/api/users/${data.reply.senderId}/replied-requests`, repliedRequest.data)
+        const user = await axios.post(`/api/users/${reply.senderId}/${requestId}`, reply)
+        if (user) {
+          commit(mutations.SET_USER, user.data)
+        }
+      } catch (e) {
+        throw e
+      }
+    },
+
           commit(mutations.SET_USER, user.data)
         }
       } catch (e) {
