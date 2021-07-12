@@ -39,9 +39,18 @@ export default function init(store) {
         },
       },
       {
-        path: '/user',
-        name: 'user',
-        component: () => import(/* webpackChunkName: "user" */ '../views/user.vue'),
+        path: '/customer',
+        name: 'customer',
+        component: () => import(/* webpackChunkName: "customer" */ '../views/customer.vue'),
+        beforeEnter(to, from, next) {
+          if (!store.state.user) return next('/')
+          else return next()
+        },
+      },
+      {
+        path: '/hairdresser',
+        name: 'hairdresser',
+        component: () => import(/* webpackChunkName: "hairdresser" */ '../views/hairdresser.vue'),
         beforeEnter(to, from, next) {
           if (!store.state.user) return next('/')
           else return next()
