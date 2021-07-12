@@ -23,8 +23,8 @@ export default {
 .card.border-secondary.my-3.mx-2.p-3.rounded.shadow-sm
   h6.border-bottom.pb-2.mb-0 {{ title }}
   .display-requests(v-if='requests.length > 0')
-    transition-group(name='list', tag='p')
-      .request(v-for='request in sortedRequests', :key='request._id')
+    transition-group(name='list', tag='ul')
+      li(v-for='request in sortedRequests', :key='request._id')
         RequestCard(:request='request')
 </template>
 
@@ -36,5 +36,9 @@ export default {
 .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
   opacity: 0;
   transform: translateY(30px);
+}
+
+ul {
+  list-style-type: none;
 }
 </style>
