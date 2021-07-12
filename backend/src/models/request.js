@@ -36,13 +36,12 @@ const RequestSchema = new mongoose.Schema(
             type: String,
             default: '',
           },
-          state: {
+          stateCode: {
             type: String,
             default: '',
           },
           postcode: { type: Number, default: '' },
           location: [],
-          createdAt: { type: Date, default: Date.now },
         },
         message: {
           type: String,
@@ -55,6 +54,7 @@ const RequestSchema = new mongoose.Schema(
             autopopulate: true,
           },
         ],
+        createdAt: { type: Date, default: Date.now },
       },
     ],
     photos: [
@@ -69,7 +69,7 @@ const RequestSchema = new mongoose.Schema(
         type: String,
         default: '',
       },
-      state: {
+      stateCode: {
         type: String,
         default: '',
       },
