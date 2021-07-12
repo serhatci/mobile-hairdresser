@@ -12,11 +12,11 @@ router.get('/', async (req, res, next) => {
   }
 
   if (req.query.city) {
-    query = { senderAddress: { city: req.query.city } }
+    query = { 'senderAddress.city': req.query.city }
   }
 
-  if (req.query.state) {
-    query = { senderAddress: { state: req.query.state } }
+  if (req.query.stateCode) {
+    query = { senderAddress: { stateCode: req.query.stateCode } }
   }
 
   if (req.query.postcode) {
@@ -28,7 +28,7 @@ router.get('/', async (req, res, next) => {
   }
 
   try {
-    const user = await Request.find(query).limit(8)
+    const user = await Request.find(query)
     res.send(user)
   } catch (err) {
     next(err)
