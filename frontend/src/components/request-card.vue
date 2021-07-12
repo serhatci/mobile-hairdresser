@@ -41,7 +41,7 @@ export default ({
       div
         h6.fw-bold.text-info.mb-1 {{ request.senderFullName }}
         p.text-muted.small.mb-0
-          | Shared - {{ request.updatedAt }}
+          | Shared - {{ request.createdAt }}
   p.mt-3.mb-1.pb-2
     | Looking for&nbsp
     strong(v-if='request.requestType === "Hairdresser Request"') Mobile Hairdresser&nbsp
@@ -51,8 +51,12 @@ export default ({
   p#message.mt-3.mb-4 {{ request.message }}
   .small.d-flex.justify-content-between.pb-3.border-bottom
     nav
-      .btn.btn-sm.me-3.text-primary.text-decoration-underline(href='#!') Comments
-      .btn.btn-sm.me-3.text-primary.text-decoration-underline(@click='isReplyClicked = !isReplyClicked') Reply
+      #comment-button.d-inline(@click='isAllRepliesClicked = !isAllRepliesClicked')
+        .btn.btn-sm.me-3.text-primary.text-decoration-underline All Replies
+          i.bi.ms-2(:class='isAllRepliesClicked ? "bi-chevron-compact-up" : "bi-chevron-compact-down"')
+      #reply-button.d-inline(@click='isReplyClicked = !isReplyClicked')
+        .btn.btn-sm.me-3.text-primary.text-decoration-underline Reply
+          i.bi.ms-2(:class='isReplyClicked ? "bi-chevron-compact-up" : "bi-chevron-compact-down"')
     nav(v-show='request.senderId == user._id')
       .btn.btn-sm.me-3.text-danger.text-decoration-underline(@click='deleteRequest(request)') DELETE
   PostReply(
