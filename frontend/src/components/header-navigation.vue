@@ -12,6 +12,12 @@ export default {
   },
   computed: {
     ...mapState(['user']),
+
+    userPage () {
+      if (!this.user) return '/'
+
+      return this.user.type == 'Customer' ? '/customer' : '/hairdresser'
+    }
   },
 }
 </script>
@@ -43,7 +49,7 @@ nav.navbar.navbar-expand-md.navbar-light.px-3(aria-label='Top sticky navigation 
         li.nav-item(v-show='!user')
           a.btn.btn-outline-success.m-1(href='/signup', role='button') Sign up
         li.nav-item(v-show='user')
-          a.btn.btn-outline-success.m-1(href='/user', role='button') User Page
+          a.btn.btn-outline-success.m-1(:href='userPage', role='button') User Page
         li.nav-item(v-show='user')
           button.btn.btn-outline-success.m-1(@click='doLogout') Log out
 </template>
