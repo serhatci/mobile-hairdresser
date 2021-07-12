@@ -27,7 +27,8 @@ export default {
   section(v-show='user.type==="Customer"')
     PostRequest
   section
-    DisplayRequests(title='Recent Requests', :requests='user.customerRequests')
+    #display-request(v-if='user.type == "Customer"')
+      DisplayRequests(title='Recent Requests', :requests='user.customerRequests')
 </template>
 
 <style lang="scss" scoped>
