@@ -135,7 +135,7 @@ const store = new Vuex.Store({
 
 socket.on('Hairdresser Request', address => {
   console.log(`city ${address.city}`)
-  if (store.state.user.city != address.city) return
+  if (store.state.user.address.city != address.city) return
 
   store.dispatch('receiveNotifications')
 })
