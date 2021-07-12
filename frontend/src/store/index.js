@@ -103,7 +103,6 @@ const store = new Vuex.Store({
         const user = await axios.delete(`/api/customers/${request.senderId}/request/${request._id}`)
         if (user) {
           commit(mutations.SET_USER, user.data)
-          await axios.delete(`/api/requests/${request._id}`)
         }
       } catch (e) {
         throw e
@@ -121,6 +120,10 @@ const store = new Vuex.Store({
       }
     },
 
+    async deleteReply({ commit }, { requestId, reply }) {
+      try {
+        const user = await axios.patch(`/api/users/${reply.senderId}/${requestId}`, reply)
+        if (user) {
           commit(mutations.SET_USER, user.data)
         }
       } catch (e) {
