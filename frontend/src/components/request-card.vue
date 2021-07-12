@@ -1,5 +1,5 @@
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import PostReply from './post-reply.vue'
 import ReplyCard from './reply-card.vue'
 
@@ -52,13 +52,14 @@ export default ({
   .small.d-flex.justify-content-between.pb-3.border-bottom
     nav
       #comment-button.d-inline(@click='isAllRepliesClicked = !isAllRepliesClicked')
+        span.badge.bg-warning.ms-1 {{ request.replies.length }}
         .btn.btn-sm.me-3.text-primary.text-decoration-underline All Replies
           i.bi.ms-2(:class='isAllRepliesClicked ? "bi-chevron-compact-up" : "bi-chevron-compact-down"')
       #reply-button.d-inline(@click='isReplyClicked = !isReplyClicked')
         .btn.btn-sm.me-3.text-primary.text-decoration-underline Reply
           i.bi.ms-2(:class='isReplyClicked ? "bi-chevron-compact-up" : "bi-chevron-compact-down"')
     nav(v-show='request.senderId == user._id')
-      .btn.btn-sm.me-3.text-danger.text-decoration-underline(@click='deleteRequest(request)') DELETE
+      .btn.btn-sm.me-3.text-danger.text-decoration-underline(@click='deleteRequest(request)') Delete
   PostReply(
     :requestId='request._id',
     :isReplyClicked='isReplyClicked',
