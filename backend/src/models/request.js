@@ -42,6 +42,7 @@ const RequestSchema = new mongoose.Schema(
           },
           postcode: { type: Number, default: '' },
           location: [],
+          createdAt: { type: Date, default: Date.now },
         },
         message: {
           type: String,
