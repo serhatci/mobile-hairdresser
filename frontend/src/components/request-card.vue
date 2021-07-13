@@ -67,7 +67,7 @@ export default ({
   )
   transition-group(name='replyList', tag='ul')
     li(v-for='reply in request.replies', :key='reply._id', v-show='isAllRepliesClicked')
-      ReplyCard(:reply='reply', :requestId='request._id')
+      ReplyCard(:reply='reply', :requestId='request._id', :sameUser='reply.senderId === request.senderId ? true : false')
 </template>
 
 <style scoped>
