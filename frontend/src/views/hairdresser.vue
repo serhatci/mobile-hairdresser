@@ -45,7 +45,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.customer-page {
+#hairdresserPage {
   background-color: var(--my-green);
 }
 
