@@ -47,7 +47,7 @@ export default ({
 <template lang="pug">
 .row
   .col-12.col-md-4.text-md-end
-    label.d-none.d-sm-inline.form-control-label.form-control-sm(for='addressInput') Address:
+    label.visually-hidden.d-sm-inline.form-control-label.form-control-sm(for='addressInput') Address:
   .col-12.col-md-8
     input#addressInput.form-control.form-control-sm.form-control-borderless(
       type='text',

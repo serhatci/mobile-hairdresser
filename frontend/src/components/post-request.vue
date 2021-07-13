@@ -92,7 +92,7 @@ export default ({
           AddressInputBar(@clicked='getLocation')
       .mb-3
         label.form-label(for='message')
-          span.d-none Request Message
+          span.visually-hidden Request Message
         textarea#message.form-control.form-control-sm(
           v-model='message',
           placeholder='Request Message',

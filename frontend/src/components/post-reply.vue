@@ -56,7 +56,7 @@ transition(name='fade')
     span.d-block.text-center.text-danger.py-1(v-if='backendError') {{ backendError }}
     .mb-3
       label.form-label(for='replyMessage')
-        span.d-none Request Message
+        span.visually-hidden Request Message
       textarea#replyMessage.form-control.form-control-sm(
         v-model='message',
         placeholder='Reply Message',

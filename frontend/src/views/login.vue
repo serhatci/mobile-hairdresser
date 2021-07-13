@@ -38,13 +38,11 @@ export default {
     .card-body
       form(@submit='submitLogin')
         span.d-block.text-center.text-danger(v-if='backendError') {{ backendError }}
-        .mb-0
-          label.form-label(for='email')
-            span.screenreader Email
+        .mb-3
+          label.form-label.visually-hidden(for='email') Email
           input#email.form-control(type='email', v-model='email', aria-describedby='emailHelp', placeholder='Email')
         .mb-3
-          label.form-label(for='password')
-            span.screenreader Password
+          label.form-label.visually-hidden(for='password') Password
           input#password.form-control(type='password', v-model='password', placeholder='Password')
         .mb-3.text-center
           button.btn.btn-primary(type='submit') Log In
@@ -63,10 +61,6 @@ export default {
 
 .card {
   max-width: 25rem;
-}
-
-.screenreader {
-  display: none;
 }
 
 .card-footer {
