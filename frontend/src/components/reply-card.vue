@@ -5,10 +5,12 @@ export default ({
   name: 'ReplyCard',
   props: {
     reply: {},
-    requestId: String
+    requestId: String,
+    sameUser: Boolean
   },
   computed: {
     ...mapState(['user']),
+
   },
   methods: {
     ...mapActions(['deleteReply']),
@@ -18,7 +20,7 @@ export default ({
 
 <template lang="pug">
 .clearfix
-  .card.border.mt-1.me-2.px-3.bg-light.float-end
+  .card.border.mt-1.me-2.px-3.bg-light(:class='{ "float-start": sameUser, "float-end": !sameUser }')
     .row.g-0
       .col-6
         .d-flex.flex-start.align-items-center.mt-2
@@ -29,7 +31,7 @@ export default ({
             height='60'
           )
           div
-            h6.fw-bold.text-info.mb-1 {{ reply.senderFullName }}
+            h6.fw-bold.mb-1(:class='{ "text-info": sameUser, "text-body": !sameUser }') {{ reply.senderFullName }}
               #sendPM.btn.text-primary.text-decoration-underline.mb-1.ms-3.p-1(v-show='user.type=="Customer"') Send PM
             p.text-muted.small.mb-0
               | Shared - {{ reply.createdAt }}&nbsp
