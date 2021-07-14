@@ -48,11 +48,13 @@ export default ({
       e.preventDefault()
       try {
         await this.postRequest({
-          senderId: this.user._id,
-          senderFullName: this.user.fullName,
-          requestType: this.requestType,
-          senderAddress: this.address,
-          message: this.message,
+          request: {
+            senderId: this.user._id,
+            senderFullName: this.user.fullName,
+            requestType: this.requestType,
+            senderAddress: this.address,
+            message: this.message,
+          }, senderId: this.user._id
         })
 
         this.notifyRequest(this.address)
