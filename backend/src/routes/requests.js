@@ -58,4 +58,60 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.delete('/:requestId', async (req, res, next) => {
+  const { requestId } = req.params
+
+  if (!requestId) return res.status(400).send({ message: 'Request ID can not be empty!' })
+
+  try {
+    const deletedRequest = await Request.findByIdAndDelete(requestId)
+    return res.send(deletedRequest)
+  } catch (err) {
+    if (err.name === 'CastError') {
+      res.status(400).send({ message: 'Provided requestId has wrong format!' })
+    } else {
+      next(err)
+    }
+  }
+})
+
+router.post('/:requestId/replies', async (req, res, next) => {
+  const { requestId } = req.params
+  const { senderId, senderFullName, senderAddress, message, photos } = req.body
+
+  if (message === '') return res.status(400).send({ message: 'Message can not be empty!' })
+
+  const replyToCreate = { senderId, senderFullName, senderAddress, message, photos }
+
+  try {
+    const updatedRequest = await Request.updateOne({ _id: requestId }, { $push: { replies: replyToCreate } })
+
+    return res.send(updatedRequest)
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      const invalidProperty = Object.keys(err.errors)[0]
+      return res.status(422).send({ message: err.errors[invalidProperty].message })
+    }
+    return next(err)
+  }
+})
+
+router.delete('/:requestId/replies/:replyId', async (req, res, next) => {
+  const { requestId, replyId } = req.params
+
+  if (!requestId) return res.status(400).send({ message: 'Request ID can not be empty!' })
+  if (!replyId) return res.status(400).send({ message: 'Reply ID can not be empty!' })
+
+  try {
+    const updatedRequest = await Request.updateOne({ _id: requestId }, { $pull: { replies: { _id: replyId } } })
+    return res.send(updatedRequest)
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      const invalidProperty = Object.keys(err.errors)[0]
+      return res.status(422).send({ message: err.errors[invalidProperty].message })
+    }
+    return next(err)
+  }
+})
+
 module.exports = router
