@@ -1,8 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
 const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
 const User = require('./user')
-const Request = require('./request')
 
 const CustomerSchema = new mongoose.Schema(
   {
@@ -44,11 +44,8 @@ class Customer {
   }
 
   async deleteRequest(requestId) {
-    // eslint-disable-next-line no-underscore-dangle
     const index = this.customerRequests.findIndex(item => item._id == requestId)
     this.customerRequests.splice(index, 1)
-
-    await Request.findByIdAndDelete(requestId)
 
     await this.save()
     return this

@@ -86,11 +86,11 @@ const store = new Vuex.Store({
       }
     },
 
-    async postRequest({ commit }, request) {
+    async postRequest({ commit }, { request, senderId }) {
       try {
         const createdRequest = await axios.post('/api/requests', request)
         if (createdRequest) {
-          const user = await axios.post(`/api/customers/${request.senderId}/request`, createdRequest.data)
+          const user = await axios.post(`/api/customers/${senderId}/requests`, createdRequest.data)
           commit(mutations.SET_USER, user.data)
         }
       } catch (e) {
@@ -98,10 +98,11 @@ const store = new Vuex.Store({
       }
     },
 
-    async deleteRequest({ commit }, request) {
+    async deleteRequest({ commit }, { requestId, senderId }) {
       try {
-        const user = await axios.delete(`/api/customers/${request.senderId}/request/${request._id}`)
+        const user = await axios.delete(`/api/customers/${senderId}/requests/${requestId}`)
         if (user) {
+          await axios.delete(`/api/requests/${requestId}`)
           commit(mutations.SET_USER, user.data)
         }
       } catch (e) {
@@ -109,10 +110,11 @@ const store = new Vuex.Store({
       }
     },
 
-    async postReply({ commit }, { requestId, reply }) {
+    async postReply({ commit }, { requestId, reply, userId }) {
       try {
-        const user = await axios.post(`/api/users/${reply.senderId}/${requestId}`, reply)
-        if (user) {
+        const createdReply = await axios.post(`/api/requests/${requestId}/replies`, reply)
+        if (createdReply) {
+          const user = await axios.get(`/api/users/${userId}`)
           commit(mutations.SET_USER, user.data)
         }
       } catch (e) {
@@ -120,10 +122,11 @@ const store = new Vuex.Store({
       }
     },
 
-    async deleteReply({ commit }, { requestId, reply }) {
+    async deleteReply({ commit }, { requestId, replyId, userId }) {
       try {
-        const user = await axios.patch(`/api/users/${reply.senderId}/${requestId}`, reply)
-        if (user) {
+        const deletedReply = await axios.delete(`/api/requests/${requestId}/replies/${replyId}`)
+        if (deletedReply) {
+          const user = await axios.get(`/api/users/${userId}`)
           commit(mutations.SET_USER, user.data)
         }
       } catch (e) {

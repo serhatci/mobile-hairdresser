@@ -26,12 +26,6 @@ const HairdresserSchema = new mongoose.Schema(
     },
     serviceArea: { type: Number, default: 0 }, // perimeter in km around a location
     employerReferences: [],
-    portfolioVideos: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Video',
-      },
-    ],
     portfolioPhotos: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -73,18 +67,8 @@ class Hairdresser {
     await this.save()
   }
 
-  async uploadVideoToPortfolio(video) {
-    this.portfolioVideos.push(video)
-    await this.save()
-  }
-
   async deletePhotoFromPortfolio(photo) {
     this.portfolioPhotos = this.portfolioPhotos.filter(p => p !== photo)
-    await this.save()
-  }
-
-  async deleteVideoFromPortfolio(video) {
-    this.portfolioVideos = this.portfolioVideos.filter(p => p !== video)
     await this.save()
   }
 
@@ -104,17 +88,6 @@ class Hairdresser {
     const referenceIndex = this.employerReferences.indexOf(reference)
     this.employerReferences.splice(referenceIndex, 1)
     await this.save()
-  }
-
-  async tagVideo(video, user) {
-    video.taggedUsers.push(user)
-    await video.save()
-  }
-
-  async unTagVideo(video, user) {
-    const userIndex = video.taggedUsers.indexOf(user)
-    video.taggedUsers.splice(userIndex, 1)
-    await video.save()
   }
 
   async uploadCertificate(certificate) {

@@ -35,7 +35,8 @@ export default ({
             senderAddress: this.user.address,
             message: this.message,
           },
-          requestId: this.requestId
+          requestId: this.requestId,
+          userId: this.user._id
         })
 
         this.$emit('replySent')

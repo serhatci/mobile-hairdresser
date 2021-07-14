@@ -110,24 +110,13 @@ class User {
     await photo.save()
   }
 
-  async likeVideo(video) {
-    video.likedBy.push(this)
-    await video.save()
-  }
-
-  async unlikeVideo(video) {
-    const videoIndex = video.likedBy.indexOf(video)
-    video.likedBy.splice(videoIndex, 1)
-    await video.save()
-  }
-
   async replyRequest(request, reply) {
     request.replies.push(reply)
     await request.save()
   }
 
-  async deleteReply(request, reply) {
-    const replyIndex = request.replies.findIndex(i => i._id == reply._id)
+  async deleteReply(request, replyId) {
+    const replyIndex = request.replies.findIndex(i => i._id == replyId)
     request.replies.splice(replyIndex, 1)
     await request.save()
   }
