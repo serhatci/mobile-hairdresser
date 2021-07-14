@@ -31,10 +31,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-#customerPage {
-  background-color: var(--my-green);
-}
-
 section {
   max-width: 1000px;
   margin: auto;

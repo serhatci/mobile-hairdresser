@@ -86,10 +86,6 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/theme.scss';
 
-.signup-page {
-  background-color: var(--my-green);
-}
-
 .card {
   max-width: 25rem;
 }

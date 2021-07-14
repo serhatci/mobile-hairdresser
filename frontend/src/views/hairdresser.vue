@@ -45,10 +45,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-#hairdresserPage {
-  background-color: var(--my-green);
-}
-
 section {
   max-width: 1000px;
   margin: auto;

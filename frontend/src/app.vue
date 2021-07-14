@@ -32,10 +32,15 @@ export default {
 
 #app,
 body,
-html {
+html,
+.container-fluid {
   height: 100%;
   width: 100%;
   margin: 0;
+}
+
+main {
+  background-color: var(--my-green);
 }
 
 html {
