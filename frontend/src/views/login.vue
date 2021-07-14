@@ -1,5 +1,5 @@
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'Login',
@@ -7,11 +7,17 @@ export default {
     return {
       email: '',
       password: '',
-      backendError: null
+      backendError: null,
+
+      loginSuccess: false
     }
+  },
+  computed: {
+    ...mapState(['user'])
   },
   methods: {
     ...mapActions(['login']),
+
     async submitLogin (e) {
       e.preventDefault()
 
@@ -21,10 +27,16 @@ export default {
           password: this.password
         })
 
-        this.$router.push('/')
+        this.redirect()
       } catch (e) {
         this.backendError = e.response.data.message
       }
+    },
+
+    redirect () {
+      this.loginSuccess = true
+      const route = this.user.type === 'Customer' ? 'customer' : 'hairdresser'
+      setTimeout(() => this.$router.push(`/${route}`), 1000)
     }
   }
 }
@@ -33,7 +45,14 @@ export default {
 
 <template lang='pug'>
 .login-page.d-flex.align-items-center.justify-content-center.py-3.py-sm-5
-  .card.w-100.mx-2
+  #loginMessage.alert.alert-success.text-center(role='alert', :class='{ "d-none": !loginSuccess }')
+    h4.alert-headin Logged in!
+      i.bi.bi-check-circle.ms-2
+    hr
+    p
+      | You are being directed to home page
+
+  .card.w-100.mx-2(:class='{ "d-none": loginSuccess }')
     h4.card-header.text-center.text-primary Log In
     .card-body
       form(@submit='submitLogin')
@@ -55,10 +74,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.login-page {
-  background-color: var(--my-green);
-}
-
 .card {
   max-width: 25rem;
 }
