@@ -40,7 +40,7 @@ export default ({
       .col-6.text-end
         nav.d-inline-block(v-show='reply.senderId == user._id')
           .btn.btn-sm.me-3.text-danger.text-decoration-underline(
-            @click='deleteReply({ requestId, reply })',
+            @click='deleteReply({ requestId, replyId: reply._id, userId: user._id })',
             v-show='user._id==reply.senderId'
           ) Delete
     p#message.mt-3.mb-4 {{ reply.message }}
