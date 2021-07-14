@@ -60,17 +60,14 @@ export default {
                 input#typeCustomer.form-check-input(type='radio', v-model='type', value='Customer')
                 label.form-check-label(for='typeCustomer') Customer
         span.d-block.text-center.text-danger(v-if='backendError') {{ backendError }}
-        .mb-0
-          label.form-label(for='email')
-            span.screenreader Email
+        .mb-3
+          label.form-label.visually-hidden(for='email') Email
           input#email.form-control(type='email', v-model='email', aria-describedby='emailHelp', placeholder='Email')
-        .mb-0
-          label.form-label(for='password')
-            span.screenreader Password
+        .mb-3
+          label.form-label.visually-hidden(for='password') Password
           input#password.form-control(type='password', v-model='password', placeholder='Password')
         .mb-3
-          label.form-label(for='password-confirmation')
-            span.screenreader Password Confirmation
+          label.form-label.visually-hidden(for='password-confirmation') Password Confirmation
           input#password-confirmation.form-control(
             type='password',
             placeholder='Password Confirmation',
@@ -88,14 +85,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/theme.scss';
-
-.signup-page {
-  background-color: var(--my-green);
-}
-
-.screenreader {
-  display: none;
-}
 
 .card {
   max-width: 25rem;

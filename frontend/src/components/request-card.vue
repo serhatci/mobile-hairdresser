@@ -67,7 +67,7 @@ export default ({
   )
   transition-group(name='replyList', tag='ul')
     li(v-for='reply in request.replies', :key='reply._id', v-show='isAllRepliesClicked')
-      ReplyCard(:reply='reply', :requestId='request._id')
+      ReplyCard(:reply='reply', :requestId='request._id', :sameUser='reply.senderId === request.senderId ? true : false')
 </template>
 
 <style scoped>
@@ -81,10 +81,10 @@ ul {
 
 .replyList-enter-active,
 .replyList-leave-active {
-  transition: all 1s;
+  transition: all 0.3s;
 }
 .replyList-enter, .replyList-leave-to /* .list-leave-active below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateY(30px);
+  opacity: 70%;
+  transform: translateY(0.5rem);
 }
 </style>

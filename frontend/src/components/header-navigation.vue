@@ -13,7 +13,11 @@ export default {
   computed: {
     ...mapState(['user']),
 
-    userPage () {
+    currentRoute () {
+      return this.$route.name;
+    },
+
+    userPageRoute () {
       if (!this.user) return '/'
 
       return this.user.type == 'Customer' ? '/customer' : '/hairdresser'
@@ -41,15 +45,15 @@ nav.navbar.navbar-expand-md.navbar-light.px-3(aria-label='Top sticky navigation 
       ul.navbar-nav.me-auto.mb-2.mb-md-0
         li.nav-item
           a.nav-link(href='/about') About
-        li.nav-item
-          a.nav-link(href='/contact') Contact
+        li.nav-item(v-show='currentRoute!=="home"')
+          a.nav-link(href='/') Home
       ul.navbar-nav.mb-2.mb-md-0
-        li.nav-item(v-show='!user')
+        li.nav-item(v-show='!user && currentRoute!=="login"')
           a.btn.btn-outline-success.m-1(href='/login', role='button') Log in
-        li.nav-item(v-show='!user')
+        li.nav-item(v-show='!user && currentRoute !== "signup"')
           a.btn.btn-outline-success.m-1(href='/signup', role='button') Sign up
-        li.nav-item(v-show='user')
-          a.btn.btn-outline-success.m-1(:href='userPage', role='button') User Page
+        li.nav-item(v-show='user && currentRoute==="home"')
+          a.btn.btn-success.m-1(:href='userPageRoute', role='button') User Page
         li.nav-item(v-show='user')
           button.btn.btn-outline-success.m-1(@click='doLogout') Log out
 </template>
