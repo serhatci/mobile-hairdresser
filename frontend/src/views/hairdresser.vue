@@ -29,9 +29,11 @@ export default {
   },
   async created () {
     this.repliedRequests = await this.getRequests(`replierId=${this.user._id}`)
-    this.requestsFromUsersCity = await this.getRequests(`city=${this.user.address.city}`)
-    const requestsInState = await this.getRequests(`stateCode=${this.user.address.stateCode}`)
-    this.requestsAtSameState = requestsAtState.filter(i => i.senderAddress.city != user.address.city)
+    if (this.user.address) {
+      this.requestsFromUsersCity = await this.getRequests(`city=${this.user.address.city}`)
+      const requestsInState = await this.getRequests(`stateCode=${this.user.address.stateCode}`)
+      this.requestsFromUsersState = requestsInState.filter(i => i.senderAddress.city != this.user.address.city)
+    }
   }
 }
 
