@@ -35,7 +35,7 @@ export default ({
               #sendPM.btn.text-primary.text-decoration-underline.mb-1.ms-3.p-1(v-show='user.type=="Customer"') Send PM
             p.text-muted.small.mb-0
               | Shared - {{ reply.createdAt }}&nbsp
-              | {{ reply.senderAddress.city ? reply.senderAddress.city : "Unknown" }}
+              | {{ reply.senderAddress ? reply.senderAddress.city : "Unknown" }}
             .small.d-flex.justify-content-between.pb-3.border-bottom
       .col-6.text-end
         nav.d-inline-block(v-if='reply.senderId == user._id')
