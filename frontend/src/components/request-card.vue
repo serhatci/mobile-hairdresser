@@ -26,6 +26,9 @@ export default ({
 
     addReplyCard (reply) {
       this.request.replies.push(reply)
+
+      this.isReplyClicked = !this.isReplyClicked
+      this.isAllRepliesClicked = true
     },
 
     deleteReplyCard (replyId) {
