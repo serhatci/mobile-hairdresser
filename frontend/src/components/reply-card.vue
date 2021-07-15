@@ -1,5 +1,5 @@
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 export default ({
   name: 'ReplyCard',
@@ -10,10 +10,12 @@ export default ({
   },
   computed: {
     ...mapState(['user']),
-
   },
   methods: {
-    ...mapActions(['deleteReply']),
+
+    deleteReplyCard (replyId) {
+      this.$emit('replyDeleted', replyId)
+    }
   },
 })
 </script>

@@ -22,11 +22,18 @@ export default ({
     ...mapState(['user']),
   },
   methods: {
-    ...mapActions(['deleteRequest']),
+    ...mapActions(['deleteRequest', 'deleteReply']),
 
     addReplyCard (reply) {
       this.request.replies.push(reply)
     },
+
+    deleteReplyCard (replyId) {
+      this.deleteReply({ requestId: this.request._id, replyId })
+
+      const index = this.request.replies.findIndex(i => i._id == replyId)
+      this.request.replies.splice(index, 1)
+    }
   },
 })
 </script>
