@@ -22,7 +22,21 @@ export default ({
     ...mapState(['user']),
   },
   methods: {
-    ...mapActions(['deleteRequest']),
+    ...mapActions(['deleteRequest', 'deleteReply']),
+
+    addReplyCard (reply) {
+      this.request.replies.push(reply)
+
+      this.isReplyClicked = !this.isReplyClicked
+      this.isAllRepliesClicked = true
+    },
+
+    deleteReplyCard (replyId) {
+      this.deleteReply({ requestId: this.request._id, replyId })
+
+      const index = this.request.replies.findIndex(i => i._id == replyId)
+      this.request.replies.splice(index, 1)
+    }
   },
 })
 </script>
@@ -62,17 +76,14 @@ export default ({
       .btn.btn-sm.me-3.text-danger.text-decoration-underline(
         @click='deleteRequest({ requestId: request._id, senderId: user._id })'
       ) Delete
-  PostReply(
-    :requestId='request._id',
-    :isReplyClicked='isReplyClicked',
-    v-on:replySent='isReplyClicked = !isReplyClicked'
-  )
+  PostReply(:request='request', :isReplyClicked='isReplyClicked', @replySent='addReplyCard')
   transition-group(name='replyList', tag='ul')
-    li(v-for='reply in request.replies', :key='reply._id', v-show='isAllRepliesClicked')
+    li(v-for='reply in request.replies', :key='`${reply._id}`', v-show='isAllRepliesClicked')
       ReplyCard(
         :reply='reply',
         :requestId='request._id',
-        :sameUser='reply.senderId === request.senderId ? true : false'
+        :sameUser='reply.senderId === request.senderId ? true : false',
+        @replyDeleted='deleteReplyCard'
       )
 </template>
 

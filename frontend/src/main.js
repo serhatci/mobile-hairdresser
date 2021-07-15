@@ -8,6 +8,7 @@ import 'normalize.css'
 import 'bootstrap'
 
 Vue.config.productionTip = false
+Vue.config.performance = true
 
 async function main() {
   let storeInstance = await store()

@@ -22,26 +22,31 @@ export default {
   },
   data () {
     return {
-      requestsAtSameCity: [],
-      requestsAtSameState: []
+      requestsFromUsersCity: [],
+      requestsFromUsersState: [],
+      repliedRequests: []
     }
   },
   async created () {
-    this.requestsAtSameCity = await this.getRequests(`city=${this.user.address.city}`)
-    const requestsAtState = await this.getRequests(`stateCode=${this.user.address.stateCode}`)
-    this.requestsAtSameState = requestsAtState.filter(i => i.senderAddress.city != user.address.city)
+    this.repliedRequests = await this.getRequests(`replierId=${this.user._id}`)
+    if (this.user.address) {
+      this.requestsFromUsersCity = await this.getRequests(`city=${this.user.address.city}`)
+      const requestsInState = await this.getRequests(`stateCode=${this.user.address.stateCode}`)
+      this.requestsFromUsersState = requestsInState.filter(i => i.senderAddress.city != this.user.address.city)
+    }
   }
 }
 
 </script>
 
 <template lang="pug">
-#hairdresserPage.pb-5
+#hairdresserPage.pb-5(v-if='user')
   section
     UserNavigation
   section
-    DisplayRequests(title='Requests in your city', :requests='requestsAtSameCity')
-    DisplayRequests(title='Requests in your state', :requests='requestsAtSameState')
+    DisplayRequests(title='Requests that you replied', :requests='repliedRequests')
+    DisplayRequests(title='Requests in your city', :requests='requestsFromUsersCity')
+    DisplayRequests(title='Requests in your state', :requests='requestsFromUsersState')
 </template>
 
 <style lang="scss" scoped>

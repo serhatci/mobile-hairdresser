@@ -56,7 +56,7 @@ export default ({
       v-model='address',
       @focus='setSuggestions'
     )
-    #suggestions.mt-2.d-none(v-show='address.length > 0 && doAutocomplete().length > 0')
+    #suggestions.mt-2.d-none(v-show='address.length > 2 && doAutocomplete().length > 0')
       ul.list-group.rounded
         li.list-group-item.py-2.px-3(
           v-for='item in doAutocomplete()',

@@ -110,25 +110,19 @@ const store = new Vuex.Store({
       }
     },
 
-    async postReply({ commit }, { requestId, reply, userId }) {
+    async postReply(store, { requestId, reply }) {
       try {
         const createdReply = await axios.post(`/api/requests/${requestId}/replies`, reply)
-        if (createdReply) {
-          const user = await axios.get(`/api/users/${userId}`)
-          commit(mutations.SET_USER, user.data)
-        }
+        return createdReply.data
       } catch (e) {
         throw e
       }
     },
 
-    async deleteReply({ commit }, { requestId, replyId, userId }) {
+    async deleteReply(store, { requestId, replyId }) {
       try {
         const deletedReply = await axios.delete(`/api/requests/${requestId}/replies/${replyId}`)
-        if (deletedReply) {
-          const user = await axios.get(`/api/users/${userId}`)
-          commit(mutations.SET_USER, user.data)
-        }
+        return deletedReply.data
       } catch (e) {
         throw e
       }

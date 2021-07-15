@@ -22,7 +22,7 @@ export default ({
     }
   },
   mounted () {
-    if (this.locations.lenght > 0) return
+    if (this.locations.length > 0) return
 
     this.fetchLocations()
   },

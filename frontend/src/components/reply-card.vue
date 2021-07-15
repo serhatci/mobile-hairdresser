@@ -1,19 +1,21 @@
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 export default ({
   name: 'ReplyCard',
   props: {
     reply: {},
     requestId: String,
-    sameUser: Boolean
+    sameUser: Boolean,
   },
   computed: {
     ...mapState(['user']),
-
   },
   methods: {
-    ...mapActions(['deleteReply']),
+
+    deleteReplyCard (replyId) {
+      this.$emit('replyDeleted', replyId)
+    }
   },
 })
 </script>
@@ -35,14 +37,11 @@ export default ({
               #sendPM.btn.text-primary.text-decoration-underline.mb-1.ms-3.p-1(v-show='user.type=="Customer"') Send PM
             p.text-muted.small.mb-0
               | Shared - {{ reply.createdAt }}&nbsp
-              | {{ reply.senderAddress.city ? reply.senderAddress.city : "Unknown" }}
+              | {{ reply.senderAddress ? reply.senderAddress.city : "Unknown" }}
             .small.d-flex.justify-content-between.pb-3.border-bottom
       .col-6.text-end
-        nav.d-inline-block(v-show='reply.senderId == user._id')
-          .btn.btn-sm.me-3.text-danger.text-decoration-underline(
-            @click='deleteReply({ requestId, replyId: reply._id, userId: user._id })',
-            v-show='user._id==reply.senderId'
-          ) Delete
+        nav.d-inline-block(v-if='reply.senderId == user._id')
+          .btn.btn-sm.me-3.text-danger.text-decoration-underline(@click='deleteReplyCard(reply._id)') Delete
     p#message.mt-3.mb-4 {{ reply.message }}
 </template>
 
