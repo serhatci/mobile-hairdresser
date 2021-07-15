@@ -21,11 +21,11 @@ router.get('/', async (req, res, next) => {
   }
 
   if (req.query.stateCode) {
-    query = { senderAddress: { stateCode: req.query.stateCode } }
+    query = { 'senderAddress.stateCode': req.query.stateCode }
   }
 
   if (req.query.postcode) {
-    query = { senderAddress: { postcode: req.query.postcode } }
+    query = { 'senderAddress.postcode': req.query.postcode }
   }
 
   if (req.query.userType) {
@@ -113,7 +113,11 @@ router.delete('/:requestId/replies/:replyId', async (req, res, next) => {
   if (!replyId) return res.status(400).send({ message: 'Reply ID can not be empty!' })
 
   try {
-    const updatedRequest = await Request.findByIdAndUpdate(requestId, { $push: { replies: replyId } }, { new: true })
+    const updatedRequest = await Request.findByIdAndUpdate(
+      requestId,
+      { $pull: { replies: { _id: replyId } } },
+      { new: true }
+    )
     const deletedReply = updatedRequest.replies.filter(i => i._id == replyId)
 
     return res.send(deletedReply)
