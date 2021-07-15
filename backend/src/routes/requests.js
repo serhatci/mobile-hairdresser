@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 const express = require('express')
 
@@ -88,9 +89,14 @@ router.post('/:requestId/replies', async (req, res, next) => {
   const replyToCreate = { senderId, senderFullName, senderAddress, message, photos }
 
   try {
-    const updatedRequest = await Request.updateOne({ _id: requestId }, { $push: { replies: replyToCreate } })
+    const updatedRequest = await Request.findByIdAndUpdate(
+      requestId,
+      { $push: { replies: replyToCreate } },
+      { new: true }
+    )
+    const createdReply = updatedRequest.replies[updatedRequest.replies.length - 1]
 
-    return res.send(updatedRequest)
+    return res.send(createdReply)
   } catch (err) {
     if (err.name === 'ValidationError') {
       const invalidProperty = Object.keys(err.errors)[0]
@@ -107,8 +113,10 @@ router.delete('/:requestId/replies/:replyId', async (req, res, next) => {
   if (!replyId) return res.status(400).send({ message: 'Reply ID can not be empty!' })
 
   try {
-    const updatedRequest = await Request.updateOne({ _id: requestId }, { $pull: { replies: { _id: replyId } } })
-    return res.send(updatedRequest)
+    const updatedRequest = await Request.findByIdAndUpdate(requestId, { $push: { replies: replyId } }, { new: true })
+    const deletedReply = updatedRequest.replies.filter(i => i._id == replyId)
+
+    return res.send(deletedReply)
   } catch (err) {
     if (err.name === 'ValidationError') {
       const invalidProperty = Object.keys(err.errors)[0]
