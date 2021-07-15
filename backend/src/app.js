@@ -28,7 +28,7 @@ const app = express()
 
 app.use(
   cors({
-    origin: app.get('env') == 'development' ? true : 'https://frontend-rcboh7xxta-lz.a.run.app/',
+    origin: app.get('env') == 'development' ? true : 'https://frontend-rcboh7xxta-lz.a.run.app',
     credentials: true,
   })
 )
