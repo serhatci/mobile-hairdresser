@@ -11,6 +11,10 @@ router.get('/', async (req, res, next) => {
     query = { sender: req.query.senderId }
   }
 
+  if (req.query.replierId) {
+    query = { 'replies.senderId': req.query.replierId }
+  }
+
   if (req.query.city) {
     query = { 'senderAddress.city': req.query.city }
   }
