@@ -20,7 +20,7 @@ export default {
       i.bi.bi-person-circle.position-absolut.text-muted
     .card-body.text-center.pt-4
       h5.card-title {{ user.fullName ? user.fullName : "Anonymous" }}
-        i.bi.bi-scissors.ms-1(v-show='user.type=="Hairdresser"')
+        i.bi.bi-scissors.ms-1(v-if='user.type == "Hairdresser"')
         .user-menu.col.col-sm-10.col-lg-8.m-auto.py-1
           .row.g-0
             .col-3

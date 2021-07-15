@@ -36,7 +36,7 @@ export default {
 </script>
 
 <template lang="pug">
-#hairdresserPage.pb-5
+#hairdresserPage.pb-5(v-if='user')
   section
     UserNavigation
   section

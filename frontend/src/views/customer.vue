@@ -21,7 +21,7 @@ export default {
 </script>
 
 <template lang="pug">
-#customerPage.pb-5
+#customerPage.pb-5(v-if='user')
   section
     UserNavigation
   section
