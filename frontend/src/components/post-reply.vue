@@ -5,7 +5,7 @@ export default ({
   name: 'PostReply',
   props: {
     isReplyClicked: Boolean,
-    requestId: String
+    request: {}
   },
   computed: {
     ...mapState(['user']),
@@ -28,18 +28,17 @@ export default ({
     async submitReply (e) {
       e.preventDefault()
       try {
-        await this.postReply({
+        const createdReply = await this.postReply({
           reply: {
             senderId: this.user._id,
             senderFullName: this.user.fullName,
             senderAddress: this.user.address,
             message: this.message,
           },
-          requestId: this.requestId,
-          userId: this.user._id
+          requestId: this.request._id,
         })
 
-        this.$emit('replySent')
+        this.$emit('replySent', createdReply)
 
         this.resetFormValues()
       } catch (e) {
