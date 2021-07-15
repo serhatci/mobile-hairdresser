@@ -6,7 +6,7 @@ export default ({
   props: {
     reply: {},
     requestId: String,
-    sameUser: Boolean
+    sameUser: Boolean,
   },
   computed: {
     ...mapState(['user']),
