@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get('/', async (req, res, next) => {
   try {
-    const results = await Location.find({}, { city: 1, stateCode: 1, postcode: 1, location: 1 }).sort({ city: 'asc' })
+    const results = await Location.find({}, { city: 1, postcode: 1 }).sort({ city: 'asc' })
     res.send(results)
   } catch (err) {
     next(err)
