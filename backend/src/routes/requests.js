@@ -4,6 +4,7 @@ const express = require('express')
 
 const router = express.Router()
 const Request = require('../models/request')
+const Location = require('../models/location')
 
 router.get('/', async (req, res, next) => {
   let query = {}
@@ -49,9 +50,12 @@ router.post('/', async (req, res, next) => {
   if (senderAddress === '') return res.status(400).send({ message: 'Address can not be empty!' })
   if (message === '') return res.status(400).send({ message: 'Message can not be empty!' })
 
-  const requestToCreate = { senderId, senderFullName, requestType, senderAddress, message }
-
   try {
+    const fullAddress = await Location.find({ postcode: senderAddress.postcode }, { stateCode: 1, location: 1, _id: 0 })
+    senderAddress.stateCode = fullAddress[0].stateCode
+    senderAddress.location = fullAddress[0].location
+
+    const requestToCreate = { senderId, senderFullName, requestType, senderAddress, message }
     const createdRequest = await Request.create(requestToCreate)
     return res.send(createdRequest)
   } catch (err) {
