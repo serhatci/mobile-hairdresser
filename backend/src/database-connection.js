@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const initializeDatabase = require('./database-initialization')
 
 // Disables depreciate warnings
 mongoose.set('useCreateIndex', true)
@@ -21,6 +22,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log('connection established'))
-  .catch(err => console.log(err))
+  .then(() => initializeDatabase(mongoose.connection))
+  .catch(console.log)
 
 module.exports = mongoose.connection
