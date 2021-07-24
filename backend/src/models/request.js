@@ -64,7 +64,7 @@ const RequestSchema = new mongoose.Schema(
         autopopulate: true,
       },
     ],
-    senderAddress: {
+    eventAddress: {
       city: {
         type: String,
         default: '',

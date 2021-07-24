@@ -15,7 +15,7 @@ export default ({
       isPostExpanded: false,
 
       requestType: 'Hairdresser Request',
-      address: '',
+      eventAddress: '',
       message: '',
 
       backendError: null,
@@ -27,22 +27,18 @@ export default ({
     this.fetchLocations()
   },
   methods: {
-    getLocation (item) {
-      this.address = item
-    },
-
-    resetFormValues () {
-      this.requestType = 'Hairdresser Request'
-      this.address = ''
-      this.message = ''
-      this.backendError = null
-
-      let el = document.getElementById("addressInput");
-      el.value = '';
-      el.dispatchEvent(new Event('addressInput'));
-    },
-
     ...mapActions(['postRequest', 'notifyRequest', 'fetchLocations']),
+
+    getLocation (item) {
+      this.eventAddress = item
+    },
+
+    sendRequest (e) {
+      if (!this.submitRequest(e)) return
+
+      this.notifyRequest(this.eventAddress)
+      this.resetFormValues()
+    },
 
     async submitRequest (e) {
       e.preventDefault()
@@ -52,17 +48,25 @@ export default ({
             senderId: this.user._id,
             senderFullName: this.user.fullName,
             requestType: this.requestType,
-            senderAddress: this.address,
+            eventAddress: this.eventAddress,
             message: this.message,
           }, senderId: this.user._id
         })
-
-        this.notifyRequest(this.address)
-
-        this.resetFormValues()
+        return true
       } catch (e) {
         this.backendError = e.response.data.message
       }
+    },
+
+    resetFormValues () {
+      this.requestType = 'Hairdresser Request'
+      this.eventAddress = ''
+      this.message = ''
+      this.backendError = null
+
+      let el = document.getElementById("addressInput");
+      el.value = '';
+      el.dispatchEvent(new Event('addressInput'));
     },
   },
 })
@@ -75,7 +79,7 @@ export default ({
     i.bi.bi-chevron-compact-up.ms-2(@click='isPostExpanded = !isPostExpanded', v-if='isPostExpanded')
     i.bi.bi-chevron-compact-down.ms-2(@click='isPostExpanded = !isPostExpanded', v-else)
   transition(name='fade')
-    form.py-2(@submit='submitRequest', v-show='isPostExpanded', autocomplete='off')
+    form.py-2(@submit='sendRequest', v-show='isPostExpanded', autocomplete='off')
       span.d-block.text-center.text-danger.mb-2(v-if='backendError') {{ backendError }}
       .row.g-0
         .col-12.col-sm-6.mb-1

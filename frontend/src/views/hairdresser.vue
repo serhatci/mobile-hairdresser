@@ -32,7 +32,7 @@ export default {
     if (this.user.address) {
       this.requestsFromUsersCity = await this.getRequests(`city=${this.user.address.city}`)
       const requestsInState = await this.getRequests(`stateCode=${this.user.address.stateCode}`)
-      this.requestsFromUsersState = requestsInState.filter(i => i.senderAddress.city != this.user.address.city)
+      this.requestsFromUsersState = requestsInState.filter(i => i.eventAddress.city != this.user.address.city)
     }
   }
 }

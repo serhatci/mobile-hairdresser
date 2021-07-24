@@ -61,7 +61,7 @@ export default ({
     strong(v-if='request.requestType === "Hairdresser Request"') Mobile Hairdresser&nbsp
     strong(v-else) Style Advice&nbsp
     | at location&nbsp
-    strong {{ request.senderAddress.city }}, {{ request.senderAddress.postcode }}
+    strong {{ request.eventAddress.city }}, {{ request.eventAddress.postcode }}
   p#message.mt-3.mb-4 {{ request.message }}
   .small.d-flex.justify-content-between.pb-3.border-bottom
     nav
