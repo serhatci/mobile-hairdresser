@@ -145,8 +145,9 @@ const store = new Vuex.Store({
 })
 
 socket.on('New notification', notification => {
-  console.log(`city ${notification.address.city}`)
-  if (store.state.user.address.city != notification.address.city) return
+  console.log(`New ${notification.type}`)
+
+  if (notification.address && store.state.user.address.city != notification.address.city) return
 
   store.dispatch('receiveNotification', notification)
 })
