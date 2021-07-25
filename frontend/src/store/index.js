@@ -133,6 +133,15 @@ const store = new Vuex.Store({
       }
     },
 
+    async updateUserData({ commit, state }) {
+      try {
+        const user = await axios.get(`/api/users/${state.user._id}`)
+        commit(mutations.SET_USER, user.data)
+      } catch (e) {
+        throw e
+      }
+    },
+
     notifyUserPost(store, userPost) {
       socket.emit('New post', userPost)
     },
