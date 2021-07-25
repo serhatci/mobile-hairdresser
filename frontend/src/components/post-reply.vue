@@ -43,8 +43,8 @@ export default ({
         this.$emit('replySent', createdReply)
         return true
 
-      } catch (e) {
-        this.backendError = e.response.data.message
+      } catch (err) {
+        this.backendError = err.response.data.message
       }
     },
 
