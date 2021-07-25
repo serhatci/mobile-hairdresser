@@ -11,9 +11,9 @@ io.on('connect', socket => {
     console.log(`web socket connected!..`)
   })
 
-  socket.on('New Request', address => {
-    console.log(`new request in ${address.city}`)
-    socket.broadcast.emit('Hairdresser Request', address)
+  socket.on('New post', notification => {
+    console.log(`new ${notification.type} in ${notification.address.city}`)
+    socket.broadcast.emit('New notification', notification)
   })
 })
 
