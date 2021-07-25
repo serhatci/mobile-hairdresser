@@ -1,5 +1,5 @@
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 import UserNavigation from '@/components/user-navigation.vue'
 import SearchBar from '@/components/search-bar.vue'
@@ -15,7 +15,15 @@ export default {
     DisplayRequests
   },
   computed: {
-    ...mapState(['user']),
+    ...mapState(['user', 'notifications']),
+  },
+  methods: {
+    ...mapActions(['updateUserData'])
+  },
+  watch: {
+    notifications: function () {
+      this.updateUserData()
+    }
   },
 }
 </script>
