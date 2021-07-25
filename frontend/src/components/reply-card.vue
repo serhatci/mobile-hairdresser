@@ -36,7 +36,7 @@ export default ({
             h6.fw-bold.mb-1(:class='{ "text-info": sameUser, "text-body": !sameUser }') {{ reply.senderFullName }}
               #sendPM.btn.text-primary.text-decoration-underline.mb-1.ms-3.p-1(v-show='user.type=="Customer"') Send PM
             p.text-muted.small.mb-0
-              | Shared - {{ reply.createdAt }}&nbsp
+              | Shared - {{ reply.createdAt | formatDate }}&nbsp
               | {{ reply.senderAddress ? reply.senderAddress.city : "Unknown" }}
             .small.d-flex.justify-content-between.pb-3.border-bottom
       .col-6.text-end

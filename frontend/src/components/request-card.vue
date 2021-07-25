@@ -55,7 +55,7 @@ export default ({
       div
         h6.fw-bold.text-info.mb-1 {{ request.senderFullName }}
         p.text-muted.small.mb-0
-          | Shared - {{ request.createdAt }}
+          | Shared - {{ request.createdAt | formatDate }}
   p.mt-3.mb-1.pb-2
     | Looking for&nbsp
     strong(v-if='request.requestType === "Hairdresser Request"') Mobile Hairdresser&nbsp
