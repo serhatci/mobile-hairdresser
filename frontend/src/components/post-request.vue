@@ -53,8 +53,8 @@ export default ({
           }, senderId: this.user._id
         })
         return true
-      } catch (e) {
-        this.backendError = e.response.data.message
+      } catch (err) {
+        this.backendError = err.response.data.message
       }
     },
 
