@@ -1,15 +1,12 @@
 <script>
 import HeaderNavigation from "@/components/header-navigation.vue";
 import Footer from "@/components/footer.vue";
-import NotificationToast from "@/components/notification-toast";
-
 
 export default {
   name: "App",
   components: {
     HeaderNavigation,
     Footer,
-    NotificationToast
   }
 }
 </script>
@@ -24,7 +21,6 @@ export default {
         router-view
       footer
         Footer
-      NotificationToast
 </template>
 
 
