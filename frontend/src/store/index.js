@@ -144,11 +144,11 @@ const store = new Vuex.Store({
   modules: {},
 })
 
-socket.on('Hairdresser Request', address => {
-  console.log(`city ${address.city}`)
-  if (store.state.user.address.city != address.city) return
+socket.on('New notification', notification => {
+  console.log(`city ${notification.address.city}`)
+  if (store.state.user.address.city != notification.address.city) return
 
-  store.dispatch('receiveNotifications')
+  store.dispatch('receiveNotification', notification)
 })
 
 export default async function init() {
