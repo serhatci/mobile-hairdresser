@@ -27,7 +27,7 @@ export default ({
     this.fetchLocations()
   },
   methods: {
-    ...mapActions(['postRequest', 'notifyRequest', 'fetchLocations']),
+    ...mapActions(['postRequest', 'notifyUserPost', 'fetchLocations']),
 
     getLocation (item) {
       this.eventAddress = item
@@ -36,7 +36,7 @@ export default ({
     sendRequest (e) {
       if (!this.submitRequest(e)) return
 
-      this.notifyRequest(this.eventAddress)
+      this.notifyUserPost({ type: 'Request', address: this.eventAddress })
       this.resetFormValues()
     },
 
