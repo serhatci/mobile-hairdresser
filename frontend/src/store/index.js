@@ -15,22 +15,27 @@ socket.emit('Connection Check')
 
 const mutations = {
   SET_USER: 'set user',
-  SET_NOTIFICATIONS: 'set notifications',
+  ADD_NOTIFICATION: 'add notifications',
+  DELETE_NOTIFICATION: 'delete notifications',
   SET_LOCATIONS: 'set locations',
 }
 
 const store = new Vuex.Store({
   state: {
     user: null,
-    notifications: 0,
+    notifications: [],
     locations: [],
   },
   mutations: {
     [mutations.SET_USER](state, user) {
       state.user = user
     },
-    [mutations.SET_NOTIFICATIONS](state) {
-      state.notifications++
+    [mutations.ADD_NOTIFICATION](state, notification) {
+      state.notifications.push(notification)
+    },
+    [mutations.DELETE_NOTIFICATION](state, notification) {
+      const index = state.notifications.findIndex(notification)
+      state.notifications.splice(index, 1)
     },
     [mutations.SET_LOCATIONS](state, locations) {
       state.locations = locations
@@ -128,12 +133,12 @@ const store = new Vuex.Store({
       }
     },
 
-    notifyRequest(store, address) {
-      socket.emit('New Request', address)
+    notifyUserPost(store, userPost) {
+      socket.emit('New post', userPost)
     },
 
-    receiveNotifications({ commit }) {
-      commit(mutations.SET_NOTIFICATIONS)
+    receiveNotification({ commit }, notification) {
+      commit(mutations.ADD_NOTIFICATION, notification)
     },
   },
   modules: {},
