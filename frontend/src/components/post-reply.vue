@@ -18,11 +18,13 @@ export default ({
     }
   },
   methods: {
-    ...mapActions(['postReply', 'notifyReply']),
+    ...mapActions(['postReply', 'notifyUserPost']),
 
-    resetFormValues () {
-      this.message = ''
-      this.backendError = null
+    sendReply (e) {
+      if (!this.submitReply(e)) return
+
+      this.notifyUserPost({ type: 'Reply' })
+      this.resetFormValues()
     },
 
     async submitReply (e) {
@@ -39,11 +41,16 @@ export default ({
         })
 
         this.$emit('replySent', createdReply)
+        return true
 
-        this.resetFormValues()
       } catch (e) {
         this.backendError = e.response.data.message
       }
+    },
+
+    resetFormValues () {
+      this.message = ''
+      this.backendError = null
     },
   },
 })
@@ -52,7 +59,7 @@ export default ({
 
 <template lang="pug">
 transition(name='fade')
-  form.bg-light.px-3.pb-3(@submit='submitReply', v-show='isReplyClicked')
+  form.bg-light.px-3.pb-3(@submit='sendReply', v-show='isReplyClicked')
     span.d-block.text-center.text-danger.py-1(v-if='backendError') {{ backendError }}
     .mb-3
       label.form-label(for='replyMessage')
