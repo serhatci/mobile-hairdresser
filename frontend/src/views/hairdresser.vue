@@ -15,7 +15,7 @@ export default {
     DisplayRequests
   },
   computed: {
-    ...mapState(['user']),
+    ...mapState(['user', 'notifications']),
   },
   methods: {
     ...mapActions(['getRequests']),
@@ -27,12 +27,22 @@ export default {
       repliedRequests: []
     }
   },
-  async created () {
+  async beforeMount () {
     this.repliedRequests = await this.getRequests(`replierId=${this.user._id}`)
     if (this.user.address) {
       this.requestsFromUsersCity = await this.getRequests(`city=${this.user.address.city}`)
       const requestsInState = await this.getRequests(`stateCode=${this.user.address.stateCode}`)
       this.requestsFromUsersState = requestsInState.filter(i => i.eventAddress.city != this.user.address.city)
+    }
+  },
+  watch: {
+    notifications: async function () {
+      this.repliedRequests = await this.getRequests(`replierId=${this.user._id}`)
+      if (this.user.address) {
+        this.requestsFromUsersCity = await this.getRequests(`city=${this.user.address.city}`)
+        const requestsInState = await this.getRequests(`stateCode=${this.user.address.stateCode}`)
+        this.requestsFromUsersState = requestsInState.filter(i => i.eventAddress.city != this.user.address.city)
+      }
     }
   }
 }
