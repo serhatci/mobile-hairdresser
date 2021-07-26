@@ -20,8 +20,12 @@ export default ({
   methods: {
     ...mapActions(['postReply', 'notifyUserPost']),
 
-    sendReply (e) {
-      if (!this.submitReply(e)) return
+    async sendReply (e) {
+      const createdReply = await this.submitReply(e)
+
+      if (!createdReply) return
+
+      this.$emit('replySent', createdReply)
 
       this.notifyUserPost({ type: 'Reply' })
       this.resetFormValues()
@@ -29,8 +33,9 @@ export default ({
 
     async submitReply (e) {
       e.preventDefault()
+
       try {
-        const createdReply = await this.postReply({
+        return await this.postReply({
           reply: {
             senderId: this.user._id,
             senderFullName: this.user.fullName,
@@ -40,11 +45,9 @@ export default ({
           requestId: this.request._id,
         })
 
-        this.$emit('replySent', createdReply)
-        return true
-
       } catch (err) {
         this.backendError = err.response.data.message
+        return false
       }
     },
 
