@@ -1,10 +1,11 @@
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 import UserNavigation from '@/components/user-navigation.vue'
 import SearchBar from '@/components/search-bar.vue'
 import PostRequest from '@/components/post-request.vue'
 import DisplayRequests from '@/components/display-requests.vue'
+import NotificationToast from "@/components/notification-toast";
 
 export default {
   name: 'User',
@@ -12,12 +13,27 @@ export default {
     UserNavigation,
     SearchBar,
     PostRequest,
-    DisplayRequests
+    DisplayRequests,
+    NotificationToast
   },
   computed: {
-    ...mapState(['user']),
+    ...mapState(['user', 'notifications']),
+    newNotification () {
+      return this.notifications.received
+    }
+  },
+  methods: {
+    ...mapActions(['updateUserData'])
+  },
+  watch: {
+    newNotification: function () {
+      if (this.newNotification == 0) return
+
+      this.updateUserData()
+    }
   },
 }
+
 </script>
 
 <template lang="pug">
@@ -28,6 +44,7 @@ export default {
     PostRequest
   section
     DisplayRequests(title='Recent Requests', :requests='user.customerRequests')
+  NotificationToast(:alerts='notifications.alerts')
 </template>
 
 <style lang="scss" scoped>

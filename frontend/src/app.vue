@@ -2,7 +2,6 @@
 import HeaderNavigation from "@/components/header-navigation.vue";
 import Footer from "@/components/footer.vue";
 
-
 export default {
   name: "App",
   components: {

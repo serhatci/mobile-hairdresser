@@ -15,22 +15,28 @@ socket.emit('Connection Check')
 
 const mutations = {
   SET_USER: 'set user',
-  SET_NOTIFICATIONS: 'set notifications',
+  ADD_NOTIFICATION: 'add notifications',
+  DELETE_NOTIFICATION: 'delete notifications',
   SET_LOCATIONS: 'set locations',
 }
 
 const store = new Vuex.Store({
   state: {
     user: null,
-    notifications: 0,
+    notifications: { alerts: [], received: 0 },
     locations: [],
   },
   mutations: {
     [mutations.SET_USER](state, user) {
       state.user = user
     },
-    [mutations.SET_NOTIFICATIONS](state) {
-      state.notifications++
+    [mutations.ADD_NOTIFICATION](state, notification) {
+      state.notifications.alerts.push(notification)
+      state.notifications.received++
+    },
+    [mutations.DELETE_NOTIFICATION](state, index) {
+      state.notifications.alerts.splice(index, 1)
+      state.notifications.received = 0
     },
     [mutations.SET_LOCATIONS](state, locations) {
       state.locations = locations
@@ -128,22 +134,36 @@ const store = new Vuex.Store({
       }
     },
 
-    notifyRequest(store, address) {
-      socket.emit('New Request', address)
+    async updateUserData({ commit, state }) {
+      try {
+        const user = await axios.get(`/api/users/${state.user._id}`)
+        commit(mutations.SET_USER, user.data)
+      } catch (e) {
+        throw e
+      }
     },
 
-    receiveNotifications({ commit }) {
-      commit(mutations.SET_NOTIFICATIONS)
+    notifyUserPost(store, userPost) {
+      socket.emit('New post', userPost)
+    },
+
+    receiveNotification({ commit }, notification) {
+      commit(mutations.ADD_NOTIFICATION, notification)
+    },
+
+    deleteNotification({ commit }, index) {
+      commit(mutations.DELETE_NOTIFICATION, index)
     },
   },
   modules: {},
 })
 
-socket.on('Hairdresser Request', address => {
-  console.log(`city ${address.city}`)
-  if (store.state.user.address.city != address.city) return
+socket.on('New notification', notification => {
+  console.log(`New ${notification.type}`)
 
-  store.dispatch('receiveNotifications')
+  if (notification.address && store.state.user.address.city != notification.address.city) return
+
+  store.dispatch('receiveNotification', notification)
 })
 
 export default async function init() {

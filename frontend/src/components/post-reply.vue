@@ -18,17 +18,24 @@ export default ({
     }
   },
   methods: {
-    ...mapActions(['postReply', 'notifyReply']),
+    ...mapActions(['postReply', 'notifyUserPost']),
 
-    resetFormValues () {
-      this.message = ''
-      this.backendError = null
+    async sendReply (e) {
+      const createdReply = await this.submitReply(e)
+
+      if (!createdReply) return
+
+      this.$emit('replySent', createdReply)
+
+      this.notifyUserPost({ type: 'Reply' })
+      this.resetFormValues()
     },
 
     async submitReply (e) {
       e.preventDefault()
+
       try {
-        const createdReply = await this.postReply({
+        return await this.postReply({
           reply: {
             senderId: this.user._id,
             senderFullName: this.user.fullName,
@@ -38,12 +45,15 @@ export default ({
           requestId: this.request._id,
         })
 
-        this.$emit('replySent', createdReply)
-
-        this.resetFormValues()
-      } catch (e) {
-        this.backendError = e.response.data.message
+      } catch (err) {
+        this.backendError = err.response.data.message
+        return false
       }
+    },
+
+    resetFormValues () {
+      this.message = ''
+      this.backendError = null
     },
   },
 })
@@ -52,7 +62,7 @@ export default ({
 
 <template lang="pug">
 transition(name='fade')
-  form.bg-light.px-3.pb-3(@submit='submitReply', v-show='isReplyClicked')
+  form.bg-light.px-3.pb-3(@submit='sendReply', v-show='isReplyClicked')
     span.d-block.text-center.text-danger.py-1(v-if='backendError') {{ backendError }}
     .mb-3
       label.form-label(for='replyMessage')

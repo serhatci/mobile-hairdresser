@@ -55,13 +55,13 @@ export default ({
       div
         h6.fw-bold.text-info.mb-1 {{ request.senderFullName }}
         p.text-muted.small.mb-0
-          | Shared - {{ request.createdAt }}
+          | Shared - {{ request.createdAt | formatDate }}
   p.mt-3.mb-1.pb-2
     | Looking for&nbsp
     strong(v-if='request.requestType === "Hairdresser Request"') Mobile Hairdresser&nbsp
     strong(v-else) Style Advice&nbsp
     | at location&nbsp
-    strong {{ request.senderAddress.city }}, {{ request.senderAddress.postcode }}
+    strong {{ request.eventAddress.city }}, {{ request.eventAddress.postcode }}
   p#message.mt-3.mb-4 {{ request.message }}
   .small.d-flex.justify-content-between.pb-3.border-bottom
     nav
