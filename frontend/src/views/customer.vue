@@ -16,14 +16,19 @@ export default {
     DisplayRequests,
     NotificationToast
   },
+  data () {
+    return {
+      settings: false
+    }
+  },
   computed: {
     ...mapState(['user', 'notifications']),
     newNotification () {
       return this.notifications.received
-    }
+    },
   },
   methods: {
-    ...mapActions(['updateUserData'])
+    ...mapActions(['updateUserData']),
   },
   watch: {
     newNotification: function () {
@@ -39,10 +44,10 @@ export default {
 <template lang="pug">
 #customerPage.pb-5(v-if='user')
   section
-    UserNavigation
-  section
+    UserNavigation(@settingsClicked='settings = !settings')
+  section(v-if='!settings')
     PostRequest
-  section
+  section(v-if='!settings')
     DisplayRequests(title='Recent Requests', :requests='user.customerRequests')
   NotificationToast(:alerts='notifications.alerts')
 </template>
