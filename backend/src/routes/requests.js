@@ -98,6 +98,9 @@ router.post('/:requestId/replies', async (req, res, next) => {
       { $push: { replies: replyToCreate } },
       { new: true }
     )
+
+    if (!updatedRequest) throw Error('This request is no more active! Probably deleted by user.')
+
     const createdReply = updatedRequest.replies[updatedRequest.replies.length - 1]
 
     return res.send(createdReply)
@@ -105,6 +108,9 @@ router.post('/:requestId/replies', async (req, res, next) => {
     if (err.name === 'ValidationError') {
       const invalidProperty = Object.keys(err.errors)[0]
       return res.status(422).send({ message: err.errors[invalidProperty].message })
+    }
+    if (err.name === 'Error') {
+      return res.status(404).send({ message: err.message })
     }
     return next(err)
   }
