@@ -1,30 +1,38 @@
 <script>
-import { mapState } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'NotificationToast',
+  props: {
+    alerts: []
+  },
   computed: {
-    ...mapState(['notifications']),
+    reversedAlerts () {
+      return this.alerts.reverse()
+    }
+  },
+  methods: {
+    ...mapActions(['deleteNotification'])
   },
 }
 </script>
 
 <template lang="pug">
-.toast-container.position-fixed.bottom-0.end-0.p-3(style='z-index: 11', v-if='notifications.length')
+.toast-container.position-fixed.bottom-0.end-0.p-3(style='z-index: 11', v-if='alerts.length')
   .toast.show.bg-warning(
     role='alert',
     aria-live='assertive',
     aria-atomic='true',
-    v-for='notification in notifications'
+    v-for='(alert, index) in reversedAlerts'
   )
     .toast-header
       strong.me-auto
         i.bi.bi-bell
         span &nbspNotification
-      button.btn-close(type='button', data-bs-dismiss='toast', aria-label='Close')
+      button.btn-close(type='button', data-bs-dismiss='toast', aria-label='Close', @click='deleteNotification(index)')
     .toast-body
-      span(v-if='notification.type == "Reply"') You've a new reply.
-      span(v-else='notification.type=="Request"') New request in your city.
+      span(v-if='alert.type == "Reply"') You've a new reply.
+      span(v-else='alert.type=="Request"') New request in your city.
 </template>
 
 <style scoped>
