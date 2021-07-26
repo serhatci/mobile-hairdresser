@@ -13,7 +13,7 @@ export default {
     UserNavigation,
     SearchBar,
     PostRequest,
-    DisplayRequests
+    DisplayRequests,
     NotificationToast
   },
   computed: {
@@ -22,14 +22,11 @@ export default {
       return this.notifications.received
     }
   },
-  methods: {
-    ...mapActions(['getRequests']),
-  },
   data () {
     return {
       requestsFromUsersCity: [],
       requestsFromUsersState: [],
-      repliedRequests: []
+      repliedRequests: [],
     }
   },
   watch: {
@@ -37,14 +34,12 @@ export default {
       if (this.newNotification == 0) return
 
       this.fetchData()
-  async beforeMount () {
-    this.repliedRequests = await this.getRequests(`replierId=${this.user._id}`)
-    if (this.user.address) {
-      this.requestsFromUsersCity = await this.getRequests(`city=${this.user.address.city}`)
-      const requestsInState = await this.getRequests(`stateCode=${this.user.address.stateCode}`)
-      this.requestsFromUsersState = requestsInState.filter(i => i.eventAddress.city != this.user.address.city)
     }
   },
+  methods: {
+    ...mapActions(['getRequests']),
+
+    async fetchData () {
       this.repliedRequests = await this.getRequests(`replierId=${this.user._id}`)
       if (this.user.address) {
         this.requestsFromUsersCity = await this.getRequests(`city=${this.user.address.city}`)
@@ -52,7 +47,10 @@ export default {
         this.requestsFromUsersState = requestsInState.filter(i => i.eventAddress.city != this.user.address.city)
       }
     }
-  }
+  },
+  mounted () {
+    this.fetchData()
+  },
 }
 
 </script>
