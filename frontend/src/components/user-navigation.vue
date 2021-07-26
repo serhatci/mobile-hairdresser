@@ -1,13 +1,11 @@
 <script>
 import { mapState } from 'vuex'
 import SearchBar from "@/components/search-bar.vue";
-import NotificationToast from "@/components/notification-toast";
 
 export default {
   name: 'UserNavigation',
   components: {
     SearchBar,
-    NotificationToast
   },
   computed: {
     ...mapState(['user'])
@@ -30,7 +28,6 @@ export default {
         i.bi.bi-scissors.ms-1(v-if='user.type == "Hairdresser"')
       .search-bar.rounded-pill.col.col-sm-10.col-lg-8.m-auto.mt-1
         SearchBar
-        NotificationToast
 </template>
 
 <style lang='scss'scoped>
