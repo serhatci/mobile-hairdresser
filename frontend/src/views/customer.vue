@@ -13,7 +13,7 @@ export default {
     UserNavigation,
     SearchBar,
     PostRequest,
-    DisplayRequests
+    DisplayRequests,
     NotificationToast
   },
   computed: {
@@ -33,6 +33,7 @@ export default {
     }
   },
 }
+
 </script>
 
 <template lang="pug">
