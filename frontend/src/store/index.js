@@ -23,7 +23,7 @@ const mutations = {
 const store = new Vuex.Store({
   state: {
     user: null,
-    notifications: [],
+    notifications: { alerts: [], received: 0 },
     locations: [],
   },
   mutations: {
@@ -31,11 +31,12 @@ const store = new Vuex.Store({
       state.user = user
     },
     [mutations.ADD_NOTIFICATION](state, notification) {
-      state.notifications.push(notification)
+      state.notifications.alerts.push(notification)
+      state.notifications.received++
     },
-    [mutations.DELETE_NOTIFICATION](state, notification) {
-      const index = state.notifications.findIndex(notification)
-      state.notifications.splice(index, 1)
+    [mutations.DELETE_NOTIFICATION](state, index) {
+      state.notifications.alerts.splice(index, 1)
+      state.notifications.received = 0
     },
     [mutations.SET_LOCATIONS](state, locations) {
       state.locations = locations
