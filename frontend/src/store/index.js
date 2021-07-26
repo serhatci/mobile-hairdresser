@@ -150,6 +150,10 @@ const store = new Vuex.Store({
     receiveNotification({ commit }, notification) {
       commit(mutations.ADD_NOTIFICATION, notification)
     },
+
+    deleteNotification({ commit }, index) {
+      commit(mutations.DELETE_NOTIFICATION, index)
+    },
   },
   modules: {},
 })
