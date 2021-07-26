@@ -5,6 +5,7 @@ import UserNavigation from '@/components/user-navigation.vue'
 import SearchBar from '@/components/search-bar.vue'
 import PostRequest from '@/components/post-request.vue'
 import DisplayRequests from '@/components/display-requests.vue'
+import NotificationToast from "@/components/notification-toast";
 
 export default {
   name: 'Hairdresser',
@@ -13,9 +14,13 @@ export default {
     SearchBar,
     PostRequest,
     DisplayRequests
+    NotificationToast
   },
   computed: {
     ...mapState(['user', 'notifications']),
+    newNotification () {
+      return this.notifications.received
+    }
   },
   methods: {
     ...mapActions(['getRequests']),
@@ -27,6 +32,11 @@ export default {
       repliedRequests: []
     }
   },
+  watch: {
+    newNotification: function () {
+      if (this.newNotification == 0) return
+
+      this.fetchData()
   async beforeMount () {
     this.repliedRequests = await this.getRequests(`replierId=${this.user._id}`)
     if (this.user.address) {
@@ -35,8 +45,6 @@ export default {
       this.requestsFromUsersState = requestsInState.filter(i => i.eventAddress.city != this.user.address.city)
     }
   },
-  watch: {
-    notifications: async function () {
       this.repliedRequests = await this.getRequests(`replierId=${this.user._id}`)
       if (this.user.address) {
         this.requestsFromUsersCity = await this.getRequests(`city=${this.user.address.city}`)
@@ -57,6 +65,7 @@ export default {
     DisplayRequests(title='Requests that you replied', :requests='repliedRequests')
     DisplayRequests(title='Requests in your city', :requests='requestsFromUsersCity')
     DisplayRequests(title='Requests in your state', :requests='requestsFromUsersState')
+  NotificationToast(:alerts='notifications.alerts')
 </template>
 
 <style lang="scss" scoped>
