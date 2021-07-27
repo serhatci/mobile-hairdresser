@@ -36,13 +36,13 @@ export default ({
 
       this.$emit('clicked', item)
 
-      this.setSuggestions()
+      this.setSuggestionsDisplay()
     },
 
-    setSuggestions: function () {
-      this.suggestions = !this.suggestions
+    setSuggestionsDisplay: function () {
+      this.displaySuggestions = !this.displaySuggestions
 
-      if (this.suggestions) return document.getElementById("suggestions").classList.remove('d-none');
+      if (this.displaySuggestions) return document.getElementById("suggestions").classList.remove('d-none');
 
       document.getElementById("suggestions").classList.add('d-none');
     }
@@ -56,10 +56,10 @@ export default ({
     label.visually-hidden.d-sm-inline.form-control-label.form-control-sm(for='addressInput') Address:
     input#addressInput.form-control.form-control-sm.form-control-borderless(
       type='text',
-      :placeholder='userAddress',
+      placeholder='City or Postcode',
       aria-label='Address search input',
       v-model='address',
-      @focus='setSuggestions'
+      @focus='setSuggestionsDisplay'
     )
     #suggestions.mt-2.d-none(v-show='address.length > 2 && doAutocomplete().length > 0')
       ul.list-group.rounded
