@@ -134,9 +134,18 @@ const store = new Vuex.Store({
       }
     },
 
-    async updateUserData({ commit, state }) {
+    async fetchUserData({ commit, state }) {
       try {
         const user = await axios.get(`/api/users/${state.user._id}`)
+        commit(mutations.SET_USER, user.data)
+      } catch (e) {
+        throw e
+      }
+    },
+
+    async updateUser({ commit }, { update, userId }) {
+      try {
+        const user = await axios.patch(`/api/users/${userId}`, update)
         commit(mutations.SET_USER, user.data)
       } catch (e) {
         throw e
