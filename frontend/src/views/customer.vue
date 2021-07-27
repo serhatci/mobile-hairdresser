@@ -45,7 +45,7 @@ export default {
 #customerPage.pb-5(v-if='user')
   section
     UserNavigation(@settingsClicked='settings = !settings')
-  section(v-if='!settings')
+  section(v-if='!settings && user.address.city')
     PostRequest
   section(v-if='!settings')
     DisplayRequests(title='Recent Requests', :requests='user.customerRequests')
