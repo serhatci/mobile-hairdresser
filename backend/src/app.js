@@ -28,7 +28,7 @@ const app = express()
 
 app.use(
   cors({
-    origin: app.get('env') == 'development' ? true : 'https://api.mobilerfriseur.net',
+    origin: app.get('env') == 'development' ? true : 'https://mobilerfriseur.net',
     credentials: true,
   })
 )
