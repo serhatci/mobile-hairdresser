@@ -59,7 +59,7 @@ export default {
 <template lang="pug">
 #hairdresserPage.pb-5(v-if='user')
   section
-    UserNavigation
+    UserNavigation(@settingsClicked='settings = !settings')
   section(v-if='!settings')
     DisplayRequests(title='Requests that you replied', :requests='repliedRequests')
     DisplayRequests(title='Requests in your city', :requests='requestsFromUsersCity')
