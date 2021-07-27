@@ -50,7 +50,7 @@ const UserSchema = new mongoose.Schema(
         type: String,
         default: '',
       },
-      postcode: { type: Number, default: '' },
+      postcode: { type: Number, default: 0 },
       location: [],
     },
     tel: {
