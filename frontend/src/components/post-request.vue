@@ -28,8 +28,10 @@ export default ({
       this.eventAddress = item
     },
 
-    sendRequest (e) {
-      if (!this.submitRequest(e)) return
+    async sendRequest (e) {
+      const result = await this.submitRequest(e)
+
+      if (!result) return
 
       this.notifyUserPost({ type: 'Request', address: this.eventAddress })
       this.resetFormValues()
@@ -50,6 +52,7 @@ export default ({
         return true
       } catch (err) {
         this.backendError = err.response.data.message
+        return false
       }
     },
 
