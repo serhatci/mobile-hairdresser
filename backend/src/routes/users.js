@@ -57,8 +57,15 @@ router.patch('/:userId', async (req, res, next) => {
   if (userAddress.city === '') return res.status(400).send({ message: 'Address can not be empty!' })
 
   try {
-    await User.findByIdAndUpdate(userId, req.body, { runValidators: true })
-    const updatedUser = await User.findById(userId)
+    const fullAddress = await Location.find({ postcode: userAddress.postcode }, { stateCode: 1, location: 1, _id: 0 })
+    userAddress.stateCode = fullAddress[0].stateCode
+    userAddress.location = fullAddress[0].location
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { firstName, lastName, address: userAddress },
+      { new: true }
+    )
 
     if (updatedUser === null) throw new Error('UserId does not exist in database!')
 
