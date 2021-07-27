@@ -28,13 +28,13 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['updateUserData']),
+    ...mapActions(['fetchUserData']),
   },
   watch: {
     newNotification: function () {
       if (this.newNotification == 0) return
 
-      this.updateUserData()
+      this.fetchUserData()
     }
   },
 }
