@@ -40,6 +40,8 @@ export default {
     .card-body.pt-0
       h5.card-title {{ user.fullName ? user.fullName : "Anonymous" }}
         i.bi.bi-scissors.ms-1(v-if='user.type == "Hairdresser"')
+      p.text-center.text-danger(v-if='!user.address.city && !settingsClicked')
+        strong Update your settings to activate posting!
       Settings(v-if='settingsClicked')
       .search-bar.rounded-pill.col.col-sm-10.col-lg-8.m-auto.mt-1(v-else)
         SearchBar
