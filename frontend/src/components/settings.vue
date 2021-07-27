@@ -20,7 +20,49 @@ export default {
     }
   },
   methods: {
-    // ...mapActions(['updateUser']),
+    ...mapActions(['updateUser']),
+
+    async sendUserUpdate (e) {
+
+      const result = await this.submitUpdate(e)
+
+      if (!result) return
+
+      this.resetFormValues()
+    },
+
+    async submitUpdate (e) {
+      e.preventDefault()
+      try {
+        if (!this.firstName && !this.lastName && !this.userAddress) {
+          this.backendError = 'At least one required area must be filled!'
+          return false
+        }
+
+        await this.updateUser({
+          update: {
+            firstName: this.firstName || this.user.firstName,
+            lastName: this.lastName || this.user.lastName,
+            userAddress: this.userAddress || this.user.address,
+          }, userId: this.user._id
+        })
+        return true
+      } catch (err) {
+        this.backendError = err.response.data.message
+        return false
+      }
+    },
+
+    resetFormValues () {
+      this.firstName = ''
+      this.lastName = ''
+      this.userAddress = ''
+      this.backendError = null
+
+      let el = document.getElementById("addressInput");
+      el.value = '';
+      el.dispatchEvent(new Event('addressInput'));
+    },
 
     getLocation (item) {
       this.userAddress = item
