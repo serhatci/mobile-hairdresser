@@ -6,9 +6,6 @@ export default ({
   computed: {
     ...mapState(['locations']),
   },
-  props: {
-    userAddress: { type: String, default: "City or Postcode" }
-  },
   data () {
     return {
       address: '',
