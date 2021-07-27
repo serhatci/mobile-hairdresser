@@ -27,6 +27,7 @@ export default {
       requestsFromUsersCity: [],
       requestsFromUsersState: [],
       repliedRequests: [],
+      settings: false
     }
   },
   watch: {
@@ -58,8 +59,8 @@ export default {
 <template lang="pug">
 #hairdresserPage.pb-5(v-if='user')
   section
-    UserNavigation
-  section
+    UserNavigation(@settingsClicked='settings = !settings')
+  section(v-if='!settings')
     DisplayRequests(title='Requests that you replied', :requests='repliedRequests')
     DisplayRequests(title='Requests in your city', :requests='requestsFromUsersCity')
     DisplayRequests(title='Requests in your state', :requests='requestsFromUsersState')

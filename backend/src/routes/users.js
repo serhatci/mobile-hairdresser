@@ -3,6 +3,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const express = require('express')
 const User = require('../models/user')
+const Location = require('../models/location')
 
 const router = express.Router()
 
@@ -48,12 +49,24 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
-router.put('/:userId', async (req, res, next) => {
+router.patch('/:userId', async (req, res, next) => {
   const { userId } = req.params
+  const { firstName, lastName, userAddress } = req.body
+
+  if (firstName === '') return res.status(400).send({ message: 'First name can not be empty!' })
+  if (lastName === '') return res.status(400).send({ message: 'Last name can not be empty!' })
+  if (userAddress.city === '') return res.status(400).send({ message: 'Address can not be empty!' })
 
   try {
-    await User.findByIdAndUpdate(userId, req.body, { runValidators: true })
-    const updatedUser = await User.findById(userId)
+    const fullAddress = await Location.find({ postcode: userAddress.postcode }, { stateCode: 1, location: 1, _id: 0 })
+    userAddress.stateCode = fullAddress[0].stateCode
+    userAddress.location = fullAddress[0].location
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { firstName, lastName, address: userAddress },
+      { new: true }
+    )
 
     if (updatedUser === null) throw new Error('UserId does not exist in database!')
 

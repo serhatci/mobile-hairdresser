@@ -20,17 +20,26 @@ const UserSchema = new mongoose.Schema(
     firstName: {
       type: String,
       trim: true,
-      validate: [isAlphanumeric, 'First name should contain letters & numbers only'],
-    },
-    middleName: {
-      type: String,
-      trim: true,
-      validate: [isAlphanumeric, 'Middle name should contain letters & numbers only'],
+      default: '',
+      validate: [
+        input => {
+          if (input === '') return true
+          return isAlphanumeric(input)
+        },
+        'First name should contain letters & numbers only',
+      ],
     },
     lastName: {
       type: String,
       trim: true,
-      validate: [isAlphanumeric, 'Last name should contain letters & numbers only'],
+      default: '',
+      validate: [
+        input => {
+          if (input === '') return true
+          return isAlphanumeric(input)
+        },
+        'Last name should contain letters & numbers only',
+      ],
     },
     address: {
       city: {
@@ -41,7 +50,7 @@ const UserSchema = new mongoose.Schema(
         type: String,
         default: '',
       },
-      postcode: { type: Number, default: '' },
+      postcode: { type: Number, default: 0 },
       location: [],
     },
     tel: {
@@ -69,10 +78,8 @@ const UserSchema = new mongoose.Schema(
 
 // eslint-disable-next-line func-names
 UserSchema.virtual('fullName').get(function () {
-  if (this.firstName) {
-    return this.middleName
-      ? `${this.firstName} ${this.middleName} ${this.lastName}`
-      : `${this.firstName} ${this.lastName}`
+  if (this.firstName || this.lastName) {
+    return `${this.firstName} ${this.lastName}`
   }
   return 'Anonymous'
 })

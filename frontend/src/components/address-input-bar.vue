@@ -1,6 +1,5 @@
 <script>
-import { mapState } from 'vuex'
-
+import { mapActions, mapState } from 'vuex'
 
 export default ({
   name: 'AddressInputBar',
@@ -10,10 +9,16 @@ export default ({
   data () {
     return {
       address: '',
-      suggestions: false
+      displaySuggestions: false
     }
   },
+  mounted () {
+    if (this.locations.length > 0) return
+
+    this.fetchLocations()
+  },
   methods: {
+    ...mapActions(['fetchLocations']),
 
     emitValue: function (value) {
       this.$emit('input', value);
@@ -23,6 +28,7 @@ export default ({
 
       return this.locations.filter((item) => item.city.toLowerCase().startsWith(this.address.toLowerCase()) || item.postcode.toString().startsWith(this.address))
     },
+
     updateBinding: function (item) {
       let el = document.getElementById("addressInput");
       el.value = `${item.city}, ${item.postcode}`;
@@ -30,13 +36,13 @@ export default ({
 
       this.$emit('clicked', item)
 
-      this.setSuggestions()
+      this.setSuggestionsDisplay()
     },
 
-    setSuggestions: function () {
-      this.suggestions = !this.suggestions
+    setSuggestionsDisplay: function () {
+      this.displaySuggestions = !this.displaySuggestions
 
-      if (this.suggestions) return document.getElementById("suggestions").classList.remove('d-none');
+      if (this.displaySuggestions) return document.getElementById("suggestions").classList.remove('d-none');
 
       document.getElementById("suggestions").classList.add('d-none');
     }
@@ -46,15 +52,14 @@ export default ({
 
 <template lang="pug">
 .row
-  .col-12.col-md-4.text-md-end
+  .col-12
     label.visually-hidden.d-sm-inline.form-control-label.form-control-sm(for='addressInput') Address:
-  .col-12.col-md-8
     input#addressInput.form-control.form-control-sm.form-control-borderless(
       type='text',
       placeholder='City or Postcode',
       aria-label='Address search input',
       v-model='address',
-      @focus='setSuggestions'
+      @focus='setSuggestionsDisplay'
     )
     #suggestions.mt-2.d-none(v-show='address.length > 2 && doAutocomplete().length > 0')
       ul.list-group.rounded

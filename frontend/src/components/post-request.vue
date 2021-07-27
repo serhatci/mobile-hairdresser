@@ -8,7 +8,7 @@ export default ({
     AddressInputBar
   },
   computed: {
-    ...mapState(['user', 'locations']),
+    ...mapState(['user']),
   },
   data () {
     return {
@@ -21,20 +21,17 @@ export default ({
       backendError: null,
     }
   },
-  mounted () {
-    if (this.locations.length > 0) return
-
-    this.fetchLocations()
-  },
   methods: {
-    ...mapActions(['postRequest', 'notifyUserPost', 'fetchLocations']),
+    ...mapActions(['postRequest', 'notifyUserPost']),
 
     getLocation (item) {
       this.eventAddress = item
     },
 
-    sendRequest (e) {
-      if (!this.submitRequest(e)) return
+    async sendRequest (e) {
+      const result = await this.submitRequest(e)
+
+      if (!result) return
 
       this.notifyUserPost({ type: 'Request', address: this.eventAddress })
       this.resetFormValues()
@@ -55,6 +52,7 @@ export default ({
         return true
       } catch (err) {
         this.backendError = err.response.data.message
+        return false
       }
     },
 
@@ -95,7 +93,7 @@ export default ({
             input#customerRequest.form-check-input(type='radio', v-model='requestType', value='Style Advice')
             label.form-check-label(for='customerRequest') Style Advice
         .col-12.col-sm-6
-          AddressInputBar(@clicked='getLocation')
+          AddressInputBar(@clicked='getLocation', key='Post Request Address')
       .mb-3
         label.form-label(for='message')
           span.visually-hidden Request Message

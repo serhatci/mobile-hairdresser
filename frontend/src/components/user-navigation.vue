@@ -1,15 +1,28 @@
 <script>
 import { mapState } from 'vuex'
 import SearchBar from "@/components/search-bar.vue";
+import Settings from "@/components/settings.vue";
 
 export default {
   name: 'UserNavigation',
   components: {
     SearchBar,
+    Settings
   },
   computed: {
     ...mapState(['user'])
-  }
+  },
+  data () {
+    return {
+      settingsClicked: false
+    }
+  },
+  methods: {
+    toggleSettingsClicked () {
+      this.settingsClicked = !this.settingsClicked
+      this.$emit('settingsClicked')
+    }
+  },
 }
 </script>
 
@@ -21,12 +34,16 @@ export default {
       .user-menu.py-1.position-absolut.text-end
         a.btn.text-light.me-4(href='#!')
           i.bi.bi-envelope.fs-5
-        a.btn.text-light.me-3(href='#!')
-          i.bi.bi-gear.fs-5
+        a.btn.text-light.me-3(@click='toggleSettingsClicked')
+          i.bi.bi-gear.fs-5(v-if='!settingsClicked')
+          i.bi.bi-x-circle-fill.fs-5.text-danger(v-else)
     .card-body.pt-0
       h5.card-title {{ user.fullName ? user.fullName : "Anonymous" }}
         i.bi.bi-scissors.ms-1(v-if='user.type == "Hairdresser"')
-      .search-bar.rounded-pill.col.col-sm-10.col-lg-8.m-auto.mt-1
+      p.text-center.text-danger(v-if='!user.address.city && !settingsClicked')
+        strong Update your settings to activate posting!
+      Settings(v-if='settingsClicked')
+      .search-bar.rounded-pill.col.col-sm-10.col-lg-8.m-auto.mt-1(v-else)
         SearchBar
 </template>
 
