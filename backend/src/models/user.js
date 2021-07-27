@@ -20,17 +20,26 @@ const UserSchema = new mongoose.Schema(
     firstName: {
       type: String,
       trim: true,
-      validate: [isAlphanumeric, 'First name should contain letters & numbers only'],
-    },
-    middleName: {
-      type: String,
-      trim: true,
-      validate: [isAlphanumeric, 'Middle name should contain letters & numbers only'],
+      default: '',
+      validate: [
+        input => {
+          if (input === '') return true
+          return isAlphanumeric(input)
+        },
+        'First name should contain letters & numbers only',
+      ],
     },
     lastName: {
       type: String,
       trim: true,
-      validate: [isAlphanumeric, 'Last name should contain letters & numbers only'],
+      default: '',
+      validate: [
+        input => {
+          if (input === '') return true
+          return isAlphanumeric(input)
+        },
+        'Last name should contain letters & numbers only',
+      ],
     },
     address: {
       city: {
