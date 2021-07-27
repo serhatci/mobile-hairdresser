@@ -35,7 +35,8 @@ export default {
         a.btn.text-light.me-4(href='#!')
           i.bi.bi-envelope.fs-5
         a.btn.text-light.me-3(@click='toggleSettingsClicked')
-          i.bi.bi-gear.fs-5(:class='{ "text-danger": settingsClicked, "text-light": !settingsClicked }')
+          i.bi.bi-gear.fs-5(v-if='!settingsClicked')
+          i.bi.bi-x-circle-fill.fs-5.text-danger(v-else)
     .card-body.pt-0
       h5.card-title {{ user.fullName ? user.fullName : "Anonymous" }}
         i.bi.bi-scissors.ms-1(v-if='user.type == "Hairdresser"')
