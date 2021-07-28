@@ -48,7 +48,7 @@ export default ({
     .row.mt-1
       .col-12.col-sm-8
         .d-flex.flex-start.align-items-center
-          i#requestPerson.bi.bi-person-circle.text-muted.me-2
+          i#personIcon.bi.bi-person-circle.text-muted.me-2
           div
             h6.fw-bold.text-info.mb-1 {{ request.senderFullName }}
             p.text-muted.small.mb-0
@@ -101,7 +101,7 @@ ul {
   transform: translateY(0.5rem);
 }
 
-#requestPerson {
+#personIcon {
   font-size: 3rem;
 }
 </style>
