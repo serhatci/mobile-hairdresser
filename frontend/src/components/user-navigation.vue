@@ -32,6 +32,8 @@ export default {
     .background(:class='{ "bg-customer": user.type == "Customer", "bg-hairdresser": user.type == "Hairdresser" }')
       i.bi.bi-person-circle.position-absolut.text-muted
       .user-menu.py-1.position-absolut.text-end
+        a.btn.text-light.me-4(href='#!', v-if='user.type == "Hairdresser"')
+          i.bi.bi-file-person.fs-5
         a.btn.text-light.me-4(href='#!')
           i.bi.bi-envelope.fs-5
         a.btn.text-light.me-3(@click='toggleSettingsClicked')
