@@ -44,6 +44,7 @@ export default {
             firstName: this.firstName || this.user.firstName,
             lastName: this.lastName || this.user.lastName,
             userAddress: this.userAddress || this.user.address,
+            about: this.about || this.user.about,
           }, userId: this.user._id
         })
         return true
@@ -106,5 +107,9 @@ form {
 }
 .settings-bg {
   background-image: url('../assets/illustrations/undraw-barber.svg');
+}
+
+textarea {
+  height: 5rem;
 }
 </style>
