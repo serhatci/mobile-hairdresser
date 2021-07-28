@@ -31,8 +31,8 @@ export default {
         span &nbspNotification
       button.btn-close(type='button', data-bs-dismiss='toast', aria-label='Close', @click='deleteNotification(index)')
     .toast-body
-      span(v-if='alert.type == "Reply"') You've a new reply.
-      span(v-else='alert.type=="Request"') New request in your city.
+      span(v-if='alert === "Reply"') You've a new reply.
+      span(v-else) New request in your city.
 </template>
 
 <style scoped>
