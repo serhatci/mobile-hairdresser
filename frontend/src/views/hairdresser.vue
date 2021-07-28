@@ -20,12 +20,18 @@ export default {
     ...mapState(['user', 'notifications']),
     newNotification () {
       return this.notifications.received
+    },
+    filteredRequestsInCity () {
+      return this.requestsInUsersCity.filter(req => !this.repliedRequests.some(e => e._id === req._id))
+    },
+    filteredRequestsInState () {
+      return this.requestsInUsersState.filter(req => req.eventAddress.city !== this.user.address.city)
     }
   },
   data () {
     return {
-      requestsFromUsersCity: [],
-      requestsFromUsersState: [],
+      requestsInUsersCity: [],
+      requestsInUsersState: [],
       repliedRequests: [],
       settings: false
     }
@@ -43,9 +49,8 @@ export default {
     async fetchData () {
       this.repliedRequests = await this.getRequests(`replierId=${this.user._id}`)
       if (this.user.address) {
-        this.requestsFromUsersCity = await this.getRequests(`city=${this.user.address.city}`)
-        const requestsInState = await this.getRequests(`stateCode=${this.user.address.stateCode}`)
-        this.requestsFromUsersState = requestsInState.filter(i => i.eventAddress.city != this.user.address.city)
+        this.requestsInUsersCity = await this.getRequests(`city=${this.user.address.city}`)
+        this.requestsInUsersState = await this.getRequests(`stateCode=${this.user.address.stateCode}`)
       }
     }
   },
@@ -62,8 +67,8 @@ export default {
     UserNavigation(@settingsClicked='settings = !settings')
   section(v-if='!settings')
     DisplayRequests(title='Requests that you replied', :requests='repliedRequests')
-    DisplayRequests(title='Requests in your city', :requests='requestsFromUsersCity')
-    DisplayRequests(title='Requests in your state', :requests='requestsFromUsersState')
+    DisplayRequests(title='Requests in your city', :requests='filteredRequestsInCity')
+    DisplayRequests(title='Requests in your state', :requests='filteredRequestsInState')
   NotificationToast(:alerts='notifications.alerts')
 </template>
 
