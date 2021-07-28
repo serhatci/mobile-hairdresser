@@ -45,35 +45,31 @@ export default ({
 <template lang="pug">
 .request-card
   section
-    .d-flex.flex-start.align-items-center.mt-2
-      img.rounded-circle.shadow-1-strong.me-3(
-        src='https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg',
-        alt='avatar',
-        width='60',
-        height='60'
-      )
-      div
-        h6.fw-bold.text-info.mb-1 {{ request.senderFullName }}
-        p.text-muted.small.mb-0
-          | Shared - {{ request.createdAt | formatDate }}
-  p.mt-3.mb-1.pb-2
-    | Looking for&nbsp
-    strong(v-if='request.requestType === "Hairdresser Request"') Mobile Hairdresser&nbsp
-    strong(v-else) Style Advice&nbsp
-    | at location&nbsp
-    strong {{ request.eventAddress.city }}, {{ request.eventAddress.postcode }}
-  p#message.mt-3.mb-4 {{ request.message }}
+    .row.mt-1
+      .col-12.col-sm-8
+        .d-flex.flex-start.align-items-center
+          i#requestPerson.bi.bi-person-circle.text-muted.me-2
+          div
+            h6.fw-bold.text-info.mb-1 {{ request.senderFullName }}
+            p.text-muted.small.mb-0
+              | Shared - {{ request.createdAt | formatDate }}
+      .col-12.col-sm-4.d-flex.align-items-center.justify-content-start.justify-content-sm-end
+        .text-muted.small
+          strong.d-block.mb-1 {{ request.requestType }}
+          span {{ request.eventAddress.city }}, {{ request.eventAddress.postcode }}
+  section#message
+    p.mt-3.mb-4.ms-0.ms-sm-5 {{ request.message }}
   .small.d-flex.justify-content-between.pb-3.border-bottom
     nav
       #comment-button.d-inline(@click='isAllRepliesClicked = !isAllRepliesClicked')
         span.badge.bg-warning.ms-1 {{ request.replies.length }}
-        .btn.btn-sm.me-3.text-primary.text-decoration-underline All Replies
+        .btn.btn-sm.text-primary.text-decoration-underline All Replies
           i.bi.ms-2(:class='isAllRepliesClicked ? "bi-chevron-compact-up" : "bi-chevron-compact-down"')
       #reply-button.d-inline(@click='isReplyClicked = !isReplyClicked')
-        .btn.btn-sm.me-3.text-primary.text-decoration-underline Reply
+        .btn.btn-sm.text-primary.text-decoration-underline Reply
           i.bi.ms-2(:class='isReplyClicked ? "bi-chevron-compact-up" : "bi-chevron-compact-down"')
     nav(v-show='request.senderId == user._id')
-      .btn.btn-sm.me-3.text-danger.text-decoration-underline(
+      .btn.btn-sm.text-danger.text-decoration-underline(
         @click='deleteRequest({ requestId: request._id, senderId: user._id })'
       ) Delete
   PostReply(:request='request', :isReplyClicked='isReplyClicked', @replySent='addReplyCard')
@@ -103,5 +99,9 @@ ul {
 .replyList-enter, .replyList-leave-to /* .list-leave-active below version 2.1.8 */ {
   opacity: 70%;
   transform: translateY(0.5rem);
+}
+
+#requestPerson {
+  font-size: 3rem;
 }
 </style>
