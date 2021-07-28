@@ -14,7 +14,10 @@ io.on('connect', socket => {
 
   socket.on('New post', notification => {
     console.log(`new ${notification.type}`)
-    socket.broadcast.emit('New notification', notification)
+
+    return notification.type == 'Reply'
+      ? socket.broadcast.emit('New reply', notification)
+      : socket.broadcast.emit('New request', notification)
   })
 })
 
