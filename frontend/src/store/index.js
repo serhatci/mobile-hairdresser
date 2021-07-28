@@ -175,7 +175,6 @@ socket.on('New request', request => {
 })
 
 socket.on('New reply', reply => {
-  console.log(reply)
   if (!reply.replierIdList.includes(store.state.user._id) && reply.senderId != store.state.user._id) return
 
   console.log(`New ${reply.type}`)
