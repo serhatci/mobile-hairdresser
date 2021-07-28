@@ -41,8 +41,8 @@ export default {
 
         await this.updateUser({
           update: {
-            firstName: this.firstName || this.user.firstName,
-            lastName: this.lastName || this.user.lastName,
+            firstName: this.capitalize(this.firstName) || this.user.firstName,
+            lastName: this.capitalize(this.lastName) || this.user.lastName,
             userAddress: this.userAddress || this.user.address,
             about: this.about || this.user.about,
           }, userId: this.user._id
@@ -68,6 +68,10 @@ export default {
     getLocation (item) {
       this.userAddress = item
     },
+
+    capitalize (s) {
+      return s.charAt(0).toUpperCase() + s.slice(1)
+    }
   }
 }
 </script>
