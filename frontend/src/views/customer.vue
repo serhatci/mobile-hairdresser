@@ -48,7 +48,7 @@ export default {
   section(v-if='!settings && user.address.city')
     PostRequest
   section(v-if='!settings')
-    DisplayRequests(title='Recent Requests', :requests='user.customerRequests')
+    DisplayRequests(title='Your Requests', :requests='user.customerRequests')
   NotificationToast(:alerts='notifications.alerts')
 </template>
 

@@ -31,11 +31,11 @@ export default {
 <style scoped>
 .list-enter-active,
 .list-leave-active {
-  transition: all 1s;
+  transition: all 0.7s;
 }
 .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(10px);
 }
 
 ul {

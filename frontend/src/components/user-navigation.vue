@@ -32,9 +32,11 @@ export default {
     .background(:class='{ "bg-customer": user.type == "Customer", "bg-hairdresser": user.type == "Hairdresser" }')
       i.bi.bi-person-circle.position-absolut.text-muted
       .user-menu.py-1.position-absolut.text-end
-        a.btn.text-light.me-4(href='#!')
+        a.btn.text-light.me-2.me-sm-4(href='#!', v-if='user.type == "Hairdresser"')
+          i.bi.bi-file-person.fs-5
+        a.btn.text-light.me-2.me-sm-4(href='#!')
           i.bi.bi-envelope.fs-5
-        a.btn.text-light.me-3(@click='toggleSettingsClicked')
+        a.btn.text-light.me-3.me-sm-4(@click='toggleSettingsClicked')
           i.bi.bi-gear.fs-5(v-if='!settingsClicked')
           i.bi.bi-x-circle-fill.fs-5.text-danger(v-else)
     .card-body.pt-0
@@ -42,8 +44,9 @@ export default {
         i.bi.bi-scissors.ms-1(v-if='user.type == "Hairdresser"')
       p.text-center.text-danger(v-if='!user.address.city && !settingsClicked')
         strong Update your settings to activate posting!
-      Settings(v-if='settingsClicked')
-      .search-bar.rounded-pill.col.col-sm-10.col-lg-8.m-auto.mt-1(v-else)
+      transition(name='slide-fade')
+        Settings(v-if='settingsClicked')
+      .search-bar.rounded-pill.col.col-sm-10.col-lg-8.m-auto.mt-4(v-if='!settingsClicked')
         SearchBar
 </template>
 
@@ -81,10 +84,19 @@ export default {
 }
 
 .bg-hairdresser {
-  background-image: url('../assets/backgrounds/confetti.svg');
+  background-image: url('../assets/backgrounds/tortoise-shell.svg');
 }
 
 .search-bar {
   background-color: var(--my-green);
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

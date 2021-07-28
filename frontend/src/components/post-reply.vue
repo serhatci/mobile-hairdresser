@@ -9,6 +9,10 @@ export default ({
   },
   computed: {
     ...mapState(['user']),
+
+    replierIdList () {
+      return this.request.replies.map(reply => reply.senderId)
+    }
   },
   data () {
     return {
@@ -27,7 +31,7 @@ export default ({
 
       this.$emit('replySent', createdReply)
 
-      this.notifyUserPost({ type: 'Reply' })
+      this.notifyUserPost({ type: 'Reply', replierIdList: this.replierIdList, senderId: this.request.senderId })
       this.resetFormValues()
     },
 
@@ -55,6 +59,8 @@ export default ({
       this.message = ''
       this.backendError = null
     },
+
+
   },
 })
 </script>

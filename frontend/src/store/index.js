@@ -31,7 +31,7 @@ const store = new Vuex.Store({
       state.user = user
     },
     [mutations.ADD_NOTIFICATION](state, notification) {
-      state.notifications.alerts.push(notification)
+      state.notifications.alerts.push(notification.type)
       state.notifications.received++
     },
     [mutations.DELETE_NOTIFICATION](state, index) {
@@ -167,12 +167,18 @@ const store = new Vuex.Store({
   modules: {},
 })
 
-socket.on('New notification', notification => {
-  console.log(`New ${notification.type}`)
+socket.on('New request', request => {
+  if (request.address && store.state.user.address.city != request.address.city) return
 
-  if (notification.address && store.state.user.address.city != notification.address.city) return
+  console.log(`New ${request.type}`)
+  store.dispatch('receiveNotification', request)
+})
 
-  store.dispatch('receiveNotification', notification)
+socket.on('New reply', reply => {
+  if (!reply.replierIdList.includes(store.state.user._id) && reply.senderId != store.state.user._id) return
+
+  console.log(`New ${reply.type}`)
+  store.dispatch('receiveNotification', reply)
 })
 
 export default async function init() {
