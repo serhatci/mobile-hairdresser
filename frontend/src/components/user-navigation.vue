@@ -44,8 +44,9 @@ export default {
         i.bi.bi-scissors.ms-1(v-if='user.type == "Hairdresser"')
       p.text-center.text-danger(v-if='!user.address.city && !settingsClicked')
         strong Update your settings to activate posting!
-      Settings(v-if='settingsClicked')
-      .search-bar.rounded-pill.col.col-sm-10.col-lg-8.m-auto.mt-1(v-else)
+      transition(name='slide-fade')
+        Settings(v-if='settingsClicked')
+      .search-bar.rounded-pill.col.col-sm-10.col-lg-8.m-auto.mt-4(v-if='!settingsClicked')
         SearchBar
 </template>
 
@@ -88,5 +89,14 @@ export default {
 
 .search-bar {
   background-color: var(--my-green);
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>
