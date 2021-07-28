@@ -83,7 +83,7 @@ export default {
 }
 
 .bg-hairdresser {
-  background-image: url('../assets/backgrounds/confetti.svg');
+  background-image: url('../assets/backgrounds/tortoise-shell.svg');
 }
 
 .search-bar {
