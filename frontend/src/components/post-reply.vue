@@ -90,9 +90,11 @@ button {
 textarea {
   height: 8rem;
 }
-.fade-enter-active,
-.fade-leave-active {
+.fade-enter-active {
   transition: opacity 0.6s ease;
+}
+.fade-leave-active {
+  transition: opacity 0.2s ease;
 }
 .fade-enter, .fade-leave-to
 /* .component-fade-leave-active below version 2.1.8 */ {
