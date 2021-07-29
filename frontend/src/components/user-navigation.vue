@@ -50,7 +50,9 @@ export default {
         SearchBar
 </template>
 
-<style lang='scss'scoped>
+<style lang='scss' scoped>
+@import '../assets/scss/custom.scss';
+
 .bi-person-circle {
   font-size: 4rem;
   position: absolute;
@@ -88,7 +90,7 @@ export default {
 }
 
 .search-bar {
-  background-color: var(--my-green);
+  background-color: $my-green;
 }
 
 .slide-fade-enter-active {
