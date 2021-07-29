@@ -50,7 +50,7 @@ export default ({
         .d-flex.flex-start.align-items-center
           i#personIcon.bi.bi-person-circle.text-muted.me-2
           div
-            h6.fw-bold.text-info.mb-1 {{ request.senderFullName }}
+            h4.display-8.fw-bold.mb-1 {{ request.senderFullName }}
             p.text-muted.small.mb-0
               | Shared - {{ request.createdAt | formatDate }}
       .col-12.col-sm-4.d-flex.align-items-center.justify-content-start.justify-content-sm-end
