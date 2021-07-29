@@ -62,7 +62,7 @@ export default ({
   .small.d-flex.justify-content-between.pb-3.border-bottom
     nav
       #comment-button.d-inline(@click='isAllRepliesClicked = !isAllRepliesClicked')
-        span.badge.bg-warning.ms-1 {{ request.replies.length }}
+        span.badge.bg-success.ms-1 {{ request.replies.length }}
         .btn.btn-sm.text-primary.text-decoration-underline All Replies
           i.bi.ms-2(:class='isAllRepliesClicked ? "bi-chevron-compact-up" : "bi-chevron-compact-down"')
       #reply-button.d-inline(@click='isReplyClicked = !isReplyClicked')
