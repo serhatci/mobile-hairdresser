@@ -31,7 +31,8 @@ export default {
 <template lang="pug">
 nav.navbar.navbar-expand-md.navbar-light.px-3(aria-label='Top sticky navigation bar')
   .container-fluid
-    a.navbar-brand(href='/') MOBILER FRISEUR
+    a.navbar-brand.py-0(href='/')
+      h1.display-7.m-0 MOBILER FRISEUR
     button.navbar-toggler.collapsed(
       type='button',
       data-bs-toggle='collapse',
@@ -57,3 +58,9 @@ nav.navbar.navbar-expand-md.navbar-light.px-3(aria-label='Top sticky navigation 
         li.nav-item(v-if='user')
           button.btn.btn-outline-success.m-1(@click='doLogout') Log out
 </template>
+
+<style lang="scss" scoped>
+h1 {
+  font-weight: 300;
+}
+</style>

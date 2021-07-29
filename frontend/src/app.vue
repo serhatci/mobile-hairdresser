@@ -25,8 +25,8 @@ export default {
 
 
 <style lang="scss">
+@import './assets/scss/custom.scss';
 @import 'bootstrap/scss/bootstrap.scss';
-@import './assets/theme.scss';
 @import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css');
 
 #app,
@@ -39,7 +39,7 @@ html,
 }
 
 main {
-  background-color: var(--my-green);
+  background-color: $my-green;
 }
 
 html {

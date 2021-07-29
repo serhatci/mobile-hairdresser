@@ -73,7 +73,7 @@ export default ({
 
 <template lang="pug">
 .card.border-secondary.my-3.mx-2.p-3.rounded.shadow-sm
-  h6.border-bottom.pb-2.mb-0 Post a request
+  h3.display-8.border-bottom.pb-2.mb-0 Post a request
     i.bi.bi-chevron-compact-up.ms-2(@click='isPostExpanded = !isPostExpanded', v-if='isPostExpanded')
     i.bi.bi-chevron-compact-down.ms-2(@click='isPostExpanded = !isPostExpanded', v-else)
   transition(name='fade')

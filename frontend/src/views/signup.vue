@@ -84,8 +84,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@import '../assets/theme.scss';
-
 .card {
   max-width: 25rem;
 }

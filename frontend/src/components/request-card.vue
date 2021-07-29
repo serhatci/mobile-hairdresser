@@ -50,7 +50,7 @@ export default ({
         .d-flex.flex-start.align-items-center
           i#personIcon.bi.bi-person-circle.text-muted.me-2
           div
-            h6.fw-bold.text-info.mb-1 {{ request.senderFullName }}
+            h4.display-8.fw-bold.mb-1 {{ request.senderFullName }}
             p.text-muted.small.mb-0
               | Shared - {{ request.createdAt | formatDate }}
       .col-12.col-sm-4.d-flex.align-items-center.justify-content-start.justify-content-sm-end
@@ -62,17 +62,15 @@ export default ({
   .small.d-flex.justify-content-between.pb-3.border-bottom
     nav
       #comment-button.d-inline(@click='isAllRepliesClicked = !isAllRepliesClicked')
-        span.badge.bg-warning.ms-1 {{ request.replies.length }}
+        span.badge.bg-success.ms-1 {{ request.replies.length }}
         .btn.btn-sm.text-primary.text-decoration-underline All Replies
           i.bi.ms-2(:class='isAllRepliesClicked ? "bi-chevron-compact-up" : "bi-chevron-compact-down"')
       #reply-button.d-inline(@click='isReplyClicked = !isReplyClicked')
         .btn.btn-sm.text-primary.text-decoration-underline Reply
           i.bi.ms-2(:class='isReplyClicked ? "bi-chevron-compact-up" : "bi-chevron-compact-down"')
-    nav(v-show='request.senderId == user._id')
-      .btn.btn-sm.text-danger.text-decoration-underline(
-        @click='deleteRequest({ requestId: request._id, senderId: user._id })'
-      ) Delete
-  PostReply(:request='request', :isReplyClicked='isReplyClicked', @replySent='addReplyCard')
+    a(v-show='request.senderId == user._id')
+      .btn.btn-sm.text-danger(@click='deleteRequest({ requestId: request._id, senderId: user._id })') Delete
+  PostReply(:request='request', :isReplyClicked='isReplyClicked', @replySent='addReplyCard', :key='request._id')
   transition-group(name='replyList', tag='ul')
     li(v-for='reply in request.replies', :key='`${reply._id}`', v-show='isAllRepliesClicked')
       ReplyCard(

@@ -68,15 +68,14 @@ export default ({
 
 <template lang="pug">
 transition(name='fade')
-  form.bg-light.px-3.pb-3(@submit='sendReply', v-show='isReplyClicked')
+  form.bg-light.px-3.py-3(@submit='sendReply', v-show='isReplyClicked')
     span.d-block.text-center.text-danger.py-1(v-if='backendError') {{ backendError }}
     .mb-3
-      label.form-label(for='replyMessage')
-        span.visually-hidden Request Message
       textarea#replyMessage.form-control.form-control-sm(
         v-model='message',
         placeholder='Reply Message',
-        aria-describedby='message'
+        aria-describedby='message',
+        aria-label='Request Message'
       )
     .d-flex.justify-content-end
       button.btn.btn-primary.w-100(type='submit') Reply

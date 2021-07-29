@@ -40,17 +40,18 @@ export default ({
     p#message.mt-3.mb-4 {{ reply.message }}
 </template>
 
-<style scoped>
+<style lang='scss' scoped>
 #message {
   white-space: pre-line;
 }
 
-.card {
-  width: 90%;
-}
-
 #sendPM {
   font-size: 0.8rem;
+  cursor: pointer;
+}
+
+#requestPerson {
+  font-size: 3rem;
 }
 
 #personIcon {

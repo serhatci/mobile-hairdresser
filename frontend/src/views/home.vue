@@ -25,17 +25,17 @@ export default {
       .row.text-center
         .col-md-4
           i.service-icons.bi.bi-scissors
-          h4.my-3 Search
+          h3.display-6.my-3 Search
           p.text
             | Easily search mobile hairdressers close to your location. Check their portfolio and learn more about their previous works & customer reviews.
         .col-md-4
           i.service-icons.bi.bi-chat-left-text
-          h4.my-3 Post
+          h3.display-6.my-3 Post
           p.text
             | Post a hairdresser request. Define your expectations and wait for the replies.
         .col-md-4
           i.service-icons.bi.bi-chat
-          h4.my-3 Ask for Advice
+          h3.display-6.my-3 Ask for Advice
           p.text
             | Do you want to have a new hair style? Why not asking for opinion of real hairdressers?
 
@@ -46,22 +46,24 @@ export default {
       .row.text-center
         .col-md-4
           i.service-icons.bi.bi-scissors
-          h4.my-3 Alert
+          h3.display-6.my-3 Alert
           p.text
             | Get real time notifications when a customer post a hairdresser request. Be the first one to be notified if customer's location close to your service area.
         .col-md-4
           i.service-icons.bi.bi-chat-dots
-          h4.my-3 Reply
+          h3.display-6.my-3 Reply
           p.text
             | Reply hairdresser requests and reach out you potential customers.
         .col-md-4
           i.service-icons.bi.bi-info-circle
-          h4.my-3 Help
+          h3.display-6.my-3 Help
           p.text
             | Help your potential customers looking for hairstyle advices. Reply them instantly and increase your network
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import '../assets/scss/custom.scss';
+
 section.first {
   height: 100vh;
   background-image: url('../assets/illustrations/scissors3.svg');
@@ -72,15 +74,15 @@ section.first {
 }
 
 .home-page {
-  background-color: var(--my-green);
+  background-color: $my-green;
 }
 
 section.second {
-  background-color: var(--my-aliceblue);
+  background-color: aliceblue;
 }
 
 section.third {
-  background-color: var(--my-pink);
+  background-color: $my-pink;
 }
 
 .service-icons {

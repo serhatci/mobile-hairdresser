@@ -21,7 +21,7 @@ export default {
 
 <template lang="pug">
 .card.border-secondary.my-3.mx-2.p-3.rounded.shadow-sm
-  h6.border-bottom.pb-2.mb-0 {{ title }}
+  h3.display-8.border-bottom.pb-2.mb-0 {{ title }}
   .display-requests(v-if='requests.length > 0')
     transition-group(name='list', tag='ul')
       li(v-for='request in sortedRequests', :key='request._id')
