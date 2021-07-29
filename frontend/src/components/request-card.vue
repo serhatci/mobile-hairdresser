@@ -48,7 +48,7 @@ export default ({
     .row.mt-1
       .col-12.col-sm-8
         .d-flex.flex-start.align-items-center
-          i#requestPerson.bi.bi-person-circle.text-muted.me-2
+          i#personIcon.bi.bi-person-circle.text-muted.me-2
           div
             h6.fw-bold.text-info.mb-1 {{ request.senderFullName }}
             p.text-muted.small.mb-0
@@ -92,16 +92,19 @@ ul {
   list-style-type: none;
 }
 
-.replyList-enter-active,
-.replyList-leave-active {
+.replyList-enter-active {
   transition: all 0.3s;
 }
-.replyList-enter, .replyList-leave-to /* .list-leave-active below version 2.1.8 */ {
+.replyList-leave-active {
+  transition: all 0.2s;
+}
+.replyList-enter,
+.replyList-leave-to {
   opacity: 70%;
-  transform: translateY(0.5rem);
+  transform: translateX(0.4rem);
 }
 
-#requestPerson {
+#personIcon {
   font-size: 3rem;
 }
 </style>
