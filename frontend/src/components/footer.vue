@@ -11,13 +11,13 @@ export default {
     .col-lg-4
       span.text-lg-start Copyright &copy; MOBILER HAIRDRESSER 2021
     .col-lg-4.my-3.my-lg-0
-      a.btn.btn-primary.btn-social.mx-2(href='#!')
+      a.btn.btn-primary.btn-social.mx-2(href='#!', aria-label='facebook')
         i.bi.bi-facebook
 
-      a.btn.btn-danger.btn-social.mx-2(href='#!')
+      a.btn.btn-danger.btn-social.mx-2(href='#!', aria-label='instagram')
         i.bi.bi-instagram
 
-      a.btn.btn-success.btn-social.mx-2(href='#!')
+      a.btn.btn-success.btn-social.mx-2(href='#!', aria-label='twitter')
         i.bi.bi-twitter
 
     .px-4.col-lg-4.text-lg-end
