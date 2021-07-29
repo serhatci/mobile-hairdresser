@@ -92,13 +92,16 @@ ul {
   list-style-type: none;
 }
 
-.replyList-enter-active,
-.replyList-leave-active {
+.replyList-enter-active {
   transition: all 0.3s;
 }
-.replyList-enter, .replyList-leave-to /* .list-leave-active below version 2.1.8 */ {
+.replyList-leave-active {
+  transition: all 0.2s;
+}
+.replyList-enter,
+.replyList-leave-to {
   opacity: 70%;
-  transform: translateY(0.5rem);
+  transform: translateX(0.4rem);
 }
 
 #personIcon {
