@@ -111,6 +111,10 @@ i {
   cursor: pointer;
 }
 
+textarea {
+  height: 9rem;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.6s ease;
