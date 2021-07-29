@@ -31,16 +31,16 @@ export default {
   .card.border-secondary.border-top-0
     .background(:class='{ "bg-customer": user.type == "Customer", "bg-hairdresser": user.type == "Hairdresser" }')
       i.bi.bi-person-circle.position-absolut.text-muted
-      .user-menu.py-1.position-absolut.text-end
-        a.btn.text-light.me-2.me-sm-4(href='#!', v-if='user.type == "Hairdresser"')
+      nav.position-absolut.text-end.mt-2
+        a.btn.text-light.me-2.me-sm-4(href='#!', v-if='user.type == "Hairdresser"', aria-label='Portfolio')
           i.bi.bi-file-person.fs-5
-        a.btn.text-light.me-2.me-sm-4(href='#!')
+        a.btn.text-light.me-2.me-sm-4(href='#!', aria-label='PM messages')
           i.bi.bi-envelope.fs-5
-        a.btn.text-light.me-3.me-sm-4(@click='toggleSettingsClicked')
+        a.btn.text-light.me-3.me-sm-4(@click='toggleSettingsClicked', , aria-label='Settings')
           i.bi.bi-gear.fs-5(v-if='!settingsClicked')
           i.bi.bi-x-circle-fill.fs-5.text-danger(v-else)
     .card-body.pt-0
-      h5.card-title {{ user.fullName ? user.fullName : "Anonymous" }}
+      h2.display-7.card-title.fw-normal {{ user.fullName ? user.fullName : "Anonymous" }}
         i.bi.bi-scissors.ms-1(v-if='user.type == "Hairdresser"')
       p.text-center.text-danger(v-if='!user.address.city && !settingsClicked')
         strong Update your settings to activate posting!
