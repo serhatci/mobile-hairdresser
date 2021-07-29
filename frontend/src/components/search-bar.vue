@@ -10,11 +10,12 @@ export default {
     form
       .row.g-0.align-items-center
         .col
-          input.form-control.form-control-sm.form-control-borderless(
+          label.d-none(for='search') Search
+          input#search.form-control.form-control-sm.form-control-borderless(
             type='search',
             placeholder='City, Region or Postcode'
           )
         .col-auto.mx-2
-          button.btn(type='submit')
+          button.btn(type='submit', aria-label='submit')
             i.bi.bi-search.text-body
 </template>
