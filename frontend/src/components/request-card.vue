@@ -68,11 +68,9 @@ export default ({
       #reply-button.d-inline(@click='isReplyClicked = !isReplyClicked')
         .btn.btn-sm.text-primary.text-decoration-underline Reply
           i.bi.ms-2(:class='isReplyClicked ? "bi-chevron-compact-up" : "bi-chevron-compact-down"')
-    nav(v-show='request.senderId == user._id')
-      .btn.btn-sm.text-danger.text-decoration-underline(
-        @click='deleteRequest({ requestId: request._id, senderId: user._id })'
-      ) Delete
-  PostReply(:request='request', :isReplyClicked='isReplyClicked', @replySent='addReplyCard')
+    a(v-show='request.senderId == user._id')
+      .btn.btn-sm.text-danger(@click='deleteRequest({ requestId: request._id, senderId: user._id })') Delete
+  PostReply(:request='request', :isReplyClicked='isReplyClicked', @replySent='addReplyCard', :key='request._id')
   transition-group(name='replyList', tag='ul')
     li(v-for='reply in request.replies', :key='`${reply._id}`', v-show='isAllRepliesClicked')
       ReplyCard(
