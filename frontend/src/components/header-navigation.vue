@@ -61,6 +61,6 @@ nav.navbar.navbar-expand-md.navbar-light.px-3(aria-label='Top sticky navigation 
 
 <style lang="scss" scoped>
 h1 {
-  font-weight: 300;
+  font-weight: 400;
 }
 </style>
