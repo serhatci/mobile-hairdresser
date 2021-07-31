@@ -29,7 +29,7 @@ export default ({
 
       if (!createdReply) return
 
-      this.$emit('replySent', createdReply)
+      this.$emit('reply-sent', createdReply)
 
       this.notifyUserPost({ type: 'Reply', replierIdList: this.replierIdList, senderId: this.request.senderId })
       this.resetFormValues()

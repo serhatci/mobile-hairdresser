@@ -14,7 +14,7 @@ export default ({
   methods: {
 
     deleteReplyCard (replyId) {
-      this.$emit('replyDeleted', replyId)
+      this.$emit('reply-deleted', replyId)
     }
   },
 })
