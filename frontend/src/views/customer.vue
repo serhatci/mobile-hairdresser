@@ -18,7 +18,8 @@ export default {
   },
   data () {
     return {
-      settings: false
+      isSettingsClicked: false,
+      userRequests: []
     }
   },
   computed: {
@@ -57,17 +58,16 @@ export default {
     this.fetchUserRequests()
   },
 }
-
 </script>
 
 <template lang="pug">
 #customerPage.pb-5(v-if='user')
   section
-    UserNavigation(@settingsClicked='settings = !settings')
-  section(v-if='!settings && user.address.city')
-    PostRequest
-  section(v-if='!settings')
-    DisplayRequests(title='Your Requests', :requests='user.customerRequests')
+    UserNavigation(@settingsClicked='isSettingsClicked = !isSettingsClicked')
+  section(v-if='!isSettingsClicked && user.address.city')
+    PostRequest(@request-posted='addRequest')
+  section(v-if='!isSettingsClicked')
+    DisplayRequests(title='Your Requests', :requests='userRequests', @request-deleted='deleteRequest')
   NotificationToast(:alerts='notifications.alerts')
 </template>
 
