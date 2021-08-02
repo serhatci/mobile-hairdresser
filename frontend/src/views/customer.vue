@@ -63,7 +63,7 @@ export default {
 <template lang="pug">
 #customerPage.pb-5(v-if='user')
   section
-    UserNavigation(@settingsClicked='isSettingsClicked = !isSettingsClicked')
+    UserNavigation(@settings-clicked='isSettingsClicked = !isSettingsClicked', :isSettingsClicked='isSettingsClicked')
   section(v-if='!isSettingsClicked && user.address.city')
     PostRequest(@request-posted='addRequest')
   section(v-if='!isSettingsClicked')
