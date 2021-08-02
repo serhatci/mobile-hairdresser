@@ -14,7 +14,7 @@ export default {
     SearchBar,
     PostRequest,
     DisplayRequests,
-    NotificationToast
+    NotificationToast,
   },
   computed: {
     ...mapState(['user', 'notifications']),
@@ -33,7 +33,8 @@ export default {
       requestsInUsersCity: [],
       requestsInUsersState: [],
       repliedRequests: [],
-      settings: false
+      isSettingsClicked: false,
+      isPortfolioClicked: false
     }
   },
   watch: {
@@ -64,8 +65,12 @@ export default {
 <template lang="pug">
 #hairdresserPage.pb-5(v-if='user')
   section
-    UserNavigation(@settingsClicked='settings = !settings')
-  section(v-if='!settings')
+    UserNavigation(
+      :isSettingsClicked='isSettingsClicked',
+      @portfolio-clicked='isPortfolioClicked = !isPortfolioClicked',
+      @settings-clicked='isSettingsClicked = !isSettingsClicked'
+    )
+  section(v-if='!isSettingsClicked')
     DisplayRequests(title='Requests that you replied', :requests='repliedRequests')
     DisplayRequests(title='Requests in your city', :requests='filteredRequestsInCity')
     DisplayRequests(title='Requests in your state', :requests='filteredRequestsInState')
