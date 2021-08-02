@@ -28,7 +28,23 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['fetchUserData']),
+    ...mapActions(['getRequests', 'deleteRequestFromDatabase']),
+
+    async fetchUserRequests () {
+      this.userRequests = await this.getRequests(`senderId=${this.user._id}`)
+    },
+
+    addRequest (request) {
+      this.userRequests.push(request)
+    },
+
+    async deleteRequest (requestId) {
+      const deletedRequest = await this.deleteRequestFromDatabase(requestId)
+      if (deletedRequest) {
+        const index = this.userRequests.findIndex(item => item._id == requestId)
+        this.userRequests.splice(index, 1)
+      }
+    }
   },
   watch: {
     newNotification: function () {
