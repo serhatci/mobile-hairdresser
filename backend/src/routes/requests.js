@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
   let query = {}
 
   if (req.query.senderId) {
-    query = { sender: req.query.senderId }
+    query = { senderId: req.query.senderId }
   }
 
   if (req.query.replierId) {
@@ -34,7 +34,11 @@ router.get('/', async (req, res, next) => {
   }
 
   try {
-    const user = await Request.find(query)
+    const user = await Request.find(query).populate({
+      path: 'replies.senderId',
+      match: { type: 'Hairdresser' },
+      select: '-messageBox,-email',
+    })
     res.send(user)
   } catch (err) {
     next(err)
@@ -86,18 +90,22 @@ router.delete('/:requestId', async (req, res, next) => {
 
 router.post('/:requestId/replies', async (req, res, next) => {
   const { requestId } = req.params
-  const { senderId, senderFullName, eventAddress, message, photos } = req.body
+  const { senderId, senderFullName, senderType, senderCity, senderPostcode, message, photos } = req.body
 
   if (message === '') return res.status(400).send({ message: 'Message can not be empty!' })
 
-  const replyToCreate = { senderId, senderFullName, eventAddress, message, photos }
+  const replyToCreate = { senderId, senderFullName, senderType, senderCity, senderPostcode, message, photos }
 
   try {
     const updatedRequest = await Request.findByIdAndUpdate(
       requestId,
       { $push: { replies: replyToCreate } },
       { new: true }
-    )
+    ).populate({
+      path: 'replies.senderId',
+      match: { type: 'Hairdresser' },
+      select: '-messageBox,-email',
+    })
 
     if (!updatedRequest) throw Error('This request is no more active! Probably deleted by user.')
 
