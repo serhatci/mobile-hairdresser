@@ -40,19 +40,16 @@ export default ({
     async submitRequest (e) {
       e.preventDefault()
       try {
-        await this.postRequest({
-          request: {
-            senderId: this.user._id,
-            senderFullName: this.user.fullName,
-            requestType: this.requestType,
-            eventAddress: this.eventAddress,
-            message: this.message,
-          }, senderId: this.user._id
+        return await this.postRequestToDatabase({
+          senderId: this.user._id,
+          senderFullName: this.user.fullName,
+          requestType: this.requestType,
+          eventAddress: this.eventAddress,
+          message: this.message,
         })
-        return true
+
       } catch (err) {
         this.backendError = err.response.data.message
-        return false
       }
     },
 
