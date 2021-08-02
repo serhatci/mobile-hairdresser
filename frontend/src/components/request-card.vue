@@ -22,7 +22,7 @@ export default ({
     ...mapState(['user']),
   },
   methods: {
-    ...mapActions(['deleteRequest', 'deleteReply']),
+    ...mapActions(['deleteReply']),
 
     addReplyCard (reply) {
       this.request.replies.push(reply)
