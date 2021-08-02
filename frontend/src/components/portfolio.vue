@@ -25,6 +25,7 @@ export default {
         h5#portfolioModelLabel.modal-title Located in {{ hairdresser.address.city || "unknown" }}, {{ hairdresser.address.postcode || "" }}
         button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
       .modal-body
+        button.btn.btn-small.btn-primary.w-100 Send PM
         .row.align-items-center
           .col-2
             i.bi.bi-person-circle
@@ -37,24 +38,19 @@ export default {
         p.text-muted Joined at {{ hairdresser.createdAt | formatDateShort }}
         dl
           dt About:
-            i.ms-3.text-danger.bi.bi-pen
-          dd {{ hairdresser.about }}
+          dd {{ hairdresser.about || "I am a mobile hairdresser" }}
           dt Availability:
-            i.ms-3.text-danger.bi.bi-pen
           dd {{ hairdresser.availability }}
           dt Experience:
-            i.ms-3.text-danger.bi.bi-pen
           dd {{ hairdresser.experienceInYears }} years
           dt Service Area:
-            i.ms-3.text-danger.bi.bi-pen
           dd(v-if='hairdresser.serviceArea > 0') {{ hairdresser.serviceArea }} km around {{ hairdresser.address.city }}
-          dd(v-else) Only inside {{ hairdresser.address.city || "unknown" }}
+          dd(v-else) Only in {{ hairdresser.address.city || "Unknown" }}
           dt Certificates:
-          dd
-            i.bi.bi-folder-plus.fs-1
+          dd None
+
           dt Portfolio Photos:
-          dd
-            i.bi.bi-folder-plus.fs-1
+          dd None
 </template>
 
 <style lang="scss" scoped>

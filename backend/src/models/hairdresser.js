@@ -8,7 +8,7 @@ const User = require('./user')
 
 const HairdresserSchema = new mongoose.Schema(
   {
-    about: { type: String, maxLength: 300, default: 'Please check my portfolio for more info.', trim: true }, // short info about hairdresser
+    about: { type: String, maxLength: 300, trim: true },
     website: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
     facebook: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
     instagram: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
