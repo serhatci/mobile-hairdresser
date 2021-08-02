@@ -16,7 +16,6 @@ const socketService = require('./socket-service')
 
 const User = require('./models/user')
 
-const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const photosRouter = require('./routes/photos')
 const accountRouter = require('./routes/account')
@@ -87,7 +86,6 @@ app.use(
   })
 )
 
-app.use('/api', indexRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/photos', photosRouter)
 app.use('/api/account', accountRouter)
