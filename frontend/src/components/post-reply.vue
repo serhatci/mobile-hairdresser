@@ -10,8 +10,9 @@ export default ({
   computed: {
     ...mapState(['user']),
 
-    replierIdList () {
-      return this.request.replies.map(reply => reply.senderId)
+    repliedHairdressers () {
+      const hairdresserReplies = this.request.replies.filter(reply => reply.senderType == 'Hairdresser')
+      return hairdresserReplies.map(reply => reply.senderId._id)
     }
   },
   data () {
@@ -31,7 +32,7 @@ export default ({
 
       this.$emit('reply-sent', createdReply)
 
-      this.notifyUserPost({ type: 'Reply', replierIdList: this.replierIdList, senderId: this.request.senderId })
+      this.notifyUserPost({ type: 'Reply', repliedHairdressers: this.repliedHairdressers, requestSenderId: this.request.senderId })
       this.resetFormValues()
     },
 

@@ -153,14 +153,22 @@ const store = new Vuex.Store({
 })
 
 socket.on('New request', request => {
-  if (request.address && store.state.user.address.city != request.address.city) return
+  const user = store.state.user
+
+  if (user.address.city != request.address.city && user.address.state != request.address.state) return
 
   console.log(`New ${request.type}`)
   store.dispatch('receiveNotification', request)
 })
 
 socket.on('New reply', reply => {
-  if (!reply.replierIdList.includes(store.state.user._id) && reply.senderId != store.state.user._id) return
+  console.log(reply)
+  const isUserReplied = reply.repliedHairdressers.includes(store.state.user._id)
+  const isUserSenderOfRequest = reply.requestSenderId == store.state.user._id
+  console.log(isUserReplied)
+  console.log(isUserSenderOfRequest)
+
+  if (!isUserReplied && !isUserSenderOfRequest) return
 
   console.log(`New ${reply.type}`)
   store.dispatch('receiveNotification', reply)
