@@ -71,6 +71,11 @@ const UserSchema = new mongoose.Schema(
     timestamps: true,
     discriminatorKey: 'type',
     toJSON: {
+      transform(doc, ret) {
+        delete ret.hash
+        delete ret.salt
+        delete ret.__v
+      },
       virtuals: true,
     },
   }
