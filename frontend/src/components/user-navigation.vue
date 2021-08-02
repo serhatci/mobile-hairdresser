@@ -15,17 +15,6 @@ export default {
   computed: {
     ...mapState(['user'])
   },
-  data () {
-    return {
-      settingsClicked: false
-    }
-  },
-  methods: {
-    toggleSettingsClicked () {
-      this.settingsClicked = !this.settingsClicked
-      this.$emit('settingsClicked')
-    }
-  },
 }
 </script>
 
