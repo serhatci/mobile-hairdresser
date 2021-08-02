@@ -30,7 +30,7 @@ export default {
   .display-requests(v-if='requests.length > 0')
     transition-group(name='list', tag='ul')
       li(v-for='request in sortedRequests', :key='request._id')
-        RequestCard(:request='request', @request-deleted='emitDeletedRequest')
+        RequestCard(:request='request', @request-deleted='emitDeletedRequest', @reply-action='$emit("reply-action")')
 </template>
 
 <style scoped>
