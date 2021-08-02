@@ -29,6 +29,8 @@ export default ({
 
       this.isReplyClicked = !this.isReplyClicked
       this.isAllRepliesClicked = true
+
+      this.$emit('reply-action')
     },
 
     deleteReplyCard (replyId) {
@@ -36,6 +38,8 @@ export default ({
 
       const index = this.request.replies.findIndex(i => i._id == replyId)
       this.request.replies.splice(index, 1)
+
+      this.$emit('reply-action')
     }
   },
 })
