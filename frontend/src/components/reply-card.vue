@@ -43,7 +43,7 @@ div
             p.small.mb-0
               | Shared - {{ reply.createdAt | formatDate }}&nbsp
       .col-12.col-sm-2.text-end
-        a.btn.btn-sm.text-danger(v-if='reply.senderId == user._id', @click='deleteReplyCard(reply._id)') Delete
+        a.btn.btn-sm.text-danger(v-if='reply.senderType == user.type', @click='deleteReplyCard(reply._id)') Delete
         address.text-muted.small {{ reply.senderCity ? `${reply.senderCity}, ${reply.senderPostcode}` : "Unknown" }}
     p#message.my-3.ms-0.ms-sm-5 {{ reply.message }}
 </template>
