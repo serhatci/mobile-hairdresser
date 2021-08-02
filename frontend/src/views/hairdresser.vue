@@ -25,14 +25,15 @@ export default {
       return this.requestsInUsersCity.filter(req => !this.repliedRequests.some(e => e._id === req._id))
     },
     filteredRequestsInState () {
-      return this.requestsInUsersState.filter(req => req.eventAddress.city !== this.user.address.city)
+      const requests = this.requestsInUsersState.filter(req => req.eventAddress.city !== this.user.address.city)
+      return requests.filter(req => !this.repliedRequests.some(e => e._id === req._id))
     }
   },
   data () {
     return {
+      repliedRequests: [],
       requestsInUsersCity: [],
       requestsInUsersState: [],
-      repliedRequests: [],
       isSettingsClicked: false,
       isPortfolioClicked: false
     }
@@ -71,9 +72,9 @@ export default {
       @settings-clicked='isSettingsClicked = !isSettingsClicked'
     )
   section(v-if='!isSettingsClicked')
-    DisplayRequests(title='Requests that you replied', :requests='repliedRequests')
-    DisplayRequests(title='Requests in your city', :requests='filteredRequestsInCity')
-    DisplayRequests(title='Requests in your state', :requests='filteredRequestsInState')
+    DisplayRequests(title='Requests that you replied', :requests='repliedRequests', @reply-action='fetchData')
+    DisplayRequests(title='Requests in your city', :requests='filteredRequestsInCity', @reply-action='fetchData')
+    DisplayRequests(title='Requests in your state', :requests='filteredRequestsInState', @reply-action='fetchData')
   NotificationToast(:alerts='notifications.alerts')
 </template>
 
