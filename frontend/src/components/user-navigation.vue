@@ -34,17 +34,17 @@ export default {
           i.bi.bi-file-person.fs-5
         a.btn.text-light.me-2.me-sm-4(href='#!', aria-label='PM messages')
           i.bi.bi-envelope.fs-5
-        a.btn.text-light.me-3.me-sm-4(@click='toggleSettingsClicked', , aria-label='Settings')
-          i.bi.bi-gear.fs-5(v-if='!settingsClicked')
+        a.btn.text-light.me-3.me-sm-4(@click='$emit("settings-clicked")', aria-label='Settings')
+          i.bi.bi-gear.fs-5(v-if='!isSettingsClicked')
           i.bi.bi-x-circle-fill.fs-5.text-danger(v-else)
     .card-body.pt-0
       h2.display-7.card-title.fw-normal {{ user.fullName ? user.fullName : "Anonymous" }}
         i.bi.bi-scissors.ms-1(v-if='user.type == "Hairdresser"')
-      p.text-center.text-danger(v-if='!user.address.city && !settingsClicked')
+      p.text-center.text-danger(v-if='!user.address.city && !isSettingsClicked')
         strong Update your settings to activate posting!
       transition(name='slide-fade')
-        Settings(v-if='settingsClicked')
-      .search-bar.rounded-pill.col.col-sm-10.col-lg-8.m-auto.mt-4(v-if='!settingsClicked')
+        Settings(v-if='isSettingsClicked')
+      .search-bar.rounded-pill.col.col-sm-10.col-lg-8.m-auto.mt-4(v-if='!isSettingsClicked')
         SearchBar
 </template>
 
