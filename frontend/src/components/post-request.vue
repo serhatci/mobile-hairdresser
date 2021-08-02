@@ -35,7 +35,9 @@ export default ({
 
       this.$emit('request-posted', newRequest)
       this.notifyUserPost({ type: 'Request', address: this.eventAddress })
+
       this.resetFormValues()
+      this.isPostExpanded = !this.isPostExpanded
     },
 
     async submitRequest (e) {
