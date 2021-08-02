@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
 const mongoose = require('mongoose')
-const autopopulate = require('mongoose-autopopulate')
 const User = require('./user')
 
 const CustomerSchema = new mongoose.Schema(
@@ -10,7 +9,6 @@ const CustomerSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Request',
-        autopopulate: true,
       },
     ],
     hairdresserReviews: [
@@ -68,5 +66,4 @@ class Customer {
 }
 
 CustomerSchema.loadClass(Customer)
-CustomerSchema.plugin(autopopulate)
 module.exports = User.discriminator('Customer', CustomerSchema, 'Customer')

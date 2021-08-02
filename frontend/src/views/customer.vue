@@ -18,7 +18,8 @@ export default {
   },
   data () {
     return {
-      settings: false
+      isSettingsClicked: false,
+      userRequests: []
     }
   },
   computed: {
@@ -28,27 +29,45 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['fetchUserData']),
+    ...mapActions(['getRequests', 'deleteRequestFromDatabase']),
+
+    async fetchUserRequests () {
+      this.userRequests = await this.getRequests(`senderId=${this.user._id}`)
+    },
+
+    addRequest (request) {
+      this.userRequests.push(request)
+    },
+
+    async deleteRequest (requestId) {
+      const deletedRequest = await this.deleteRequestFromDatabase(requestId)
+      if (deletedRequest) {
+        const index = this.userRequests.findIndex(item => item._id == requestId)
+        this.userRequests.splice(index, 1)
+      }
+    }
   },
   watch: {
     newNotification: function () {
       if (this.newNotification == 0) return
 
-      this.fetchUserData()
+      this.fetchUserRequests()
     }
   },
+  mounted () {
+    this.fetchUserRequests()
+  },
 }
-
 </script>
 
 <template lang="pug">
 #customerPage.pb-5(v-if='user')
   section
-    UserNavigation(@settingsClicked='settings = !settings')
-  section(v-if='!settings && user.address.city')
-    PostRequest
-  section(v-if='!settings')
-    DisplayRequests(title='Your Requests', :requests='user.customerRequests')
+    UserNavigation(@settingsClicked='isSettingsClicked = !isSettingsClicked')
+  section(v-if='!isSettingsClicked && user.address.city')
+    PostRequest(@request-posted='addRequest')
+  section(v-if='!isSettingsClicked')
+    DisplayRequests(title='Your Requests', :requests='userRequests', @request-deleted='deleteRequest')
   NotificationToast(:alerts='notifications.alerts')
 </template>
 

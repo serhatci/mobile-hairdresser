@@ -22,7 +22,7 @@ export default ({
     ...mapState(['user']),
   },
   methods: {
-    ...mapActions(['deleteRequest', 'deleteReply']),
+    ...mapActions(['deleteReply']),
 
     addReplyCard (reply) {
       this.request.replies.push(reply)
@@ -69,19 +69,18 @@ export default ({
         .btn.btn-sm.text-primary.text-decoration-underline Reply
           i.bi.ms-2(:class='isReplyClicked ? "bi-chevron-compact-up" : "bi-chevron-compact-down"')
     a(v-show='request.senderId == user._id')
-      .btn.btn-sm.text-danger(@click='deleteRequest({ requestId: request._id, senderId: user._id })') Delete
-  PostReply(:request='request', :isReplyClicked='isReplyClicked', @replySent='addReplyCard', :key='request._id')
+      .btn.btn-sm.text-danger(@click='$emit("request-deleted", request._id)') Delete
+  PostReply(:request='request', :isReplyClicked='isReplyClicked', @reply-sent='addReplyCard', :key='request._id')
   transition-group(name='replyList', tag='ul')
-    li(v-for='reply in request.replies', :key='`${reply._id}`', v-show='isAllRepliesClicked')
-      ReplyCard(
-        :reply='reply',
-        :requestId='request._id',
-        :sameUser='reply.senderId === request.senderId ? true : false',
-        @replyDeleted='deleteReplyCard'
-      )
+    li(v-for='reply in request.replies', :key='`${reply._id}`', v-if='isAllRepliesClicked')
+      ReplyCard(:reply='reply', @reply-deleted='deleteReplyCard')
 </template>
 
 <style scoped>
+ul {
+  padding: 0;
+}
+
 #message {
   white-space: pre-line;
 }

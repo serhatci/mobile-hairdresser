@@ -22,37 +22,37 @@ export default ({
     }
   },
   methods: {
-    ...mapActions(['postRequest', 'notifyUserPost']),
+    ...mapActions(['postRequestToDatabase', 'notifyUserPost']),
 
     getLocation (item) {
       this.eventAddress = item
     },
 
     async sendRequest (e) {
-      const result = await this.submitRequest(e)
+      const newRequest = await this.submitRequest(e)
 
-      if (!result) return
+      if (!newRequest) return
 
+      this.$emit('request-posted', newRequest)
       this.notifyUserPost({ type: 'Request', address: this.eventAddress })
+
       this.resetFormValues()
+      this.isPostExpanded = !this.isPostExpanded
     },
 
     async submitRequest (e) {
       e.preventDefault()
       try {
-        await this.postRequest({
-          request: {
-            senderId: this.user._id,
-            senderFullName: this.user.fullName,
-            requestType: this.requestType,
-            eventAddress: this.eventAddress,
-            message: this.message,
-          }, senderId: this.user._id
+        return await this.postRequestToDatabase({
+          senderId: this.user._id,
+          senderFullName: this.user.fullName,
+          requestType: this.requestType,
+          eventAddress: this.eventAddress,
+          message: this.message,
         })
-        return true
+
       } catch (err) {
         this.backendError = err.response.data.message
-        return false
       }
     },
 

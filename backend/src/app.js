@@ -16,12 +16,10 @@ const socketService = require('./socket-service')
 
 const User = require('./models/user')
 
-const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const photosRouter = require('./routes/photos')
 const accountRouter = require('./routes/account')
 const requestsRouter = require('./routes/requests')
-const customersRouter = require('./routes/customers')
 const locationsRouter = require('./routes/locations')
 
 const app = express()
@@ -87,12 +85,10 @@ app.use(
   })
 )
 
-app.use('/api', indexRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/photos', photosRouter)
 app.use('/api/account', accountRouter)
 app.use('/api/requests', requestsRouter)
-app.use('/api/customers', customersRouter)
 app.use('/api/locations', locationsRouter)
 
 // catch 404 and forward to error handler

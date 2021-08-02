@@ -1,15 +1,14 @@
+/* eslint-disable func-names */
 /* eslint-disable no-param-reassign */
 const mongoose = require('mongoose')
 
 const { isURL } = require('validator')
 
 const User = require('./user')
-const EmployerReference = require('./employer-reference')
 
 const HairdresserSchema = new mongoose.Schema(
   {
     about: { type: String, maxLength: 300, default: 'Please check my portfolio for more info.', trim: true }, // short info about hairdresser
-    languages: { type: [], default: ['Deutsch'] },
     website: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
     facebook: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
     instagram: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
@@ -25,7 +24,6 @@ const HairdresserSchema = new mongoose.Schema(
       default: 0,
     },
     serviceArea: { type: Number, default: 0 }, // perimeter in km around a location
-    employerReferences: [],
     portfolioPhotos: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -35,15 +33,26 @@ const HairdresserSchema = new mongoose.Schema(
     certificates: [],
     customerReviews: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Review',
+        reviewer: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+          required: [true, 'Reviewer Id should be provided!'],
+        },
+        rating: {
+          type: Number,
+          required: [true, 'Rating should be provided!'],
+        },
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
       },
     ],
   },
   {
     toJSON: {
       transform(doc, ret) {
-        delete ret.password
+        delete ret.customerReviews
         // eslint-disable-next-line no-underscore-dangle
         delete ret.__v
       },
@@ -54,11 +63,14 @@ const HairdresserSchema = new mongoose.Schema(
 
 // eslint-disable-next-line func-names
 HairdresserSchema.virtual('averageRating').get(function () {
-  if (this.customerReviews.length !== 0) {
-    const totalRating = this.customerReviews.reduce((a, b) => a + b.rating, 0)
-    return totalRating / this.customerReviews.length
-  }
-  return 0
+  if (this.customerReviews.length == 0) return 0
+
+  const totalRating = this.customerReviews.reduce((a, b) => a + b.rating, 0)
+  return totalRating / this.customerReviews.length
+})
+
+HairdresserSchema.virtual('numberOfReviews').get(function () {
+  return this.customerReviews.length
 })
 
 class Hairdresser {
@@ -69,18 +81,6 @@ class Hairdresser {
 
   async deletePhotoFromPortfolio(photo) {
     this.portfolioPhotos = this.portfolioPhotos.filter(p => p !== photo)
-    await this.save()
-  }
-
-  async addEmployerReference(employerName, shopName, employerAddress, employerEmail, employerTelephone) {
-    const reference = new EmployerReference({
-      name: employerName,
-      shop: shopName,
-      address: employerAddress,
-      email: employerEmail,
-      telephone: employerTelephone,
-    })
-    this.employerReferences.push(reference)
     await this.save()
   }
 

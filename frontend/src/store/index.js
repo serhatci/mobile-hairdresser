@@ -92,25 +92,19 @@ const store = new Vuex.Store({
       }
     },
 
-    async postRequest({ commit }, { request, senderId }) {
+    async postRequestToDatabase(store, request) {
       try {
-        const createdRequest = await axios.post('/api/requests', request)
-        if (createdRequest) {
-          const user = await axios.post(`/api/customers/${senderId}/requests`, createdRequest.data)
-          commit(mutations.SET_USER, user.data)
-        }
+        const newRequest = await axios.post('/api/requests', request)
+        return newRequest.data
       } catch (e) {
         throw e
       }
     },
 
-    async deleteRequest({ commit }, { requestId, senderId }) {
+    async deleteRequestFromDatabase(store, requestId) {
       try {
-        const user = await axios.delete(`/api/customers/${senderId}/requests/${requestId}`)
-        if (user) {
-          await axios.delete(`/api/requests/${requestId}`)
-          commit(mutations.SET_USER, user.data)
-        }
+        const deletedRequest = await axios.delete(`/api/requests/${requestId}`)
+        return deletedRequest.data
       } catch (e) {
         throw e
       }
@@ -129,15 +123,6 @@ const store = new Vuex.Store({
       try {
         const deletedReply = await axios.delete(`/api/requests/${requestId}/replies/${replyId}`)
         return deletedReply.data
-      } catch (e) {
-        throw e
-      }
-    },
-
-    async fetchUserData({ commit, state }) {
-      try {
-        const user = await axios.get(`/api/users/${state.user._id}`)
-        commit(mutations.SET_USER, user.data)
       } catch (e) {
         throw e
       }

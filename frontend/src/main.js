@@ -17,6 +17,13 @@ Vue.filter('formatDate', function (date) {
   return parsedDate.toLocaleDateString('en-EN', options)
 })
 
+Vue.filter('formatDateShort', function (date) {
+  const parsedDate = new Date(date)
+  const options = { year: 'numeric', month: 'long', day: 'numeric' }
+
+  return parsedDate.toLocaleDateString('en-EN', options)
+})
+
 async function main() {
   let storeInstance = await store()
 

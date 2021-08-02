@@ -29,7 +29,7 @@ export default ({
 
       if (!createdReply) return
 
-      this.$emit('replySent', createdReply)
+      this.$emit('reply-sent', createdReply)
 
       this.notifyUserPost({ type: 'Reply', replierIdList: this.replierIdList, senderId: this.request.senderId })
       this.resetFormValues()
@@ -43,7 +43,9 @@ export default ({
           reply: {
             senderId: this.user._id,
             senderFullName: this.user.fullName,
-            senderAddress: this.user.address,
+            senderType: this.user.type,
+            senderCity: this.user.address.city,
+            senderPostcode: this.user.address.postcode,
             message: this.message,
           },
           requestId: this.request._id,

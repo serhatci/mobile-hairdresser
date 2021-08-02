@@ -16,6 +16,11 @@ export default {
       return this.requests
     }
   },
+  methods: {
+    emitDeletedRequest (requestId) {
+      this.$emit('request-deleted', requestId)
+    }
+  },
 }
 </script>
 
@@ -25,7 +30,7 @@ export default {
   .display-requests(v-if='requests.length > 0')
     transition-group(name='list', tag='ul')
       li(v-for='request in sortedRequests', :key='request._id')
-        RequestCard(:request='request')
+        RequestCard(:request='request', @request-deleted='emitDeletedRequest')
 </template>
 
 <style scoped>

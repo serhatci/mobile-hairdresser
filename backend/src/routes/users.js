@@ -27,7 +27,7 @@ router.get('/', async (req, res, next) => {
   }
 
   try {
-    const userArr = await User.find(query)
+    const userArr = await User.find(query, { messageBox: 0 })
     res.send(userArr)
   } catch (err) {
     next(err)
