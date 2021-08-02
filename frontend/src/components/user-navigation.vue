@@ -7,7 +7,10 @@ export default {
   name: 'UserNavigation',
   components: {
     SearchBar,
-    Settings
+    Settings,
+  },
+  props: {
+    isSettingsClicked: Boolean
   },
   computed: {
     ...mapState(['user'])
