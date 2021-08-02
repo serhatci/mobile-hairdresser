@@ -27,21 +27,21 @@ const RequestSchema = new mongoose.Schema(
           ref: 'User',
           required: true,
         },
+        senderType: {
+          type: String,
+          required: true,
+        },
         senderFullName: {
           type: String,
           required: true,
         },
-        senderAddress: {
-          city: {
-            type: String,
-            default: '',
-          },
-          stateCode: {
-            type: String,
-            default: '',
-          },
-          postcode: { type: Number, default: '' },
-          location: [],
+        senderCity: {
+          type: String,
+          required: true,
+        },
+        senderPostcode: {
+          type: String,
+          required: true,
         },
         message: {
           type: String,
