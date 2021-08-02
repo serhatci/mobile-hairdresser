@@ -22,7 +22,7 @@ export default ({
     }
   },
   methods: {
-    ...mapActions(['postRequest', 'notifyUserPost']),
+    ...mapActions(['postRequestToDatabase', 'notifyUserPost']),
 
     getLocation (item) {
       this.eventAddress = item
