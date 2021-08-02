@@ -72,13 +72,8 @@ export default ({
       .btn.btn-sm.text-danger(@click='$emit("request-deleted", request._id)') Delete
   PostReply(:request='request', :isReplyClicked='isReplyClicked', @reply-sent='addReplyCard', :key='request._id')
   transition-group(name='replyList', tag='ul')
-    li(v-for='reply in request.replies', :key='`${reply._id}`', v-show='isAllRepliesClicked')
-      ReplyCard(
-        :reply='reply',
-        :requestId='request._id',
-        :sameUser='reply.senderId === request.senderId ? true : false',
-        @replyDeleted='deleteReplyCard'
-      )
+    li(v-for='reply in request.replies', :key='`${reply._id}`', v-if='isAllRepliesClicked')
+      ReplyCard(:reply='reply', @reply-deleted='deleteReplyCard')
 </template>
 
 <style scoped>
