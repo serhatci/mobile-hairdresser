@@ -50,8 +50,11 @@ export default {
     newNotification: function () {
       if (this.newNotification == 0) return
 
-      this.fetchUserData()
+      this.fetchUserRequests()
     }
+  },
+  mounted () {
+    this.fetchUserRequests()
   },
 }
 
