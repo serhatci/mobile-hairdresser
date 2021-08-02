@@ -29,9 +29,9 @@ export default ({
     },
 
     async sendRequest (e) {
-      const result = await this.submitRequest(e)
+      const newRequest = await this.submitRequest(e)
 
-      if (!result) return
+      if (!newRequest) return
 
       this.notifyUserPost({ type: 'Request', address: this.eventAddress })
       this.resetFormValues()
