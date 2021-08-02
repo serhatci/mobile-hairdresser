@@ -2,7 +2,8 @@
 export default {
   name: 'Rating',
   props: {
-    averageRating: Number
+    averageRating: Number,
+    numberOfReviews: Number
   },
   computed: {
     starsArr: function () {
@@ -20,8 +21,8 @@ export default {
 
 <template lang="pug">
 .ratings.text-start
-  p {{ averageRating }}
   .d-inline(v-for='star in starsArr')
-    img(v-if='star == "filled"', src='@/assets/icons/star-fill.svg', alt='starFill')
-    img(v-else, src='@/assets/icons/star.svg', alt='starEmpty')
+    i.bi.bi-star-fill.text-warning(v-if='star === "filled"')
+    i.bi.bi-star(v-else)
+  small.text-muted.ms-2 (Reviews:{{ numberOfReviews }})
 </template>
