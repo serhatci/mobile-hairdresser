@@ -33,6 +33,7 @@ export default ({
 
       if (!newRequest) return
 
+      this.$emit('request-posted', newRequest)
       this.notifyUserPost({ type: 'Request', address: this.eventAddress })
       this.resetFormValues()
     },
