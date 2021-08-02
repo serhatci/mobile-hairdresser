@@ -82,6 +82,10 @@ export default ({
 </template>
 
 <style scoped>
+ul {
+  padding: 0;
+}
+
 #message {
   white-space: pre-line;
 }
