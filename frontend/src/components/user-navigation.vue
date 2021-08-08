@@ -58,6 +58,11 @@ export default {
 <style lang='scss' scoped>
 @import '../assets/scss/custom.scss';
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .bi-person-circle {
   font-size: 4rem;
   position: absolute;
