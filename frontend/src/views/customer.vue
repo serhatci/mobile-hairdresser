@@ -18,12 +18,13 @@ export default {
   },
   data () {
     return {
-      isSettingsClicked: false,
-      userRequests: []
+      userRequests: [],
+      isViewSettings: false
     }
   },
   computed: {
     ...mapState(['user', 'notifications']),
+
     newNotification () {
       return this.notifications.received
     },
@@ -52,6 +53,12 @@ export default {
       if (this.newNotification == 0) return
 
       this.fetchUserRequests()
+    },
+
+    $route (to, from) {
+      if (to.path == '/customer/settings') return this.isViewSettings = true
+
+      this.isViewSettings = false
     }
   },
   mounted () {
@@ -63,10 +70,10 @@ export default {
 <template lang="pug">
 #customerPage.pb-5(v-if='user')
   section
-    UserNavigation(@settings-clicked='isSettingsClicked = !isSettingsClicked', :isSettingsClicked='isSettingsClicked')
-  section(v-if='!isSettingsClicked && user.address.city')
+    UserNavigation
+  section(v-if='!isViewSettings')
     PostRequest(@request-posted='addRequest')
-  section(v-if='!isSettingsClicked')
+  section(v-if='!isViewSettings')
     DisplayRequests(title='Your Requests', :requests='userRequests', @request-deleted='deleteRequest')
   NotificationToast(:alerts='notifications.alerts')
 </template>
