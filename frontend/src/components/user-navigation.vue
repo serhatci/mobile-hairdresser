@@ -2,17 +2,14 @@
 import { mapState } from 'vuex'
 import SearchBar from "@/components/search-bar.vue";
 import Settings from "@/components/settings.vue";
+import PortfolioSettings from "@/components/portfolio-settings.vue";
 
 export default {
   name: 'UserNavigation',
   components: {
     SearchBar,
     Settings,
-  },
-  data () {
-    return {
-      isSettingsClicked: false
-    }
+    PortfolioSettings
   },
   computed: {
     ...mapState(['user'])
