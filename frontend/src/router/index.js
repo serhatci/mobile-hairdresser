@@ -42,6 +42,7 @@ export default function init(store) {
         path: '/customer',
         name: 'customer',
         component: () => import(/* webpackChunkName: "customer" */ '../views/customer.vue'),
+        children: [{ path: 'settings' }],
         beforeEnter(to, from, next) {
           if (!store.state.user) return next('/')
           else return next()
@@ -51,6 +52,7 @@ export default function init(store) {
         path: '/hairdresser',
         name: 'hairdresser',
         component: () => import(/* webpackChunkName: "hairdresser" */ '../views/hairdresser.vue'),
+        children: [{ path: 'settings' }],
         beforeEnter(to, from, next) {
           if (!store.state.user) return next('/')
           else return next()
