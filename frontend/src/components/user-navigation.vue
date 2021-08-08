@@ -34,7 +34,7 @@ export default {
 .user-profile.px-2
   .card.border-secondary.border-top-0
     .background(:class='{ "bg-customer": user.type == "Customer", "bg-hairdresser": user.type == "Hairdresser" }')
-      i.bi.bi-person-circle.position-absolut.text-muted
+      i.bi.bi-person-circle.position-absolut.text-muted(@click='goToUserPage')
       nav.position-absolut.text-end.mt-2
         a.btn.text-light.me-2.me-sm-4(href='#!', aria-label='PM messages')
           i.bi.bi-envelope.fs-5
