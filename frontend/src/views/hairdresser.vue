@@ -27,6 +27,10 @@ export default {
     filteredRequestsInState () {
       const requests = this.requestsInUsersState.filter(req => req.eventAddress.city !== this.user.address.city)
       return requests.filter(req => !this.repliedRequests.some(e => e._id === req._id))
+    },
+
+    routeView () {
+      return this.$route.params.page
     }
   },
   data () {
