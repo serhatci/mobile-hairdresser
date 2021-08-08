@@ -34,8 +34,7 @@ export default {
       repliedRequests: [],
       requestsInUsersCity: [],
       requestsInUsersState: [],
-      isSettingsClicked: false,
-      isPortfolioClicked: false
+      isViewSettings: false,
     }
   },
   watch: {
@@ -66,12 +65,8 @@ export default {
 <template lang="pug">
 #hairdresserPage.pb-5(v-if='user')
   section
-    UserNavigation(
-      :isSettingsClicked='isSettingsClicked',
-      @portfolio-clicked='isPortfolioClicked = !isPortfolioClicked',
-      @settings-clicked='isSettingsClicked = !isSettingsClicked'
-    )
-  section(v-if='!isSettingsClicked')
+    UserNavigation
+  section(v-if='!isViewSettings')
     DisplayRequests(title='Requests that you replied', :requests='repliedRequests', @reply-action='fetchData')
     DisplayRequests(title='Requests in your city', :requests='filteredRequestsInCity', @reply-action='fetchData')
     DisplayRequests(title='Requests in your state', :requests='filteredRequestsInState', @reply-action='fetchData')
