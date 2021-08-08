@@ -9,8 +9,10 @@ export default {
     SearchBar,
     Settings,
   },
-  props: {
-    isSettingsClicked: Boolean
+  data () {
+    return {
+      isSettingsClicked: false
+    }
   },
   computed: {
     ...mapState(['user'])
