@@ -37,8 +37,11 @@ export default {
         a.btn.text-light.me-2.me-sm-4(href='#!', aria-label='PM messages')
           i.bi.bi-envelope.fs-5
         a.btn.text-light.me-3.me-sm-4(aria-label='Settings')
-          i.bi.bi-gear.fs-5(v-if='!isSettingsClicked', @click='goToSettings')
-          i.bi.bi-x-circle-fill.fs-5.text-danger(v-else, @click='goToUserPage')
+          i.bi.bi-gear.fs-5(
+            v-if='routeView != "settings"',
+            @click='$router.push(`/${user.type.toLowerCase()}/settings`)'
+          )
+          i.bi.bi-x-circle-fill.fs-5.text-danger(v-else, @click='$router.push(`/${user.type.toLowerCase()}`)')
     .card-body.pt-0
       router-link(:to='`/${user.type.toLowerCase()}`')
         h2.display-7.card-title {{ user.fullName ? user.fullName : "Anonymous" }}
@@ -46,8 +49,9 @@ export default {
       p.text-center.text-danger(v-if='!user.address.city && !routeView')
         strong Update your settings to activate posting!
       transition(name='slide-fade')
-        Settings(v-if='isSettingsClicked')
-      .search-bar.rounded-pill.col.col-sm-10.col-lg-8.m-auto.mt-4(v-if='!isSettingsClicked')
+        Settings(v-if='routeView == "settings"')
+        PortfolioSettings(v-if='routeView == "portfolio"')
+      .search-bar.rounded-pill.col.col-sm-10.col-lg-8.m-auto.mt-4(v-if='!routeView')
         SearchBar
 </template>
 
