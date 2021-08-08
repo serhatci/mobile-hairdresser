@@ -25,7 +25,8 @@ export default {
 .user-profile.px-2
   .card.border-secondary.border-top-0
     .background(:class='{ "bg-customer": user.type == "Customer", "bg-hairdresser": user.type == "Hairdresser" }')
-      i.bi.bi-person-circle.position-absolut.text-muted(@click='goToUserPage')
+      router-link(:to='`/${user.type.toLowerCase()}`')
+        i.bi.bi-person-circle.position-absolut.text-muted
       nav.position-absolut.text-end.mt-2
         a.btn.text-light.me-2.me-sm-4(v-if='user.type == "Hairdresser"', aria-label='Portfolio')
           i.bi.bi-file-person.fs-5(
@@ -39,9 +40,10 @@ export default {
           i.bi.bi-gear.fs-5(v-if='!isSettingsClicked', @click='goToSettings')
           i.bi.bi-x-circle-fill.fs-5.text-danger(v-else, @click='goToUserPage')
     .card-body.pt-0
-      h2.display-7.card-title.fw-normal {{ user.fullName ? user.fullName : "Anonymous" }}
-        i.bi.bi-scissors.ms-1(v-if='user.type == "Hairdresser"')
-      p.text-center.text-danger(v-if='!user.address.city && !isSettingsClicked')
+      router-link(:to='`/${user.type.toLowerCase()}`')
+        h2.display-7.card-title {{ user.fullName ? user.fullName : "Anonymous" }}
+          i.bi.bi-scissors.ms-1(v-if='user.type == "Hairdresser"')
+      p.text-center.text-danger(v-if='!user.address.city && !routeView')
         strong Update your settings to activate posting!
       transition(name='slide-fade')
         Settings(v-if='isSettingsClicked')
