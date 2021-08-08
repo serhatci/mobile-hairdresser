@@ -24,6 +24,7 @@ export default {
   },
   computed: {
     ...mapState(['user', 'notifications']),
+
     newNotification () {
       return this.notifications.received
     },
@@ -52,6 +53,12 @@ export default {
       if (this.newNotification == 0) return
 
       this.fetchUserRequests()
+    },
+
+    $route (to, from) {
+      if (to.path == '/customer/settings') return this.isViewSettings = true
+
+      this.isViewSettings = false
     }
   },
   mounted () {
