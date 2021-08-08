@@ -38,7 +38,6 @@ export default {
       repliedRequests: [],
       requestsInUsersCity: [],
       requestsInUsersState: [],
-      isViewSettings: false,
     }
   },
   watch: {
@@ -47,12 +46,6 @@ export default {
 
       this.fetchData()
     },
-
-    $route (to, from) {
-      if (to.path == '/hairdresser/settings') return this.isViewSettings = true
-
-      this.isViewSettings = false
-    }
   },
   methods: {
     ...mapActions(['getRequests']),
