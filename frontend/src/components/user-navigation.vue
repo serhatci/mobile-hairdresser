@@ -36,14 +36,6 @@ export default {
     .background(:class='{ "bg-customer": user.type == "Customer", "bg-hairdresser": user.type == "Hairdresser" }')
       i.bi.bi-person-circle.position-absolut.text-muted
       nav.position-absolut.text-end.mt-2
-        a.btn.text-light.me-2.me-sm-4(
-          data-bs-toggle='modal',
-          data-bs-target='#portfolioModal',
-          v-if='user.type == "Hairdresser"',
-          aria-label='Portfolio',
-          @click='$emit("portfolio-clicked")'
-        )
-          i.bi.bi-file-person.fs-5
         a.btn.text-light.me-2.me-sm-4(href='#!', aria-label='PM messages')
           i.bi.bi-envelope.fs-5
         a.btn.text-light.me-3.me-sm-4(@click='$emit("settings-clicked")', aria-label='Settings')
