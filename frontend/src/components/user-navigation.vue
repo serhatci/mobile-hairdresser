@@ -12,8 +12,11 @@ export default {
     PortfolioSettings
   },
   computed: {
-    ...mapState(['user'])
-  },
+    ...mapState(['user']),
+
+    routeView () {
+      return this.$route.params.page
+    }
   },
 }
 </script>
