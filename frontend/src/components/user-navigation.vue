@@ -38,9 +38,9 @@ export default {
       nav.position-absolut.text-end.mt-2
         a.btn.text-light.me-2.me-sm-4(href='#!', aria-label='PM messages')
           i.bi.bi-envelope.fs-5
-        a.btn.text-light.me-3.me-sm-4(@click='$emit("settings-clicked")', aria-label='Settings')
-          i.bi.bi-gear.fs-5(v-if='!isSettingsClicked')
-          i.bi.bi-x-circle-fill.fs-5.text-danger(v-else)
+        a.btn.text-light.me-3.me-sm-4(aria-label='Settings')
+          i.bi.bi-gear.fs-5(v-if='!isSettingsClicked', @click='goToSettings')
+          i.bi.bi-x-circle-fill.fs-5.text-danger(v-else, @click='goToUserPage')
     .card-body.pt-0
       h2.display-7.card-title.fw-normal {{ user.fullName ? user.fullName : "Anonymous" }}
         i.bi.bi-scissors.ms-1(v-if='user.type == "Hairdresser"')
