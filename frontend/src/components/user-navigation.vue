@@ -14,15 +14,6 @@ export default {
   computed: {
     ...mapState(['user'])
   },
-  methods: {
-    goToSettings () {
-      this.isSettingsClicked = true
-      this.$router.push(`${(this.user.type).toLowerCase()}/settings`)
-    },
-    goToUserPage () {
-      this.isSettingsClicked = false
-      this.$router.push(`/${(this.user.type).toLowerCase()}`)
-    },
   },
 }
 </script>
