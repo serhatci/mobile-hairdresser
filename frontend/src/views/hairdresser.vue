@@ -42,6 +42,12 @@ export default {
       if (this.newNotification == 0) return
 
       this.fetchData()
+    },
+
+    $route (to, from) {
+      if (to.path == '/hairdresser/settings') return this.isViewSettings = true
+
+      this.isViewSettings = false
     }
   },
   methods: {
