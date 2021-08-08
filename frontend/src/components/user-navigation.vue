@@ -27,6 +27,12 @@ export default {
     .background(:class='{ "bg-customer": user.type == "Customer", "bg-hairdresser": user.type == "Hairdresser" }')
       i.bi.bi-person-circle.position-absolut.text-muted(@click='goToUserPage')
       nav.position-absolut.text-end.mt-2
+        a.btn.text-light.me-2.me-sm-4(v-if='user.type == "Hairdresser"', aria-label='Portfolio')
+          i.bi.bi-file-person.fs-5(
+            v-if='routeView != "portfolio"',
+            @click='$router.push(`/${user.type.toLowerCase()}/portfolio`)'
+          )
+          i.bi.bi-x-circle-fill.fs-5.text-danger(v-else, @click='$router.push(`/${user.type.toLowerCase()}`)')
         a.btn.text-light.me-2.me-sm-4(href='#!', aria-label='PM messages')
           i.bi.bi-envelope.fs-5
         a.btn.text-light.me-3.me-sm-4(aria-label='Settings')
