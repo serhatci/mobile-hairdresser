@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="532px" preserveAspectRatio="none" style="width:1171px;height:532px;background:#FFFFFF;" version="1.1" viewBox="0 0 1171 532" width="1171px" zoomAndPan="magnify"><defs><filter height="300%" id="fpgyefvjfnzw2" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="30" lengthAdjust="spacing" textLength="392" x="383" y="27.8467">Mobile Hairdresser Search</text><!--MD5=[1c12e75c625b4870a19e4610fd8c6184]
+cluster Request--><polygon fill="#FFFFFF" filter="url(#fpgyefvjfnzw2)" points="674,117.6019,745,117.6019,752,139.8988,1154,139.8988,1154,216.6019,674,216.6019,674,117.6019" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="674" x2="752" y1="139.8988" y2="139.8988"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="65" x="678" y="132.597">Request</text><!--MD5=[b0294dabf094eb592d39dfeb18291415]
+cluster Video--><polygon fill="#FFFFFF" filter="url(#fpgyefvjfnzw2)" points="16,442.1019,67,442.1019,74,464.3988,345,464.3988,345,524.1019,16,524.1019,16,442.1019" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="16" x2="74" y1="464.3988" y2="464.3988"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="45" x="20" y="457.097">Video</text><!--MD5=[14cfa25d24f5c5f55381b51df7a16b8a]
+cluster Photo--><polygon fill="#FFFFFF" filter="url(#fpgyefvjfnzw2)" points="369,441.6019,421,441.6019,428,463.8988,704,463.8988,704,524.6019,369,524.6019,369,441.6019" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="369" x2="428" y1="463.8988" y2="463.8988"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="46" x="373" y="456.597">Photo</text><!--MD5=[5223754136197ef6c38be0e64c3cef5c]
+cluster PrivateMessage--><polygon fill="#FFFFFF" filter="url(#fpgyefvjfnzw2)" points="728,441.1019,859,441.1019,866,463.3988,1061,463.3988,1061,525.1019,728,525.1019,728,441.1019" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="728" x2="866" y1="463.3988" y2="463.3988"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="125" x="732" y="456.097">PrivateMessage</text><ellipse cx="787.211" cy="176.5441" fill="#FEFECE" filter="url(#fpgyefvjfnzw2)" rx="97.711" ry="21.9422" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159" x="707.711" y="179.3908">Post customer request</text><ellipse cx="1029.1316" cy="176.8282" fill="#FEFECE" filter="url(#fpgyefvjfnzw2)" rx="109.1316" ry="24.2263" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="184" x="937.1316" y="179.6749">Reply to customer request</text><ellipse cx="262.92" cy="492.5859" fill="#FEFECE" filter="url(#fpgyefvjfnzw2)" rx="65.42" ry="15.484" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="80" x="219.92" y="496.3334">Like a video</text><ellipse cx="97.0766" cy="492.5172" fill="#FEFECE" filter="url(#fpgyefvjfnzw2)" rx="65.0766" ry="15.4153" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="54.5766" y="496.2648">Tag a video</text><ellipse cx="620.8142" cy="492.3647" fill="#FEFECE" filter="url(#fpgyefvjfnzw2)" rx="66.8142" ry="15.7628" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="575.8142" y="496.1123">Like a photo</text><ellipse cx="451.9626" cy="492.7944" fill="#FEFECE" filter="url(#fpgyefvjfnzw2)" rx="66.4626" ry="15.6925" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="407.4626" y="496.542">Tag a photo</text><ellipse cx="982.0625" cy="492.6144" fill="#FEFECE" filter="url(#fpgyefvjfnzw2)" rx="63.0625" ry="15.0125" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="942.5625" y="496.3619">Send a PM</text><ellipse cx="814.1952" cy="492.4409" fill="#FEFECE" filter="url(#fpgyefvjfnzw2)" rx="69.6952" ry="16.339" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="765.1952" y="496.1885">Receive a PM</text><!--MD5=[d9fd133f7513e8fffa53d0ee4937fc73]
+entity Hairdresser--><ellipse cx="511" cy="154.6019" fill="#FEFECE" filter="url(#fpgyefvjfnzw2)" rx="16" ry="16" style="stroke:#A80036;stroke-width:1.5;"/><path d="M511,174.6019 C515,174.6019 518,174.6019 522,170.6019 C530,170.6019 538,178.6019 538,186.6019 L538,190.6019 C538,194.6019 534,198.6019 530,198.6019 L492,198.6019 C488,198.6019 484,194.6019 484,190.6019 L484,186.6019 C484,178.6019 492,170.6019 500,170.6019 C504,174.6019 507,174.6019 511,174.6019 " fill="#FEFECE" filter="url(#fpgyefvjfnzw2)" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="471.5" y="213.097">Hairdresser</text><!--MD5=[ae78ca0dd1f49bdd788e5556d70823ac]
+entity Customer--><ellipse cx="620" cy="154.6019" fill="#FEFECE" filter="url(#fpgyefvjfnzw2)" rx="16" ry="16" style="stroke:#A80036;stroke-width:1.5;"/><path d="M620,174.6019 C624,174.6019 627,174.6019 631,170.6019 C639,170.6019 647,178.6019 647,186.6019 L647,190.6019 C647,194.6019 643,198.6019 639,198.6019 L601,198.6019 C597,198.6019 593,194.6019 593,190.6019 L593,186.6019 C593,178.6019 601,170.6019 609,170.6019 C613,174.6019 616,174.6019 620,174.6019 " fill="#FEFECE" filter="url(#fpgyefvjfnzw2)" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="586" y="213.097">Customer</text><!--MD5=[fee662a292a0353a69bd162820bae93b]
+entity User--><ellipse cx="536" cy="354.6019" fill="#FEFECE" filter="url(#fpgyefvjfnzw2)" rx="16" ry="16" style="stroke:#A80036;stroke-width:1.5;"/><path d="M536,374.6019 C540,374.6019 543,374.6019 547,370.6019 C555,370.6019 563,378.6019 563,386.6019 L563,390.6019 C563,394.6019 559,398.6019 555,398.6019 L517,398.6019 C513,398.6019 509,394.6019 509,390.6019 L509,386.6019 C509,378.6019 517,370.6019 525,370.6019 C529,374.6019 532,374.6019 536,374.6019 " fill="#FEFECE" filter="url(#fpgyefvjfnzw2)" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="520" y="413.097">User</text><!--MD5=[38983802706c0a13132030d2476df9d5]
+link Hairdresser to User--><path d="M515.88,216.2519 C519.49,244.8719 524.48,284.3719 528.59,316.8819 " fill="none" id="Hairdresser-to-User" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="535.57,316.3319,531.13,337.0519,521.68,318.0919,535.57,316.3319" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[6414565bda2732f9b0501b8c9fbd7295]
+link Customer to User--><path d="M603.6,216.2519 C591.29,245.2719 574.23,285.5019 560.32,318.2719 " fill="none" id="Customer-to-User" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="566.61,321.3719,552.35,337.0519,553.72,315.9119,566.61,321.3719" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7128cd1693f5ac5e48a097ae8b02564a]
+link User to UC3--><path d="M507.34,385.3819 C473.59,394.9419 416.16,412.4619 369,433.1019 C340.96,445.3719 310.51,462.6219 289.48,475.2019 " fill="none" id="User-to-UC3" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="285.14,477.8119,294.9154,476.6114,289.4275,475.2394,290.7995,469.7514,285.14,477.8119" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[4ce996a24f59d1a51dc827afbab411c4]
+link User to UC4--><path d="M507.14,377.7119 C444.99,378.8619 294.82,386.6719 180,433.1019 C156.04,442.7919 132.31,460.5619 116.4,473.9819 " fill="none" id="User-to-UC4" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="112.53,477.2919,121.9777,474.5098,116.3393,474.0532,116.7959,468.4148,112.53,477.2919" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ded8ba90975cb89afbb8aa34a82599c8]
+link User to UC5--><path d="M564.54,415.8819 C578.74,434.9219 595.27,457.0919 606.76,472.5019 " fill="none" id="User-to-UC5" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="609.86,476.6619,607.6984,467.0532,606.876,472.6499,601.2793,471.8275,609.86,476.6619" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c3cbf0c63ed82a5d0a0584885332cee8]
+link User to UC6--><path d="M507.56,416.2019 C493.47,435.3319 477.09,457.5519 465.78,472.9019 " fill="none" id="User-to-UC6" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="462.73,477.0319,471.2801,472.1436,465.6887,473.0012,464.8311,467.4097,462.73,477.0319" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[5a2cfe3801774c699a4d0ee8e3ef548b]
+link User to UC7--><path d="M564.67,377.4519 C627.87,378.0619 782.94,384.8219 901,433.1019 C924.83,442.8519 948.26,460.9519 963.73,474.4519 " fill="none" id="User-to-UC7" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="967.49,477.7819,963.3868,468.8284,963.7404,474.4742,958.0946,474.8278,967.49,477.7819" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[5649d3ce8239eeeaf9383143c35c0b67]
+link User to UC8--><path d="M564.78,385.4919 C598.68,395.1519 656.41,412.7619 704,433.1019 C732.41,445.2419 763.36,462.0519 785.18,474.5319 " fill="none" id="User-to-UC8" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="789.69,477.1319,783.897,469.1669,785.3603,474.6312,779.8959,476.0945,789.69,477.1319" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[f21c161c5ad2f975ea4d511c49549f77]
+link Hairdresser to UC2--><path d="M530.34,137.1019 C543.08,115.8519 561.96,91.6019 586.5,79.6019 C645.99,50.5219 821.15,60.3119 884.5,79.6019 C929.41,93.2719 973.03,126.0819 1000.38,149.7519 " fill="none" id="Hairdresser-to-UC2" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1004.3,153.1819,1000.1776,144.2373,1000.5433,149.8823,994.8983,150.2479,1004.3,153.1819" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[f7471b9bf68cb51c049bc1597aad59ee]
+link Customer to UC1--><path d="M654.25,176.6019 C664.18,176.6019 674.12,176.6019 684.06,176.6019 " fill="none" id="Customer-to-UC1" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="689.25,176.6019,680.25,172.6019,684.25,176.6019,680.25,180.6019,689.25,176.6019" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b057adf7faef67eb30ada733a805dd59]
+link Customer to UC2--><path d="M638.1,136.6619 C650,115.5519 667.79,91.5819 691.5,79.6019 C768.06,40.9219 802.44,54.6119 884.5,79.6019 C929.41,93.2719 973.03,126.0819 1000.38,149.7519 " fill="none" id="Customer-to-UC2" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1004.3,153.1819,1000.1776,144.2373,1000.5433,149.8823,994.8983,150.2479,1004.3,153.1819" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[41b3f8c5850a58c366f2c22233e40870]
+@startuml
+
+skinparam actorStyle awesome
+
+skinparam TitleFontSize 30
+
+Title: Mobile Hairdresser Search
+
+actor "Hairdresser"
+actor "Customer"
+actor "User"
+
+package Request {
+  usecase "Post customer request" as UC1
+  usecase "Reply to customer request" as UC2
+}
+
+package Video {
+  usecase "Like a video" as UC3
+  usecase "Tag a video" as UC4
+}
+
+package Photo {
+  usecase "Like a photo" as UC5
+  usecase "Tag a photo" as UC6
+}
+
+package PrivateMessage {
+  usecase "Send a PM" as UC7
+  usecase "Receive a PM" as UC8
+}
+
+Hairdresser - - -|> User
+Customer - - -|> User
+
+User - -> UC3
+User - -> UC4
+User - -> UC5
+User - -> UC6
+User - -> UC7
+User - -> UC8
+
+Hairdresser -> UC2
+Customer -> UC1
+Customer -> UC2
+
+@enduml
+
+PlantUML version 1.2021.7(Sun May 23 14:40:07 CEST 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>
