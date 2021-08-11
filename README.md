@@ -39,7 +39,7 @@ Testing: Jest
 
 ## Screenshots
 
-![Application image](https://github.com/serhatci/mobile-hairdresser/backend/dev-data/class-diagram/class-diagram.svg)
+![Application image](https://github.com/serhatci/mobile-hairdresser/blob/main/backend/dev-data/screenshots/screenshots.jpg)
 
 ## Installation
 
@@ -62,8 +62,12 @@ http://myapp.localhost/
 
 ULM class diagram
 
-![Application image](https://github.com/serhatci/mobile-hairdresser/backend/architecture/class-diagram/class-diagram.svg)
+## Architecture
+
+ULM class diagram
+
+![Application image](https://github.com/serhatci/mobile-hairdresser/blob/main/backend/architecture/class-diagram/class-diagram.svg)
 
 ULM use case diagram
 
-![Application image](https://github.com/serhatci/mobile-hairdresser/backend/architecture/use-case-diagram/use-case-diagram.svg)
+![Application image](https://github.com/serhatci/mobile-hairdresser/blob/main/backend/architecture/use-case-diagram/use-case.svg)
