@@ -99,7 +99,7 @@ export default {
           :editableContent='user.experienceInYears',
           @edited='submitUpdate("experienceInYears", $event, "Years of experience")'
         )
-    .row.mb-2
+    .row.mb-5
       .col-12.col-sm-8.col-lg-6
         EditableText(
           title='Service Area (km) around your location',
