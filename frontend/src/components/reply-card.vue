@@ -30,7 +30,7 @@ div
               data-bs-toggle='modal',
               data-bs-target='#portfolioModal',
               aria-label='Portfolio',
-              href='#!'
+              href='/hairdresser/portfolio'
             )
               h6.fw-bold.mb-1.text-success {{ reply.senderFullName }}
                 i.bi.bi-scissors.m-2

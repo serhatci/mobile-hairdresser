@@ -18,15 +18,22 @@ export default {
   },
   computed: {
     ...mapState(['user', 'notifications']),
+
     newNotification () {
       return this.notifications.received
     },
+
     filteredRequestsInCity () {
       return this.requestsInUsersCity.filter(req => !this.repliedRequests.some(e => e._id === req._id))
     },
+
     filteredRequestsInState () {
       const requests = this.requestsInUsersState.filter(req => req.eventAddress.city !== this.user.address.city)
       return requests.filter(req => !this.repliedRequests.some(e => e._id === req._id))
+    },
+
+    routeView () {
+      return this.$route.params.page
     }
   },
   data () {
@@ -34,7 +41,6 @@ export default {
       repliedRequests: [],
       requestsInUsersCity: [],
       requestsInUsersState: [],
-      isViewSettings: false,
     }
   },
   watch: {
@@ -43,12 +49,6 @@ export default {
 
       this.fetchData()
     },
-
-    $route (to, from) {
-      if (to.path == '/hairdresser/settings') return this.isViewSettings = true
-
-      this.isViewSettings = false
-    }
   },
   methods: {
     ...mapActions(['getRequests']),
@@ -72,7 +72,7 @@ export default {
 #hairdresserPage.pb-5(v-if='user')
   section
     UserNavigation
-  section(v-if='!isViewSettings')
+  section(v-if='!routeView')
     DisplayRequests(title='Requests that you replied', :requests='repliedRequests', @reply-action='fetchData')
     DisplayRequests(title='Requests in your city', :requests='filteredRequestsInCity', @reply-action='fetchData')
     DisplayRequests(title='Requests in your state', :requests='filteredRequestsInState', @reply-action='fetchData')

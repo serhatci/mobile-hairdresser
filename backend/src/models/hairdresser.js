@@ -9,13 +9,12 @@ const User = require('./user')
 const HairdresserSchema = new mongoose.Schema(
   {
     about: { type: String, maxLength: 300, trim: true },
-    website: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
-    facebook: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
-    instagram: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
+    website: { type: String, trim: true, validate: [isURL, 'Website requires a valid URL'] },
+    facebook: { type: String, trim: true, validate: [isURL, 'Facebook requires a valid URL'] },
+    instagram: { type: String, trim: true, validate: [isURL, 'Instagram requires a valid URL'] },
     availability: {
       type: String,
-      default: 'Anytime',
-      enum: { values: ['Anytime', 'Weekdays', 'Weekends'], message: '{VALUE} is not supported' },
+      default: 'Available at anytime',
     },
     experienceInYears: {
       type: Number,
@@ -23,7 +22,12 @@ const HairdresserSchema = new mongoose.Schema(
       max: [70, 'Years of experience should have a logical value'],
       default: 0,
     },
-    serviceArea: { type: Number, default: 0 }, // perimeter in km around a location
+    serviceArea: {
+      type: Number,
+      default: 0,
+      min: [0, 'Service area can not be negative'],
+      max: [1000, 'Service area should have a logical value'],
+    }, // perimeter in km around a location
     portfolioPhotos: [
       {
         type: mongoose.Schema.Types.ObjectId,

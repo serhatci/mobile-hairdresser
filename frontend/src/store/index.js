@@ -137,6 +137,15 @@ const store = new Vuex.Store({
       }
     },
 
+    async updatePortfolio({ commit }, { key, value, userId }) {
+      try {
+        const user = await axios.patch(`/api/users/${userId}/portfolio/${key}`, { value })
+        commit(mutations.SET_USER, user.data)
+      } catch (e) {
+        throw e
+      }
+    },
+
     notifyUserPost(store, userPost) {
       socket.emit('New post', userPost)
     },
