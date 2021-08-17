@@ -3,6 +3,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const express = require('express')
 const User = require('../models/user')
+const Hairdresser = require('../models/hairdresser')
 const Location = require('../models/location')
 
 const router = express.Router()
@@ -97,6 +98,62 @@ router.delete('/:userId', async (req, res, next) => {
   } catch (err) {
     if (err.name === 'CastError') {
       res.status(400).send({ message: 'Provided UserId has wrong format!' })
+    } else if (err.name === 'Error') {
+      res.status(400).send({ message: err.message })
+    } else {
+      next(err)
+    }
+  }
+})
+
+router.patch('/:userId/portfolio/:key', async (req, res, next) => {
+  const { userId, key } = req.params
+  const { value } = req.body
+
+  let updateKey = {}
+
+  if (key == 'about') {
+    updateKey = { about: value }
+  }
+
+  if (key == 'website') {
+    updateKey = { website: value || undefined }
+  }
+
+  if (key == 'facebook') {
+    updateKey = { facebook: value }
+  }
+
+  if (key == 'instagram') {
+    updateKey = { instagram: value }
+  }
+
+  if (key == 'availability') {
+    updateKey = { availability: value }
+  }
+
+  if (key == 'experienceInYears') {
+    updateKey = { experienceInYears: value }
+  }
+
+  if (key == 'serviceArea') {
+    updateKey = { serviceArea: value }
+  }
+
+  try {
+    const updatedUser = await Hairdresser.findByIdAndUpdate(userId, updateKey, { new: true, runValidators: true })
+
+    if (updatedUser === null) throw new Error('UserId does not exist in database!')
+
+    res.send(updatedUser)
+  } catch (err) {
+    if (err.kind === 'ObjectId') {
+      res.status(400).send({ message: 'Provided UserId has wrong format!' })
+    } else if (err.kind === 'Number') {
+      res.status(400).send({ message: 'Only integer numbers are allowed!' })
+    } else if (err.name === 'ValidationError') {
+      const invalidProperty = Object.keys(err.errors)[0]
+      res.status(422).send({ message: err.errors[invalidProperty].message })
     } else if (err.name === 'Error') {
       res.status(400).send({ message: err.message })
     } else {
