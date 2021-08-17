@@ -14,8 +14,7 @@ const HairdresserSchema = new mongoose.Schema(
     instagram: { type: String, trim: true, validate: [isURL, 'Instagram requires a valid URL'] },
     availability: {
       type: String,
-      default: 'Anytime',
-      enum: { values: ['Anytime', 'Weekdays', 'Weekends'], message: '{VALUE} is not supported' },
+      default: 'Available at anytime',
     },
     experienceInYears: {
       type: Number,
