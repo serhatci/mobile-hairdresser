@@ -9,9 +9,9 @@ const User = require('./user')
 const HairdresserSchema = new mongoose.Schema(
   {
     about: { type: String, maxLength: 300, trim: true },
-    website: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
-    facebook: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
-    instagram: { type: String, trim: true, validate: [isURL, 'Requires a valid URL'] },
+    website: { type: String, trim: true, validate: [isURL, 'Website requires a valid URL'] },
+    facebook: { type: String, trim: true, validate: [isURL, 'Facebook requires a valid URL'] },
+    instagram: { type: String, trim: true, validate: [isURL, 'Instagram requires a valid URL'] },
     availability: {
       type: String,
       default: 'Anytime',
