@@ -22,7 +22,12 @@ const HairdresserSchema = new mongoose.Schema(
       max: [70, 'Years of experience should have a logical value'],
       default: 0,
     },
-    serviceArea: { type: Number, default: 0 }, // perimeter in km around a location
+    serviceArea: {
+      type: Number,
+      default: 0,
+      min: [0, 'Service area can not be negative'],
+      max: [1000, 'Service area should have a logical value'],
+    }, // perimeter in km around a location
     portfolioPhotos: [
       {
         type: mongoose.Schema.Types.ObjectId,
