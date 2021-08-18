@@ -1,5 +1,4 @@
 <script>
-import { mapActions } from 'vuex'
 import SearchBar from "@/components/search-bar.vue";
 
 export default {

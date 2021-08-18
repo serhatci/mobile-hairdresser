@@ -21,6 +21,11 @@ export default function init(store) {
         component: Home,
       },
       {
+        path: '/about',
+        name: 'about',
+        component: () => import(/* webpackChunkName: "user" */ '../views/about.vue'),
+      },
+      {
         path: '/login',
         name: 'login',
         component: () => import(/* webpackChunkName: "user" */ '../views/login.vue'),
