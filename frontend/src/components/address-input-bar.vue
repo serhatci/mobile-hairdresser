@@ -24,8 +24,6 @@ export default ({
   methods: {
     ...mapActions(['fetchLocations']),
 
-    emitValue: function (value) {
-      this.$emit('input', value);
     },
 
     doAutocomplete: function () {
