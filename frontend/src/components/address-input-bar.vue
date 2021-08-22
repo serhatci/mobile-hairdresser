@@ -43,20 +43,26 @@ export default ({
 <template lang="pug">
 .row
   .col-12
-    label.visually-hidden.d-sm-inline.form-control-label.form-control-sm(for='addressInput') Address:
-    input#addressInput.form-control.form-control-sm.form-control-borderless(
+    label.visually-hidden.d-sm-inline.form-control-label.form-control-sm(:for='inputId') Address:
+    input.form-control.form-control-sm.form-control-borderless(
+      :id='inputId',
       type='text',
-      placeholder='City or Postcode',
+      placeholder='City or Postcode in Germany',
       aria-label='Address search input',
-      v-model='address',
-      @focus='setSuggestionsDisplay'
+      autocomplete='off',
+      v-model='userInput',
+      @focus='displaySuggestions = true',
+      @keyup='$emit("update", userInput)'
     )
-    #suggestions.mt-2.d-none(v-show='address.length > 2 && doAutocomplete().length > 0')
+    #suggestions.mt-2(
+      v-if='userInput.length > 0',
+      :class='{ "d-none": !displaySuggestions, "d-block": displaySuggestions }'
+    )
       ul.list-group.rounded
         li.list-group-item.py-2.px-3(
           v-for='item in doAutocomplete()',
           :key='`${item.postcode}-${item.city}`',
-          @click='updateBinding(item)'
+          @click='bindUserInput(item)'
         )
           | {{ item.city }}, {{ item.postcode }}
 </template>
