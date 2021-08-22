@@ -51,7 +51,7 @@ router.post('/', async (req, res, next) => {
   if (requestType !== 'Hairdresser Request' && requestType !== 'Style Advice')
     return res.status(400).send({ message: 'Request type is wrong' })
 
-  if (eventAddress === '') return res.status(400).send({ message: 'Address can not be empty!' })
+  if (eventAddress === '') return res.status(400).send({ message: 'Address must be selected from autocomplete list!' })
   if (message === '') return res.status(400).send({ message: 'Message can not be empty!' })
 
   try {
