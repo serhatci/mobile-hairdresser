@@ -96,7 +96,7 @@ export default {
       span.col-12.py-1(:class='{ "text-danger": !user.address.city }') * Address:
         strong.text-success.ps-2(v-if='user.address.city') {{ user.address.city }}, {{ user.address.postcode }}
       .col-12.col-sm-8.col-lg-6
-        AddressInputBar(@clicked='getLocation', key='Settings Address')
+        AddressInputBar(@clicked='getLocation', inputId='settingsAddress')
     .row.mb-3
       .col-12.col-sm-8.col-lg-6.text-end.mb-5
         button.btn.btn-primary(type='submit') Update
