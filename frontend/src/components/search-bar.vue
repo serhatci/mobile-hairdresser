@@ -1,6 +1,21 @@
 <script>
+import AddressInputBar from '@/components/address-input-bar.vue'
+
 export default {
-  name: 'SearchBar'
+  name: 'SearchBar',
+  components: {
+    AddressInputBar
+  },
+  data () {
+    return {
+      geoLocation: {}
+    }
+  },
+  computed: {
+    getSearchUrl () {
+      return `/search-results/${this.geoLocation.city}`
+    },
+  }
 }
 </script>
 
