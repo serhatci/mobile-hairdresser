@@ -54,7 +54,7 @@ export default ({
 
       } catch (err) {
         this.backendError = err.response.data.message
-        return false
+        setTimeout(() => this.backendError = '', 3000)
       }
     },
 
@@ -72,7 +72,8 @@ export default ({
 <template lang="pug">
 transition(name='fade')
   form.bg-light.px-3.py-3(@submit='sendReply', v-show='isReplyClicked')
-    span.d-block.text-center.text-danger.py-1(v-if='backendError') {{ backendError }}
+    transition(name='fade')
+      span.d-block.text-center.text-danger.py-1(v-if='backendError') {{ backendError }}
     .mb-3
       textarea#replyMessage.form-control.form-control-sm(
         v-model='message',
