@@ -11,8 +11,8 @@ export default {
 
 <template lang="pug">
 .home-page
-  //- .search-bar.col.col-sm-10.col-lg-8.m-auto
-  //-   SearchBar
+  .search-bar.col.col-sm-10.col-lg-8.m-auto
+    SearchBar
   section.first
     .d-flex.justify-content-center.align-items-center.h-100
       a.btn.btn.btn-primary.btn-lg.mx-l2.px-5(href='#services', role='button') Tell me more...

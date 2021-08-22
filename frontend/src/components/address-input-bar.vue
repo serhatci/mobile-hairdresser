@@ -6,9 +6,13 @@ export default ({
   computed: {
     ...mapState(['locations']),
   },
+  props: {
+    inputId: String
+  },
   data () {
     return {
-      address: '',
+      userInput: '',
+      geoLocation: {},
       displaySuggestions: false
     }
   },
@@ -20,31 +24,17 @@ export default ({
   methods: {
     ...mapActions(['fetchLocations']),
 
-    emitValue: function (value) {
-      this.$emit('input', value);
+    doAutocomplete () {
+      return this.locations.filter((item) => item.city.toLowerCase().startsWith(this.userInput.toLowerCase()) || item.postcode.toString().startsWith(this.userInput))
     },
 
-    doAutocomplete: function () {
+    bindUserInput (autocompletedLocation) {
+      this.userInput = `${autocompletedLocation.city}, ${autocompletedLocation.postcode}`
 
-      return this.locations.filter((item) => item.city.toLowerCase().startsWith(this.address.toLowerCase()) || item.postcode.toString().startsWith(this.address))
-    },
+      this.geoLocation = autocompletedLocation
+      this.$emit('clicked', this.geoLocation)
 
-    updateBinding: function (item) {
-      let el = document.getElementById("addressInput");
-      el.value = `${item.city}, ${item.postcode}`;
-      el.dispatchEvent(new Event('addressInput'));
-
-      this.$emit('clicked', item)
-
-      this.setSuggestionsDisplay()
-    },
-
-    setSuggestionsDisplay: function () {
-      this.displaySuggestions = !this.displaySuggestions
-
-      if (this.displaySuggestions) return document.getElementById("suggestions").classList.remove('d-none');
-
-      document.getElementById("suggestions").classList.add('d-none');
+      this.displaySuggestions = false
     }
   },
 })
@@ -53,31 +43,44 @@ export default ({
 <template lang="pug">
 .row
   .col-12
-    label.visually-hidden.d-sm-inline.form-control-label.form-control-sm(for='addressInput') Address:
-    input#addressInput.form-control.form-control-sm.form-control-borderless(
+    label.visually-hidden.d-sm-inline.form-control-label.form-control-sm(:for='inputId') Address:
+    input.form-control.form-control-sm.form-control-borderless(
+      :id='inputId',
       type='text',
-      placeholder='City or Postcode',
+      placeholder='City or Postcode in Germany',
       aria-label='Address search input',
-      v-model='address',
-      @focus='setSuggestionsDisplay'
+      autocomplete='off',
+      v-model='userInput',
+      @focus='displaySuggestions = true',
+      @keyup='$emit("update", userInput)'
     )
-    #suggestions.mt-2.d-none(v-show='address.length > 2 && doAutocomplete().length > 0')
+    #suggestions.mt-2(
+      v-if='userInput.length > 0',
+      :class='{ "d-none": !displaySuggestions, "d-block": displaySuggestions }'
+    )
       ul.list-group.rounded
         li.list-group-item.py-2.px-3(
           v-for='item in doAutocomplete()',
           :key='`${item.postcode}-${item.city}`',
-          @click='updateBinding(item)'
+          @click='bindUserInput(item)'
         )
           | {{ item.city }}, {{ item.postcode }}
 </template>
 
 <style scoped>
 #suggestions {
-  background-color: white;
+  background-color: rgb(245, 248, 245);
   position: absolute;
   font-size: 0.9rem;
   overflow-y: scroll;
-  max-height: 8rem;
+  max-height: 10rem;
+  max-width: 17rem;
+  z-index: 100;
+}
+
+li {
+  word-wrap: break-word;
+  background-color: rgb(247, 255, 246);
 }
 
 li:hover {

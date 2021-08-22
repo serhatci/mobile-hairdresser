@@ -26,6 +26,11 @@ export default function init(store) {
         component: () => import(/* webpackChunkName: "user" */ '../views/about.vue'),
       },
       {
+        path: '/search-results/:city',
+        name: 'searchResults',
+        component: () => import(/* webpackChunkName: "user" */ '../views/search-results.vue'),
+      },
+      {
         path: '/login',
         name: 'login',
         component: () => import(/* webpackChunkName: "user" */ '../views/login.vue'),

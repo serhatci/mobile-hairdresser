@@ -69,11 +69,12 @@ export default ({
         span.badge.bg-success.ms-1 {{ request.replies.length }}
         .btn.btn-sm.text-primary.text-decoration-underline All Replies
           i.bi.ms-2(:class='isAllRepliesClicked ? "bi-chevron-compact-up" : "bi-chevron-compact-down"')
-      #reply-button.d-inline(@click='isReplyClicked = !isReplyClicked')
+      #reply-button.d-inline(v-if='user', @click='isReplyClicked = !isReplyClicked')
         .btn.btn-sm.text-primary.text-decoration-underline Reply
           i.bi.ms-2(:class='isReplyClicked ? "bi-chevron-compact-up" : "bi-chevron-compact-down"')
-    a(v-show='request.senderId == user._id')
-      .btn.btn-sm.text-danger(@click='$emit("request-deleted", request._id)') Delete
+    div(v-if='user')
+      a(v-if='request.senderId == user._id')
+        .btn.btn-sm.text-danger(@click='$emit("request-deleted", request._id)') Delete
   PostReply(:request='request', :isReplyClicked='isReplyClicked', @reply-sent='addReplyCard', :key='request._id')
   transition-group(name='replyList', tag='ul')
     li(v-for='reply in request.replies', :key='`${reply._id}`', v-if='isAllRepliesClicked')

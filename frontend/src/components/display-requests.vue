@@ -27,7 +27,8 @@ export default {
 <template lang="pug">
 .card.border-secondary.my-3.mx-2.p-3.rounded.shadow-sm
   h3.display-8.border-bottom.pb-2.mb-0 {{ title }}
-  .display-requests(v-if='requests.length > 0')
+  p.pt-2.text-danger(v-if='!requests.length') There is no request posted in this location!
+  .display-requests(v-else)
     transition-group(name='list', tag='ul')
       li(v-for='request in sortedRequests', :key='request._id')
         RequestCard(:request='request', @request-deleted='emitDeletedRequest', @reply-action='$emit("reply-action")')
