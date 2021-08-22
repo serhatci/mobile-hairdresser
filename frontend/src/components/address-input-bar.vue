@@ -73,11 +73,18 @@ export default ({
 
 <style scoped>
 #suggestions {
-  background-color: white;
+  background-color: rgb(245, 248, 245);
   position: absolute;
   font-size: 0.9rem;
   overflow-y: scroll;
-  max-height: 8rem;
+  max-height: 10rem;
+  max-width: 17rem;
+  z-index: 100;
+}
+
+li {
+  word-wrap: break-word;
+  background-color: rgb(247, 255, 246);
 }
 
 li:hover {
