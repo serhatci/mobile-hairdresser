@@ -53,6 +53,7 @@ export default ({
 
       } catch (err) {
         this.backendError = err.response.data.message
+        setTimeout(() => this.backendError = '', 3000)
       }
     },
 
@@ -62,9 +63,9 @@ export default ({
       this.message = ''
       this.backendError = null
 
-      let el = document.getElementById("addressInput");
+      let el = document.getElementById("postRequestAddress");
       el.value = '';
-      el.dispatchEvent(new Event('addressInput'));
+      el.dispatchEvent(new Event('postRequestAddress'));
     },
   },
 })
@@ -77,8 +78,9 @@ export default ({
     i.bi.bi-chevron-compact-up.ms-2(@click='isPostExpanded = !isPostExpanded', v-if='isPostExpanded')
     i.bi.bi-chevron-compact-down.ms-2(@click='isPostExpanded = !isPostExpanded', v-else)
   transition(name='fade')
-    form.py-2(@submit='sendRequest', v-show='isPostExpanded', autocomplete='off')
-      span.d-block.text-center.text-danger.mb-2(v-if='backendError') {{ backendError }}
+    form.py-2(@submit='sendRequest', v-if='isPostExpanded', autocomplete='off')
+      transition(name='fade')
+        span.d-block.text-center.text-danger.mb-2(v-if='backendError') {{ backendError }}
       .row.g-0
         .col-12.col-sm-6.mb-1
           .form-check.form-check-inline.text-muted
@@ -93,7 +95,7 @@ export default ({
             input#customerRequest.form-check-input(type='radio', v-model='requestType', value='Style Advice')
             label.form-check-label(for='customerRequest') Style Advice
         .col-12.col-sm-6
-          AddressInputBar(@clicked='getLocation', key='Post Request Address')
+          AddressInputBar(@clicked='getLocation', inputId='postRequestAddress')
       .mb-3
         label.form-label(for='message')
           span.visually-hidden Request Message
