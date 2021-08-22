@@ -6,9 +6,13 @@ export default ({
   computed: {
     ...mapState(['locations']),
   },
+  props: {
+    inputId: String
+  },
   data () {
     return {
-      address: '',
+      userInput: '',
+      geoLocation: {},
       displaySuggestions: false
     }
   },
