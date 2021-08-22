@@ -24,29 +24,17 @@ export default ({
   methods: {
     ...mapActions(['fetchLocations']),
 
+    doAutocomplete () {
+      return this.locations.filter((item) => item.city.toLowerCase().startsWith(this.userInput.toLowerCase()) || item.postcode.toString().startsWith(this.userInput))
     },
 
-    doAutocomplete: function () {
+    bindUserInput (autocompletedLocation) {
+      this.userInput = `${autocompletedLocation.city}, ${autocompletedLocation.postcode}`
 
-      return this.locations.filter((item) => item.city.toLowerCase().startsWith(this.address.toLowerCase()) || item.postcode.toString().startsWith(this.address))
-    },
+      this.geoLocation = autocompletedLocation
+      this.$emit('clicked', this.geoLocation)
 
-    updateBinding: function (item) {
-      let el = document.getElementById("addressInput");
-      el.value = `${item.city}, ${item.postcode}`;
-      el.dispatchEvent(new Event('addressInput'));
-
-      this.$emit('clicked', item)
-
-      this.setSuggestionsDisplay()
-    },
-
-    setSuggestionsDisplay: function () {
-      this.displaySuggestions = !this.displaySuggestions
-
-      if (this.displaySuggestions) return document.getElementById("suggestions").classList.remove('d-none');
-
-      document.getElementById("suggestions").classList.add('d-none');
+      this.displaySuggestions = false
     }
   },
 })
