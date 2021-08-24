@@ -10,18 +10,18 @@ There are considerable amounts of mobile hairdressers&freelancers in Germany who
 
 Hairdressers:
 
+- Receive real time notifications when a customer made a request in their location
 - Can create own portfolio with photos & references
 - Can search & read customer requests
 - Can reply customer requests
-- Receive real time notifications when a customer made a request in their location
 - PM messaging
 
 Customers:
 
+- Receive real-time notifications when a new hairdresser is joined in customer's location
 - Can create customer requests
 - Can ask a professional style advice
 - Can review hairdressers
-- Receive real-time notifications when a new hairdresser is joined in customer's location
 - PM messaging
 
 ## Tech Stack
@@ -33,7 +33,7 @@ Express.js,
 MongoDB,
 Mongoose
 
-Frontend: HTML5, CSS3, Vue.js, React.js, Bootstrap5, PUG
+Frontend: HTML5, CSS3, Vue.js,Bootstrap5, PUG
 
 Testing: Jest
 
@@ -57,10 +57,6 @@ after that you can see the running application in your browser:
 http://myapp.localhost/
 
 ```
-
-## Architecture
-
-ULM class diagram
 
 ## Architecture
 
