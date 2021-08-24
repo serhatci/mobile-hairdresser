@@ -26,17 +26,17 @@ export default {
       h3 Features
       p For hairdressers:
       ul
+        li Receive real time notifications when a customer made a request in their location
         li Can create own portfolio with photos & references
         li Can search & read customer requests
         li Can reply customer requests
-        li Receive real time notifications when a customer made a request in their location
         li PM messaging
       p For customers:
       ul
+        li Receive real-time notifications when a new hairdresser is joined in customer's location
         li Can create customer requests
         li Can ask a professional style advice
         li Can review hairdressers
-        li Receive real-time notifications when a new hairdresser is joined in customer's location
         li PM messaging
       h3 Tech Stack
       p
@@ -44,7 +44,7 @@ export default {
         | Node.js, socket.io Express.js, MongoDB, Mongoose
         br
         strong Frontend:&nbsp
-        | HTML5, CSS3, Vue.js, React.js, Bootstrap5, PUG
+        | HTML5, CSS3, Vue.js, Bootstrap5, PUG
         br
         strong Testing:&nbsp
         | Jest
