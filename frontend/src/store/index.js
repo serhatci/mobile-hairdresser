@@ -54,7 +54,11 @@ const store = new Vuex.Store({
 
     async fetchLocations({ commit }) {
       try {
-        const locations = await axios.get('/api/locations')
+        const locations = await axios.get('/api/locations', {
+          headers: {
+            'X-Compression': 'compress',
+          },
+        })
         commit(mutations.SET_LOCATIONS, locations.data || null)
       } catch (err) {
         commit(mutations.SET_LOCATIONS, [])
