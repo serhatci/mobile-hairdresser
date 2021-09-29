@@ -38,6 +38,7 @@
   },
   "homepage": "https://github.com/serhatci/mobile-hairdresser#readme",
   "dependencies": {
+    "compression": "^1.7.4",
     "connect-mongo": "^4.4.1",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
