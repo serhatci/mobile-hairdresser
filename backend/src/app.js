@@ -10,6 +10,7 @@ const passport = require('passport')
 const cors = require('cors')
 const helmet = require('helmet')
 const mongoSanitize = require('express-mongo-sanitize')
+const compression = require('compression')
 
 const mongooseConnection = require('./database-connection')
 const socketService = require('./socket-service')
@@ -84,6 +85,16 @@ app.use(
     replaceWith: '_',
   })
 )
+
+function shouldCompress(req, res) {
+  if (req.headers['x-compression']) {
+    return compression.filter(req, res)
+  }
+  // don't compress responses without this request header
+  return false
+}
+
+app.use(compression({ filter: shouldCompress }))
 
 app.use('/api/users', usersRouter)
 app.use('/api/photos', photosRouter)
