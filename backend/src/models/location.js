@@ -6,7 +6,7 @@ const LocationSchema = new mongoose.Schema({
     required: true,
   },
   postcode: {
-    type: Number,
+    type: String,
     required: true,
   },
   city: {
