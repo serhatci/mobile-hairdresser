@@ -1,31 +1,42 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 
-export default ({
+export default {
   name: 'AddressInputBar',
+
+  props: {
+    inputId: String,
+  },
+
   computed: {
     ...mapState(['locations']),
+
+    inputValue () {
+      return isNaN(this.userInput) ? this.userInput.charAt(0).toUpperCase() + this.userInput.slice(1) : this.userInput
+    },
   },
-  props: {
-    inputId: String
-  },
+
   data () {
     return {
       userInput: '',
       geoLocation: {},
-      displaySuggestions: false
+      displaySuggestions: false,
     }
   },
+
   mounted () {
     if (this.locations.length > 0) return
 
     this.fetchLocations()
   },
+
   methods: {
     ...mapActions(['fetchLocations']),
 
     doAutocomplete () {
-      return this.locations.filter((item) => item.city.toLowerCase().startsWith(this.userInput.toLowerCase()) || item.postcode.toString().startsWith(this.userInput))
+      return this.locations.filter(
+        item => item.city.startsWith(this.inputValue) || item.postcode.startsWith(this.inputValue)
+      )
     },
 
     bindUserInput (autocompletedLocation) {
@@ -35,9 +46,9 @@ export default ({
       this.$emit('clicked', this.geoLocation)
 
       this.displaySuggestions = false
-    }
+    },
   },
-})
+}
 </script>
 
 <template lang="pug">
