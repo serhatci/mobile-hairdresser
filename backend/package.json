@@ -11,7 +11,7 @@
     "lint": "lint-staged",
     "lint-only": "eslint .",
     "lint-all": "pretty-quick && eslint",
-    "prepare": "npx husky install"
+    "prepare": "cd .. && husky install && npx husky add .husky/pre-commit 'cd backend && npm run lint && cd ../frontend && npm run lint'"
   },
   "husky": {
     "hooks": {
