@@ -55,6 +55,7 @@ export default {
       this.fetchUserRequests()
     },
 
+    // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       if (to.path == '/customer/settings') return (this.isViewSettings = true)
 

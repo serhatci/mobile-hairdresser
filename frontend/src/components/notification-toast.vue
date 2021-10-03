@@ -8,6 +8,7 @@ export default {
   },
   computed: {
     reversedAlerts() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       return this.alerts.reverse()
     }
   },

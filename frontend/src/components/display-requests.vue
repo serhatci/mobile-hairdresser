@@ -12,7 +12,9 @@ export default {
   },
   computed: {
     sortedRequests() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       if (this.requests.length > 0) return this.requests.reverse()
+
       return this.requests
     }
   },

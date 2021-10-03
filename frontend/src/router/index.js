@@ -7,6 +7,7 @@ Vue.use(VueRouter)
 // Handle navigation duplication for router push (Globally)
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
+  // eslint-disable-next-line no-unused-vars
   return originalPush.call(this, location).catch(error => {})
 }
 
