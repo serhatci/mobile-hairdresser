@@ -1,12 +1,12 @@
 <script>
-import HeaderNavigation from "@/components/header-navigation.vue";
-import Footer from "@/components/footer.vue";
+import HeaderNavigation from '@/components/header-navigation.vue'
+import Footer from '@/components/footer.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     HeaderNavigation,
-    Footer,
+    Footer
   }
 }
 </script>
@@ -22,7 +22,6 @@ export default {
       footer
         Footer
 </template>
-
 
 <style lang="scss">
 @import './assets/scss/custom.scss';

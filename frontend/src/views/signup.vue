@@ -3,7 +3,7 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'Signup',
-  data () {
+  data() {
     return {
       type: 'Hairdresser',
       email: '',
@@ -12,11 +12,10 @@ export default {
 
       backendError: null
     }
-
   },
   methods: {
     ...mapActions(['signup', 'login']),
-    async submitSignUp (e) {
+    async submitSignUp(e) {
       e.preventDefault()
 
       try {
@@ -29,21 +28,19 @@ export default {
 
         await this.login({
           email: this.email,
-          password: this.password,
+          password: this.password
         })
 
         this.$router.push('/')
-
       } catch (e) {
         this.backendError = e.response.data.message
       }
     }
   }
 }
-
 </script>
 
-<template lang='pug'>
+<template lang="pug">
 .signup-page.d-flex.align-items-center.justify-content-center.py-3.py-sm-5
   .card.w-100.mx-2
     h4.card-header.text-center.text-primary Sign Up

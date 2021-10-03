@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
@@ -17,14 +18,14 @@ const mutations = {
   SET_USER: 'set user',
   ADD_NOTIFICATION: 'add notifications',
   DELETE_NOTIFICATION: 'delete notifications',
-  SET_LOCATIONS: 'set locations',
+  SET_LOCATIONS: 'set locations'
 }
 
 const store = new Vuex.Store({
   state: {
     user: null,
     notifications: { alerts: [], received: 0 },
-    locations: [],
+    locations: []
   },
   mutations: {
     [mutations.SET_USER](state, user) {
@@ -40,7 +41,7 @@ const store = new Vuex.Store({
     },
     [mutations.SET_LOCATIONS](state, locations) {
       state.locations = locations
-    },
+    }
   },
   actions: {
     async fetchSession({ commit }) {
@@ -56,8 +57,8 @@ const store = new Vuex.Store({
       try {
         const locations = await axios.get('/api/locations', {
           headers: {
-            'X-Compression': 'compress',
-          },
+            'X-Compression': 'compress'
+          }
         })
         commit(mutations.SET_LOCATIONS, locations.data || null)
       } catch (err) {
@@ -160,9 +161,9 @@ const store = new Vuex.Store({
 
     deleteNotification({ commit }, index) {
       commit(mutations.DELETE_NOTIFICATION, index)
-    },
+    }
   },
-  modules: {},
+  modules: {}
 })
 
 socket.on('New request', request => {

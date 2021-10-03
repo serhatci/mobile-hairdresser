@@ -2,15 +2,15 @@
 import { mapState, mapActions } from 'vuex'
 import AddressInputBar from '../components/address-input-bar.vue'
 
-export default ({
+export default {
   name: 'PostRequest',
   components: {
     AddressInputBar
   },
   computed: {
-    ...mapState(['user']),
+    ...mapState(['user'])
   },
-  data () {
+  data() {
     return {
       isPostExpanded: false,
 
@@ -18,17 +18,17 @@ export default ({
       eventAddress: '',
       message: '',
 
-      backendError: null,
+      backendError: null
     }
   },
   methods: {
     ...mapActions(['postRequestToDatabase', 'notifyUserPost']),
 
-    getLocation (item) {
+    getLocation(item) {
       this.eventAddress = item
     },
 
-    async sendRequest (e) {
+    async sendRequest(e) {
       const newRequest = await this.submitRequest(e)
 
       if (!newRequest) return
@@ -40,7 +40,7 @@ export default ({
       this.isPostExpanded = !this.isPostExpanded
     },
 
-    async submitRequest (e) {
+    async submitRequest(e) {
       e.preventDefault()
       try {
         return await this.postRequestToDatabase({
@@ -48,29 +48,27 @@ export default ({
           senderFullName: this.user.fullName,
           requestType: this.requestType,
           eventAddress: this.eventAddress,
-          message: this.message,
+          message: this.message
         })
-
       } catch (err) {
         this.backendError = err.response.data.message
-        setTimeout(() => this.backendError = '', 3000)
+        setTimeout(() => (this.backendError = ''), 3000)
       }
     },
 
-    resetFormValues () {
+    resetFormValues() {
       this.requestType = 'Hairdresser Request'
       this.eventAddress = ''
       this.message = ''
       this.backendError = null
 
-      let el = document.getElementById("postRequestAddress");
-      el.value = '';
-      el.dispatchEvent(new Event('postRequestAddress'));
-    },
-  },
-})
+      let el = document.getElementById('postRequestAddress')
+      el.value = ''
+      el.dispatchEvent(new Event('postRequestAddress'))
+    }
+  }
+}
 </script>
-
 
 <template lang="pug">
 .card.border-secondary.my-3.mx-2.p-3.rounded.shadow-sm

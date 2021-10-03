@@ -5,7 +5,7 @@ import UserNavigation from '@/components/user-navigation.vue'
 import SearchBar from '@/components/search-bar.vue'
 import PostRequest from '@/components/post-request.vue'
 import DisplayRequests from '@/components/display-requests.vue'
-import NotificationToast from "@/components/notification-toast";
+import NotificationToast from '@/components/notification-toast'
 
 export default {
   name: 'Hairdresser',
@@ -14,33 +14,33 @@ export default {
     SearchBar,
     PostRequest,
     DisplayRequests,
-    NotificationToast,
+    NotificationToast
   },
   computed: {
     ...mapState(['user', 'notifications']),
 
-    newNotification () {
+    newNotification() {
       return this.notifications.received
     },
 
-    filteredRequestsInCity () {
+    filteredRequestsInCity() {
       return this.requestsInUsersCity.filter(req => !this.repliedRequests.some(e => e._id === req._id))
     },
 
-    filteredRequestsInState () {
+    filteredRequestsInState() {
       const requests = this.requestsInUsersState.filter(req => req.eventAddress.city !== this.user.address.city)
       return requests.filter(req => !this.repliedRequests.some(e => e._id === req._id))
     },
 
-    routeView () {
+    routeView() {
       return this.$route.params.page
     }
   },
-  data () {
+  data() {
     return {
       repliedRequests: [],
       requestsInUsersCity: [],
-      requestsInUsersState: [],
+      requestsInUsersState: []
     }
   },
   watch: {
@@ -48,12 +48,12 @@ export default {
       if (this.newNotification == 0) return
 
       this.fetchData()
-    },
+    }
   },
   methods: {
     ...mapActions(['getRequests']),
 
-    async fetchData () {
+    async fetchData() {
       this.repliedRequests = await this.getRequests(`replierId=${this.user._id}`)
       if (this.user.address) {
         this.requestsInUsersCity = await this.getRequests(`city=${this.user.address.city}`)
@@ -61,11 +61,10 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.fetchData()
-  },
+  }
 }
-
 </script>
 
 <template lang="pug">

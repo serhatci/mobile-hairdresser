@@ -1,8 +1,8 @@
 <script>
 import { mapState } from 'vuex'
-import SearchBar from "@/components/search-bar.vue";
-import Settings from "@/components/settings.vue";
-import PortfolioSettings from "@/components/portfolio-settings.vue";
+import SearchBar from '@/components/search-bar.vue'
+import Settings from '@/components/settings.vue'
+import PortfolioSettings from '@/components/portfolio-settings.vue'
 
 export default {
   name: 'UserNavigation',
@@ -14,10 +14,10 @@ export default {
   computed: {
     ...mapState(['user']),
 
-    routeView () {
+    routeView() {
       return this.$route.params.page
     }
-  },
+  }
 }
 </script>
 
@@ -55,7 +55,7 @@ export default {
         SearchBar
 </template>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import '../assets/scss/custom.scss';
 
 a {

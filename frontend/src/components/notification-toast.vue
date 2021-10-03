@@ -7,13 +7,14 @@ export default {
     alerts: []
   },
   computed: {
-    reversedAlerts () {
+    reversedAlerts() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       return this.alerts.reverse()
     }
   },
   methods: {
     ...mapActions(['deleteNotification'])
-  },
+  }
 }
 </script>
 

@@ -5,7 +5,7 @@ import UserNavigation from '@/components/user-navigation.vue'
 import SearchBar from '@/components/search-bar.vue'
 import PostRequest from '@/components/post-request.vue'
 import DisplayRequests from '@/components/display-requests.vue'
-import NotificationToast from "@/components/notification-toast";
+import NotificationToast from '@/components/notification-toast'
 
 export default {
   name: 'User',
@@ -16,7 +16,7 @@ export default {
     DisplayRequests,
     NotificationToast
   },
-  data () {
+  data() {
     return {
       userRequests: [],
       isViewSettings: false
@@ -25,22 +25,22 @@ export default {
   computed: {
     ...mapState(['user', 'notifications']),
 
-    newNotification () {
+    newNotification() {
       return this.notifications.received
-    },
+    }
   },
   methods: {
     ...mapActions(['getRequests', 'deleteRequestFromDatabase']),
 
-    async fetchUserRequests () {
+    async fetchUserRequests() {
       this.userRequests = await this.getRequests(`senderId=${this.user._id}`)
     },
 
-    addRequest (request) {
+    addRequest(request) {
       this.userRequests.push(request)
     },
 
-    async deleteRequest (requestId) {
+    async deleteRequest(requestId) {
       const deletedRequest = await this.deleteRequestFromDatabase(requestId)
       if (deletedRequest) {
         const index = this.userRequests.findIndex(item => item._id == requestId)
@@ -55,15 +55,16 @@ export default {
       this.fetchUserRequests()
     },
 
-    $route (to, from) {
-      if (to.path == '/customer/settings') return this.isViewSettings = true
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      if (to.path == '/customer/settings') return (this.isViewSettings = true)
 
       this.isViewSettings = false
     }
   },
-  mounted () {
+  mounted() {
     this.fetchUserRequests()
-  },
+  }
 }
 </script>
 

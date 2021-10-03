@@ -1,7 +1,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 
-export default ({
+export default {
   name: 'PostReply',
   props: {
     isReplyClicked: Boolean,
@@ -10,33 +10,37 @@ export default ({
   computed: {
     ...mapState(['user']),
 
-    repliedHairdressers () {
+    repliedHairdressers() {
       const hairdresserReplies = this.request.replies.filter(reply => reply.senderType == 'Hairdresser')
       return hairdresserReplies.map(reply => reply.senderId._id)
     }
   },
-  data () {
+  data() {
     return {
       message: '',
 
-      backendError: null,
+      backendError: null
     }
   },
   methods: {
     ...mapActions(['postReply', 'notifyUserPost']),
 
-    async sendReply (e) {
+    async sendReply(e) {
       const createdReply = await this.submitReply(e)
 
       if (!createdReply) return
 
       this.$emit('reply-sent', createdReply)
 
-      this.notifyUserPost({ type: 'Reply', repliedHairdressers: this.repliedHairdressers, requestSenderId: this.request.senderId })
+      this.notifyUserPost({
+        type: 'Reply',
+        repliedHairdressers: this.repliedHairdressers,
+        requestSenderId: this.request.senderId
+      })
       this.resetFormValues()
     },
 
-    async submitReply (e) {
+    async submitReply(e) {
       e.preventDefault()
 
       try {
@@ -47,27 +51,23 @@ export default ({
             senderType: this.user.type,
             senderCity: this.user.address.city,
             senderPostcode: this.user.address.postcode,
-            message: this.message,
+            message: this.message
           },
-          requestId: this.request._id,
+          requestId: this.request._id
         })
-
       } catch (err) {
         this.backendError = err.response.data.message
-        setTimeout(() => this.backendError = '', 3000)
+        setTimeout(() => (this.backendError = ''), 3000)
       }
     },
 
-    resetFormValues () {
+    resetFormValues() {
       this.message = ''
       this.backendError = null
-    },
-
-
-  },
-})
+    }
+  }
+}
 </script>
-
 
 <template lang="pug">
 transition(name='fade')

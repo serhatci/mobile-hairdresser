@@ -3,7 +3,7 @@ import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'Login',
-  data () {
+  data() {
     return {
       email: '',
       password: '',
@@ -18,7 +18,7 @@ export default {
   methods: {
     ...mapActions(['login']),
 
-    async submitLogin (e) {
+    async submitLogin(e) {
       e.preventDefault()
 
       try {
@@ -33,17 +33,16 @@ export default {
       }
     },
 
-    redirect () {
+    redirect() {
       this.loginSuccess = true
       const route = this.user.type === 'Customer' ? 'customer' : 'hairdresser'
       setTimeout(() => this.$router.push(`/${route}`), 1000)
     }
   }
 }
-
 </script>
 
-<template lang='pug'>
+<template lang="pug">
 .login-page.d-flex.align-items-center.justify-content-center.py-3.py-sm-5
   #loginMessage.alert.alert-success.text-center(role='alert', :class='{ "d-none": !loginSuccess }')
     h4.alert-headin Logged in!

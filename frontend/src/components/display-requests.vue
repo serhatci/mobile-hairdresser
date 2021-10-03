@@ -11,16 +11,18 @@ export default {
     requests: []
   },
   computed: {
-    sortedRequests () {
+    sortedRequests() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       if (this.requests.length > 0) return this.requests.reverse()
+
       return this.requests
     }
   },
   methods: {
-    emitDeletedRequest (requestId) {
+    emitDeletedRequest(requestId) {
       this.$emit('request-deleted', requestId)
     }
-  },
+  }
 }
 </script>
 

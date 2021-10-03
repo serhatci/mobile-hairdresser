@@ -5,23 +5,23 @@ export default {
     title: String,
     editableContent: String
   },
-  data () {
+  data() {
     return {
-      isEditClicked: false,
+      isEditClicked: false
     }
   },
   methods: {
-    onEdit (evt) {
+    onEdit(evt) {
       const src = evt.target.innerText
       this.$emit('edited', src)
       this.isEditClicked = false
 
-      window.scrollTo(0, 0);
+      window.scrollTo(0, 0)
     },
-    endEdit () {
+    endEdit() {
       this.$el.querySelector('p').blur()
-    },
-  },
+    }
+  }
 }
 </script>
 
@@ -33,7 +33,7 @@ div
     | {{ editableContent }}
 </template>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 div > p {
   white-space: pre-wrap;
   outline: none;

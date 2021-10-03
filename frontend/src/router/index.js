@@ -7,6 +7,7 @@ Vue.use(VueRouter)
 // Handle navigation duplication for router push (Globally)
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
+  // eslint-disable-next-line no-unused-vars
   return originalPush.call(this, location).catch(error => {})
 }
 
@@ -18,17 +19,17 @@ export default function init(store) {
       {
         path: '/',
         name: 'home',
-        component: Home,
+        component: Home
       },
       {
         path: '/about',
         name: 'about',
-        component: () => import(/* webpackChunkName: "user" */ '../views/about.vue'),
+        component: () => import(/* webpackChunkName: "user" */ '../views/about.vue')
       },
       {
         path: '/search-results/:city',
         name: 'searchResults',
-        component: () => import(/* webpackChunkName: "user" */ '../views/search-results.vue'),
+        component: () => import(/* webpackChunkName: "user" */ '../views/search-results.vue')
       },
       {
         path: '/login',
@@ -37,7 +38,7 @@ export default function init(store) {
         beforeEnter(to, from, next) {
           if (store.state.user) return next('/user')
           else return next()
-        },
+        }
       },
       {
         path: '/signup',
@@ -46,7 +47,7 @@ export default function init(store) {
         beforeEnter(to, from, next) {
           if (store.state.user) return next('/user')
           else return next()
-        },
+        }
       },
       {
         path: '/customer',
@@ -56,7 +57,7 @@ export default function init(store) {
         beforeEnter(to, from, next) {
           if (!store.state.user) return next('/')
           else return next()
-        },
+        }
       },
       {
         path: '/hairdresser',
@@ -66,8 +67,8 @@ export default function init(store) {
         beforeEnter(to, from, next) {
           if (!store.state.user) return next('/')
           else return next()
-        },
-      },
-    ],
+        }
+      }
+    ]
   })
 }
