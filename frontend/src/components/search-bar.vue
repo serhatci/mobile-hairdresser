@@ -6,20 +6,20 @@ export default {
   components: {
     AddressInputBar
   },
-  data () {
+  data() {
     return {
       geoLocation: {}
     }
   },
   computed: {
-    getSearchUrl () {
+    getSearchUrl() {
       return `/search-results/${this.geoLocation.city}`
-    },
+    }
   }
 }
 </script>
 
-<template lang='pug'>
+<template lang="pug">
 .search-bar.py-2.rounded-pill
   .col-11.col-sm-8.col-lg-8.m-auto
     form(:action='getSearchUrl', autocomplete='off')

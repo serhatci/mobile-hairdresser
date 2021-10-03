@@ -30,7 +30,7 @@ async function main() {
   new Vue({
     router: router(storeInstance),
     store: storeInstance,
-    render: h => h(App),
+    render: h => h(App)
   }).$mount('#app')
 }
 

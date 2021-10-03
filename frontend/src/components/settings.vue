@@ -8,22 +8,21 @@ export default {
     AddressInputBar
   },
   computed: {
-    ...mapState(['user']),
+    ...mapState(['user'])
   },
-  data () {
+  data() {
     return {
       firstName: '',
       lastName: '',
       userAddress: '',
 
-      backendError: null,
+      backendError: null
     }
   },
   methods: {
     ...mapActions(['updateUser']),
 
-    async sendUserUpdate (e) {
-
+    async sendUserUpdate(e) {
       const result = await this.submitUpdate(e)
 
       if (!result) return
@@ -31,7 +30,7 @@ export default {
       this.resetFormValues()
     },
 
-    async submitUpdate (e) {
+    async submitUpdate(e) {
       e.preventDefault()
       try {
         if (!this.firstName && !this.lastName && !this.userAddress) {
@@ -44,8 +43,9 @@ export default {
             firstName: this.capitalize(this.firstName) || this.user.firstName,
             lastName: this.capitalize(this.lastName) || this.user.lastName,
             userAddress: this.userAddress || this.user.address,
-            about: this.about || this.user.about,
-          }, userId: this.user._id
+            about: this.about || this.user.about
+          },
+          userId: this.user._id
         })
         return true
       } catch (err) {
@@ -54,22 +54,22 @@ export default {
       }
     },
 
-    resetFormValues () {
+    resetFormValues() {
       this.firstName = ''
       this.lastName = ''
       this.userAddress = ''
       this.backendError = null
 
-      let el = document.getElementById("addressInput");
-      el.value = '';
-      el.dispatchEvent(new Event('addressInput'));
+      let el = document.getElementById('addressInput')
+      el.value = ''
+      el.dispatchEvent(new Event('addressInput'))
     },
 
-    getLocation (item) {
+    getLocation(item) {
       this.userAddress = item
     },
 
-    capitalize (s) {
+    capitalize(s) {
       return s.charAt(0).toUpperCase() + s.slice(1)
     }
   }

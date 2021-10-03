@@ -11,16 +11,16 @@ export default {
     requests: []
   },
   computed: {
-    sortedRequests () {
+    sortedRequests() {
       if (this.requests.length > 0) return this.requests.reverse()
       return this.requests
     }
   },
   methods: {
-    emitDeletedRequest (requestId) {
+    emitDeletedRequest(requestId) {
       this.$emit('request-deleted', requestId)
     }
-  },
+  }
 }
 </script>
 

@@ -1,11 +1,11 @@
 <script>
-import SearchBar from "@/components/search-bar.vue";
+import SearchBar from '@/components/search-bar.vue'
 
 export default {
   name: 'Home',
   components: {
     SearchBar
-  },
+  }
 }
 </script>
 

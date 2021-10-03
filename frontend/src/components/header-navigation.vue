@@ -5,24 +5,24 @@ export default {
   name: 'HeaderNavigation',
   methods: {
     ...mapActions(['logout']),
-    async doLogout () {
+    async doLogout() {
       await this.logout()
       this.$router.push('/')
-    },
+    }
   },
   computed: {
     ...mapState(['user']),
 
-    currentRoute () {
-      return this.$route.name;
+    currentRoute() {
+      return this.$route.name
     },
 
-    userPageRoute () {
+    userPageRoute() {
       if (!this.user) return '/'
 
       return this.user.type == 'Customer' ? '/customer' : '/hairdresser'
     }
-  },
+  }
 }
 </script>
 

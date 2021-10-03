@@ -11,30 +11,30 @@ export default {
     SearchBar,
     UserNavigation
   },
-  data () {
+  data() {
     return {
       requestsInCity: [],
-      requestsInGermany: [],
+      requestsInGermany: []
     }
   },
   computed: {
     ...mapState(['user']),
 
-    cityTitle () {
+    cityTitle() {
       return `Requests in ${this.$route.params.city}`
-    },
+    }
   },
   methods: {
     ...mapActions(['getRequests']),
 
-    async fetchRequests () {
+    async fetchRequests() {
       this.requestsInCity = await this.getRequests(`city=${this.$route.params.city}`)
       this.requestsInGermany = await this.getRequests('')
-    },
+    }
   },
-  mounted () {
+  mounted() {
     this.fetchRequests()
-  },
+  }
 }
 </script>
 

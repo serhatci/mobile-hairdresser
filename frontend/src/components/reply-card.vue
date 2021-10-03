@@ -1,19 +1,19 @@
 <script>
 import { mapState } from 'vuex'
-import Portfolio from "@/components/portfolio.vue";
+import Portfolio from '@/components/portfolio.vue'
 
-export default ({
+export default {
   name: 'ReplyCard',
   components: {
     Portfolio
   },
   props: {
-    reply: {},
+    reply: {}
   },
   computed: {
-    ...mapState(['user']),
-  },
-})
+    ...mapState(['user'])
+  }
+}
 </script>
 
 <template lang="pug">

@@ -9,14 +9,12 @@ export default {
     starsArr: function () {
       let stars = []
       for (let i = 0; i < 5; i++) {
-        i < this.averageRating ?
-          stars.push('filled')
-          : stars.push('empty')
+        i < this.averageRating ? stars.push('filled') : stars.push('empty')
       }
       return stars
     }
   }
-};
+}
 </script>
 
 <template lang="pug">

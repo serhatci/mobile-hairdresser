@@ -7,13 +7,13 @@ export default {
     alerts: []
   },
   computed: {
-    reversedAlerts () {
+    reversedAlerts() {
       return this.alerts.reverse()
     }
   },
   methods: {
     ...mapActions(['deleteNotification'])
-  },
+  }
 }
 </script>
 

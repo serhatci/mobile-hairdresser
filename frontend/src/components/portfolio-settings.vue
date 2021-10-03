@@ -8,9 +8,9 @@ export default {
     EditableText
   },
   computed: {
-    ...mapState(['user']),
+    ...mapState(['user'])
   },
-  data () {
+  data() {
     return {
       backendError: null,
       successMsg: null,
@@ -20,10 +20,12 @@ export default {
   methods: {
     ...mapActions(['updatePortfolio']),
 
-    async submitUpdate (key, value, title) {
+    async submitUpdate(key, value, title) {
       try {
         await this.updatePortfolio({
-          key, value, userId: this.user._id
+          key,
+          value,
+          userId: this.user._id
         })
         this.showSuccessMsg(`${title} has been updated!`)
       } catch (err) {
@@ -31,7 +33,7 @@ export default {
       }
     },
 
-    showSuccessMsg (msg) {
+    showSuccessMsg(msg) {
       this.successMsg = msg
       setTimeout(() => {
         this.successMsg = null
@@ -39,7 +41,7 @@ export default {
       }, 1500)
     },
 
-    showErrorMsg (msg) {
+    showErrorMsg(msg) {
       this.backendError = msg
       setTimeout(() => {
         this.backendError = null

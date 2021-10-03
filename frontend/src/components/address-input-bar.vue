@@ -5,26 +5,26 @@ export default {
   name: 'AddressInputBar',
 
   props: {
-    inputId: String,
+    inputId: String
   },
 
   computed: {
     ...mapState(['locations']),
 
-    inputValue () {
+    inputValue() {
       return isNaN(this.userInput) ? this.userInput.charAt(0).toUpperCase() + this.userInput.slice(1) : this.userInput
-    },
-  },
-
-  data () {
-    return {
-      userInput: '',
-      geoLocation: {},
-      displaySuggestions: false,
     }
   },
 
-  mounted () {
+  data() {
+    return {
+      userInput: '',
+      geoLocation: {},
+      displaySuggestions: false
+    }
+  },
+
+  mounted() {
     if (this.locations.length > 0) return
 
     this.fetchLocations()
@@ -33,21 +33,21 @@ export default {
   methods: {
     ...mapActions(['fetchLocations']),
 
-    doAutocomplete () {
+    doAutocomplete() {
       return this.locations.filter(
         item => item.city.startsWith(this.inputValue) || item.postcode.startsWith(this.inputValue)
       )
     },
 
-    bindUserInput (autocompletedLocation) {
+    bindUserInput(autocompletedLocation) {
       this.userInput = `${autocompletedLocation.city}, ${autocompletedLocation.postcode}`
 
       this.geoLocation = autocompletedLocation
       this.$emit('clicked', this.geoLocation)
 
       this.displaySuggestions = false
-    },
-  },
+    }
+  }
 }
 </script>
 

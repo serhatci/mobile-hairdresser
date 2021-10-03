@@ -3,7 +3,7 @@ import { mapState, mapActions } from 'vuex'
 import PostReply from './post-reply.vue'
 import ReplyCard from './reply-card.vue'
 
-export default ({
+export default {
   name: 'RequestCard',
   components: {
     PostReply,
@@ -12,19 +12,19 @@ export default ({
   props: {
     request: {}
   },
-  data () {
+  data() {
     return {
       isReplyClicked: false,
       isAllRepliesClicked: false
     }
   },
   computed: {
-    ...mapState(['user']),
+    ...mapState(['user'])
   },
   methods: {
     ...mapActions(['deleteReply']),
 
-    addReplyCard (reply) {
+    addReplyCard(reply) {
       this.request.replies.push(reply)
 
       this.isReplyClicked = !this.isReplyClicked
@@ -33,7 +33,7 @@ export default ({
       this.$emit('reply-action')
     },
 
-    deleteReplyCard (replyId) {
+    deleteReplyCard(replyId) {
       this.deleteReply({ requestId: this.request._id, replyId })
 
       const index = this.request.replies.findIndex(i => i._id == replyId)
@@ -41,10 +41,9 @@ export default ({
 
       this.$emit('reply-action')
     }
-  },
-})
+  }
+}
 </script>
-
 
 <template lang="pug">
 .request-card
