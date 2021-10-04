@@ -171,12 +171,10 @@ socket.on('New request', request => {
 
   if (user.address.city != request.address.city && user.address.state != request.address.state) return
 
-  console.log(`New ${request.type}`)
   store.dispatch('receiveNotification', request)
 })
 
 socket.on('New reply', reply => {
-  console.log(reply)
   const isUserReplied = reply.repliedHairdressers.includes(store.state.user._id)
   const isUserSenderOfRequest = reply.requestSenderId == store.state.user._id
   console.log(isUserReplied)
