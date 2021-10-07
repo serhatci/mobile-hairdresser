@@ -8,7 +8,7 @@ const app = require('../src/app')
 
 jest.setTimeout(120000)
 
-describe('Account endpoints', () => {
+describe('Session endpoints', () => {
   let createdUser
 
   const newUser = {
