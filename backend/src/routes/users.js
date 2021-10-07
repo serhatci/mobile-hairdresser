@@ -86,26 +86,6 @@ router.patch('/:userId', async (req, res, next) => {
   }
 })
 
-router.delete('/:userId', async (req, res, next) => {
-  const { userId } = req.params
-
-  try {
-    const deletedUser = await User.findByIdAndDelete(userId)
-
-    if (deletedUser === null) throw new Error('UserId does not exist in database!')
-
-    res.send(deletedUser)
-  } catch (err) {
-    if (err.name === 'CastError') {
-      res.status(400).send({ message: 'Provided UserId has wrong format!' })
-    } else if (err.name === 'Error') {
-      res.status(400).send({ message: err.message })
-    } else {
-      next(err)
-    }
-  }
-})
-
 router.patch('/:userId/portfolio/:key', async (req, res, next) => {
   const { userId, key } = req.params
   const { value } = req.body
