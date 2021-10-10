@@ -25,7 +25,7 @@ describe('Account endpoints', () => {
       expect(addedUser.type).toEqual(newUser.type)
     })
 
-    it('should only accept unique user emails', async () => {
+    it('should only accept unique users', async () => {
       const error = (await request(app).post('/api/account').send(newUser)).body
       expect(error.message).toBe('This user already exists!')
     })
