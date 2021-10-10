@@ -46,7 +46,7 @@ const store = new Vuex.Store({
   actions: {
     async fetchSession({ commit }) {
       try {
-        const user = await axios.get('/api/account/session')
+        const user = await axios.get('/api/session')
         commit(mutations.SET_USER, user.data || null)
       } catch (err) {
         commit(mutations.SET_USER, null)
@@ -72,7 +72,7 @@ const store = new Vuex.Store({
 
     async login({ commit }, credentials) {
       try {
-        const user = await axios.post('/api/account/session', credentials)
+        const user = await axios.post('/api/session', credentials)
         commit(mutations.SET_USER, user.data || null)
       } catch (e) {
         throw e
@@ -81,7 +81,7 @@ const store = new Vuex.Store({
 
     async logout({ commit }) {
       try {
-        await axios.delete('/api/account/session')
+        await axios.delete('/api/session')
         commit(mutations.SET_USER, null)
       } catch (e) {
         throw e
@@ -171,12 +171,10 @@ socket.on('New request', request => {
 
   if (user.address.city != request.address.city && user.address.state != request.address.state) return
 
-  console.log(`New ${request.type}`)
   store.dispatch('receiveNotification', request)
 })
 
 socket.on('New reply', reply => {
-  console.log(reply)
   const isUserReplied = reply.repliedHairdressers.includes(store.state.user._id)
   const isUserSenderOfRequest = reply.requestSenderId == store.state.user._id
   console.log(isUserReplied)

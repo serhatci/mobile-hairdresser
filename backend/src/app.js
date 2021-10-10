@@ -20,6 +20,7 @@ const User = require('./models/user')
 const usersRouter = require('./routes/users')
 const photosRouter = require('./routes/photos')
 const accountRouter = require('./routes/account')
+const sessionRouter = require('./routes/session')
 const requestsRouter = require('./routes/requests')
 const locationsRouter = require('./routes/locations')
 
@@ -65,6 +66,8 @@ app.use(
       sameSite: process.env.NODE_ENV == 'production' ? 'none' : 'strict',
       secure: process.env.NODE_ENV == 'production',
     },
+    resave: false,
+    saveUninitialized: false,
   })
 )
 
@@ -99,6 +102,7 @@ app.use(compression({ filter: shouldCompress }))
 app.use('/api/users', usersRouter)
 app.use('/api/photos', photosRouter)
 app.use('/api/account', accountRouter)
+app.use('/api/session', sessionRouter)
 app.use('/api/requests', requestsRouter)
 app.use('/api/locations', locationsRouter)
 

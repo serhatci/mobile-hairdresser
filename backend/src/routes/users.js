@@ -2,11 +2,12 @@
 /* eslint-disable consistent-return */
 /* eslint-disable import/no-extraneous-dependencies */
 const express = require('express')
+
+const router = express.Router()
+
 const User = require('../models/user')
 const Hairdresser = require('../models/hairdresser')
 const Location = require('../models/location')
-
-const router = express.Router()
 
 router.get('/', async (req, res, next) => {
   let query = {}
@@ -28,7 +29,7 @@ router.get('/', async (req, res, next) => {
   }
 
   try {
-    const userArr = await User.find(query, { messageBox: 0 })
+    const userArr = await User.find(query, { messageBox: 0 }).limit(10)
     res.send(userArr)
   } catch (err) {
     next(err)
@@ -56,7 +57,8 @@ router.patch('/:userId', async (req, res, next) => {
 
   if (firstName === '') return res.status(400).send({ message: 'First name can not be empty!' })
   if (lastName === '') return res.status(400).send({ message: 'Last name can not be empty!' })
-  if (userAddress.city === '') return res.status(400).send({ message: 'Address can not be empty!' })
+  if (userAddress.city === '' || userAddress.city === undefined)
+    return res.status(400).send({ message: 'Address can not be empty!' })
 
   try {
     const fullAddress = await Location.find({ postcode: userAddress.postcode }, { stateCode: 1, location: 1, _id: 0 })
@@ -66,7 +68,7 @@ router.patch('/:userId', async (req, res, next) => {
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { firstName, lastName, address: userAddress },
-      { new: true }
+      { new: true, runValidators: true }
     )
 
     if (updatedUser === null) throw new Error('UserId does not exist in database!')
@@ -78,26 +80,6 @@ router.patch('/:userId', async (req, res, next) => {
     } else if (err.name === 'ValidationError') {
       const invalidProperty = Object.keys(err.errors)[0]
       res.status(422).send({ message: err.errors[invalidProperty].message })
-    } else if (err.name === 'Error') {
-      res.status(400).send({ message: err.message })
-    } else {
-      next(err)
-    }
-  }
-})
-
-router.delete('/:userId', async (req, res, next) => {
-  const { userId } = req.params
-
-  try {
-    const deletedUser = await User.findByIdAndDelete(userId)
-
-    if (deletedUser === null) throw new Error('UserId does not exist in database!')
-
-    res.send(deletedUser)
-  } catch (err) {
-    if (err.name === 'CastError') {
-      res.status(400).send({ message: 'Provided UserId has wrong format!' })
     } else if (err.name === 'Error') {
       res.status(400).send({ message: err.message })
     } else {
@@ -149,8 +131,6 @@ router.patch('/:userId/portfolio/:key', async (req, res, next) => {
   } catch (err) {
     if (err.kind === 'ObjectId') {
       res.status(400).send({ message: 'Provided UserId has wrong format!' })
-    } else if (err.kind === 'Number') {
-      res.status(400).send({ message: 'Only integer numbers are allowed!' })
     } else if (err.name === 'ValidationError') {
       const invalidProperty = Object.keys(err.errors)[0]
       res.status(422).send({ message: err.errors[invalidProperty].message })
