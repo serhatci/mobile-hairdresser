@@ -18,12 +18,16 @@ const HairdresserSchema = new mongoose.Schema(
     },
     experienceInYears: {
       type: Number,
+      trim: true,
+      validate: [Number.isInteger, 'Only integer numbers are allowed!'],
       min: [0, 'Years of experience should not be negative'],
       max: [70, 'Years of experience should have a logical value'],
       default: 0,
     },
     serviceArea: {
       type: Number,
+      trim: true,
+      validate: [Number.isInteger, 'Only integer numbers are allowed!'],
       default: 0,
       min: [0, 'Service area can not be negative'],
       max: [1000, 'Service area should have a logical value'],
