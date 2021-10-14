@@ -213,7 +213,7 @@ describe('Users endpoints', () => {
     let user
 
     beforeAll(async () => {
-      const users = (await request(app).get('/api/users')).body
+      const users = (await request(app).get('/api/users?userType=Hairdresser')).body
       // eslint-disable-next-line prefer-destructuring
       user = users[0]
     })
