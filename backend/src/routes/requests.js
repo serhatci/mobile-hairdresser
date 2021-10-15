@@ -29,8 +29,8 @@ router.get('/', async (req, res, next) => {
     query = { 'eventAddress.postcode': req.query.postcode }
   }
 
-  if (req.query.userType) {
-    query.type = req.query.userType
+  if (req.query.requestType) {
+    query = { requestType: req.query.requestType }
   }
 
   try {
