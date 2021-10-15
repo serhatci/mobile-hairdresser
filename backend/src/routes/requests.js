@@ -92,8 +92,6 @@ router.post('/', async (req, res, next) => {
 router.delete('/:requestId', async (req, res, next) => {
   const { requestId } = req.params
 
-  if (!requestId) return res.status(400).send({ message: 'Request ID can not be empty!' })
-
   try {
     const deletedRequest = await Request.findByIdAndDelete(requestId)
     return res.send(deletedRequest)
@@ -144,9 +142,6 @@ router.post('/:requestId/replies', async (req, res, next) => {
 
 router.delete('/:requestId/replies/:replyId', async (req, res, next) => {
   const { requestId, replyId } = req.params
-
-  if (!requestId) return res.status(400).send({ message: 'Request ID can not be empty!' })
-  if (!replyId) return res.status(400).send({ message: 'Reply ID can not be empty!' })
 
   try {
     const updatedRequest = await Request.findByIdAndUpdate(
