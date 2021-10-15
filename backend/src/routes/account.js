@@ -6,6 +6,7 @@ const router = express.Router()
 const User = require('../models/user')
 const Customer = require('../models/customer')
 const Hairdresser = require('../models/hairdresser')
+const Request = require('../models/request')
 
 router.post('/', async (req, res, next) => {
   const { type, email, password, passwordConfirmation } = req.body
@@ -38,7 +39,9 @@ router.delete('/:userId', async (req, res, next) => {
   try {
     const deletedUser = await User.findByIdAndDelete(userId)
 
-    if (deletedUser === null) throw new Error('UserId does not exist in database!')
+    if (deletedUser == null) throw new Error('UserId does not exist in database!')
+
+    await Request.deleteMany({ senderId: deletedUser.id })
 
     res.send(deletedUser)
   } catch (err) {

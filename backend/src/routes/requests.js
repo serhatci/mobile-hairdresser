@@ -29,19 +29,37 @@ router.get('/', async (req, res, next) => {
     query = { 'eventAddress.postcode': req.query.postcode }
   }
 
-  if (req.query.userType) {
-    query.type = req.query.userType
+  if (req.query.requestType) {
+    query = { requestType: req.query.requestType }
   }
 
   try {
-    const user = await Request.find(query).populate({
-      path: 'replies.senderId',
-      match: { type: 'Hairdresser' },
-      select: '-messageBox,-email',
-    })
+    const user = await Request.find(query)
+      .populate({
+        path: 'replies.senderId',
+        match: { type: 'Hairdresser' },
+        select: '-messageBox,-email',
+      })
+      .limit(10)
+
     res.send(user)
   } catch (err) {
     next(err)
+  }
+})
+
+router.get('/:requestId', async (req, res, next) => {
+  const { requestId } = req.params
+
+  try {
+    const request = await Request.findById(requestId)
+    res.send(request)
+  } catch (err) {
+    if (err.name === 'CastError') {
+      res.status(400).send({ message: 'Provided request ID has wrong format!' })
+    } else {
+      next(err)
+    }
   }
 })
 
@@ -52,6 +70,7 @@ router.post('/', async (req, res, next) => {
     return res.status(400).send({ message: 'Request type is wrong' })
 
   if (eventAddress === '') return res.status(400).send({ message: 'Address must be selected from autocomplete list!' })
+
   if (message === '') return res.status(400).send({ message: 'Message can not be empty!' })
 
   try {
@@ -61,12 +80,14 @@ router.post('/', async (req, res, next) => {
 
     const requestToCreate = { senderId, senderFullName, requestType, eventAddress, message }
     const createdRequest = await Request.create(requestToCreate)
+
     return res.send(createdRequest)
   } catch (err) {
     if (err.name === 'ValidationError') {
       const invalidProperty = Object.keys(err.errors)[0]
       return res.status(422).send({ message: err.errors[invalidProperty].message })
     }
+
     return next(err)
   }
 })
@@ -74,10 +95,9 @@ router.post('/', async (req, res, next) => {
 router.delete('/:requestId', async (req, res, next) => {
   const { requestId } = req.params
 
-  if (!requestId) return res.status(400).send({ message: 'Request ID can not be empty!' })
-
   try {
     const deletedRequest = await Request.findByIdAndDelete(requestId)
+
     return res.send(deletedRequest)
   } catch (err) {
     if (err.name === 'CastError') {
@@ -117,9 +137,11 @@ router.post('/:requestId/replies', async (req, res, next) => {
       const invalidProperty = Object.keys(err.errors)[0]
       return res.status(422).send({ message: err.errors[invalidProperty].message })
     }
+
     if (err.name === 'Error') {
       return res.status(404).send({ message: err.message })
     }
+
     return next(err)
   }
 })
@@ -127,15 +149,13 @@ router.post('/:requestId/replies', async (req, res, next) => {
 router.delete('/:requestId/replies/:replyId', async (req, res, next) => {
   const { requestId, replyId } = req.params
 
-  if (!requestId) return res.status(400).send({ message: 'Request ID can not be empty!' })
-  if (!replyId) return res.status(400).send({ message: 'Reply ID can not be empty!' })
-
   try {
     const updatedRequest = await Request.findByIdAndUpdate(
       requestId,
       { $pull: { replies: { _id: replyId } } },
       { new: true }
     )
+
     const deletedReply = updatedRequest.replies.filter(i => i._id == replyId)
 
     return res.send(deletedReply)
@@ -144,6 +164,7 @@ router.delete('/:requestId/replies/:replyId', async (req, res, next) => {
       const invalidProperty = Object.keys(err.errors)[0]
       return res.status(422).send({ message: err.errors[invalidProperty].message })
     }
+
     return next(err)
   }
 })
