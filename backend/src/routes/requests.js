@@ -34,11 +34,14 @@ router.get('/', async (req, res, next) => {
   }
 
   try {
-    const user = await Request.find(query).populate({
-      path: 'replies.senderId',
-      match: { type: 'Hairdresser' },
-      select: '-messageBox,-email',
-    })
+    const user = await Request.find(query)
+      .populate({
+        path: 'replies.senderId',
+        match: { type: 'Hairdresser' },
+        select: '-messageBox,-email',
+      })
+      .limit(10)
+
     res.send(user)
   } catch (err) {
     next(err)
