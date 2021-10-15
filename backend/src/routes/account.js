@@ -39,9 +39,9 @@ router.delete('/:userId', async (req, res, next) => {
   try {
     const deletedUser = await User.findByIdAndDelete(userId)
 
-    await Request.deleteMany({ senderId: deletedUser.id })
+    if (deletedUser == null) throw new Error('UserId does not exist in database!')
 
-    if (deletedUser === null) throw new Error('UserId does not exist in database!')
+    await Request.deleteMany({ senderId: deletedUser.id })
 
     res.send(deletedUser)
   } catch (err) {
