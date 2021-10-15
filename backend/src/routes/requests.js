@@ -48,6 +48,21 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:requestId', async (req, res, next) => {
+  const { requestId } = req.params
+
+  try {
+    const request = await Request.findById(requestId)
+    res.send(request)
+  } catch (err) {
+    if (err.name === 'CastError') {
+      res.status(400).send({ message: 'Provided request ID has wrong format!' })
+    } else {
+      next(err)
+    }
+  }
+})
+
 router.post('/', async (req, res, next) => {
   const { senderId, senderFullName, requestType, eventAddress, message } = req.body
 
