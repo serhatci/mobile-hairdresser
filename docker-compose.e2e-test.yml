@@ -1,0 +1,19 @@
+version: "3"
+services:
+  backend:
+    image: test-backend
+    build:
+      context: backend
+      dockerfile: e2e-test.Dockerfile
+    environment:
+      - MONGODB_CONNECTION_STRING=mongodb://mongo/mobilehairdresser
+    ports:
+      - 3000
+      - 35729:35729
+    depends_on:
+      - mongo
+    command: npm run test:coveralls
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
