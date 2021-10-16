@@ -10,7 +10,6 @@ before_install: cd backend
 install: npm ci
 
 script:
-  - npm run lint-only
   - npm run test:coveralls
 
 notification:
