@@ -1,16 +1,5 @@
-version: "3"
+version: "3.8"
 services:
-  frontend:
-    image: frontend
-    build:
-      context: frontend
-      dockerfile: Dockerfile
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`myapp.localhost`)"
-      - "traefik.http.routers.frontend.entrypoints=web"
-    ports:
-      - 8080
   backend:
     image: backend
     build:
@@ -28,6 +17,9 @@ services:
     ports:
       - 3000
       - 35729:35729
+    depends_on:
+      - mongo
+    command: npm run test
   mongo:
     image: mongo
     ports:
