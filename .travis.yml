@@ -5,7 +5,7 @@ language: node_js
 node_js:
   - node
 
-before_script: cd backend
+before_install: cd backend
 
 install: npm ci
 
