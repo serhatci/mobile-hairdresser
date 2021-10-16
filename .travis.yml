@@ -1,0 +1,17 @@
+sudo: false
+
+language: node_js
+
+node_js:
+  - node
+
+install: npm ci
+
+before_script: cd backend
+
+script:
+  - npm run lint-only
+  - npm run test:coveralls
+
+notification:
+  - emails: false
