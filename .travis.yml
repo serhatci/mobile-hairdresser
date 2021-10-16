@@ -6,7 +6,7 @@ services:
   - docker
 
 script:
-  - docker-compose up --abort-on-container-exit --exit-code-from backend
+  - docker-compose up -f docker-compose.e2e-test.yml --abort-on-container-exit --exit-code-from backend
   - docker-compose down
 
 notification:
