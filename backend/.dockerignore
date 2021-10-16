@@ -5,7 +5,7 @@
 .husky
 /architecture
 Dockerfile
-2e2-test.Dockerfile
+e2e-test.Dockerfile
 .vscode
 /coverage
 /dev-data
