@@ -1,13 +1,13 @@
 sudo: false
 
 language: node_js
-sudo: required
 
 services:
   - docker
 
 script:
-  - docker-compose up
+  - docker-compose up --abort-on-container-exit --exit-code-from backend
+  - docker-compose down
 
 notification:
   - emails: false
