@@ -53,7 +53,17 @@ describe('Users endpoints', () => {
     it('should give list of users', async () => {
       const userList = (await request(app).get('/api/users')).body
       const usersExist = userList.length > 0
+
       expect(usersExist).toBe(true)
+    })
+
+    it('should not provide hash, salt and versions data of users', async () => {
+      const userList = (await request(app).get('/api/users')).body
+      const singleUser = userList[0]
+
+      expect(singleUser.hash).toBe(undefined)
+      expect(singleUser.salt).toBe(undefined)
+      expect(singleUser.__v).toBe(undefined)
     })
 
     it('should give max 10 users', async () => {
