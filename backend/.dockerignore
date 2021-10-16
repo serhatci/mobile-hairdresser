@@ -5,9 +5,9 @@
 .husky
 /architecture
 Dockerfile
+2e2-test.Dockerfile
 .vscode
 /coverage
-/test
 /dev-data
 jest.config.js
 jest.config.setup
