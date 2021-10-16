@@ -1,16 +1,22 @@
 sudo: false
 
 language: node_js
+sudo: required
 
-node_js:
-  - node
+services:
+  - docker
 
-before_install: cd backend
+env:
+  COMPOSE_VERSION: 1.4.1
 
-install: npm ci
+before_install:
+ - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+ - chmod +x docker-compose
+ - sudo mv docker-compose /usr/local/bin
 
 script:
-  - npm run test:coveralls
+  - docker-compose build
+  - docker-compose run test:coveralls
 
 notification:
   - emails: false
