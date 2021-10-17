@@ -12,7 +12,7 @@ const helmet = require('helmet')
 const mongoSanitize = require('express-mongo-sanitize')
 const compression = require('compression')
 
-const mongooseConnection = require('./database-connection')
+const clientP = require('./database-connection')
 const socketService = require('./socket-service')
 
 const User = require('./models/user')
@@ -55,16 +55,15 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-async function getClientPromise() {
-  const client = await mongooseConnection.getClient()
-  return client
-}
-
 app.use(
   session({
     secret: ['ofCourseThisIsDifferentInProduction', 'PushedHereOnlyForLEarningPurposes'],
     // eslint-disable-next-line no-underscore-dangle
-    store: MongoStore.create({ client: getClientPromise(), stringify: false }),
+    store: new MongoStore({
+      clientPromise: clientP,
+      dbName: 'mobilehairdresser',
+      stringify: false,
+    }),
     cookie: {
       maxAge: 30 * 24 * 60 * 60 * 1000,
       path: '/api',
