@@ -17,13 +17,19 @@ if (!connectionString) {
 
 mongoose.set('debug', false)
 
-mongoose
+const clientP = mongoose
   .connect(connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
+  .then(m => m.connection.getClient())
+
+clientP
   .then(() => console.log('connection established'))
-  .then(() => initializeDatabase(mongoose.connection))
+  .then(() => {
+    initializeDatabase(mongoose.connection)
+    console.log('db initialized')
+  })
   .catch(console.log)
 
-module.exports = mongoose.connection
+module.exports = clientP
