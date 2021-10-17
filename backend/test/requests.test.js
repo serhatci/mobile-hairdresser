@@ -4,14 +4,13 @@
 /* eslint-disable jest/no-commented-out-tests */
 const request = require('supertest')
 
+const mongoose = require('mongoose')
 const User = require('../src/models/user')
 const Customer = require('../src/models/customer')
 const Hairdresser = require('../src/models/hairdresser')
 const Request = require('../src/models/request')
 
 const app = require('../src/app')
-
-jest.setTimeout(80000)
 
 describe('Request endpoints', () => {
   let newCustomer
@@ -51,6 +50,7 @@ describe('Request endpoints', () => {
   afterAll(async () => {
     await User.deleteMany({ email: { $regex: /_TestEmail_/, $options: 'g' } })
     await Request.deleteMany({ senderId: newCustomer.id })
+    mongoose.disconnect()
   })
 
   describe('GET request to api/requests', () => {

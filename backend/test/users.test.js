@@ -5,6 +5,8 @@
 const request = require('supertest')
 const faker = require('faker')
 
+const mongoose = require('mongoose')
+
 const Customer = require('../src/models/customer')
 const Hairdresser = require('../src/models/hairdresser')
 const User = require('../src/models/user')
@@ -47,13 +49,24 @@ describe('Users endpoints', () => {
 
   afterAll(async () => {
     await User.deleteMany({ email: { $regex: /_TestEmail_/, $options: 'g' } })
+    mongoose.disconnect()
   })
 
   describe('GET request to api/users', () => {
     it('should give list of users', async () => {
       const userList = (await request(app).get('/api/users')).body
       const usersExist = userList.length > 0
+
       expect(usersExist).toBe(true)
+    })
+
+    it('should not provide hash, salt and versions data of users', async () => {
+      const userList = (await request(app).get('/api/users')).body
+      const singleUser = userList[0]
+
+      expect(singleUser.hash).toBe(undefined)
+      expect(singleUser.salt).toBe(undefined)
+      expect(singleUser.__v).toBe(undefined)
     })
 
     it('should give max 10 users', async () => {

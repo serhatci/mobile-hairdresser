@@ -29,41 +29,29 @@ const CustomerSchema = new mongoose.Schema(
   }
 )
 
-class Customer {
-  async addPhotoToAdviceRequest(photo, adviceRequest) {
-    adviceRequest.photos.push(photo)
-    await adviceRequest.save()
-  }
+// BELOW METHODS WILL BE iMPLEMENTED LATER
 
-  async postRequest(request) {
-    this.customerRequests.push(request)
-    await this.save()
-    return this
-  }
+// class Customer {
+//   async addPhotoToAdviceRequest(photo, adviceRequest) {
+//     adviceRequest.photos.push(photo)
+//     await adviceRequest.save()
+//   }
 
-  async deleteRequest(requestId) {
-    const index = this.customerRequests.findIndex(item => item._id == requestId)
-    this.customerRequests.splice(index, 1)
+//   async reviewHairdresser(hairdresser, review) {
+//     hairdresser.customerReviews.push(review)
+//     await hairdresser.save()
+//     this.hairdresserReviews.push(review)
+//     await this.save()
+//   }
 
-    await this.save()
-    return this
-  }
+//   async deleteHairdresserReview(hairdresser, review) {
+//     const reviewIndex = hairdresser.customerReviews.indexOf(review)
+//     hairdresser.customerReviews.splice(reviewIndex, 1)
+//     await hairdresser.save()
+//     this.hairdresserReviews.splice(reviewIndex, 1)
+//     await this.save()
+//   }
+// }
+// CustomerSchema.loadClass(Customer)
 
-  async reviewHairdresser(hairdresser, review) {
-    hairdresser.customerReviews.push(review)
-    await hairdresser.save()
-    this.hairdresserReviews.push(review)
-    await this.save()
-  }
-
-  async deleteHairdresserReview(hairdresser, review) {
-    const reviewIndex = hairdresser.customerReviews.indexOf(review)
-    hairdresser.customerReviews.splice(reviewIndex, 1)
-    await hairdresser.save()
-    this.hairdresserReviews.splice(reviewIndex, 1)
-    await this.save()
-  }
-}
-
-CustomerSchema.loadClass(Customer)
 module.exports = User.discriminator('Customer', CustomerSchema, 'Customer')

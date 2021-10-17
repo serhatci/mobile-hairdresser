@@ -1,0 +1,20 @@
+version: '3'
+services:
+  backend:
+    image: test-backend
+    build:
+      context: backend
+      dockerfile: e2e-test.Dockerfile
+    environment:
+      - COVERALLS_REPO_TOKEN=${COVERALLS_REPO_TOKEN}
+      - MONGODB_CONNECTION_STRING=mongodb://mongo/mobilehairdresser
+    ports:
+      - 3000
+      - 35729:35729
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    command: mongod --quiet --logpath /dev/null

@@ -59,7 +59,7 @@ app.use(
   session({
     secret: ['ofCourseThisIsDifferentInProduction', 'PushedHereOnlyForLEarningPurposes'],
     // eslint-disable-next-line no-underscore-dangle
-    store: MongoStore.create({ mongoUrl: mongooseConnection._connectionString, stringify: false }),
+    store: MongoStore.create({ client: mongooseConnection.getClient(), stringify: false }),
     cookie: {
       maxAge: 30 * 24 * 60 * 60 * 1000,
       path: '/api',

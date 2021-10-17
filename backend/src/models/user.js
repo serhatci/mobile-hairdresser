@@ -5,9 +5,8 @@ const passportLocalMongoose = require('passport-local-mongoose')
 const autopopulate = require('mongoose-autopopulate')
 
 const { isEmail, isAlphanumeric, isInt } = require('validator')
-
-const PrivateMessage = require('./private-message')
 const MessageBoxSchema = require('./message-box')
+// const PrivateMessage = require('./private-message')
 
 const UserSchema = new mongoose.Schema(
   {
@@ -89,75 +88,66 @@ UserSchema.virtual('fullName').get(function () {
   return 'Anonymous'
 })
 
-class User {
-  async addProfilePhoto(photo) {
-    this.profilePhoto = photo
-    await this.save()
-  }
+// THIS METHODS WILL BE IMPLEMENTED LATER
 
-  async uploadPhotoToPost(photo, post) {
-    post.photos.push(photo)
-    await post.save()
-  }
+// class User {
+//   async addProfilePhoto(photo) {
+//     this.profilePhoto = photo
+//     await this.save()
+//   }
 
-  async likePhoto(photo) {
-    photo.likedBy.push(this)
-    await photo.save()
-  }
+//   async uploadPhotoToPost(photo, post) {
+//     post.photos.push(photo)
+//     await post.save()
+//   }
 
-  async unlikePhoto(photo) {
-    const photoIndex = photo.likedBy.indexOf(photo)
-    photo.likedBy.splice(photoIndex, 1)
-    await photo.save()
-  }
+//   async likePhoto(photo) {
+//     photo.likedBy.push(this)
+//     await photo.save()
+//   }
 
-  async tagPhoto(photo, user) {
-    photo.taggedUsers.push(user)
-    await photo.save()
-  }
+//   async unlikePhoto(photo) {
+//     const photoIndex = photo.likedBy.indexOf(photo)
+//     photo.likedBy.splice(photoIndex, 1)
+//     await photo.save()
+//   }
 
-  async unTagPhoto(photo, user) {
-    const userIndex = photo.taggedUsers.indexOf(user)
-    photo.taggedUsers.splice(userIndex, 1)
-    await photo.save()
-  }
+//   async tagPhoto(photo, user) {
+//     photo.taggedUsers.push(user)
+//     await photo.save()
+//   }
 
-  async replyRequest(request, reply) {
-    request.replies.push(reply)
-    await request.save()
-  }
+//   async unTagPhoto(photo, user) {
+//     const userIndex = photo.taggedUsers.indexOf(user)
+//     photo.taggedUsers.splice(userIndex, 1)
+//     await photo.save()
+//   }
 
-  async deleteReply(request, replyId) {
-    const replyIndex = request.replies.findIndex(i => i._id == replyId)
-    request.replies.splice(replyIndex, 1)
-    await request.save()
-  }
+//   async sendPrivateMessage(receiver, title, message) {
+//     const privateMessage = await PrivateMessage.create(this, receiver, title, message)
+//     receiver.messageBox.receiveMessage(privateMessage)
+//     this.messageBox.storeSentMessage(privateMessage)
+//   }
 
-  async sendPrivateMessage(receiver, title, message) {
-    const privateMessage = await PrivateMessage.create(this, receiver, title, message)
-    receiver.messageBox.receiveMessage(privateMessage)
-    this.messageBox.storeSentMessage(privateMessage)
-  }
+//   async deletePrivateMessage(privateMessage) {
+//     this.messageBox.deleteSeenMessage(privateMessage)
+//   }
 
-  async deletePrivateMessage(privateMessage) {
-    this.messageBox.deleteSeenMessage(privateMessage)
-  }
+//   async readPrivateMessage(privateMessage) {
+//     this.messageBox.setMessageAsSeen(privateMessage)
+//   }
 
-  async readPrivateMessage(privateMessage) {
-    this.messageBox.setMessageAsSeen(privateMessage)
-  }
+//   async unreadPrivateMessage(privateMessage) {
+//     this.messageBox.setMessageAsUnSeen(privateMessage)
+//   }
 
-  async unreadPrivateMessage(privateMessage) {
-    this.messageBox.setMessageAsUnSeen(privateMessage)
-  }
+//   async recallPrivateMessage(privateMessage) {
+//     privateMessage.receiver.messageBox.deleteUnseenMessage(privateMessage)
+//     this.messageBox.deleteSeenMessage(privateMessage)
+//   }
+// }
+// UserSchema.loadClass(User)
 
-  async recallPrivateMessage(privateMessage) {
-    privateMessage.receiver.messageBox.deleteUnseenMessage(privateMessage)
-    this.messageBox.deleteSeenMessage(privateMessage)
-  }
-}
-
-UserSchema.loadClass(User)
 UserSchema.plugin(passportLocalMongoose, {
   usernameField: 'email',
 })
