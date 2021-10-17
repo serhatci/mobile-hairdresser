@@ -65,6 +65,7 @@
     "@prettier/plugin-pug": "^1.15.2",
     "babel-eslint": "^10.1.0",
     "connect-livereload": "^0.6.1",
+    "coveralls": "^3.1.1",
     "eslint": "^7.28.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
