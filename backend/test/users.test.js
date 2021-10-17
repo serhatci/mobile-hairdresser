@@ -5,6 +5,8 @@
 const request = require('supertest')
 const faker = require('faker')
 
+const mongoose = require('mongoose')
+
 const Customer = require('../src/models/customer')
 const Hairdresser = require('../src/models/hairdresser')
 const User = require('../src/models/user')
@@ -47,6 +49,7 @@ describe('Users endpoints', () => {
 
   afterAll(async () => {
     await User.deleteMany({ email: { $regex: /_TestEmail_/, $options: 'g' } })
+    mongoose.disconnect()
   })
 
   describe('GET request to api/users', () => {

@@ -4,11 +4,13 @@
 /* eslint-disable jest/no-commented-out-tests */
 const request = require('supertest')
 
+const mongoose = require('mongoose')
+
 const app = require('../src/app')
 
-jest.setTimeout(120000)
-
 describe('Locations endpoints', () => {
+  afterAll(() => mongoose.disconnect())
+
   describe('GET request to api/locations', () => {
     it('should return an array including all locations', async () => {
       const locations = (await request(app).get('/api/locations')).body

@@ -4,6 +4,8 @@
 /* eslint-disable jest/no-commented-out-tests */
 const request = require('supertest')
 
+const mongoose = require('mongoose')
+
 const app = require('../src/app')
 
 jest.setTimeout(120000)
@@ -24,6 +26,7 @@ describe('Session endpoints', () => {
 
   afterAll(async () => {
     await request(app).delete(`/api/account/${createdUser.id}`)
+    mongoose.disconnect()
   })
 
   describe('POST request to api/session', () => {

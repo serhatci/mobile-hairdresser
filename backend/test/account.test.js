@@ -4,11 +4,13 @@
 /* eslint-disable jest/no-commented-out-tests */
 const request = require('supertest')
 
+const mongoose = require('mongoose')
+
 const app = require('../src/app')
 
-jest.setTimeout(120000)
-
 describe('Account endpoints', () => {
+  afterAll(() => mongoose.disconnect())
+
   let addedUser
 
   describe('POST request to api/account', () => {
