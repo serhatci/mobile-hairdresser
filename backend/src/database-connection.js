@@ -23,6 +23,7 @@ const clientP = mongoose
     useUnifiedTopology: true,
   })
   .then(m => m.connection.getClient())
+  .catch(console.log)
 
 clientP
   .then(() => console.log('connection established'))
