@@ -8,7 +8,7 @@ script:
   - docker-compose ps
   - docker-compose exec backend echo $COVERALLS_REPO_TOKEN
   - docker-compose exec backend npm run test-coverage
-  - docker*compose cp backend:./app/coverage  ./coverage
+  - docker-compose cp backend:./app/coverage  ./coverage
   - npm i coveralls
   - npx coveralls < coverage/lcov.info
 
