@@ -20,6 +20,7 @@ script:
   - docker-compose exec backend npm run test-coverage
   - docker cp "$(docker-compose ps -q backend)":/app/coverage ./coverage
   - npm i coveralls
+  - npm i -g npx
   - npx coveralls < coverage/lcov.info
 
 notification:
