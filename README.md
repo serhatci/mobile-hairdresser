@@ -1,3 +1,6 @@
+[![Coverage Status](https://coveralls.io/repos/github/serhatci/mobile-hairdresser/badge.svg?branch=main)](https://coveralls.io/github/serhatci/mobile-hairdresser?branch=main)
+[![Build Status](https://app.travis-ci.com/serhatci/mobile-hairdresser.svg?branch=main)](https://app.travis-ci.com/serhatci/mobile-hairdresser)
+
 # https://mobilerfriseur.net
 
 A web platform developed with MEVN stack where mobile hairdressers can create their own portfolios and share with their potential customers.
