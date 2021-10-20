@@ -1,17 +1,19 @@
 language: node_js
+node_js:
+  - 16
 
 services:
   - docker
 
 script:
   - docker-compose --version
-  - docker-compose -f docker-compose.e2e-test.yml up -d
+  - docker-compose up -d
   - docker-compose ps
   - docker-compose exec backend echo $COVERALLS_REPO_TOKEN
   - docker-compose exec backend npm run test-coverage
-  - docker cp "$(docker-compose ps -q backend)":/app/coverage ./coverage
-  - npm i coveralls
-  - npm i -g npx
+  - docker cp "$(docker-compose ps -q backend)":/app/coverage ./backend/coverage
+  - cd backend
+  - npm i
   - npx coveralls < coverage/lcov.info
 
 notification:
